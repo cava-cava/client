@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import io from 'socket.io-client';
 
 console.log(process.env.NODE_ENV)
