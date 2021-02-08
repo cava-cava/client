@@ -1,9 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import './scss/App.scss';
 import io from 'socket.io-client';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Home from "./pages/Home";
+import Tips from "./pages/Tips";
+import Names from "./pages/Names";
 
-console.log(process.env.NODE_ENV)
 const url: string = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : window.location.toString();
 const socket = io(url);
 
@@ -12,13 +14,22 @@ socket.on('hello', ( message: string ) => alert(message));
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
+    <div className="app">
+        <div className="app-phone">
+            <Router>
+                <nav>
+                    <Link to="/">Home</Link>
+                    <Link to="/names">Names</Link>
+                    <Link to="/tips">Tips</Link>
+                </nav>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/names" component={Names} />
+                    <Route exact path="/tips" component={Tips} />
+                    <Route path="*" component={Home} />
+                </Switch>
+            </Router>
+        </div>
     </div>
   );
 }
