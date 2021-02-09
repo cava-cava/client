@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/App.scss';
+import styles from './App.module.scss';
 import io from 'socket.io-client';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Home from "./pages/Home";
@@ -14,8 +14,8 @@ socket.on('hello', ( message: string ) => alert(message));
 
 const App = () => {
   return (
-    <div className="app">
-        <div className="app-phone">
+    <div className={styles.App}>
+        <div className={styles.AppPhone}>
             <Router>
                 <nav>
                     <Link to="/">Home</Link>
