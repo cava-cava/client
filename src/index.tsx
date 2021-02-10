@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
-import reducer from './reducers'
+import configureStore from './configureStore'
+import { createBrowserHistory } from "history";
 import './scss/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(reducer)
+const history = createBrowserHistory();
+
+const initialState: any = {};
+const store = configureStore(history, initialState);
 
 ReactDOM.render(
     <Provider store={store}>
