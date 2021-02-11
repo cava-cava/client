@@ -1,0 +1,21 @@
+import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, FETCH_TIPS_SUCCESS, Tip, TipsActionTypes} from "./types";
+
+export function FetchTipsRequest(Tips: Tip[]): TipsActionTypes {
+  return {
+    type: FETCH_TIPS_REQUEST
+  }
+}
+
+export function FetchTipsSuccess(Tips: Tip[]): TipsActionTypes {
+  return {
+    type: FETCH_TIPS_SUCCESS,
+    payload: Tips
+  }
+}
+
+export function FetchTipsError(error: string): TipsActionTypes {
+  return {
+    type: FETCH_TIPS_ERROR,
+    payload: error
+  }
+}
