@@ -1,5 +1,6 @@
 export interface User {
   name: string;
+  jwt: string
 }
 
 export interface userState {
