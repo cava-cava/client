@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import configureStore from './configureStore'
+import { createBrowserHistory } from "history";
 import './scss/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const history = createBrowserHistory();
+
+const initialState: any = {};
+const store = configureStore(history, initialState);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
