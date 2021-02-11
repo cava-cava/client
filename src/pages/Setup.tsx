@@ -18,9 +18,11 @@ const Setup = () => {
     }
 
     const handleSubmit = (event: FormEvent) => {
-        dispatch({type: SET_NAME, payload: name})
         event.preventDefault();
-        history.push('/rooms')
+        if(name) {
+            dispatch({type: SET_NAME, payload: name})
+            history.push('/rooms')
+        }
     }
     return (
         <div className="setup">
