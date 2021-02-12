@@ -1,23 +1,21 @@
 import React, {FunctionComponent} from 'react';
 import {Redirect} from "react-router";
 import {Route} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {ApplicationState} from "../store";
 
 type PrivateRouteProps = {
+    condition: boolean,
     exact?: boolean,
     path: string,
+    redirectTo: string,
     component: any
 }
 
-const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({exact = true, component: Component, path}) => {
-    const user = useSelector((state: ApplicationState) => state.user.data);
-    const isAuth: boolean = !!user.name
+const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({condition, exact = true, component: Component, path, redirectTo}) => {
     return (
         <Route exact={exact} path={path} render={(props) => (
-            isAuth
+            condition
                 ? <Component {...props} />
-                : <Redirect to='/setup'/>
+                : <Redirect to={redirectTo} />
         )}/>)
 }
 

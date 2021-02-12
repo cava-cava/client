@@ -6,9 +6,9 @@ import Home from "./pages/Home";
 import Tips from "./pages/Tips";
 import Setup from "./pages/Setup";
 import Rooms from "./pages/Rooms";
+import End from "./pages/End";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "./store";
-import {Redirect} from "react-router";
 import PrivateRoute from "./components/PrivateRoute";
 
 const url: string = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : window.location.toString();
@@ -28,15 +28,15 @@ const App = () => {
                         <Link to="/">Home</Link>
                         <Link to="/setup">Setup</Link>
                         <Link to="/rooms">Rooms</Link>
+                        <Link to="/end">End</Link>
                         <Link to="/tips">Tips</Link>
                     </nav>
                     <Switch>
                         <Route exact path="/" component={Home}/>
-                        <Route exact path="/setup" render={() => (!isAuth
-                            ? <Setup/>
-                            : <Redirect to='/rooms'/>)}/>
-                        <PrivateRoute component={Rooms} exact path="/rooms"/>
-                        <PrivateRoute component={Tips}  exact path="/tips"/>
+                        <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth} />
+                        <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth} />
+                        <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth} />
+                        <PrivateRoute component={Tips}  exact path="/tips" redirectTo="/setup" condition={isAuth} />
                         <Route path="*" component={Home}/>
                     </Switch>
                 </Router>
