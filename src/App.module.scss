@@ -2,11 +2,13 @@
 
 .App {
   text-align: center;
+  height: 100vh;
+  display: flex;
 
   @include media('exclude-mobile') {
     &Phone {
       position: relative;
-      margin: 40px auto;
+      margin: auto;
       width: 340px;
       height: 620px;
       border-radius: 40px;
