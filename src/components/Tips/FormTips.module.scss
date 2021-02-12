@@ -1,0 +1,16 @@
+.FormTips {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 5%;
+  display: flex;
+
+  textarea {
+    resize: none;
+    width: 70%;
+  }
+
+  input {
+    width: 30%;
+  }
+}
