@@ -9,7 +9,7 @@ export interface userState {
   readonly errors?: string;
 }
 
-export const SET_NAME = 'SET_NAME'
+export const SET_NAME = '@@user/SET_NAME'
 
 interface SetName {
   type: typeof SET_NAME

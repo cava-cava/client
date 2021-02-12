@@ -9,9 +9,9 @@ export interface tipsState {
   readonly errors?: string;
 }
 
-export const FETCH_TIPS_REQUEST = "FETCH_TIPS_REQUEST";
-export const FETCH_TIPS_SUCCESS = "FETCH_TIPS_SUCCESS";
-export const FETCH_TIPS_ERROR = "FETCH_TIPS_ERROR";
+export const FETCH_TIPS_REQUEST = "@@tips/FETCH_TIPS_REQUEST";
+export const FETCH_TIPS_SUCCESS = "@@tips/FETCH_TIPS_SUCCESS";
+export const FETCH_TIPS_ERROR = "@@tips/FETCH_TIPS_ERROR";
 
 interface FetchTipsRequest {
   type: typeof FETCH_TIPS_REQUEST
