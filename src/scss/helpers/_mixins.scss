@@ -1,0 +1,85 @@
+@mixin media($media){
+  /*
+  ##Device = Desktops
+  ##Screen = 1280px to higher resolution desktops
+  */
+  @if $media == "large-desktop"{
+    @media screen and (min-width: #{$xl}) {
+      @content;
+    }
+  }
+  /*
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1024px to 1280px
+  */
+  @if $media == "desktop"{
+    @media screen and (min-width: #{$lg}) and (max-width: #{$xl}) {
+      @content;
+    }
+  }
+  /*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+  */
+  @if $media == "tablet"{
+    @media screen and (min-width: #{$md}) and (max-width: #{$lg}) {
+      @content;
+    }
+  }
+  /*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 480px to 768px
+  */
+  @if $media == "low-tablet"{
+    @media screen and (min-width: #{$sm}) and (max-width: #{$md}) {
+      @content;
+    }
+  }
+  /*
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w -- to 480px
+  */
+  @if $media == "mobile"{
+    @media screen and (max-width: #{$sm}) {
+      @content;
+    }
+  }
+  /*
+    ##Device = Exclude Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w -- to 480px
+  */
+  @if $media == "exclude-mobile"{
+    @media screen and (min-width: #{$sm}) {
+      @content;
+    }
+  }
+  /*
+    ##Device = Landscape
+  */
+  @if $media == "landscape"{
+    @media screen and (orientation: landscape) {
+      @content;
+    }
+  }
+  /*
+    ##Device = Print
+  */
+  @if $media == "print"{
+    @media print {
+      @content;
+    }
+  }
+}
+/* @USAGE
+    @include media('mobile'){
+      // code
+    };
+*/
+
+/*
+* size elements
+*/
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
