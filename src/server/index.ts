@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080;
 const io = process.env.NODE_ENV !== 'production' ? require("socket.io")(server, {cors: {origin: "*",}}) : require("socket.io")(server);
 
 app.use(express.static(path.join(__dirname, '../../build')));
-app.get("/", (req: any, res: any, next: any) => res.sendFile(__dirname + './index.html'));
+app.get("*", (req: any, res: any, next: any) => res.sendFile(path.join(__dirname, '../../build', 'index.html')));
 
 // sockets test
 io.on('connection', (socket: any) => socket.emit('hello', 'hello from server!'));
