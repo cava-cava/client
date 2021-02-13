@@ -1,6 +1,7 @@
 export interface Tip {
-  id: number,
-  message: string;
+  id?: number,
+  message: string,
+  published_at?: string | null
 }
 
 export interface tipsState {
