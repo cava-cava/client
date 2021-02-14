@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './App.module.scss';
-import io from 'socket.io-client';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from "./pages/Home";
 import Tips from "./pages/Tips";
@@ -10,12 +9,6 @@ import End from "./pages/End";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "./store";
 import PrivateRoute from "./components/PrivateRoute";
-
-const url: string = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : window.location.toString();
-const socket = io(url);
-
-// sockets test
-socket.on('hello', (message: string) => alert(message));
 
 const App = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);

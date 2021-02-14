@@ -3,11 +3,24 @@ import {SET_NAME} from "../store/user/types";
 import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import styles from "./Rooms.module.scss"
+import io from "socket.io-client";
+
+const url: string = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : window.location.toString();
 
 const Rooms = () => {
     const dispatch = useDispatch();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const [name, setName] = useState(user.name);
+
+    const socket = io(url);
+
+    socket.on("connect", () => {
+        console.log(`connect ${socket.id}`);
+    });
+
+    socket.on("disconnect", () => {
+        console.log(`disconnect`);
+    });
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
