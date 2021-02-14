@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './App.module.scss';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from "./pages/Home";
@@ -16,6 +16,49 @@ import qrCode from './assets/png/qr.png'
 const App = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const isAuth: boolean = !!user.name
+
+    useEffect(() => {
+        const divInstall = document.getElementById('installContainer');
+        const butInstall = document.getElementById('butInstall');
+
+        // @ts-ignore
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            let deferredPrompt = e;
+            // Update UI to notify the user they can add to home screen
+            // @ts-ignore
+            butInstall.style.display = 'block';
+            console.log('coucou')
+
+            // @ts-ignore
+            butInstall.addEventListener('click', (e) => {
+                // hide our user interface that shows our A2HS button
+                console.log('click')
+
+                // @ts-ignore
+                butInstall.style.display = 'none';
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                // @ts-ignore
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+
+
+        window.addEventListener('appinstalled', (event:Event) => {
+            console.log('👍', 'appinstalled', event);
+        });
+    }, [])
     return (
         <div className={styles.App}>
             <div className={styles.AppLogo}>
@@ -50,6 +93,11 @@ const App = () => {
             </div>
             <div className={styles.AppCode}>
                 <img src={qrCode} alt="QR Code"/>
+            </div>
+            <div id="installContainer" className="hidden">
+                <button id="butInstall" type="button">
+                    Install
+                </button>
             </div>
         </div>
     );
