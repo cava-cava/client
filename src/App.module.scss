@@ -48,6 +48,10 @@
     }
   }
 
+  &Phone {
+    width: 100%;
+  }
+
   @include media('exclude-mobile') {
     &Phone {
       position: relative;
