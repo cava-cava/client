@@ -11,23 +11,15 @@ const Rooms = () => {
     const dispatch = useDispatch();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const [name, setName] = useState(user.name);
-
+    const [room, setRoom] = useState('');
     const socket = io(url);
 
-    socket.on("connect", () => {
-        console.log(`connect ${socket.id}`);
-    });
-
-    socket.on("disconnect", () => {
-        console.log(`disconnect`);
-    });
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     }
 
-    const callbackRoom = () => {
-        console.log('callback')
+    const handleChangeRoom = (event: ChangeEvent<HTMLInputElement>) => {
+        setRoom(event.target.value);
     }
 
     const createRoom = () => {
@@ -36,16 +28,33 @@ const Rooms = () => {
         });
     }
 
+    const joinRoom = (event:FormEvent) => {
+        event.preventDefault()
+        socket.emit("joinRoom",room, () => {
+            console.log(`createRoom`);
+        });
+    }
+
     useEffect(() => {
+        socket.on("connect", () => {
+            console.log(`connect ${socket.id}`);
+        });
+
+        socket.on("disconnect", () => {
+            console.log(`disconnect`);
+        });
         dispatch({type: SET_NAME, payload: name});
     }, [name]);
 
   return (
     <div className={styles.Rooms}>
         <h1>Rooms</h1>
-        <input type="text" id="name" name="name" maxLength={12} placeholder="PseudoCool74" value={name} onChange={handleChange} />
+        <input type="text" id="name" name="name" maxLength={12} placeholder="PseudoCool74" value={name} onChange={handleChangeName} />
         <button onClick={createRoom}>Create</button>
-        <input type="text" id="join" name="join" maxLength={5} placeholder="Join" />
+        <form autoComplete="off" onSubmit={joinRoom}>
+            <input type="text" id="join" name="join" maxLength={5} placeholder="Join" value={room} onChange={handleChangeRoom}/>
+            <input type="submit" value="Join"/>
+        </form>
     </div>
   );
 }
