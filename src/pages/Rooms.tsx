@@ -26,6 +26,16 @@ const Rooms = () => {
         setName(event.target.value);
     }
 
+    const callbackRoom = () => {
+        console.log('callback')
+    }
+
+    const createRoom = () => {
+        socket.emit("createRoom",() => {
+            console.log(`createRoom`);
+        });
+    }
+
     useEffect(() => {
         dispatch({type: SET_NAME, payload: name});
     }, [name]);
@@ -34,7 +44,7 @@ const Rooms = () => {
     <div className={styles.Rooms}>
         <h1>Rooms</h1>
         <input type="text" id="name" name="name" maxLength={12} placeholder="PseudoCool74" value={name} onChange={handleChange} />
-        <button>Create</button>
+        <button onClick={createRoom}>Create</button>
         <input type="text" id="join" name="join" maxLength={5} placeholder="Join" />
     </div>
   );
