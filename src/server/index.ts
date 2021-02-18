@@ -4,6 +4,8 @@ import * as path from "path";
 import { nanoid } from 'nanoid'
 import {Room, Rooms} from "./types/rooms";
 import { joinRoom } from "./actions/joinRoom";
+import {createRoom} from "./actions/createRoom";
+import {leaveRooms} from "./actions/leaveRooms";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -22,12 +24,8 @@ io.on("connect", (socket: Socket) => {
      * Gets fired when a user wants to create a new room.
      */
     socket.on('createRoom', (callback) => {
-        const room = {
-            id: nanoid(5),
-            sockets: []
-        };
+        const room:Room = createRoom(rooms)
         rooms[room.id] = room;
-        console.log(rooms)
         // have the socket join the room they've just created.
         joinRoom(socket, room);
         callback();
@@ -38,12 +36,19 @@ io.on("connect", (socket: Socket) => {
      */
     socket.on('joinRoom', (roomId:string, callback) => {
         const room:Room = rooms[roomId];
-        joinRoom(socket, room);
+        if(room) joinRoom(socket, room);
         callback();
     });
 
+    /**
+     * Gets fired when a player leaves a room.
+     */
+    socket.on('leaveRoom', () => {
+        leaveRooms(socket,rooms);
+    });
 
     socket.on("disconnect", () => {
+        leaveRooms(socket,rooms);
         console.log(`disconnect ${socket.id}`);
     });
 });

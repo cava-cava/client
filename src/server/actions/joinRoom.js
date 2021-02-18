@@ -10,5 +10,6 @@ var joinRoom = function (socket, room) {
     room.sockets.push(socket);
     socket.join(room.id);
     console.log(socket.id, "Joined", room.id);
+    socket.emit('redirect', "/rooms/" + room.id);
 };
 exports.joinRoom = joinRoom;

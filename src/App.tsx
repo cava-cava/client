@@ -13,6 +13,7 @@ import {MobilePrompt} from "./components/Prompt/MobilePrompt";
 
 import logo from './assets/svg/logo.svg'
 import qrCode from './assets/png/qr.png'
+import Room from "./pages/Room";
 
 const App = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
@@ -44,6 +45,7 @@ const App = () => {
                         <Route exact path="/" component={Home}/>
                         <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
                         <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
+                        <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={true}/>
                         <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
                         <Route path="*" component={Home}/>

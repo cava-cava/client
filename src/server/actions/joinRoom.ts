@@ -10,4 +10,5 @@ export const joinRoom = (socket:Socket, room:Room) => {
     room.sockets.push(socket);
     socket.join(room.id);
     console.log(socket.id, "Joined", room.id);
+    socket.emit('redirect', `/rooms/${room.id}`)
 };
