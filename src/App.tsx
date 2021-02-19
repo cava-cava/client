@@ -15,10 +15,9 @@ import logo from './assets/svg/logo.svg'
 import qrCode from './assets/png/qr.png'
 import Room from "./pages/Room";
 import {socket} from "./socketClient";
-import {useHistory} from "react-router";
+import SocketLog from "./components/SocketLog";
 
 const App = () => {
-    const history = useHistory();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const isAuth: boolean = !!user.name
 
@@ -30,7 +29,6 @@ const App = () => {
         console.log(`disconnect`);
     });
 
-    socket.on('redirect', (path: string) => history.push(path));
 
     return (
         <div className={styles.App}>
@@ -58,7 +56,7 @@ const App = () => {
                         <Route exact path="/" component={Home}/>
                         <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
                         <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
-                        <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={true}/>
+                        <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
                         <Route path="*" component={Home}/>
@@ -69,6 +67,7 @@ const App = () => {
                 <img src={qrCode} alt="QR Code"/>
             </div>
             <MobilePrompt/>
+            {(!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && <SocketLog />}
         </div>
     );
 }

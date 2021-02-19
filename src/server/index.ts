@@ -1,7 +1,6 @@
 import express from "express";
 import {Socket, Server} from "socket.io";
 import * as path from "path";
-import { nanoid } from 'nanoid'
 import {Room, Rooms} from "./types/rooms";
 import { joinRoom } from "./actions/joinRoom";
 import {createRoom} from "./actions/createRoom";
@@ -47,6 +46,11 @@ io.on("connect", (socket: Socket) => {
         leaveRooms(socket,rooms);
     });
 
+    socket.on('log', () => {
+        console.log('mySocket:',socket)
+        console.log('logRooms:',rooms)
+    });
+    
     socket.on("disconnect", () => {
         leaveRooms(socket,rooms);
         console.log(`disconnect ${socket.id}`);
