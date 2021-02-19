@@ -36,6 +36,7 @@ io.on("connect", (socket: Socket) => {
     socket.on('joinRoom', (roomId:string, callback) => {
         const room:Room = rooms[roomId];
         if(room) joinRoom(socket, room);
+        else socket.emit('error', "La room n'existe pas");
         callback();
     });
 
@@ -46,11 +47,14 @@ io.on("connect", (socket: Socket) => {
         leaveRooms(socket,rooms);
     });
 
-    socket.on('log', () => {
-        console.log('mySocket:',socket)
+    socket.on('logMySocket', () => {
+        console.log('logMySocket:',socket)
+    });
+
+    socket.on('logRooms', () => {
         console.log('logRooms:',rooms)
     });
-    
+
     socket.on("disconnect", () => {
         leaveRooms(socket,rooms);
         console.log(`disconnect ${socket.id}`);

@@ -12,10 +12,13 @@ const Rooms = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const [name, setName] = useState(user.name);
     const [room, setRoom] = useState('');
+    const [error, setError] = useState('');
 
     socket.emit("leaveRoom", () => {console.log(`leaveRoom`);});
 
     socket.on('redirect', (path: string) => history.push(path));
+
+    socket.on('error', (error: string) => setError(error));
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
@@ -54,6 +57,7 @@ const Rooms = () => {
                        onChange={handleChangeRoom}/>
                 <input type="submit" value="Join"/>
             </form>
+            { error && <div>ERROR: {error}</div>}
         </div>
     );
 }

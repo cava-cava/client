@@ -4,7 +4,10 @@ import {socket} from "../socketClient";
 
 const SocketLog: FunctionComponent = () => {
     return (
-            <button className={styles.SocketLog} onClick={() => {socket.emit('log')}}>Get Socket Log</button>
+        <div className={styles.SocketLog}>
+            <button onClick={() => {socket.emit('logMySocket')}}>Get My Socket Log</button>
+            <button onClick={() => {socket.emit('logRooms')}}>Get Rooms Log</button>
+        </div>
     )
 }
 
