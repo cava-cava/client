@@ -14,10 +14,23 @@ import {MobilePrompt} from "./components/Prompt/MobilePrompt";
 import logo from './assets/svg/logo.svg'
 import qrCode from './assets/png/qr.png'
 import Room from "./pages/Room";
+import {socket} from "./socketClient";
+import {useHistory} from "react-router";
 
 const App = () => {
+    const history = useHistory();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const isAuth: boolean = !!user.name
+
+    socket.on("connect", () => {
+        console.log(`connect ${socket.id}`);
+    });
+
+    socket.on("disconnect", () => {
+        console.log(`disconnect`);
+    });
+
+    socket.on('redirect', (path: string) => history.push(path));
 
     return (
         <div className={styles.App}>
