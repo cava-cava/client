@@ -29,14 +29,14 @@ const Rooms = () => {
     }
 
     const createRoom = () => {
-        socket.emit("createRoom", () => {
+        socket.emit("createRoom", name, () => {
             console.log(`createRoom`);
         });
     }
 
     const joinRoom = (event: FormEvent) => {
         event.preventDefault()
-        socket.emit("joinRoom", room, () => {
+        socket.emit("joinRoom", name, room, () => {
             console.log(`JoinRoom`);
         });
     }

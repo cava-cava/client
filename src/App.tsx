@@ -46,8 +46,6 @@ const App = () => {
             <div className={styles.AppPhone}>
                 <Router>
                     <nav>
-                        <Link to="/">Home</Link>
-                        <Link to="/setup">Setup</Link>
                         <Link to="/rooms">Rooms</Link>
                         <Link to="/end">End</Link>
                         <Link to="/tips">Tips</Link>

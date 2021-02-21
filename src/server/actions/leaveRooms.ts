@@ -1,11 +1,11 @@
-import {Socket} from "socket.io";
 import {Rooms} from "../types/rooms";
+import {ExtendedSocket} from "../types/socket";
 
 /**
  * Will make the socket leave any rooms that it is a part of
  * @param socket A connected socket.io socket
  */
-export const leaveRooms = (socket:Socket, rooms:Rooms) => {
+export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
     const roomsToDelete = [];
     for(const id in rooms) {
         const room = rooms[id];

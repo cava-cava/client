@@ -1,10 +1,11 @@
 import express from "express";
-import {Socket, Server} from "socket.io";
+import {Server} from "socket.io";
 import * as path from "path";
 import {Room, Rooms} from "./types/rooms";
 import { joinRoom } from "./actions/joinRoom";
 import {createRoom} from "./actions/createRoom";
 import {leaveRooms} from "./actions/leaveRooms";
+import {ExtendedSocket} from "./types/socket";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -16,26 +17,26 @@ app.get("*", (req: any, res: any, next: any) => res.sendFile(path.join(__dirname
 
 const rooms:Rooms = {};
 
-io.on("connect", (socket: Socket) => {
+io.on("connect", (socket: ExtendedSocket) => {
     console.log(`connect ${socket.id}`);
 
     /**
      * Gets fired when a user wants to create a new room.
      */
-    socket.on('createRoom', (callback) => {
+    socket.on('createRoom', (username:string, callback) => {
         const room:Room = createRoom(rooms)
         rooms[room.id] = room;
         // have the socket join the room they've just created.
-        joinRoom(socket, room);
+        joinRoom(username, socket, room);
         callback();
     });
 
     /**
      * Gets fired when a player has joined a room.
      */
-    socket.on('joinRoom', (roomId:string, callback) => {
+    socket.on('joinRoom', (username:string, roomId:string, callback) => {
         const room:Room = rooms[roomId];
-        if(room) joinRoom(socket, room);
+        if(room) joinRoom(username, socket, room);
         else socket.emit('error', "La room n'existe pas");
         callback();
     });

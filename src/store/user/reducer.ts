@@ -14,7 +14,7 @@ export const initialState: userState = {
 const reducer: Reducer<userState, UserActionTypes> = (state:userState = initialState, action: UserActionTypes) => {
   switch (action.type) {
     case SET_NAME: {
-      return { ...state, data: {name: action.payload, jwt: state.data.jwt} };
+      return { ...state, data: {...state.data, name: action.payload,} };
     }
     default: {
       return state;
