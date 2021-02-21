@@ -1,5 +1,6 @@
 import {Room} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
+import {User} from "../types/users";
 
 /**
  * Will connect a socket to a specified room
@@ -9,8 +10,14 @@ import {ExtendedSocket} from "../types/socket";
  */
 export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
     socket.username = username;
+    const user:User = {
+        id: socket.id,
+        username: username
+    };
+    room.users.push(user);
     room.sockets.push(socket);
     socket.join(room.id);
-    console.log(socket.id, "Joined", room.id);
-    socket.emit('redirect', `/rooms/${room.id}`)
+    console.log(`${socket.username}[${socket.id}] Joined ${room.id}`);
+    socket.emit('redirect', `/rooms/${room.id}`);
+    socket.to(room.id).emit('updateUsers', room.users);
 };

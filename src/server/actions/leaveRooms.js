@@ -4,6 +4,7 @@ exports.leaveRooms = void 0;
 /**
  * Will make the socket leave any rooms that it is a part of
  * @param socket A connected socket.io socket
+ * @param rooms get all rooms
  */
 var leaveRooms = function (socket, rooms) {
     var roomsToDelete = [];
@@ -14,6 +15,9 @@ var leaveRooms = function (socket, rooms) {
             socket.leave(id);
             // remove the socket from the room object
             room.sockets = room.sockets.filter(function (item) { return item !== socket; });
+            // remove the user from the room object
+            room.users = room.users.filter(function (user) { return user.id !== socket.id; });
+            socket.to(room.id).emit('updateUsers', room.users);
         }
         // Prepare to delete any rooms that are now empty
         if (room.sockets.length == 0) {

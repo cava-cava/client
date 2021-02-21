@@ -15,7 +15,6 @@ const DidYouKnow: FunctionComponent = () => {
     const fetchKnows = async () => {
         dispatch({type: FETCH_KNOWS_REQUEST})
         await axios.get('https://happiness-strapi.herokuapp.com/did-you-knows').then(({data}) => {
-            console.log(shuffle(data))
             dispatch({type: FETCH_KNOWS_SUCCESS, payload: shuffle(data)})
         }).catch(function (error) {
             console.error(error)

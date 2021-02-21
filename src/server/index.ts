@@ -42,6 +42,16 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
+     * Gets fired for update users in room
+     */
+    socket.on('getUsersInRoom', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room) {
+            socket.to(room.id).emit('updateUsers', room.users);
+        }
+    });
+
+    /**
      * Gets fired when a player leaves a room.
      */
     socket.on('leaveRoom', () => {

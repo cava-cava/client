@@ -9,7 +9,8 @@ import {nanoid} from "nanoid";
 export function createRoom(rooms: Rooms) {
     let room: Room = {
         id: nanoid(5),
-        sockets: []
+        sockets: [],
+        users: []
     }
     while (rooms[room.id] || !room?.id) {
         room.id = nanoid(5);

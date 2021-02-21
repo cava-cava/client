@@ -9,7 +9,8 @@ var nanoid_1 = require("nanoid");
 function createRoom(rooms) {
     var room = {
         id: nanoid_1.nanoid(5),
-        sockets: []
+        sockets: [],
+        users: []
     };
     while (rooms[room.id] || !(room === null || room === void 0 ? void 0 : room.id)) {
         room.id = nanoid_1.nanoid(5);

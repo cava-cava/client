@@ -9,9 +9,15 @@ exports.joinRoom = void 0;
  */
 var joinRoom = function (username, socket, room) {
     socket.username = username;
+    var user = {
+        id: socket.id,
+        username: username
+    };
+    room.users.push(user);
     room.sockets.push(socket);
     socket.join(room.id);
-    console.log(socket.id, "Joined", room.id);
+    console.log(socket.username + "[" + socket.id + "] Joined " + room.id);
     socket.emit('redirect', "/rooms/" + room.id);
+    socket.to(room.id).emit('updateUsers', room.users);
 };
 exports.joinRoom = joinRoom;
