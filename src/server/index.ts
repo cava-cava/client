@@ -36,7 +36,10 @@ io.on("connect", (socket: ExtendedSocket) => {
      */
     socket.on('joinRoom', (username:string, roomId:string, callback) => {
         const room:Room = rooms[roomId];
-        if(room) joinRoom(username, socket, room);
+        if(room) {
+            if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, socket, room);
+            else socket.emit('error', "La room est complète");
+        }
         else socket.emit('error', "La room n'existe pas");
         callback();
     });
@@ -47,7 +50,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('getUsersInRoom', (roomId:string) => {
         const room:Room = rooms[roomId];
         if(room) {
-            socket.to(room.id).emit('updateUsers', room.users);
+            socket.emit('updateUsers', room.users);
         }
     });
 
