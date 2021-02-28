@@ -1,16 +1,78 @@
 import express from "express";
-import * as socketio from "socket.io";
+import {Server} from "socket.io";
 import * as path from "path";
+import {Room, Rooms} from "./types/rooms";
+import { joinRoom } from "./actions/joinRoom";
+import {createRoom} from "./actions/createRoom";
+import {leaveRooms} from "./actions/leaveRooms";
+import {ExtendedSocket} from "./types/socket";
 
 const app = express();
 const server = require('http').createServer(app);
 const port = process.env.PORT || 8080;
-const io = process.env.NODE_ENV !== 'production' ? require("socket.io")(server, {cors: {origin: "*",}}) : require("socket.io")(server);
+const io = process.env.NODE_ENV !== 'production' ? new Server(server, {cors: {origin: "*",}}) : new Server(server);
 
 app.use(express.static(path.join(__dirname, '../../build')));
-app.get("/", (req: any, res: any, next: any) => res.sendFile(__dirname + './index.html'));
+app.get("*", (req: any, res: any, next: any) => res.sendFile(path.join(__dirname, '../../build', 'index.html')));
 
-// sockets test
-io.on('connection', (socket: any) => socket.emit('hello', 'hello from server!'));
+const rooms:Rooms = {};
+
+io.on("connect", (socket: ExtendedSocket) => {
+    console.log(`connect ${socket.id}`);
+
+    /**
+     * Gets fired when a user wants to create a new room.
+     */
+    socket.on('createRoom', (username:string, callback) => {
+        const room:Room = createRoom(rooms)
+        rooms[room.id] = room;
+        // have the socket join the room they've just created.
+        joinRoom(username, socket, room);
+        callback();
+    });
+
+    /**
+     * Gets fired when a player has joined a room.
+     */
+    socket.on('joinRoom', (username:string, roomId:string, callback) => {
+        const room:Room = rooms[roomId];
+        if(room) {
+            if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, socket, room);
+            else socket.emit('error', "La room est complète");
+        }
+        else socket.emit('error', "La room n'existe pas");
+        callback();
+    });
+
+    /**
+     * Gets fired for update users in room
+     */
+    socket.on('getUsersInRoom', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room) {
+            socket.emit('updateUsers', room.users);
+        }
+    });
+
+    /**
+     * Gets fired when a player leaves a room.
+     */
+    socket.on('leaveRoom', () => {
+        leaveRooms(socket,rooms);
+    });
+
+    socket.on('logMySocket', () => {
+        console.log('logMySocket:',socket)
+    });
+
+    socket.on('logRooms', () => {
+        console.log('logRooms:',rooms)
+    });
+
+    socket.on("disconnect", () => {
+        leaveRooms(socket,rooms);
+        console.log(`disconnect ${socket.id}`);
+    });
+});
 
 server.listen(port);

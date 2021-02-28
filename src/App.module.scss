@@ -6,12 +6,60 @@
   height: 100vh;
   display: flex;
 
+  &Logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 125px;
+
+    @include media('mobile') {
+      display: none;
+    }
+  }
+
+  &Description {
+    width: 100%;
+    margin: auto;
+    padding: 2rem;
+    color: white;
+
+    > p {
+      margin: auto;
+      max-width: 300px;
+    }
+
+    @include media('mobile') {
+      display: none;
+    }
+  }
+
+  &Code {
+    width: 100%;
+    margin: auto;
+
+    img {
+      width: 100%;
+      max-width: 150px;
+      border-radius: 20px;
+    }
+
+    @include media('mobile') {
+      display: none;
+    }
+  }
+
+  &Phone {
+    width: 100%;
+  }
+
   @include media('exclude-mobile') {
     &Phone {
       position: relative;
       margin: auto;
-      width: 340px;
-      height: 620px;
+      min-width: 340px;
+      min-height: 620px;
+      max-width: 340px;
+      max-height: 620px;
       border-radius: 40px;
       box-shadow: 0 0 0 11px #1f1f1f, 0 0 0 13px #191919, 0 0 0 20px #111;
       background: white;

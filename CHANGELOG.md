@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/happy-game/client/compare/v0.1.0...v0.2.0) (2021-02-28)
+
+
+### Features
+
+*  add condition for max users in room ([5c276c2](https://github.com/happy-game/client/commit/5c276c2480d4aa1721d00c651667a8ffb723e315))
+* add AndroidPrompt and IOSPrompt ([aac9c31](https://github.com/happy-game/client/commit/aac9c31d83b0ef8f7492f7e74d4b697cf9d7b12d))
+* add component logger for socket ([fd82f3f](https://github.com/happy-game/client/commit/fd82f3f637d32ff21fef188d75b6039b682f88e0))
+* add username when join room ([f5dc930](https://github.com/happy-game/client/commit/f5dc9309e37f3011309e8ee349a99b60318c6a75))
+* create and join game redirection ([7ed4674](https://github.com/happy-game/client/commit/7ed46743a41b06f9d67c2b3b906d2f4e62ec53da))
+* DidYouKnow ( components, store, mixins ) ([b43c10f](https://github.com/happy-game/client/commit/b43c10f79c6b0ce0095dbad5bb8d9fee900c8416))
+* front create and join room ([7ee5988](https://github.com/happy-game/client/commit/7ee5988aab043de9b26dc285df7280e640b44967))
+* List Users in room ([92b050f](https://github.com/happy-game/client/commit/92b050fd3f60375e82ca8ed2533af47d130fd531))
+* socket log and error ([12aaaa5](https://github.com/happy-game/client/commit/12aaaa58e9444140bcd611412c9c8f4f46180afc))
+* **server:** create and join room ([c874838](https://github.com/happy-game/client/commit/c8748388505488f2a20fcb4b1aa29f5043c1a1b0))
+* test prompt chrome ([30717d2](https://github.com/happy-game/client/commit/30717d20e5e191391853dc426d46d24f913ef31d))
+* **App:** update style, add qrCode and description ([2be9617](https://github.com/happy-game/client/commit/2be9617a4ef965164367af1100d48dc1ba0543ab))
+* update socket io ([01a9761](https://github.com/happy-game/client/commit/01a9761db5005934b02b0a20db18ea0dd4b7a73f))
+* update Tips ([610e505](https://github.com/happy-game/client/commit/610e50571369f41bdb9d9cf642c5ec0c82d83502))
+
+
+### Bug Fixes
+
+* connection socket client ([9ee8b86](https://github.com/happy-game/client/commit/9ee8b86d5cfa1ea161d73b04815a96e74bab394e))
+* server express ([5754899](https://github.com/happy-game/client/commit/5754899974ce9e263c6c89628ee5f84ca4f08819))
+
 ## [0.1.0](https://github.com/happy-game/client/compare/v0.0.0...v0.1.0) (2021-02-13)
 
 
