@@ -13,10 +13,22 @@ import {MobilePrompt} from "./components/Prompt/MobilePrompt";
 
 import logo from './assets/svg/logo.svg'
 import qrCode from './assets/png/qr.png'
+import Room from "./pages/Room";
+import {socket} from "./socketClient";
+import SocketLog from "./components/SocketLog";
 
 const App = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const isAuth: boolean = !!user.name
+
+    socket.on("connect", () => {
+        console.log(`connect ${socket.id}`);
+    });
+
+    socket.on("disconnect", () => {
+        console.log(`disconnect`);
+    });
+
 
     return (
         <div className={styles.App}>
@@ -34,8 +46,6 @@ const App = () => {
             <div className={styles.AppPhone}>
                 <Router>
                     <nav>
-                        <Link to="/">Home</Link>
-                        <Link to="/setup">Setup</Link>
                         <Link to="/rooms">Rooms</Link>
                         <Link to="/end">End</Link>
                         <Link to="/tips">Tips</Link>
@@ -44,6 +54,7 @@ const App = () => {
                         <Route exact path="/" component={Home}/>
                         <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
                         <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
+                        <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
                         <Route path="*" component={Home}/>
@@ -54,6 +65,7 @@ const App = () => {
                 <img src={qrCode} alt="QR Code"/>
             </div>
             <MobilePrompt/>
+            {(!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && <SocketLog />}
         </div>
     );
 }
