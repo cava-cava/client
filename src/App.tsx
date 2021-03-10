@@ -6,6 +6,7 @@ import Tips from "./pages/Tips";
 import Setup from "./pages/Setup";
 import Rooms from "./pages/Rooms";
 import End from "./pages/End";
+import Labs from "./pages/Labs";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "./store";
 import PrivateRoute from "./components/PrivateRoute";
@@ -49,6 +50,7 @@ const App = () => {
                         <Link to="/rooms">Rooms</Link>
                         <Link to="/end">End</Link>
                         <Link to="/tips">Tips</Link>
+                        <Link to="/labs">Labs</Link>
                     </nav>
                     <Switch>
                         <Route exact path="/" component={Home}/>
@@ -57,6 +59,7 @@ const App = () => {
                         <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                         <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
+                        <Route exact path="/labs" component={Labs}/>
                         <Route path="*" component={Home}/>
                     </Switch>
                 </Router>
