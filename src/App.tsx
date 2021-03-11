@@ -17,17 +17,19 @@ import qrCode from './assets/png/qr.png'
 import Room from "./pages/Room";
 import {socket} from "./socketClient";
 import SocketLog from "./components/SocketLog";
+import {colors} from './mixins/color'
+import './mixins/browser-console-color'
 
 const App = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const isAuth: boolean = !!user.name
 
     socket.on("connect", () => {
-        console.log(`connect ${socket.id}`);
+        console.color(`connect ${socket.id}`, colors.green);
     });
 
     socket.on("disconnect", () => {
-        console.log(`disconnect`);
+        console.color(`disconnect`, colors.red);
     });
 
 
