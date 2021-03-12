@@ -1,29 +1,16 @@
 import React from 'react';
 import styles from './App.module.scss';
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
-import Home from "./pages/Home";
-import Tips from "./pages/Tips";
-import Setup from "./pages/Setup";
-import Rooms from "./pages/Rooms";
-import End from "./pages/End";
-import Labs from "./pages/Labs";
-import {useSelector} from "react-redux";
-import {ApplicationState} from "./store";
-import PrivateRoute from "./components/PrivateRoute";
 import {MobilePrompt} from "./components/Prompt/MobilePrompt";
 
 import logo from './assets/svg/logo.svg'
 import qrCode from './assets/png/qr.png'
-import Room from "./pages/Room";
 import {socket} from "./socketClient";
 import SocketLog from "./components/SocketLog";
 import {colors} from './mixins/color'
 import './mixins/browser-console-color'
+import TheRouter from "./components/TheRouter/TheRouter";
 
 const App = () => {
-    const user = useSelector((state: ApplicationState) => state.user.data);
-    const isAuth: boolean = !!user.name
-
     socket.on("connect", () => {
         console.color(`connect ${socket.id}`, colors.green);
     });
@@ -46,26 +33,9 @@ const App = () => {
                     ante, eu hendrerit ante dolor mollis nibh.
                 </p>
             </div>
-            <div className={styles.AppPhone}>
-                <Router>
-                    <nav>
-                        <Link to="/rooms">Rooms</Link>
-                        <Link to="/end">End</Link>
-                        <Link to="/tips">Tips</Link>
-                        <Link to="/labs">Labs</Link>
-                    </nav>
-                    <Switch>
-                        <Route exact path="/" component={Home}/>
-                        <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
-                        <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
-                        <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={isAuth}/>
-                        <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
-                        <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
-                        <Route exact path="/labs" component={Labs}/>
-                        <Route path="*" component={Home}/>
-                    </Switch>
-                </Router>
-            </div>
+            <section className={styles.AppPhone}>
+                <TheRouter/>
+            </section>
             <div className={styles.AppCode}>
                 <img src={qrCode} alt="QR Code"/>
             </div>

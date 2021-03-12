@@ -1,0 +1,18 @@
+.UserProgressBar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: yellowgreen;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  padding: 5px;
+  transition: 0.6s left ease-in-out;
+
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
