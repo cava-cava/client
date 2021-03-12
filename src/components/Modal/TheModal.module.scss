@@ -1,0 +1,45 @@
+@import "../../scss/helpers";
+
+.TheModal {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    overflow-y: scroll;
+    background: white;
+
+    > div {
+        padding: 20px;
+    }
+
+    @include media('exclude-mobile') {
+        bottom: 0;
+        right: 0;
+        left: 65px;
+        margin: auto;
+        min-width: 340px;
+        min-height: 620px;
+        max-width: 340px;
+        max-height: 620px;
+        border-radius: 40px;
+    }
+
+    &Header {
+        h3 {
+            text-align: center;
+        }
+
+        button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+    }
+
+    &Body {
+        line-height: 1;
+    }
+}

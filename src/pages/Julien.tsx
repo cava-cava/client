@@ -1,9 +1,11 @@
 import React from 'react';
+import TheHeader from "../components/Game/Header/TheHeader";
+import styles from './Julien.module.scss'
 
 const Julien = () => {
     return (
-    <div className="julien">
-        <h1>Julien Labs</h1>
+    <div className={styles.Julien}>
+        <TheHeader />
     </div>
   );
 }

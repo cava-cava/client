@@ -33,9 +33,9 @@ const App = () => {
                     ante, eu hendrerit ante dolor mollis nibh.
                 </p>
             </div>
-            <div className={styles.AppPhone}>
+            <section className={styles.AppPhone}>
                 <TheRouter/>
-            </div>
+            </section>
             <div className={styles.AppCode}>
                 <img src={qrCode} alt="QR Code"/>
             </div>
