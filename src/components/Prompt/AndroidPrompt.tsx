@@ -1,4 +1,4 @@
-import { useAddToHomeScreenPrompt } from "./useAddToHomescreenPrompt";
+import { useAddToHomeScreenPrompt } from "../../hooks/useAddToHomescreenPrompt";
 import {FunctionComponent, useEffect, useState} from "react";
 import styles from './AndroidPrompt.module.scss'
 

@@ -1,0 +1,17 @@
+.SettingsHeader {
+    margin: auto;
+
+    .icon {
+        background: transparent;
+        border: 0;
+        outline: none;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+        }
+    }
+}
