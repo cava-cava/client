@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/happy-game/client/compare/v0.2.0...v0.3.0) (2021-03-14)
+
+
+### Features
+
+* **ProgressBar:** add progress bar component ([ea7401d](https://github.com/happy-game/client/commit/ea7401d8341e484b49f701e405285b90f966efe7))
+* add header component with userInfos, modal settings & help ([b3441aa](https://github.com/happy-game/client/commit/b3441aa9f9cfd4d11bb13253349a8dd61e13885a))
+* **TheRouter:** add router component ([a459c14](https://github.com/happy-game/client/commit/a459c142acbc5ec34570af7a806895cdcad0f3e5))
+* ⏱ Create Timer ([f45b47a](https://github.com/happy-game/client/commit/f45b47a99ccbd5ab87c4e0cbe4edceb0022fe36f))
+* add logs for socket io and color for console ([a2b919d](https://github.com/happy-game/client/commit/a2b919dc836d3bfe46fb77dca0e1bda765580599))
+
+
+### Bug Fixes
+
+* connexion with socket client ([19bbd47](https://github.com/happy-game/client/commit/19bbd47408068f866f18a8064b1d0796b7a48370))
+* delete pwa temporarily ([a806c01](https://github.com/happy-game/client/commit/a806c019d66ea955453cba6dd20b3bc9e8b9fd86))
+* update README ([0271711](https://github.com/happy-game/client/commit/0271711adaf1c586e5c415f88625e41e635e0216))
+
 ## [0.2.0](https://github.com/happy-game/client/compare/v0.1.0...v0.2.0) (2021-02-28)
 
 
