@@ -1,11 +1,14 @@
 import React, {FunctionComponent} from 'react';
 import styles from './UserHeader.module.scss'
 import avatar from '../../../assets/png/avatar.png'
+import TheTimer from "../../Timer/TheTimer";
 
 const UserHeader: FunctionComponent = () =>
     <div className={styles.UserHeader}>
         <div className={styles.avatar}>
-            <img src={avatar}/>
+            <TheTimer>
+                <img src={avatar}/>
+            </TheTimer>
         </div>
         <div className={styles.user}>
             <div>JujuOneLove</div>

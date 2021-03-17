@@ -1,12 +1,11 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import Timer from '../components/Timer/Timer'
+import TheTimer from '../components/Timer/TheTimer'
 
 const Labs = () => {
     return (
         <div className="Labs">
             <h1>LABS</h1>
-            <Timer />
+            <TheTimer />
         </div>
     );
 }

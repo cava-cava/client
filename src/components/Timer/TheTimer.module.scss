@@ -1,0 +1,40 @@
+.TheTimer {
+    position: relative;
+    margin: auto;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+
+  > div {
+    padding: 5px;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+    z-index: 1;
+
+    circle {
+      stroke-dasharray: 143px;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      stroke-width: 3px;
+      stroke: black;
+      fill: none;
+      animation: countdown linear forwards;
+    }
+  }
+
+  @keyframes countdown {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: 143px;
+    }
+  }
+}
