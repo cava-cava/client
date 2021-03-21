@@ -55,6 +55,15 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
+     * Gets fired when a host start a game in room.
+     */
+    socket.on('startGame', (roomId: string) => {
+        const room:Room = rooms[roomId];
+        socket.emit('redirect', `/game/${roomId}`);
+        socket.to(room.id).emit('redirect', `/game/${roomId}`);
+    });
+
+    /**
      * Gets fired when a player leaves a room.
      */
     socket.on('leaveRoom', () => {
