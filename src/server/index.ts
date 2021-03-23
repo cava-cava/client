@@ -55,6 +55,13 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
+     * Gets fired for get my color in room
+     */
+    socket.on('getMyColor', () => {
+        socket.emit('getMyColor', socket.color);
+    });
+
+    /**
      * Gets fired when a host start a game in room.
      */
     socket.on('startGame', (roomId: string) => {
