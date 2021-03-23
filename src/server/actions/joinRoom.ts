@@ -1,6 +1,6 @@
 import {Room} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
-import {User} from "../types/users";
+import {User} from "../../store/user/types";
 
 /**
  * Will connect a socket to a specified room
@@ -12,7 +12,7 @@ export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
     socket.username = username;
     const user:User = {
         id: socket.id,
-        username: username
+        name: username
     };
     room.users.push(user);
     room.sockets.push(socket);

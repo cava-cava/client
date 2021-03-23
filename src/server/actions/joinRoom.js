@@ -11,7 +11,7 @@ var joinRoom = function (username, socket, room) {
     socket.username = username;
     var user = {
         id: socket.id,
-        username: username
+        name: username
     };
     room.users.push(user);
     room.sockets.push(socket);

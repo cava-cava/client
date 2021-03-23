@@ -1,5 +1,5 @@
 import {Socket} from "socket.io";
-import {User} from "./users";
+import {User} from "../../store/user/types";
 
 export interface Room {
     id: string,
