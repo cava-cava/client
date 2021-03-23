@@ -7,7 +7,7 @@ import OhMyGod from "../components/Game/OhMyGod";
 const Julien = () => {
     return (
         <div className={styles.Julien}>
-            <TheHeader/>
+            <TheHeader username="JujuOneLove" code="XLRTZ"/>
             <TheProgressBar/>
             <OhMyGod/>
         </div>
