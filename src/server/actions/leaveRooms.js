@@ -15,6 +15,8 @@ var leaveRooms = function (socket, rooms) {
             socket.leave(id);
             // remove the socket from the room object
             room.sockets = room.sockets.filter(function (item) { return item !== socket; });
+            //remove color and add to room object
+            room.colors.push(socket.color);
             // remove the user from the room object
             room.users = room.users.filter(function (user) { return user.id !== socket.id; });
             socket.to(room.id).emit('updateUsers', room.users);

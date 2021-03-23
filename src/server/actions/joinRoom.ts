@@ -9,10 +9,14 @@ import {User} from "../../store/user/types";
  * @param room An object that represents a room from the `rooms` instance variable object
  */
 export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
-    socket.username = username;
+    socket.username = username
+    const color = room.colors[0]
+    socket.color = color
+    room.colors.shift()
     const user:User = {
         id: socket.id,
-        name: username
+        name: username,
+        color: color
     };
     room.users.push(user);
     room.sockets.push(socket);

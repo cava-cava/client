@@ -15,6 +15,8 @@ export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
             socket.leave(id);
             // remove the socket from the room object
             room.sockets = room.sockets.filter((item) => item !== socket);
+            //remove color and add to room object
+            room.colors.push(socket.color)
             // remove the user from the room object
             room.users = room.users.filter((user) => user.id !== socket.id);
             socket.to(room.id).emit('updateUsers', room.users);

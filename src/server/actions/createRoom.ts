@@ -10,7 +10,8 @@ export function createRoom(rooms: Rooms) {
     let room: Room = {
         id: nanoid(5),
         sockets: [],
-        users: []
+        users: [],
+        colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange']
     }
     while (rooms[room.id] || !room?.id) {
         room.id = nanoid(5);

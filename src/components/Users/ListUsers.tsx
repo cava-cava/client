@@ -6,7 +6,7 @@ type ListUsersProps = {
 }
 const ListUsers: FunctionComponent<ListUsersProps> = ({users}) => {
     return (<ul>
-        {users.map(({name}, index) => <li key={index}>{name}</li>)}
+        {users.map(({name, color}, index) => <li key={index} style={{color: color}}>{name}</li>)}
     </ul>)
 }
 export default ListUsers;

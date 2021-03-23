@@ -10,7 +10,8 @@ function createRoom(rooms) {
     var room = {
         id: nanoid_1.nanoid(5),
         sockets: [],
-        users: []
+        users: [],
+        colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange']
     };
     while (rooms[room.id] || !(room === null || room === void 0 ? void 0 : room.id)) {
         room.id = nanoid_1.nanoid(5);
