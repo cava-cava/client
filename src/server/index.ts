@@ -55,6 +55,22 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
+     * Gets fired for get my color in room
+     */
+    socket.on('getMyColor', () => {
+        socket.emit('getMyColor', socket.color);
+    });
+
+    /**
+     * Gets fired when a host start a game in room.
+     */
+    socket.on('startGame', (roomId: string) => {
+        const room:Room = rooms[roomId];
+        socket.emit('redirect', `/game/${roomId}`);
+        socket.to(room.id).emit('redirect', `/game/${roomId}`);
+    });
+
+    /**
      * Gets fired when a player leaves a room.
      */
     socket.on('leaveRoom', () => {

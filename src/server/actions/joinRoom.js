@@ -9,9 +9,13 @@ exports.joinRoom = void 0;
  */
 var joinRoom = function (username, socket, room) {
     socket.username = username;
+    var color = room.colors[0];
+    socket.color = color;
+    room.colors.shift();
     var user = {
         id: socket.id,
-        username: username
+        name: username,
+        color: color
     };
     room.users.push(user);
     room.sockets.push(socket);

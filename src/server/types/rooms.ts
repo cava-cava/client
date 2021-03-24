@@ -1,10 +1,11 @@
 import {Socket} from "socket.io";
-import {User} from "./users";
+import {User} from "../../store/user/types";
 
 export interface Room {
     id: string,
     sockets: Socket[],
-    users: User[]
+    users: User[],
+    colors: string[]
 }
 
 export interface Rooms {

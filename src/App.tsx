@@ -9,10 +9,15 @@ import SocketLog from "./components/SocketLog";
 import {colors} from './mixins/color'
 import './mixins/browser-console-color'
 import TheRouter from "./components/TheRouter/TheRouter";
+import {useDispatch} from "react-redux";
+import {SET_ID} from "./store/user/types";
 
 const App = () => {
+    const dispatch = useDispatch();
+
     socket.on("connect", () => {
         console.color(`connect ${socket.id}`, colors.green);
+        dispatch({type: SET_ID, payload: socket.id})
     });
 
     socket.on("disconnect", () => {
