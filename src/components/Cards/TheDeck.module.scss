@@ -1,6 +1,6 @@
 .TheDeck {
   position: relative;
-  margin: 20px auto 0;
+  margin: 0 auto;
   padding: 0;
   height: 5.5em;
   width: 4em;
@@ -20,25 +20,5 @@
     bottom: 0;
     box-shadow: .2em .2em .5em #333;
     background-color: dodgerblue;
-
-    &:nth-child(0) {
-      left: 0;
-      bottom: 0;
-    }
-
-    &:nth-child(1) {
-      left: 2px;
-      bottom: 1px;
-    }
-
-    &:nth-child(2) {
-      left: 4px;
-      bottom: 2px;
-    }
-
-    &:nth-child(3) {
-      left: 6px;
-      bottom: 3px;
-    }
   }
 }
