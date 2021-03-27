@@ -11,7 +11,13 @@ export function createRoom(rooms: Rooms) {
         id: nanoid(5),
         sockets: [],
         users: [],
-        colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange']
+        colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange'],
+        game: {
+            points: 100,
+            round: 0,
+            idUser: 0,
+            isStart: false
+        }
     }
     while (rooms[room.id] || !room?.id) {
         room.id = nanoid(5);

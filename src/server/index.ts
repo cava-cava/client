@@ -6,6 +6,9 @@ import { joinRoom } from "./actions/joinRoom";
 import {createRoom} from "./actions/createRoom";
 import {leaveRooms} from "./actions/leaveRooms";
 import {ExtendedSocket} from "./types/socket";
+import axios from "axios";
+import {initIdOMG} from "./actions/initOMG";
+import {shuffle} from "../mixins/shuffle";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -64,8 +67,20 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets fired when a host start a game in room.
      */
-    socket.on('startGame', (roomId: string) => {
+    socket.on('startGame', async (roomId: string) => {
         const room:Room = rooms[roomId];
+
+        //Initialize guesses for the game
+        await axios.get('https://happiness-strapi.herokuapp.com/guesses').then(({data}) => {
+            room.game.guesses = shuffle(data)
+        })
+
+        if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
+
+        //Initialize OMG for the game
+        room.game.idOMG = initIdOMG(room)
+
+        room.game.isStart = true
         socket.emit('redirect', `/game/${roomId}`);
         socket.to(room.id).emit('redirect', `/game/${roomId}`);
     });

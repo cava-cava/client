@@ -41,8 +41,8 @@ const Room = () => {
             <h1>Room {id}</h1>
             <ListUsers users={users}/>
             <DidYouKnow/>
-            {users.length >= 4 && users.length <= 6 ?
-                isHost() ? <div>
+            {true ?
+                true ? <div>
                             <button onClick={startGame}>Start game</button>
                            </div>
                     : <div>En attentes de l'hôte...</div>
