@@ -1,3 +1,14 @@
 .Game {
   padding: 0 10px;
+
+  &Center {
+    margin-top: 30%;
+  }
+
+  &Bottom {
+    display: flex;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+  }
 }

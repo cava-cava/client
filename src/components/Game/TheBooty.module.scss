@@ -1,0 +1,13 @@
+.TheBooty {
+    &Buttons {
+        display: flex;
+        flex-direction: column;
+
+        > button {
+            cursor: pointer;
+            margin: 10px auto;
+            width: 100%;
+            background: #007aff;
+        }
+    }
+}
