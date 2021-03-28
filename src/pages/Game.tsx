@@ -10,12 +10,13 @@ import TheDeck from "../components/Cards/TheDeck";
 import {colors} from "../mixins/color";
 import {socket} from "../socketClient";
 import OhMyGod from "../components/Game/OhMyGod";
+import {User} from "../store/user/types";
 
 const Game = () => {
     const {id}: RouteParams = useParams();
     const history = useHistory();
     const user = useSelector((state: ApplicationState) => state.user.data);
-    const [idUser, setIdUser] = useState(0);
+    const [player, setPlayer] = useState<User>();
     const [OMG, setOMG] = useState(false);
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
@@ -30,8 +31,15 @@ const Game = () => {
         console.color(`crasse`, colors.red);
     }
 
-    socket.on('getIdUser', (idUser: number) => {
-        setIdUser(idUser)
+    useEffect(() => {
+        socket.emit('getPlayer', id);
+        return () => {
+            setPlayer(undefined)
+        };
+    }, [])
+
+    socket.on('getPlayer', (player: User) => {
+        setPlayer(player)
     });
 
     socket.on('redirect', (path: string) => history.push(path));
@@ -53,7 +61,7 @@ const Game = () => {
                     <OhMyGod/>
                     :
                     <>
-                        <p>Au tour de {idUser}</p>
+                        {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
                         <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
                         <div className={styles.GameBottom}>
                             <TheDeck number={2} color='green' deskClick={jokerClick}/>

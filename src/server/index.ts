@@ -9,6 +9,7 @@ import {ExtendedSocket} from "./types/socket";
 import axios from "axios";
 import {initIdOMG} from "./actions/initOMG";
 import {shuffle} from "../mixins/shuffle";
+import {getPlayer} from "./actions/getPlayer";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -98,15 +99,22 @@ io.on("connect", (socket: ExtendedSocket) => {
             socket.emit('startOMG');
             socket.to(room.id).emit('startOMG');
         }else {
-            if(room.game.idUser < room.users.length) room.game.idUser ++
-            else {
+            if(++room.game.idUser >= room.users.length) {
                 console.log('envoyer un event guesses/devine qui')
                 room.game.idUser = 0
             }
-            socket.emit('getIdUser', room.game.idUser);
-            socket.to(room.id).emit('getIdUser', room.game.idUser);
+            getPlayer(room, socket)
         }
     })
+
+    /**
+     * Get fired for get player in game room
+     */
+    socket.on('getPlayer', (roomId: string) => {
+        const room:Room = rooms[roomId];
+
+        getPlayer(room, socket)
+    });
 
     socket.on('gameOver', (roomId: string) => {
         socket.to(roomId).emit('redirect', `/end`);
