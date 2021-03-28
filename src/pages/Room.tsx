@@ -28,6 +28,9 @@ const Room = () => {
 
     useEffect(() => {
         socket.emit('getUsersInRoom', id);
+        return () => {
+            setUsers([])
+        };
     }, [])
 
     const startGame = () => {
