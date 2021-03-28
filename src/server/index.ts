@@ -40,7 +40,8 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('joinRoom', (username:string, roomId:string, callback) => {
         const room:Room = rooms[roomId];
         if(room) {
-            if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, socket, room);
+            if(room.game.isStart) socket.emit('error', "La room est en plein jeu");
+            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, socket, room);
             else socket.emit('error', "La room est complète");
         }
         else socket.emit('error', "La room n'existe pas");
@@ -70,6 +71,11 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('startGame', async (roomId: string) => {
         const room:Room = rooms[roomId];
 
+        //Initialize cards for the game
+        await axios.get('https://happiness-strapi.herokuapp.com/cards').then(({data}) => {
+            room.game.cards = shuffle(data)
+        })
+
         //Initialize guesses for the game
         await axios.get('https://happiness-strapi.herokuapp.com/guesses').then(({data}) => {
             room.game.guesses = shuffle(data)
@@ -84,6 +90,27 @@ io.on("connect", (socket: ExtendedSocket) => {
         socket.emit('redirect', `/game/${roomId}`);
         socket.to(room.id).emit('redirect', `/game/${roomId}`);
     });
+
+    socket.on('nextRound', (roomId: string) => {
+        const room:Room = rooms[roomId];
+        room.game.round++
+        if(room.game.round === room.game.idOMG) {
+            socket.emit('startOMG');
+            socket.to(room.id).emit('startOMG');
+        }else {
+            if(room.game.idUser < room.users.length) room.game.idUser ++
+            else {
+                console.log('envoyer un event guesses/devine qui')
+                room.game.idUser = 0
+            }
+            socket.emit('getIdUser', room.game.idUser);
+            socket.to(room.id).emit('getIdUser', room.game.idUser);
+        }
+    })
+
+    socket.on('gameOver', (roomId: string) => {
+        socket.to(roomId).emit('redirect', `/end`);
+    })
 
     /**
      * Gets fired when a player leaves a room.
