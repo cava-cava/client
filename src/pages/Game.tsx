@@ -64,8 +64,8 @@ const Game = () => {
                         {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
                         <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
                         <div className={styles.GameBottom}>
-                            <TheDeck number={2} color='green' deskClick={jokerClick}/>
-                            <TheDeck number={2} color='red' deskClick={dirtClick}/>
+                            <TheDeck number={user.joker} color='green' deskClick={jokerClick}/>
+                            <TheDeck number={user.dirt} color='red' deskClick={dirtClick}/>
                         </div>
                     </>
             }

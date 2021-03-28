@@ -6,7 +6,9 @@ export const initialState: userState = {
   data: {
     id: '',
     name: '',
-    color: undefined
+    color: undefined,
+    joker: 2,
+    dirt: 2
   },
   errors: undefined,
   loading: false

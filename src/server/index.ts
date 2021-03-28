@@ -105,8 +105,9 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         //Re-initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
-
+        
         socket.emit('endOMG')
+        socket.to(room.id).emit('endOMG')
 
         nextRound(room, socket)
     });

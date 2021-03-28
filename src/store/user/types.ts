@@ -2,6 +2,8 @@ export interface User {
   id: string;
   name: string;
   color?: string;
+  joker: number,
+  dirt: number
 }
 
 export interface userState {
