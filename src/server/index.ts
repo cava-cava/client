@@ -10,6 +10,8 @@ import axios from "axios";
 import {initIdOMG} from "./actions/initOMG";
 import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
+import {nextRound} from "./actions/nextRound";
+import {socket} from "../socketClient";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -94,18 +96,20 @@ io.on("connect", (socket: ExtendedSocket) => {
 
     socket.on('nextRound', (roomId: string) => {
         const room:Room = rooms[roomId];
-        room.game.round++
-        if(room.game.round === room.game.idOMG) {
-            socket.emit('startOMG');
-            socket.to(room.id).emit('startOMG');
-        }else {
-            if(++room.game.idUser >= room.users.length) {
-                console.log('envoyer un event guesses/devine qui')
-                room.game.idUser = 0
-            }
-            getPlayer(room, socket)
-        }
+
+        nextRound(room, socket)
     })
+
+    socket.on('endOMG', (roomId: string) => {
+        const room:Room = rooms[roomId];
+
+        //Re-initialize OMG for the game
+        room.game.idOMG = initIdOMG(room)
+
+        socket.emit('endOMG')
+
+        nextRound(room, socket)
+    });
 
     /**
      * Get fired for get player in game room

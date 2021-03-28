@@ -58,7 +58,7 @@ const Game = () => {
             <TheProgressBar/>
             {
                 OMG ?
-                    <OhMyGod/>
+                    <OhMyGod id={id}/>
                     :
                     <>
                         {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}

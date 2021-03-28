@@ -1,8 +1,14 @@
 import React, {FunctionComponent} from 'react';
+import {socket} from "../../socketClient";
 
-const OhMyGod: FunctionComponent = () => {
+type OhMyGodProps = {
+    id: string
+}
+
+const OhMyGod: FunctionComponent<OhMyGodProps> = ({id}) => {
     const handleClick = () => {
         console.log('send/emit socket action')
+        socket.emit('endOMG', id)
     }
     return (
         <>
