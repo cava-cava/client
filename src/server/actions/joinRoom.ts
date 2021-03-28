@@ -1,6 +1,6 @@
 import {Room} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
-import {User} from "../types/users";
+import {User} from "../../store/user/types";
 
 /**
  * Will connect a socket to a specified room
@@ -9,10 +9,14 @@ import {User} from "../types/users";
  * @param room An object that represents a room from the `rooms` instance variable object
  */
 export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
-    socket.username = username;
+    socket.username = username
+    const color = room.colors[0]
+    socket.color = color
+    room.colors.shift()
     const user:User = {
         id: socket.id,
-        username: username
+        name: username,
+        color: color
     };
     room.users.push(user);
     room.sockets.push(socket);

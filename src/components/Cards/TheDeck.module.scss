@@ -1,0 +1,24 @@
+.TheDeck {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  height: 5.5em;
+  width: 4em;
+  cursor: pointer;
+
+  > div {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #666;
+    border-radius: .3em;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: .2em .2em .5em #333;
+    background-color: dodgerblue;
+  }
+}

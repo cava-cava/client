@@ -1,0 +1,21 @@
+.End {
+    &Buttons {
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+
+        > a {
+            cursor: pointer;
+            margin: auto;
+            width: 100%;
+            background: #007aff;
+            padding: 5px 10px;
+            max-width: 80px;
+
+            &:first-child {
+                background: lightgrey;
+            }
+        }
+    }
+}

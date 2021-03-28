@@ -1,12 +1,12 @@
 import React, {FunctionComponent} from 'react';
-import {User} from "../../server/types/users";
+import {User} from "../../store/user/types";
 
 type ListUsersProps = {
     users: User[]
 }
 const ListUsers: FunctionComponent<ListUsersProps> = ({users}) => {
     return (<ul>
-        {users.map(({username}, index) => <li key={index}>{username}</li>)}
+        {users.map(({name, color}, index) => <li key={index} style={{color: color}}>{name}</li>)}
     </ul>)
 }
 export default ListUsers;

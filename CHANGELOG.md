@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/happy-game/client/compare/v0.3.0...v0.4.0) (2021-03-28)
+
+
+### Features
+
+* add color when user is connected in the room ([5d72818](https://github.com/happy-game/client/commit/5d72818d056690f805aca86be786434901e41517))
+* add joker and crasse static ([40aaa80](https://github.com/happy-game/client/commit/40aaa80c02bbec0abc0bcb34b3623abc817d218a))
+* add Question Guess components ([53ca161](https://github.com/happy-game/client/commit/53ca161629d5aeba5efc0f2d43614cd957390bca))
+* create deck component static ([80bc624](https://github.com/happy-game/client/commit/80bc6246fcd4225565c8bdaf481f71577db76dd4))
+* dynamic header and host btn ([c13451f](https://github.com/happy-game/client/commit/c13451f258ae6312cfd48b13698c84e6cf39ebe7))
+* initialize cards, add next round, start OMG ([c38fe0f](https://github.com/happy-game/client/commit/c38fe0fd5564cabafc24c5ce2fd25cd504101b94))
+* round OMG ([51bec9d](https://github.com/happy-game/client/commit/51bec9d55c3cf54f1f83bf9861cf6505f802ab18))
+* round player ([7fdcbf6](https://github.com/happy-game/client/commit/7fdcbf6225a02c72684be1c0db2b8525d3d104d4))
+* **OMG:** add OMG static components ([43afa12](https://github.com/happy-game/client/commit/43afa12af776fbfce72b1004490df2d6e6501ef2))
+* **server:** get my color ([ebd2ce2](https://github.com/happy-game/client/commit/ebd2ce260850f3d420a84991715abb794c52f227))
+* **server:** initialize game type, initialize guess, initialize OMG ([f6c9813](https://github.com/happy-game/client/commit/f6c981396d7d0e15c061193f5e028ab05e635465))
+* **TheBooty:** create component ([0246673](https://github.com/happy-game/client/commit/024667318a6954a16c9a81729243abf08e169144))
+* standardize user type and set ID user with store and isHost getter ([3d0efa5](https://github.com/happy-game/client/commit/3d0efa5cbdd17c9849ab215247e93d86b0f56c6d))
+* start Game ([ab0cf59](https://github.com/happy-game/client/commit/ab0cf59e7c394ca6deacce3f0881c60791fb4590))
+
+
+### Bug Fixes
+
+* **Room:** unmount performance ([95f16e7](https://github.com/happy-game/client/commit/95f16e79b7aff0bb324472d5241404089431f162))
+* ignore .js extension ([2fcf1fa](https://github.com/happy-game/client/commit/2fcf1fac2f93d72e2c2d5a95307b18cfda82d9b6))
+* package.json ([5773028](https://github.com/happy-game/client/commit/577302801c410dd06eed76788ab1bfe906ab06be))
+* shuffle function ([3367593](https://github.com/happy-game/client/commit/3367593728844cb61ac58a2e093470e33fa8fa20))
+
 ## [0.3.0](https://github.com/happy-game/client/compare/v0.2.0...v0.3.0) (2021-03-14)
 
 

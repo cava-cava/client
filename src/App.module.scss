@@ -63,23 +63,6 @@
       border-radius: 40px;
       box-shadow: 0 0 0 11px #1f1f1f, 0 0 0 13px #191919, 0 0 0 20px #111;
       background: white;
-
-      &:before,
-      &:after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      // Home button indicator
-      &:after {
-        bottom: 7px;
-        width: 140px;
-        height: 4px;
-        background-color: #f2f2f2;
-        border-radius: 10px;
-      }
     }
   }
 }
