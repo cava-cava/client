@@ -14,6 +14,7 @@ export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
     socket.color = color
     room.colors.shift()
     const user:User = {
+        key: 0,
         id: socket.id,
         name: username,
         color: color,

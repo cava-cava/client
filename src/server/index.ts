@@ -67,6 +67,18 @@ io.on("connect", (socket: ExtendedSocket) => {
         socket.emit('getMyColor', socket.color);
     });
 
+    socket.on('addJoker', (roomId, userId) => {
+        const room:Room = rooms[roomId];
+
+        room.users[userId].joker++;
+    });
+
+    socket.on('addDirt', (roomId, userId) => {
+        const room:Room = rooms[roomId];
+
+        room.users[userId].dirt++;
+    });
+
     /**
      * Gets fired when a host start a game in room.
      */
@@ -84,6 +96,9 @@ io.on("connect", (socket: ExtendedSocket) => {
         })
 
         if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
+
+        //Init Key of users
+        room.users.map((user,index) => room.users[index].key = index)
 
         //Initialize OMG for the game
         room.game.idOMG = initIdOMG(room)

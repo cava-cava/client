@@ -1,8 +1,9 @@
 export interface User {
-  id: string;
-  name: string;
-  color?: string;
-  joker: number,
+  key: number
+  id: string
+  name: string
+  color?: string
+  joker: number
   dirt: number
 }
 
