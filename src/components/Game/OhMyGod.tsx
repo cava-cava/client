@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import {socket} from "../../socketClient";
 import TheBooty from "./TheBooty";
 
@@ -17,13 +17,25 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userId}) => {
         socket.emit('endOMG', roomId)
     }
 
-    socket.on('winOMG', () => {
-        setWin(true)
+    useEffect(() => {
+        const winOMG = () => {
+            setWin(true)
+        }
+
+        const loseOMG = () => {
+            setWin(false)
+            setLose(true)
+        }
+
+        socket.on('winOMG', winOMG)
+        socket.on('loseOMG', loseOMG)
+
+        return () => {
+            socket.off('winOMG', winOMG)
+            socket.off('loseOMG', loseOMG)
+        }
     })
-    socket.on('loseOMG', () => {
-        setWin(false)
-        setLose(true)
-    })
+
     return (
         <>
             <h1>OMGGGGGGG !!!!</h1>

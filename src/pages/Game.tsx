@@ -5,19 +5,48 @@ import TheProgressBar from "../components/ProgressBar/TheProgressBar";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import {RouteParams} from "../types/params";
-import {useHistory, useParams} from "react-router";
+import {useParams} from "react-router";
 import TheDeck from "../components/Cards/TheDeck";
 import {colors} from "../mixins/color";
 import {socket} from "../socketClient";
 import OhMyGod from "../components/Game/OhMyGod";
 import {User} from "../store/user/types";
+import useRedirect from "../hooks/useRedirect";
 
 const Game = () => {
     const {id}: RouteParams = useParams();
-    const history = useHistory();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const [player, setPlayer] = useState<User>();
     const [OMG, setOMG] = useState(false);
+
+    useRedirect();
+
+    useEffect(() => {
+        const getPlayer = (player: User) => {
+            setPlayer(player)
+        }
+
+        const startOMG = () => {
+            setOMG(true)
+        }
+
+        const endOMG = () => {
+            setOMG(false)
+        }
+
+        socket.on('getPlayer', getPlayer);
+        socket.on('startOMG', startOMG);
+        socket.on('endOMG', endOMG);
+
+        socket.emit('getPlayer', id);
+        return () => {
+            socket.off('getPlayer', getPlayer);
+            socket.off('startOMG', startOMG);
+            socket.off('endOMG', endOMG);
+            setPlayer(undefined)
+        };
+    }, [])
+
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
         socket.emit('nextRound', id)
@@ -30,27 +59,6 @@ const Game = () => {
     const dirtClick = () => {
         console.color(`crasse`, colors.red);
     }
-
-    useEffect(() => {
-        socket.emit('getPlayer', id);
-        return () => {
-            setPlayer(undefined)
-        };
-    }, [])
-
-    socket.on('getPlayer', (player: User) => {
-        setPlayer(player)
-    });
-
-    socket.on('redirect', (path: string) => history.push(path));
-
-    socket.on('startOMG', () => {
-        setOMG(true)
-    });
-
-    socket.on('endOMG', () => {
-        setOMG(false)
-    });
 
     return (
         <div className={styles.Game}>
