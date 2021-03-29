@@ -11,7 +11,6 @@ import {initIdOMG} from "./actions/initOMG";
 import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
-import {socket} from "../socketClient";
 
 const app = express();
 const server = require('http').createServer(app);
