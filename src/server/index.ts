@@ -100,12 +100,19 @@ io.on("connect", (socket: ExtendedSocket) => {
         nextRound(room, socket)
     })
 
+    socket.on('winOMG', (roomId: string) => {
+        const room:Room = rooms[roomId];
+
+        socket.emit('winOMG')
+        socket.to(room.id).emit('loseOMG')
+    });
+
     socket.on('endOMG', (roomId: string) => {
         const room:Room = rooms[roomId];
 
         //Re-initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
-        
+
         socket.emit('endOMG')
         socket.to(room.id).emit('endOMG')
 
