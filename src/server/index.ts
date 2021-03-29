@@ -79,6 +79,13 @@ io.on("connect", (socket: ExtendedSocket) => {
         room.users[userId].dirt++;
     });
 
+    socket.on('sendPointsUser', (roomId, userId, points) => {
+        const room:Room = rooms[roomId];
+
+        room.users[userId].points+= points;
+        if(room.users[userId].points < 0)  room.users[userId].points = 0
+    });
+
     /**
      * Gets fired when a host start a game in room.
      */

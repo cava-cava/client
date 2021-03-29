@@ -8,6 +8,7 @@ export const initialState: userState = {
     id: '',
     name: '',
     color: undefined,
+    points: 0,
     joker: 2,
     dirt: 2
   },

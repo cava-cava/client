@@ -13,6 +13,7 @@ type TheBootyProps = {
 const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userId, showHappiness = true, callback}) => {
     const happinessClick = () => {
         console.color(`+3% bonheur`, colors.blue);
+        socket.emit('sendPointsUser', roomId, userId, 3)
         callback()
     }
 
