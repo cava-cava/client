@@ -51,16 +51,6 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
-     * Gets fired for update users in room
-     */
-    socket.on('getUsersInRoom', (roomId:string) => {
-        const room:Room = rooms[roomId];
-        if(room) {
-            socket.emit('updateListUsers', room.users);
-        }
-    });
-
-    /**
      * Gets fired for get my color in room
      */
     socket.on('getMyColor', () => {
@@ -105,7 +95,11 @@ io.on("connect", (socket: ExtendedSocket) => {
         if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
 
         //Init Key of users
-        room.users.map((user,index) => room.users[index].key = index)
+        room.users.map((user,index) => {
+            room.users[index].key = index
+            //Init my socket key
+            if(room.users[index].id === socket.id) socket.key = index
+        })
 
         //Initialize OMG for the game
         room.game.idOMG = initIdOMG(room)

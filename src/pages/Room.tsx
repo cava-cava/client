@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useParams} from "react-router";
 import {RouteParams} from "../types/params";
 import DidYouKnow from "../components/DidYouKnow";
@@ -7,29 +7,15 @@ import {socket} from "../socketClient";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
-import {User} from "../store/user/types";
 import useRedirect from "../hooks/useRedirect";
+import useListUsers from "../hooks/useListUsers";
 
 const Room = () => {
     const {id}: RouteParams = useParams();
-    const [users, setUsers] = useState<User[]>([]);
     const user = useSelector((state: ApplicationState) => state.user.data);
+    const users = useListUsers(id);
 
     useRedirect();
-
-    useEffect(() => {
-        const updateListUsers = (users: []) => {
-            setUsers(users)
-        }
-
-        socket.on('updateListUsers', updateListUsers);
-
-        socket.emit('getUsersInRoom', id);
-        return () => {
-            socket.off('updateListUsers', updateListUsers);
-            setUsers([])
-        };
-    }, []);
 
     const isHost = () => {
         return users.length > 0 && users[0].id === user.id

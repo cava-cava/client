@@ -28,4 +28,5 @@ export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
     console.log(`${socket.username}[${socket.id}] Joined ${room.id}`);
     socket.emit('redirect', `/rooms/${room.id}`);
     socket.to(room.id).emit('updateListUsers', room.users);
+    socket.emit('updateListUsers', room.users);
 };

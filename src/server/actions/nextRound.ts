@@ -1,6 +1,7 @@
 import {Room} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
 import {getPlayer} from "./getPlayer";
+import {checkpoint} from "./checkpoint";
 
 /**
  * Get fired for get player in game room
@@ -9,6 +10,7 @@ import {getPlayer} from "./getPlayer";
  */
 
 export function nextRound(room: Room, socket:ExtendedSocket) {
+    checkpoint(room, socket)
     room.game.round++
     if(room.game.round === room.game.idOMG) {
         socket.emit('startOMG');

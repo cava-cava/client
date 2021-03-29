@@ -2,7 +2,7 @@ export interface User {
   key: number
   id: string
   name: string
-  color?: string
+  color: string
   points: number
   joker: number
   dirt: number
@@ -16,6 +16,7 @@ export interface userState {
 
 export const SET_ID = '@@user/SET_ID'
 export const SET_NAME = '@@user/SET_NAME'
+export const SET_USER = '@@user/SET_USER'
 
 interface SetId {
   type: typeof SET_ID
@@ -27,4 +28,9 @@ interface SetName {
   payload: string
 }
 
-export type UserActionTypes = SetId | SetName
+interface SetUser {
+  type: typeof SET_USER
+  payload: User
+}
+
+export type UserActionTypes = SetId | SetName | SetUser
