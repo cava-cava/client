@@ -2,22 +2,61 @@ import React, {useEffect, useState} from 'react';
 import TheHeader from "../components/Game/Header/TheHeader";
 import styles from './Game.module.scss'
 import TheProgressBar from "../components/ProgressBar/TheProgressBar";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import {RouteParams} from "../types/params";
-import {useHistory, useParams} from "react-router";
+import {useParams} from "react-router";
 import TheDeck from "../components/Cards/TheDeck";
 import {colors} from "../mixins/color";
 import {socket} from "../socketClient";
 import OhMyGod from "../components/Game/OhMyGod";
-import {User} from "../store/user/types";
+import {SET_USER, User} from "../store/user/types";
+import useRedirect from "../hooks/useRedirect";
+import useListUsers from "../hooks/useListUsers";
 
 const Game = () => {
+    const dispatch = useDispatch();
     const {id}: RouteParams = useParams();
-    const history = useHistory();
     const user = useSelector((state: ApplicationState) => state.user.data);
+    const users = useListUsers(id);
     const [player, setPlayer] = useState<User>();
     const [OMG, setOMG] = useState(false);
+
+
+    useRedirect();
+
+    useEffect(() => {
+        const getPlayer = (player: User) => {
+            setPlayer(player)
+        }
+
+        const startOMG = () => {
+            setOMG(true)
+        }
+
+        const endOMG = () => {
+            setOMG(false)
+        }
+
+        const checkpoint = (user:User) => {
+            dispatch({type: SET_USER, payload: user});
+        }
+
+        socket.on('getPlayer', getPlayer);
+        socket.on('startOMG', startOMG);
+        socket.on('endOMG', endOMG);
+        socket.on('checkpoint', checkpoint);
+
+        socket.emit('getPlayer', id);
+        return () => {
+            socket.off('getPlayer', getPlayer);
+            socket.off('startOMG', startOMG);
+            socket.off('endOMG', endOMG);
+            socket.off('checkpoint', checkpoint);
+            setPlayer(undefined)
+        };
+    }, [])
+
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
         socket.emit('nextRound', id)
@@ -31,34 +70,13 @@ const Game = () => {
         console.color(`crasse`, colors.red);
     }
 
-    useEffect(() => {
-        socket.emit('getPlayer', id);
-        return () => {
-            setPlayer(undefined)
-        };
-    }, [])
-
-    socket.on('getPlayer', (player: User) => {
-        setPlayer(player)
-    });
-
-    socket.on('redirect', (path: string) => history.push(path));
-
-    socket.on('startOMG', () => {
-        setOMG(true)
-    });
-
-    socket.on('endOMG', () => {
-        setOMG(false)
-    });
-
     return (
         <div className={styles.Game}>
             <TheHeader username={user.name} code={id}/>
-            <TheProgressBar/>
+            <TheProgressBar users={users} userPoints={user.points}/>
             {
                 OMG ?
-                    <OhMyGod id={id}/>
+                    <OhMyGod roomId={id} userId={user.key}/>
                     :
                     <>
                         {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}

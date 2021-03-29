@@ -19,7 +19,7 @@ export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
             room.colors.push(socket.color)
             // remove the user from the room object
             room.users = room.users.filter((user) => user.id !== socket.id);
-            socket.to(room.id).emit('updateUsers', room.users);
+            socket.to(room.id).emit('updateListUsers', room.users);
         }
         // Prepare to delete any rooms that are now empty
         if (room.sockets.length == 0) {

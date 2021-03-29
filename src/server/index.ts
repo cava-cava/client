@@ -11,7 +11,6 @@ import {initIdOMG} from "./actions/initOMG";
 import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
-import {socket} from "../socketClient";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -52,20 +51,29 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
-     * Gets fired for update users in room
-     */
-    socket.on('getUsersInRoom', (roomId:string) => {
-        const room:Room = rooms[roomId];
-        if(room) {
-            socket.emit('updateUsers', room.users);
-        }
-    });
-
-    /**
      * Gets fired for get my color in room
      */
     socket.on('getMyColor', () => {
         socket.emit('getMyColor', socket.color);
+    });
+
+    socket.on('addJoker', (roomId, userId) => {
+        const room:Room = rooms[roomId];
+
+        room.users[userId].joker++;
+    });
+
+    socket.on('addDirt', (roomId, userId) => {
+        const room:Room = rooms[roomId];
+
+        room.users[userId].dirt++;
+    });
+
+    socket.on('sendPointsUser', (roomId, userId, points) => {
+        const room:Room = rooms[roomId];
+
+        room.users[userId].points+= points;
+        if(room.users[userId].points < 0)  room.users[userId].points = 0
     });
 
     /**
@@ -86,6 +94,13 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
 
+        //Init Key of users
+        room.users.map((user,index) => {
+            room.users[index].key = index
+            //Init my socket key
+            if(room.users[index].id === socket.id) socket.key = index
+        })
+
         //Initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
 
@@ -100,12 +115,19 @@ io.on("connect", (socket: ExtendedSocket) => {
         nextRound(room, socket)
     })
 
+    socket.on('winOMG', (roomId: string) => {
+        const room:Room = rooms[roomId];
+
+        socket.emit('winOMG')
+        socket.to(room.id).emit('loseOMG')
+    });
+
     socket.on('endOMG', (roomId: string) => {
         const room:Room = rooms[roomId];
 
         //Re-initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
-        
+
         socket.emit('endOMG')
         socket.to(room.id).emit('endOMG')
 

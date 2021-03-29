@@ -6,12 +6,14 @@ export interface Tip {
 
 export interface tipsState {
   readonly loading: boolean;
+  readonly jwt?: string;
   readonly data: Tip[];
   readonly errors?: string;
 }
 
 export const FETCH_TIPS_REQUEST = "@@tips/FETCH_TIPS_REQUEST";
 export const FETCH_TIPS_SUCCESS = "@@tips/FETCH_TIPS_SUCCESS";
+export const SET_JWT_TIPS = "@@tips/SET_JWT_TIPS";
 export const FETCH_TIPS_ERROR = "@@tips/FETCH_TIPS_ERROR";
 
 interface FetchTipsRequest {
@@ -23,9 +25,14 @@ interface FetchTipsSuccess {
   payload: Tip[]
 }
 
+interface SetJwtTips {
+  type: typeof SET_JWT_TIPS
+  payload: string
+}
+
 interface FetchTipsError {
   type: typeof FETCH_TIPS_ERROR
   payload: string
 }
 
-export type TipsActionTypes = FetchTipsRequest | FetchTipsSuccess | FetchTipsError;
+export type TipsActionTypes = FetchTipsRequest | FetchTipsSuccess | FetchTipsError | SetJwtTips;

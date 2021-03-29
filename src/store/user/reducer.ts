@@ -1,12 +1,14 @@
 import {Reducer} from "redux";
 
-import {SET_ID, SET_NAME, UserActionTypes, userState} from "./types";
+import {SET_ID, SET_NAME, SET_USER, UserActionTypes, userState} from "./types";
 
 export const initialState: userState = {
   data: {
+    key: 0,
     id: '',
     name: '',
-    color: undefined,
+    color: 'black',
+    points: 0,
     joker: 2,
     dirt: 2
   },
@@ -21,6 +23,9 @@ const reducer: Reducer<userState, UserActionTypes> = (state:userState = initialS
     }
     case SET_NAME: {
       return { ...state, data: {...state.data, name: action.payload,} };
+    }
+    case SET_USER: {
+      return { ...state, data: {...state.data, ...action.payload} };
     }
     default: {
       return state;

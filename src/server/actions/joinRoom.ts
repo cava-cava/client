@@ -14,9 +14,11 @@ export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
     socket.color = color
     room.colors.shift()
     const user:User = {
+        key: 0,
         id: socket.id,
         name: username,
         color: color,
+        points: 0,
         joker: 2,
         dirt: 2
     };
@@ -25,5 +27,6 @@ export const joinRoom = (username:string, socket:ExtendedSocket, room:Room) => {
     socket.join(room.id);
     console.log(`${socket.username}[${socket.id}] Joined ${room.id}`);
     socket.emit('redirect', `/rooms/${room.id}`);
-    socket.to(room.id).emit('updateUsers', room.users);
+    socket.to(room.id).emit('updateListUsers', room.users);
+    socket.emit('updateListUsers', room.users);
 };

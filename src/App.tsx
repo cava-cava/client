@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './App.module.scss';
 import {MobilePrompt} from "./components/Prompt/MobilePrompt";
-
 import logo from './assets/svg/logo.svg'
 import qrCode from './assets/png/qr.png'
 import {socket} from "./socketClient";
@@ -15,15 +14,24 @@ import {SET_ID} from "./store/user/types";
 const App = () => {
     const dispatch = useDispatch();
 
-    socket.on("connect", () => {
-        console.color(`connect ${socket.id}`, colors.green);
-        dispatch({type: SET_ID, payload: socket.id})
-    });
+    useEffect(() => {
+        const connect = () => {
+            console.color(`connect ${socket.id}`, colors.green);
+            dispatch({type: SET_ID, payload: socket.id})
+        }
 
-    socket.on("disconnect", () => {
-        console.color(`disconnect`, colors.red);
-    });
+        const disconnect = () => {
+            console.color(`disconnect`, colors.red);
+        }
 
+        socket.on("connect", connect);
+        socket.on("disconnect", disconnect)
+
+        return () => {
+            socket.off('connect', connect);
+            socket.off("disconnect", disconnect)
+        }
+    })
 
     return (
         <div className={styles.App}>
