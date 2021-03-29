@@ -56,7 +56,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('getUsersInRoom', (roomId:string) => {
         const room:Room = rooms[roomId];
         if(room) {
-            socket.emit('updateUsers', room.users);
+            socket.emit('updateListUsers', room.users);
         }
     });
 

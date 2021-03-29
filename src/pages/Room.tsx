@@ -18,15 +18,15 @@ const Room = () => {
     useRedirect();
 
     useEffect(() => {
-        const updateUsers = (users: []) => {
+        const updateListUsers = (users: []) => {
             setUsers(users)
         }
 
-        socket.on('updateUsers', updateUsers);
+        socket.on('updateListUsers', updateListUsers);
 
         socket.emit('getUsersInRoom', id);
         return () => {
-            socket.off('updateUsers', updateUsers);
+            socket.off('updateListUsers', updateListUsers);
             setUsers([])
         };
     }, []);
