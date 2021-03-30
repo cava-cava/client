@@ -10,7 +10,8 @@ export const initialState: userState = {
     color: 'black',
     points: 0,
     joker: 2,
-    dirt: 2
+    dirt: 2,
+    answerGuess: ''
   },
   errors: undefined,
   loading: false

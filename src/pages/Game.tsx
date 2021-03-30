@@ -14,6 +14,7 @@ import {SET_USER, User} from "../store/user/types";
 import useRedirect from "../hooks/useRedirect";
 import useListUsers from "../hooks/useListUsers";
 import TheGuess from "../components/Game/Guess/TheGuess";
+import {Guess} from "../server/types/guess";
 
 const Game = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Game = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const users = useListUsers(id);
     const [player, setPlayer] = useState<User>();
+    const [guess, setGuess] = useState<Guess>();
     const [triggerGuesses, setTriggerGuesses] = useState(false);
     const [triggerOMG, setTriggerOMG] = useState(false);
 
@@ -29,6 +31,10 @@ const Game = () => {
     useEffect(() => {
         const getPlayer = (player: User) => {
             setPlayer(player)
+        }
+
+        const sendGuess = (guess: Guess) => {
+            setGuess(guess)
         }
 
         const eventRound = (triggerGuesses: boolean, triggerOMG: boolean) => {
@@ -41,17 +47,19 @@ const Game = () => {
         }
 
         socket.on('getPlayer', getPlayer);
+        socket.on('sendGuess', sendGuess);
         socket.on('startRoundEvent', eventRound);
         socket.on('endRoundEvent', eventRound);
         socket.on('checkpoint', checkpoint);
 
-        socket.emit('getPlayer', id);
         return () => {
             socket.off('getPlayer', getPlayer);
+            socket.off('sendGuess', sendGuess);
             socket.off('startRoundEvent', eventRound);
             socket.off('endRoundEvent', eventRound);
             socket.off('checkpoint', checkpoint);
             setPlayer(undefined)
+            setGuess(undefined)
         };
     }, [])
 
@@ -70,10 +78,10 @@ const Game = () => {
 
     return (
         <div className={styles.Game}>
-            <TheHeader username={user.name} code={id}/>
-            <TheProgressBar users={users} userPoints={user.points}/>
             { (!triggerGuesses && !triggerOMG) &&
                 <>
+                    <TheHeader username={user.name} code={id}/>
+                    <TheProgressBar users={users} userPoints={user.points}/>
                     {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
                     <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
                     <div className={styles.GameBottom}>
@@ -82,7 +90,7 @@ const Game = () => {
                     </div>
                 </>
             }
-            { (triggerGuesses && !triggerOMG) && <TheGuess id={id}/> }
+            { (triggerGuesses && !triggerOMG) && <TheGuess id={id} question={guess?.question} users={users}/> }
             { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={id} userId={user.key}/> }
         </div>
     );

@@ -96,7 +96,8 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         room.game.isStart = true
         io.to(room.id).emit('redirect', `/game/${roomId}`);
-        checkpoint(room, io) 
+        checkpoint(room, io)
+        getPlayer(room, io)
     });
 
     socket.on('nextRound', (roomId: string) => {
