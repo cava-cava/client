@@ -104,6 +104,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         nextRound(room, io)
+        io.to(room.id).emit('startTimer', 15)
     })
 
     socket.on('winOMG', (roomId: string) => {

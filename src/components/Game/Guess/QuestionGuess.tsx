@@ -4,11 +4,11 @@ import {socket} from "../../../socketClient";
 
 type QuestionGuessProps = {
     id: string
-    question: string,
     userKey: number
+    question: string
 }
 
-const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, question}) => {
+const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, userKey, question}) => {
     const [answer, setAnswer] = useState('');
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,8 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, question}) =>
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        socket.emit('sendAnswerGuess', answer)
+        socket.emit('sendAnswerGuess', id, userKey, answer)
+        socket.emit('endRoundEvent', id)
         console.color('Envoyer la reponse au serveur socket io', colors.fuchsia)
     }
 

@@ -10,6 +10,7 @@ type TheTimerProps = {
 
 const TheTimer: FunctionComponent<TheTimerProps> = ({children}) => {
     const [seconds, setSeconds] = useState(0)
+    const [running, setRunning] = useState(false)
     const countdownEl = useRef<SVGCircleElement>(null);
 
     const TimerOn = () => {
@@ -25,7 +26,13 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({children}) => {
 
     useEffect(() => {
         const startTimer = (seconds: number) => {
+            setRunning(false)
             setSeconds(seconds)
+
+            if (null !== countdownEl.current) {
+                countdownEl.current.style.animationDuration = `${seconds}s`;
+                setRunning(true)
+            }
         }
 
         socket.on("startTimer", startTimer)
@@ -35,16 +42,10 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({children}) => {
         }
     }, []);
 
-    useEffect(() => {
-        if (seconds > 0 && null !== countdownEl.current) {
-            countdownEl.current.style.animationDuration = `${seconds}s`;
-        }
-    }, [seconds]);
-
     return (
         <div className={styles.TheTimer}>
             <div>{children}</div>
-            {seconds > 0 && <svg><circle ref={countdownEl} r="22" cx="25" cy="25" /></svg>}
+            {seconds > 0 && <svg><circle ref={countdownEl} className={running ? styles.TheTimerRunning : ''} r="22" cx="25" cy="25" /></svg>}
         </div>
     )
 }
