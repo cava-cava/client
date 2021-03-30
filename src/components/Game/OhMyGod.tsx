@@ -4,10 +4,10 @@ import TheBooty from "./TheBooty";
 
 type OhMyGodProps = {
     roomId: string,
-    userId: number
+    userKey: number
 }
 
-const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userId}) => {
+const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
     const [win, setWin] = useState(false)
     const [lose, setLose] = useState(false)
     const handleClick = () => {
@@ -40,7 +40,7 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userId}) => {
         <>
             <h1>OMGGGGGGG !!!!</h1>
             { (!win && !lose) && <button role="button" onClick={handleClick}>Click !!!!!</button> }
-            { (win && !lose) && <TheBooty roomId={roomId} userId={userId} callback={callback}/> }
+            { (win && !lose) && <TheBooty roomId={roomId} userKey={userKey} callback={callback}/> }
             { (lose && !win) && <span>Tu as perdu</span> }
         </>
     )

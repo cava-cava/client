@@ -91,7 +91,7 @@ const Game = () => {
                 </>
             }
             { (triggerGuesses && !triggerOMG) && <TheGuess id={id} question={guess?.question} users={users}/> }
-            { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={id} userId={user.key}/> }
+            { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={id} userKey={user.key}/> }
         </div>
     );
 }
