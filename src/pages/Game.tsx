@@ -13,6 +13,7 @@ import OhMyGod from "../components/Game/OhMyGod";
 import {SET_USER, User} from "../store/user/types";
 import useRedirect from "../hooks/useRedirect";
 import useListUsers from "../hooks/useListUsers";
+import TheGuess from "../components/Game/Guess/TheGuess";
 
 const Game = () => {
     const dispatch = useDispatch();
@@ -20,8 +21,8 @@ const Game = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const users = useListUsers(id);
     const [player, setPlayer] = useState<User>();
-    const [OMG, setOMG] = useState(false);
-
+    const [triggerGuesses, setTriggerGuesses] = useState(false);
+    const [triggerOMG, setTriggerOMG] = useState(false);
 
     useRedirect();
 
@@ -30,12 +31,9 @@ const Game = () => {
             setPlayer(player)
         }
 
-        const startOMG = () => {
-            setOMG(true)
-        }
-
-        const endOMG = () => {
-            setOMG(false)
+        const eventRound = (triggerGuesses: boolean, triggerOMG: boolean) => {
+            setTriggerGuesses(triggerGuesses)
+            setTriggerOMG(triggerOMG)
         }
 
         const checkpoint = (user:User) => {
@@ -43,15 +41,15 @@ const Game = () => {
         }
 
         socket.on('getPlayer', getPlayer);
-        socket.on('startOMG', startOMG);
-        socket.on('endOMG', endOMG);
+        socket.on('startRoundEvent', eventRound);
+        socket.on('endRoundEvent', eventRound);
         socket.on('checkpoint', checkpoint);
 
         socket.emit('getPlayer', id);
         return () => {
             socket.off('getPlayer', getPlayer);
-            socket.off('startOMG', startOMG);
-            socket.off('endOMG', endOMG);
+            socket.off('startRoundEvent', eventRound);
+            socket.off('endRoundEvent', eventRound);
             socket.off('checkpoint', checkpoint);
             setPlayer(undefined)
         };
@@ -74,19 +72,18 @@ const Game = () => {
         <div className={styles.Game}>
             <TheHeader username={user.name} code={id}/>
             <TheProgressBar users={users} userPoints={user.points}/>
-            {
-                OMG ?
-                    <OhMyGod roomId={id} userId={user.key}/>
-                    :
-                    <>
-                        {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
-                        <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
-                        <div className={styles.GameBottom}>
-                            <TheDeck number={user.joker} color='green' deskClick={jokerClick}/>
-                            <TheDeck number={user.dirt} color='red' deskClick={dirtClick}/>
-                        </div>
-                    </>
+            { (!triggerGuesses && !triggerOMG) &&
+                <>
+                    {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
+                    <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
+                    <div className={styles.GameBottom}>
+                        <TheDeck number={user.joker} color='green' deskClick={jokerClick}/>
+                        <TheDeck number={user.dirt} color='red' deskClick={dirtClick}/>
+                    </div>
+                </>
             }
+            { (triggerGuesses && !triggerOMG) && <TheGuess id={id}/> }
+            { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={id} userId={user.key}/> }
         </div>
     );
 }

@@ -1,25 +1,25 @@
 import {Room} from "../types/rooms";
-import {ExtendedSocket} from "../types/socket";
 import {getPlayer} from "./getPlayer";
 import {checkpoint} from "./checkpoint";
+import {Server} from "socket.io";
 
 /**
  * Get fired for get player in game room
  * @param room An object that represents a room from the `rooms` instance variable object
- * @param socket A connected socket.io socket
+ * @param io A connected socket.io server
  */
-
-export function nextRound(room: Room, socket:ExtendedSocket) {
-    checkpoint(room, socket)
+export function nextRound(room: Room, io:Server) {
+    checkpoint(room, io)
     room.game.round++
     if(room.game.round === room.game.idOMG) {
-        socket.emit('startOMG');
-        socket.to(room.id).emit('startOMG');
+        room.game.triggerGuesses = false
+        room.game.triggerOMG = true
     }else {
         if(++room.game.idUser >= room.users.length) {
-            console.log('envoyer un event guesses/devine qui')
-            room.game.idUser = 0
+            room.game.triggerGuesses = true
+            room.game.triggerOMG = false
         }
-        getPlayer(room, socket)
+        getPlayer(room, io)
     }
+    io.to(room.id).emit('startRoundEvent', room.game.triggerGuesses, room.game.triggerOMG);
 }

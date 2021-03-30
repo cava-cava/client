@@ -14,7 +14,7 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userId}) => {
         socket.emit('winOMG', roomId)
     }
     const callback = () => {
-        socket.emit('endOMG', roomId)
+        socket.emit('endRoundEvent', roomId)
     }
 
     useEffect(() => {

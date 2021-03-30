@@ -4,7 +4,7 @@ import {SET_ID, SET_NAME, SET_USER, UserActionTypes, userState} from "./types";
 
 export const initialState: userState = {
   data: {
-    key: 0,
+    key: -1,
     id: '',
     name: '',
     color: 'black',

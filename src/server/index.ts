@@ -11,6 +11,7 @@ import {initIdOMG} from "./actions/initOMG";
 import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
+import {checkpoint} from "./actions/checkpoint";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -32,7 +33,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = createRoom(rooms)
         rooms[room.id] = room;
         // have the socket join the room they've just created.
-        joinRoom(username, socket, room);
+        joinRoom(username, io, socket, room);
         callback();
     });
 
@@ -43,18 +44,11 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
         if(room) {
             if(room.game.isStart) socket.emit('error', "La room est en plein jeu");
-            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, socket, room);
+            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, io, socket, room);
             else socket.emit('error', "La room est complète");
         }
         else socket.emit('error', "La room n'existe pas");
         callback();
-    });
-
-    /**
-     * Gets fired for get my color in room
-     */
-    socket.on('getMyColor', () => {
-        socket.emit('getMyColor', socket.color);
     });
 
     socket.on('addJoker', (roomId, userId) => {
@@ -95,24 +89,20 @@ io.on("connect", (socket: ExtendedSocket) => {
         if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
 
         //Init Key of users
-        room.users.map((user,index) => {
-            room.users[index].key = index
-            //Init my socket key
-            if(room.users[index].id === socket.id) socket.key = index
-        })
+        room.users.map((user,index) => room.users[index].key = index)
 
         //Initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
 
         room.game.isStart = true
-        socket.emit('redirect', `/game/${roomId}`);
-        socket.to(room.id).emit('redirect', `/game/${roomId}`);
+        io.to(room.id).emit('redirect', `/game/${roomId}`);
+        checkpoint(room, io) 
     });
 
     socket.on('nextRound', (roomId: string) => {
         const room:Room = rooms[roomId];
 
-        nextRound(room, socket)
+        nextRound(room, io)
     })
 
     socket.on('winOMG', (roomId: string) => {
@@ -122,16 +112,23 @@ io.on("connect", (socket: ExtendedSocket) => {
         socket.to(room.id).emit('loseOMG')
     });
 
-    socket.on('endOMG', (roomId: string) => {
+    socket.on('endRoundEvent', (roomId: string) => {
         const room:Room = rooms[roomId];
 
-        //Re-initialize OMG for the game
-        room.game.idOMG = initIdOMG(room)
+        if(room.game.triggerGuesses) {
+            room.game.triggerGuesses = false
+            room.game.idUser = -1
+        }
 
-        socket.emit('endOMG')
-        socket.to(room.id).emit('endOMG')
+        if(room.game.triggerOMG) {
+            room.game.triggerOMG = false
+            //Re-initialize OMG for the game
+            room.game.idOMG = initIdOMG(room)
+        }
 
-        nextRound(room, socket)
+        io.to(room.id).emit('endRoundEvent')
+
+        nextRound(room, io)
     });
 
     /**
@@ -140,11 +137,11 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('getPlayer', (roomId: string) => {
         const room:Room = rooms[roomId];
 
-        getPlayer(room, socket)
+        getPlayer(room, io)
     });
 
     socket.on('gameOver', (roomId: string) => {
-        socket.to(roomId).emit('redirect', `/end`);
+        io.to(roomId).emit('redirect', `/end`);
     })
 
     /**

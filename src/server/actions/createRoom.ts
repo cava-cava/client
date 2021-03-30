@@ -1,7 +1,6 @@
 import {Room, Rooms} from "../types/rooms";
 import {nanoid} from "nanoid";
 
-
 /**
  * Create and generate nanoid for connect a socket to a room
  * @param rooms An Array of room
@@ -16,6 +15,8 @@ export function createRoom(rooms: Rooms) {
             points: 100,
             round: 0,
             idUser: 0,
+            triggerGuesses: false,
+            triggerOMG: false,
             isStart: false
         }
     }

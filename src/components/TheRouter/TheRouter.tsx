@@ -10,7 +10,6 @@ import Room from "../../pages/Room";
 import End from "../../pages/End";
 import Tips from "../../pages/Tips";
 import Labs from "../../pages/Labs";
-import Julien from "../../pages/Julien";
 import Game from "../../pages/Game";
 
 const TheRouter: FunctionComponent = () => {
@@ -24,7 +23,6 @@ const TheRouter: FunctionComponent = () => {
                 <Link to="/end">End</Link>
                 <Link to="/tips">Tips</Link>
                 <Link to="/labs">Labs</Link>
-                <Link to="/julien">Julien</Link>
             </nav>
             <Switch>
                 <Route exact path="/" component={Home}/>
@@ -35,7 +33,6 @@ const TheRouter: FunctionComponent = () => {
                 <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                 <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
                 <Route exact path="/labs" component={Labs}/>
-                <Route exact path="/julien" component={Julien}/>
                 <Route path="*" component={Home}/>
             </Switch>
         </Router>

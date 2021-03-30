@@ -1,14 +1,12 @@
 import {Room} from "../types/rooms";
-import {ExtendedSocket} from "../types/socket";
+import {Server} from "socket.io";
 
 /**
  * checkpoint for update users and my user in game room
  * @param room An object that represents a room from the `rooms` instance variable object
- * @param socket A connected socket.io socket
+ * @param io A connected socket.io server
  */
-
-export function checkpoint(room: Room, socket:ExtendedSocket) {
-    socket.to(room.id).emit('updateListUsers', room.users);
-    socket.emit('updateListUsers', room.users);
-    socket.emit('checkpoint', room.users[socket.key]);
+export function checkpoint(room: Room, io:Server) {
+    io.to(room.id).emit('updateListUsers', room.users);
+    room.users.map((user) => io.to(user.id).emit('checkpoint', user))
 }
