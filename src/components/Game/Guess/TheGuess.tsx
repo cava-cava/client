@@ -7,14 +7,15 @@ import {User} from "../../../store/user/types";
 type TheGuessProps = {
     id: string,
     question?: string,
-    users: User[]
+    users: User[],
+    userKey: number
 }
 
-const TheGuess: FunctionComponent<TheGuessProps> = ({id, question}) => {
+const TheGuess: FunctionComponent<TheGuessProps> = ({id, question, users, userKey}) => {
     return (
         <div className={styles.TheGuess}>
             <h1>Devine qui ?</h1>
-            {question && <QuestionGuess id={id} question={question}/>}
+            {question && <QuestionGuess id={id} question={question} userKey={userKey}/>}
         </div>
     )
 }

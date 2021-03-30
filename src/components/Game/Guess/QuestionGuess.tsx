@@ -4,7 +4,8 @@ import {socket} from "../../../socketClient";
 
 type QuestionGuessProps = {
     id: string
-    question: string
+    question: string,
+    userKey: number
 }
 
 const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, question}) => {
@@ -16,9 +17,10 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, question}) =>
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        socket.emit('endRoundEvent', id)
+        socket.emit('sendAnswerGuess', answer)
         console.color('Envoyer la reponse au serveur socket io', colors.fuchsia)
     }
+
     return (
         <div>
             <p>{question}</p>

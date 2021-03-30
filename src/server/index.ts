@@ -117,6 +117,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         if(room.game.triggerGuesses) {
+            room.users.map(user => user.answerGuess = '')
             room.game.triggerGuesses = false
             room.game.idUser = -1
         }
@@ -133,12 +134,12 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
-     * Get fired for get player in game room
+     *
      */
-    socket.on('getPlayer', (roomId: string) => {
+    socket.on('sendAnswerGuess', (roomId: string, userId: number, answer: string) => {
         const room:Room = rooms[roomId];
 
-        getPlayer(room, io)
+        room.users[userId].answerGuess = answer
     });
 
     socket.on('gameOver', (roomId: string) => {
