@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import axios from 'axios'
-import styles from './Cards.module.scss'
+import styles from './TheCards.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 

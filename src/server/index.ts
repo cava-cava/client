@@ -105,17 +105,21 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets random card on click on Deck
      */
-    socket.on('getCard', (roomId: string) => {
+    socket.on('deckClicked', (roomId: string) => {
         const room:Room = rooms[roomId];
-
+        console.log('deskClicked received')
         if(room.game.timerRunning) return;
+
+        let index = 0; 
 
         let pickedCard;
         if(room.game.cards) {
-            pickedCard = room.game.cards[0]
+            console.log('passé')
+            pickedCard = room.game.cards[index];
+            index = index++;
         }
 
-        io.to(room.id).emit('getCard', pickedCard)
+        io.to(room.id).emit('pickedCard', pickedCard)
         startTimer(room, io, 15)
     });
 

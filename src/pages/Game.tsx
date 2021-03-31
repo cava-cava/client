@@ -16,6 +16,7 @@ import useListUsers from "../hooks/useListUsers";
 import TheGuess from "../components/Game/Guess/TheGuess";
 import {Guess} from "../server/types/guess";
 import {Card} from '../server/types/card'
+import TheCards from '../components/Cards/TheCards';
 
 const Game = () => {
     const dispatch = useDispatch();
@@ -48,21 +49,25 @@ const Game = () => {
             dispatch({type: SET_USER, payload: user});
         }
 
+        const pickedCard = (card:Card) => {
+            setCurrentCard(card);
+            console.log('card picked', card)
+        }
+
         socket.on('getPlayer', getPlayer);
         socket.on('sendGuess', sendGuess);
         socket.on('startRoundEvent', eventRound);
         socket.on('endRoundEvent', eventRound);
         socket.on('checkpoint', checkpoint);
+        socket.on('pickedCard', pickedCard);
 
-        socket.on('getCard', (card:any) => {
-            setCurrentCard(card);
-        })
         return () => {
             socket.off('getPlayer', getPlayer);
             socket.off('sendGuess', sendGuess);
             socket.off('startRoundEvent', eventRound);
             socket.off('endRoundEvent', eventRound);
             socket.off('checkpoint', checkpoint);
+            socket.off('pickedCard', pickedCard);
             setPlayer(undefined)
             setGuess(undefined)
         };
@@ -70,8 +75,7 @@ const Game = () => {
 
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
-        //socket.emit('getCard', id)
-        socket.emit('nextRound', id)
+        socket.emit('deckClicked', id)
     }
 
     const jokerClick = () => {
@@ -90,6 +94,7 @@ const Game = () => {
                 <>
                     {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
                     <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
+                    <div className={styles.GameCenter}><TheCards {...currentCard} /></div>
                     <div className={styles.GameBottom}>
                         <TheDeck number={user.joker} color='green' deskClick={jokerClick}/>
                         <TheDeck number={user.dirt} color='red' deskClick={dirtClick}/>

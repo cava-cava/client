@@ -1,3 +1,4 @@
 export interface Card {
-    description?: string
+    Description?: string,
 }
+
