@@ -143,10 +143,6 @@ io.on("connect", (socket: ExtendedSocket) => {
         room.users[userId].answerGuess = answer
     });
 
-    socket.on('gameOver', (roomId: string) => {
-        io.to(roomId).emit('redirect', `/end`);
-    })
-
     /**
      * Gets fired when a player leaves a room.
      */

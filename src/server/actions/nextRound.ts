@@ -3,6 +3,7 @@ import {getPlayer} from "./getPlayer";
 import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {Guess} from "../types/guess";
+import {checkGameOver} from "./gameOver";
 
 /**
  * Get fired for get player in game room
@@ -10,6 +11,7 @@ import {Guess} from "../types/guess";
  * @param io A connected socket.io server
  */
 export function nextRound(room: Room, io:Server) {
+    checkGameOver(room, io)
     checkpoint(room, io)
     room.game.round++
     if(room.game.round === room.game.idOMG) {

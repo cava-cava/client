@@ -13,9 +13,6 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
     const handleClick = () => {
         socket.emit('winOMG', roomId)
     }
-    const callback = () => {
-        socket.emit('endRoundEvent', roomId)
-    }
 
     useEffect(() => {
         const winOMG = () => {
@@ -40,7 +37,7 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
         <>
             <h1>OMGGGGGGG !!!!</h1>
             { (!win && !lose) && <button role="button" onClick={handleClick}>Click !!!!!</button> }
-            { (win && !lose) && <TheBooty roomId={roomId} userKey={userKey} callback={callback}/> }
+            { (win && !lose) && <TheBooty roomId={roomId} userKey={userKey} /> }
             { (lose && !win) && <span>Tu as perdu</span> }
         </>
     )

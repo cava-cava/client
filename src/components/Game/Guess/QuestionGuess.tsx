@@ -3,12 +3,12 @@ import {colors} from "../../../mixins/color";
 import {socket} from "../../../socketClient";
 
 type QuestionGuessProps = {
-    id: string
+    roomId: string
     userKey: number
     question: string
 }
 
-const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, userKey, question}) => {
+const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, question}) => {
     const [answer, setAnswer] = useState('');
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,8 +17,8 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({id, userKey, ques
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        socket.emit('sendAnswerGuess', id, userKey, answer)
-        socket.emit('endRoundEvent', id)
+        socket.emit('sendAnswerGuess', roomId, userKey, answer)
+        socket.emit('endRoundEvent', roomId)
         console.color('Envoyer la reponse au serveur socket io', colors.fuchsia)
     }
 

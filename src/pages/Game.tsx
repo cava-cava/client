@@ -90,7 +90,7 @@ const Game = () => {
                     </div>
                 </>
             }
-            { (triggerGuesses && !triggerOMG) && <TheGuess id={id} question={guess?.question} users={users} userKey={user.key}/> }
+            { (triggerGuesses && !triggerOMG) && <TheGuess roomId={id} question={guess?.question} users={users} userKey={user.key}/> }
             { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={id} userKey={user.key}/> }
         </div>
     );

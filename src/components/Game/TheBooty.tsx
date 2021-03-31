@@ -6,11 +6,14 @@ import {socket} from "../../socketClient";
 type TheBootyProps = {
     roomId: string
     userKey: number
-    showHappiness?: boolean,
-    callback: () => void
+    showHappiness?: boolean
 }
 
-const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappiness = true, callback}) => {
+const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappiness = true}) => {
+    const callback = () => {
+        socket.emit('endRoundEvent', roomId)
+    }
+
     const happinessClick = () => {
         console.color(`+3% bonheur`, colors.blue);
         socket.emit('sendPointsUser', roomId, userKey, 3)
