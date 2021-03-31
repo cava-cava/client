@@ -112,7 +112,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         }
 
         io.to(room.id).emit('getCard', pickedCard)
-        io.to(room.id).emit('startTimer', 15)
+
     });
 
     socket.on('endTimer', (roomId: string, userId: number) => {
@@ -126,11 +126,11 @@ io.on("connect", (socket: ExtendedSocket) => {
         nextRound(room, io)
     })
 
-    socket.on('winOMG', (roomId: string) => {
+    socket.on('winRoundEvent', (roomId: string) => {
         const room:Room = rooms[roomId];
 
-        socket.emit('winOMG')
-        socket.to(room.id).emit('loseOMG')
+        socket.emit('winRoundEvent')
+        socket.to(room.id).emit('loseRoundEvent')
     });
 
     socket.on('endRoundEvent', (roomId: string) => {

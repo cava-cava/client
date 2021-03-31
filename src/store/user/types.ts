@@ -7,6 +7,7 @@ export interface User {
   joker: number
   dirt: number
   answerGuess: string
+  timerRunning: boolean
 }
 
 export interface userState {

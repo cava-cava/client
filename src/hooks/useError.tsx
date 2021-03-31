@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {socket} from "../socketClient";
 
-const useModal = () => {
+const useError = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
         const errorEvent = (error: string) => setError(error)
-
+        
         socket.on('error', errorEvent);
 
         return () => {
@@ -17,4 +17,4 @@ const useModal = () => {
     return error;
 };
 
-export default useModal;
+export default useError;

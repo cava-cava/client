@@ -24,7 +24,8 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         points: 0,
         joker: 2,
         dirt: 2,
-        answerGuess: ''
+        answerGuess: '',
+        timerRunning: false
     };
     room.users.push(user);
     room.sockets.push(socket);

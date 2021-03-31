@@ -11,7 +11,8 @@ export const initialState: userState = {
     points: 0,
     joker: 2,
     dirt: 2,
-    answerGuess: ''
+    answerGuess: '',
+    timerRunning: false
   },
   errors: undefined,
   loading: false

@@ -18,12 +18,6 @@ const TheRouter: FunctionComponent = () => {
 
     return (
         <Router>
-            <nav>
-                <Link to="/rooms">Rooms</Link>
-                <Link to="/end">End</Link>
-                <Link to="/tips">Tips</Link>
-                <Link to="/labs">Labs</Link>
-            </nav>
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
