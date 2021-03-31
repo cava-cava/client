@@ -9,5 +9,6 @@ import {Server} from "socket.io";
  */
 export function startTimer(room: Room, io:Server, seconds: number) {
     room.users.map(user => user.timerRunning = true)
+    room.game.timerRunning = true
     io.to(room.id).emit('startTimer', seconds)
 }

@@ -19,7 +19,8 @@ export function createRoom(rooms: Rooms) {
             idOMG: 0,
             triggerGuesses: false,
             triggerOMG: false,
-            isStart: false
+            isStart: false,
+            timerRunning: false
         }
     }
     while (rooms[room.id] || !room?.id) {

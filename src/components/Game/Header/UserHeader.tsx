@@ -1,22 +1,24 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent} from 'react';
 import styles from './UserHeader.module.scss'
 import avatar from '../../../assets/png/avatar.png'
 import TheTimer from "../../Timer/TheTimer";
+import {User} from "../../../store/user/types";
 
 type UserHeaderProps = {
-    username: string
+    user: User,
+    roomId: string
 }
 
-const UserHeader: FunctionComponent<UserHeaderProps> = ({username}) => {
+const UserHeader: FunctionComponent<UserHeaderProps> = ({user, roomId}) => {
     return (
         <div className={styles.UserHeader}>
             <div className={styles.avatar}>
-                <TheTimer>
+                <TheTimer userKey={user.key} roomId={roomId}>
                     <img src={avatar}/>
                 </TheTimer>
             </div>
             <div className={styles.user}>
-                <div>{username}</div>
+                <div>{user.name}</div>
                 <div>1er</div>
             </div>
         </div>

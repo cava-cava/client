@@ -70,8 +70,8 @@ const Game = () => {
 
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
-        //socket.emit('getCard', id)
-        socket.emit('nextRound', id)
+        socket.emit('getCard', id)
+        //socket.emit('nextRound', id)
     }
 
     const jokerClick = () => {
@@ -84,10 +84,10 @@ const Game = () => {
 
     return (
         <div className={styles.Game}>
+            <TheHeader user={user} code={id}/>
+            <TheProgressBar users={users} userPoints={user.points}/>
             { (!triggerGuesses && !triggerOMG) &&
                 <>
-                    <TheHeader username={user.name} code={id}/>
-                    <TheProgressBar users={users} userPoints={user.points}/>
                     {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
                     <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
                     <div className={styles.GameBottom}>

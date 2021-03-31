@@ -12,4 +12,5 @@ export interface Game {
     triggerOMG: boolean
     idUser: number
     isStart: boolean
+    timerRunning: boolean
 }

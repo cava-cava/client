@@ -1,25 +1,31 @@
 import React, {FunctionComponent, ReactElement, useEffect, useRef, useState} from 'react';
-import useInterval from '../../hooks/useInterval'
 import styles from './TheTimer.module.scss'
 import {socket} from "../../socketClient";
 
 type TheTimerProps = {
+    userKey: number
+    roomId: string
     children: ReactElement
 }
 
-const TheTimer: FunctionComponent<TheTimerProps> = ({children}) => {
+const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children}) => {
     const [seconds, setSeconds] = useState(0)
     const countdownEl = useRef<SVGCircleElement>(null);
 
-    const TimerOn = () => {
-        if (seconds !== 0)
-            setSeconds(seconds - 1)
-        else return
-    }
+    // Set up the interval.
+    useEffect(() => {
+        const TimerOn = () => {
+            if (seconds > 0)
+                setSeconds(seconds - 1)
+            else return
+        }
 
-    useInterval(() => {
-        TimerOn()
-    }, 1000);
+        if (seconds && seconds > 0) {
+            const interval = setInterval(TimerOn, 1000);
+            return () => clearInterval(interval);
+        } else socket.emit('endTimer', roomId, userKey)
+    }, [seconds]);
+
 
     useEffect(() => {
         const startTimer = (seconds: number) => {

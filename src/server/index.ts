@@ -12,6 +12,8 @@ import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
 import {checkpoint} from "./actions/checkpoint";
+import {endTimer} from "./actions/endTimer";
+import {startTimer} from "./actions/startTimer";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -106,17 +108,21 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('getCard', (roomId: string) => {
         const room:Room = rooms[roomId];
 
+        if(room.game.timerRunning) return;
+
         let pickedCard;
         if(room.game.cards) {
             pickedCard = room.game.cards[0]
         }
 
         io.to(room.id).emit('getCard', pickedCard)
-
+        startTimer(room, io, 15)
     });
 
     socket.on('endTimer', (roomId: string, userId: number) => {
-        console.log('endTimer')
+        const room:Room = rooms[roomId];
+
+        endTimer(room, io, userId)
     })
 
 

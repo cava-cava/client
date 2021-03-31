@@ -10,4 +10,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #282c34;
+
+  @include media('mobile') {
+    background-color: white;
+  }
 }
