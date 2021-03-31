@@ -1,6 +1,7 @@
 export interface Card {
     id: number
     Description: string
-    Points: number
+    Points: number,
+    Alternative: Card[]
 }
 

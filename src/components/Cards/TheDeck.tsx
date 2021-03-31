@@ -4,10 +4,11 @@ import styles from './TheDeck.module.scss'
 type TheDeckProps = {
     number: number,
     color?: string,
-    deskClick: () => void
+    deskClick: () => void,
+    style: object
 }
 
-const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick}) => {
+const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick, style}) => {
     let cards: any = []
 
     for (let i = 0; i < number; i++) {
@@ -15,7 +16,7 @@ const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick}) =>
     }
 
     return (
-        <div className={styles.TheDeck} onClick={deskClick}>
+        <div className={styles.TheDeck} onClick={deskClick} style={style}>
             {cards}
         </div>
     )

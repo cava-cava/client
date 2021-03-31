@@ -16,6 +16,7 @@ export function createRoom(rooms: Rooms) {
             round: 0,
             idUser: 0,
             idCards: 0,
+            showAlternative: false,
             idGuesses: 0,
             idOMG: 0,
             triggerGuesses: false,

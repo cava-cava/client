@@ -73,6 +73,7 @@ const Game = () => {
         };
     }, [])
 
+
     const drawClick = () => {
         if(player && user.id === player.id) {
             console.color(`Tirer une carte`, colors.blue);
@@ -83,16 +84,18 @@ const Game = () => {
     }
 
     const jokerClick = () => {
-        if(currentCard) {
+        if(player && user.id === player.id && currentCard && currentCard.Points < 0) {
             console.color(`joker`, colors.green);
+            socket.emit('sendJoker', id, player.key, user.key)
         } else {
             console.color(`Tu ne peux pas de envoyer de carte joker`, colors.blue);
         }
     }
 
     const dirtClick = () => {
-        if(player && user.id !== player.id && currentCard) {
-            console.color(`crasse`, colors.red);
+        if(player && user.id !== player.id && currentCard && currentCard.Points > 0) {
+            console.color(`crasse`, colors.purple);
+            socket.emit('sendDirt', id, player.key)
 
         } else {
             console.color(`Tu ne peux pas de envoyer de carte crasse`, colors.blue);
@@ -106,11 +109,11 @@ const Game = () => {
             { (!triggerGuesses && !triggerOMG) &&
                 <>
                     {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
-                    <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
+                    <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
                     {currentCard && <div className={styles.GameCenter}><TheCards Description={currentCard.Description} /></div>}
                     <div className={styles.GameBottom}>
-                        <TheDeck number={user.joker} color='green' deskClick={jokerClick}/>
-                        <TheDeck number={user.dirt} color='red' deskClick={dirtClick}/>
+                        <TheDeck number={user.joker} color='green' deskClick={jokerClick} style={{opacity: (player && user.id === player.id && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
+                        <TheDeck number={user.dirt} color='red' deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
                     </div>
                 </>
             }

@@ -107,17 +107,14 @@ io.on("connect", (socket: ExtendedSocket) => {
      * Gets random card on click on Deck
      */
     socket.on('deckClicked', (roomId: string, userId: number) => {
-        const room:Room = rooms[roomId];
+        const room: Room = rooms[roomId];
 
-        if(room.game.timerRunning) return;
-        let pickedCard:Card | undefined = undefined;
-        if(room.game.cards) {
-            pickedCard = room.game.cards[room.game.idCards];
-            if(++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
-            sendPointsUser(room.users[userId], pickedCard.Points)
-            checkpoint(room, io)
-        }
+        if (room.game.timerRunning || !room.game.cards) return;
 
+        const pickedCard: Card = room.game.cards[room.game.idCards];
+        if (++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
+        sendPointsUser(room.users[userId], pickedCard.Points)
+        checkpoint(room, io)
         io.to(room.id).emit('pickedCard', pickedCard)
         startTimer(room, io, 15)
     });

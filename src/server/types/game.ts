@@ -7,6 +7,7 @@ export interface Game {
     points: number
     round: number
     idCards: number
+    showAlternative: boolean
     idGuesses: number
     triggerGuesses: boolean
     idStepGuess: number
