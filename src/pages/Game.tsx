@@ -15,6 +15,7 @@ import useRedirect from "../hooks/useRedirect";
 import useListUsers from "../hooks/useListUsers";
 import TheGuess from "../components/Game/Guess/TheGuess";
 import {Guess} from "../server/types/guess";
+import {Card} from '../server/types/card'
 
 const Game = () => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Game = () => {
     const [guess, setGuess] = useState<Guess>();
     const [triggerGuesses, setTriggerGuesses] = useState(false);
     const [triggerOMG, setTriggerOMG] = useState(false);
+    const [currentCard, setCurrentCard] = useState<Card>()
 
     useRedirect();
 
@@ -52,6 +54,9 @@ const Game = () => {
         socket.on('endRoundEvent', eventRound);
         socket.on('checkpoint', checkpoint);
 
+        socket.on('getCard', (card:any) => {
+            setCurrentCard(card);
+        })
         return () => {
             socket.off('getPlayer', getPlayer);
             socket.off('sendGuess', sendGuess);
@@ -65,6 +70,7 @@ const Game = () => {
 
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
+        socket.emit('getCard', id)
         socket.emit('nextRound', id)
     }
 
