@@ -12,6 +12,7 @@ import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
 import {checkpoint} from "./actions/checkpoint";
+import {getCard} from "./actions/getCard"
 
 const app = express();
 const server = require('http').createServer(app);
@@ -93,6 +94,19 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         //Initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
+
+        /**
+        * Gets random card on click on Deck
+        */
+        socket.on('getCard', () => {
+            let pickedCard;
+            if(room.game.cards) {
+                console.log(room.game.cards[0])
+                pickedCard = room.game.cards[0]
+            }
+            
+            io.to(room.id).emit('getCard', pickedCard)
+        });
 
         room.game.isStart = true
         io.to(room.id).emit('redirect', `/game/${roomId}`);

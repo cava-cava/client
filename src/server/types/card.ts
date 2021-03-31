@@ -1,3 +1,3 @@
 export interface Card {
-    //Fixme
+    description?: string
 }
