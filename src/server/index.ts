@@ -12,7 +12,6 @@ import {shuffle} from "../mixins/shuffle";
 import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
 import {checkpoint} from "./actions/checkpoint";
-import {getCard} from "./actions/getCard"
 
 const app = express();
 const server = require('http').createServer(app);
@@ -95,30 +94,36 @@ io.on("connect", (socket: ExtendedSocket) => {
         //Initialize OMG for the game
         room.game.idOMG = initIdOMG(room)
 
-        /**
-        * Gets random card on click on Deck
-        */
-        socket.on('getCard', () => {
-            let pickedCard;
-            if(room.game.cards) {
-                console.log(room.game.cards[0])
-                pickedCard = room.game.cards[0]
-            }
-            
-            io.to(room.id).emit('getCard', pickedCard)
-        });
-
         room.game.isStart = true
         io.to(room.id).emit('redirect', `/game/${roomId}`);
         checkpoint(room, io)
         getPlayer(room, io)
     });
 
+    /**
+     * Gets random card on click on Deck
+     */
+    socket.on('getCard', (roomId: string) => {
+        const room:Room = rooms[roomId];
+
+        let pickedCard;
+        if(room.game.cards) {
+            pickedCard = room.game.cards[0]
+        }
+
+        io.to(room.id).emit('getCard', pickedCard)
+        io.to(room.id).emit('startTimer', 15)
+    });
+
+    socket.on('endTimer', (roomId: string, userId: number) => {
+        console.log('endTimer')
+    })
+
+
     socket.on('nextRound', (roomId: string) => {
         const room:Room = rooms[roomId];
 
         nextRound(room, io)
-        io.to(room.id).emit('startTimer', 15)
     })
 
     socket.on('winOMG', (roomId: string) => {

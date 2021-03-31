@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import axios from 'axios'
-import useInterval from '../../hooks/useInterval'
 import styles from './Cards.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';

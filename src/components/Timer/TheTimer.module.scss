@@ -5,10 +5,6 @@
     width: 50px;
     text-align: center;
 
-  &Running {
-    animation: countdown linear forwards;
-  }
-
   > div {
     padding: 5px;
   }
@@ -29,6 +25,7 @@
       stroke-width: 3px;
       stroke: black;
       fill: none;
+      animation: countdown linear forwards;
     }
   }
 
