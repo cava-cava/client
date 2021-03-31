@@ -23,7 +23,10 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children})
         if (seconds && seconds > 0) {
             const interval = setInterval(TimerOn, 1000);
             return () => clearInterval(interval);
-        } else socket.emit('endTimer', roomId, userKey)
+        } else if(userKey === 0){
+            // isHost
+            socket.emit('endTimer', roomId, userKey)
+        }
     }, [seconds]);
 
 
@@ -46,7 +49,8 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children})
     return (
         <div className={styles.TheTimer}>
             <div>{children}</div>
-            {seconds > 0 && <svg><circle ref={countdownEl} r="22" cx="25" cy="25" /></svg>}
+            {(seconds && seconds > 0) ? <svg><circle ref={countdownEl} r="22" cx="25" cy="25" /></svg> : null}
+            {seconds}
         </div>
     )
 }

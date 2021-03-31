@@ -11,9 +11,8 @@ import {nextStepRoundEvent} from "./nextStepRoundEvent";
 export function endTimer(room: Room, io:Server, userId: number) {
     if(!room.game.timerRunning) return;
     room.users[userId].timerRunning = false
-
-    if(room.users.filter(user => user.timerRunning).length <= 0) {
-        room.game.timerRunning = false
+    room.game.timerRunning = false
+    if(!room.game.timerRunning) {
         if (!room.game.triggerGuesses && !room.game.triggerOMG) nextRound(room, io)
         else {
             nextStepRoundEvent(room, io)

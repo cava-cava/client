@@ -121,7 +121,10 @@ io.on("connect", (socket: ExtendedSocket) => {
 
     socket.on('endTimer', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];
-
+        if(!room && userId !== 0 ) {
+            //isHost
+            return
+        }
         endTimer(room, io, userId)
     })
 
