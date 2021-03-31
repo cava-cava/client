@@ -106,18 +106,62 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets random card on click on Deck
      */
-    socket.on('deckClicked', (roomId: string, userId: number) => {
+    socket.on('deckClicked', (roomId: string, playerId: number) => {
         const room: Room = rooms[roomId];
 
         if (room.game.timerRunning || !room.game.cards) return;
-
-        const pickedCard: Card = room.game.cards[room.game.idCards];
         if (++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
-        sendPointsUser(room.users[userId], pickedCard.Points)
+        const pickedCard: Card = room.game.cards[room.game.idCards];
+        sendPointsUser(room.users[playerId], pickedCard.Points)
         checkpoint(room, io)
         io.to(room.id).emit('pickedCard', pickedCard)
         startTimer(room, io, 15)
     });
+
+    socket.on('sendJoker', (roomId: string, userId: number, playerId: number ) => {
+        const room: Room = rooms[roomId];
+
+        if (!room.game.timerRunning || !room.game.cards) return;
+
+        if(--room.users[userId].joker < 0) room.users[userId].joker = 0
+
+        const pickedCard: Card = room.game.cards[room.game.idCards];
+        let alternativeCard: Card = pickedCard.Alternative[0];
+        alternativeCard.Points = Math.abs(pickedCard.Points)
+
+        if(!room.game.showAlternative) {
+            room.game.showAlternative = true
+        }else {
+            alternativeCard.Description = "OH CA VA"
+        }
+        sendPointsUser(room.users[playerId], alternativeCard.Points)
+        if(playerId !== userId) sendPointsUser(room.users[userId], alternativeCard.Points)
+        checkpoint(room, io)
+        io.to(room.id).emit('pickedCard', alternativeCard)
+        startTimer(room, io, 15)
+    })
+
+    socket.on('sendDirt', (roomId: string, userId: number, playerId: number) => {
+        const room: Room = rooms[roomId];
+
+        if (!room.game.timerRunning || !room.game.cards) return;
+
+        if(--room.users[userId].dirt < 0) room.users[userId].dirt = 0
+
+        const pickedCard: Card = room.game.cards[room.game.idCards];
+        let alternativeCard: Card = pickedCard.Alternative[0];
+        alternativeCard.Points = -Math.abs(pickedCard.Points)
+
+        if(!room.game.showAlternative) {
+            room.game.showAlternative = true
+        }else {
+            alternativeCard.Description = "OH CHEH"
+        }
+        sendPointsUser(room.users[playerId], alternativeCard.Points)
+        checkpoint(room, io)
+        io.to(room.id).emit('pickedCard', alternativeCard)
+        startTimer(room, io, 15)
+    })
 
     socket.on('endTimer', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];

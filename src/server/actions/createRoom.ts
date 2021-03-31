@@ -15,7 +15,7 @@ export function createRoom(rooms: Rooms) {
             points: 100,
             round: 0,
             idUser: 0,
-            idCards: 0,
+            idCards: -1,
             showAlternative: false,
             idGuesses: 0,
             idOMG: 0,
