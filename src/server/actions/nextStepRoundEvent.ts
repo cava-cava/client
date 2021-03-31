@@ -2,7 +2,6 @@ import {Room} from "../types/rooms";
 import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {startTimer} from "./startTimer";
-import {nextRound} from "./nextRound";
 
 /**
  * Get fired next step round event for game room
@@ -13,7 +12,7 @@ export function nextStepRoundEvent(room: Room, io:Server) {
     checkpoint(room, io)
     if (room.game.triggerGuesses && !room.game.triggerOMG) {
         if(room.game.idStepGuess === -1) io.to(room.id).emit('startAnswersEvent')
-        if(++room.game.idStepGuess >= room.users.length) startTimer(room, io, 10)
+        if(++room.game.idStepGuess <= room.users.length) startTimer(room, io, 10)
         else {
             io.emit('winRoundEvent')
         }
