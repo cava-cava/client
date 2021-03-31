@@ -111,6 +111,7 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         if (room.game.timerRunning || !room.game.cards) return;
         if (++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
+        room.game.showAlternative = false
         const pickedCard: Card = room.game.cards[room.game.idCards];
         sendPointsUser(room.users[playerId], pickedCard.Points)
         checkpoint(room, io)
