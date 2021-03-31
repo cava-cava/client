@@ -96,13 +96,15 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         room.game.isStart = true
         io.to(room.id).emit('redirect', `/game/${roomId}`);
-        checkpoint(room, io) 
+        checkpoint(room, io)
+        getPlayer(room, io)
     });
 
     socket.on('nextRound', (roomId: string) => {
         const room:Room = rooms[roomId];
 
         nextRound(room, io)
+        io.to(room.id).emit('startTimer', 15)
     })
 
     socket.on('winOMG', (roomId: string) => {
@@ -116,6 +118,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         if(room.game.triggerGuesses) {
+            room.users.map(user => user.answerGuess = '')
             room.game.triggerGuesses = false
             room.game.idUser = -1
         }
@@ -132,17 +135,13 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     /**
-     * Get fired for get player in game room
+     *
      */
-    socket.on('getPlayer', (roomId: string) => {
+    socket.on('sendAnswerGuess', (roomId: string, userId: number, answer: string) => {
         const room:Room = rooms[roomId];
 
-        getPlayer(room, io)
+        room.users[userId].answerGuess = answer
     });
-
-    socket.on('gameOver', (roomId: string) => {
-        io.to(roomId).emit('redirect', `/end`);
-    })
 
     /**
      * Gets fired when a player leaves a room.

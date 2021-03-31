@@ -6,9 +6,9 @@ export interface Game {
     guesses?: Guess[]
     points: number
     round: number
-    idGuesses?: number
+    idGuesses: number
     triggerGuesses: boolean
-    idOMG?: number
+    idOMG: number
     triggerOMG: boolean
     idUser: number
     isStart: boolean

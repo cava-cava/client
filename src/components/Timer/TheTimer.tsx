@@ -1,13 +1,16 @@
-import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
+import React, {FunctionComponent, ReactElement, useEffect, useRef, useState} from 'react';
 import useInterval from '../../hooks/useInterval'
 import styles from './TheTimer.module.scss'
+import {colors} from "../../mixins/color";
+import {socket} from "../../socketClient";
 
 type TheTimerProps = {
-    message?: string
+    children: ReactElement
 }
 
-const TheTimer: FunctionComponent<TheTimerProps> = ({message, ...props}) => {
-    const [seconds, setSeconds] = useState(15)
+const TheTimer: FunctionComponent<TheTimerProps> = ({children}) => {
+    const [seconds, setSeconds] = useState(0)
+    const [running, setRunning] = useState(false)
     const countdownEl = useRef<SVGCircleElement>(null);
 
     const TimerOn = () => {
@@ -17,22 +20,32 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({message, ...props}) => {
             return
     }
 
-    useEffect(() => {
-        if (null !== countdownEl.current) {
-            countdownEl.current.style.animationDuration = `${seconds}s`;
-        }
-    }, []);
-
     useInterval(() => {
         TimerOn()
     }, 1000);
 
+    useEffect(() => {
+        const startTimer = (seconds: number) => {
+            setRunning(false)
+            setSeconds(seconds)
+
+            if (null !== countdownEl.current) {
+                countdownEl.current.style.animationDuration = `${seconds}s`;
+                setRunning(true)
+            }
+        }
+
+        socket.on("startTimer", startTimer)
+
+        return () => {
+            socket.off("startTimer", startTimer)
+        }
+    }, []);
+
     return (
         <div className={styles.TheTimer}>
-            <div>{props.children}</div>
-            <svg>
-                <circle ref={countdownEl} r="22" cx="25" cy="25" />
-            </svg>
+            <div>{children}</div>
+            {seconds > 0 && <svg><circle ref={countdownEl} className={running ? styles.TheTimerRunning : ''} r="22" cx="25" cy="25" /></svg>}
         </div>
     )
 }

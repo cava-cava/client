@@ -6,6 +6,7 @@ export interface User {
   points: number
   joker: number
   dirt: number
+  answerGuess: string
 }
 
 export interface userState {
