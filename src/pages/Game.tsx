@@ -70,8 +70,8 @@ const Game = () => {
 
     const drawClick = () => {
         console.color(`Tirer une carte`, colors.blue);
-        socket.emit('getCard', id)
-        //socket.emit('nextRound', id)
+        //socket.emit('getCard', id)
+        socket.emit('nextRound', id)
     }
 
     const jokerClick = () => {

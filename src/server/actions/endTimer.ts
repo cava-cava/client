@@ -1,6 +1,7 @@
 import {Room} from "../types/rooms";
 import {nextRound} from "./nextRound";
 import {Server} from "socket.io";
+import {nextStepRoundEvent} from "./nextStepRoundEvent";
 /**
  * Get fired to end Timer in game room
  * @param room An object that represents a room from the `rooms` instance variable object
@@ -15,7 +16,7 @@ export function endTimer(room: Room, io:Server, userId: number) {
         room.game.timerRunning = false
         if (!room.game.triggerGuesses && !room.game.triggerOMG) nextRound(room, io)
         else {
-            //Event next
+            nextStepRoundEvent(room, io)
         }
     }
 }

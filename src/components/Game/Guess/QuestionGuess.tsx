@@ -18,8 +18,6 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         socket.emit('sendAnswerGuess', roomId, userKey, answer)
-        socket.emit('endRoundEvent', roomId)
-        console.color('Envoyer la reponse au serveur socket io', colors.fuchsia)
     }
 
     return (

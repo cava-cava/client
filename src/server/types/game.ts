@@ -8,6 +8,7 @@ export interface Game {
     round: number
     idGuesses: number
     triggerGuesses: boolean
+    idStepGuess: number
     idOMG: number
     triggerOMG: boolean
     idUser: number

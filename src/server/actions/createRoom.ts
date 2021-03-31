@@ -18,6 +18,7 @@ export function createRoom(rooms: Rooms) {
             idGuesses: 0,
             idOMG: 0,
             triggerGuesses: false,
+            idStepGuess: -1,
             triggerOMG: false,
             isStart: false,
             timerRunning: false

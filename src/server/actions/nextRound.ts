@@ -4,6 +4,7 @@ import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {Guess} from "../types/guess";
 import {checkGameOver} from "./gameOver";
+import {startTimer} from "./startTimer";
 
 /**
  * Get fired for get player in game room
@@ -27,4 +28,5 @@ export function nextRound(room: Room, io:Server) {
         getPlayer(room, io)
     }
     io.to(room.id).emit('startRoundEvent', room.game.triggerGuesses, room.game.triggerOMG);
+    if(room.game.triggerGuesses && !room.game.triggerOMG) startTimer(room, io, 30);
 }
