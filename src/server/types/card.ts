@@ -1,4 +1,6 @@
 export interface Card {
-    Description?: string,
+    id: number
+    Description: string
+    Points: number
 }
 

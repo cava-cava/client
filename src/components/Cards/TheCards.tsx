@@ -1,19 +1,14 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
-import axios from 'axios'
+import React, {FunctionComponent} from 'react';
 import styles from './TheCards.module.scss'
-import 'swiper/swiper.scss';
-import { Card } from '../../server/types/card';
 
-interface TheCardsProps extends Card {
-    cards?: string,
+type TheCardsProps = {
+    Description: string
 }
-
-
 
 const TheCards: FunctionComponent<TheCardsProps> = ({Description}) => {
 
     return (
-        <div className='Card'>
+        <div className={styles.TheCards}>
             {Description}
         </div>
     )

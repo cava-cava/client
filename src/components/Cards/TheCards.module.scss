@@ -1,22 +1,13 @@
-.Card {
-    height: 100px!important;
-    width: 30px;
+.TheCards {
+    position: absolute;
+    height: 40%;
+    width: 90%;
+    top: 0;
+    bottom: 0;
+    display: block;
+    margin: auto;
     border-radius: 10px;
-    border: .5px solid gba(0,0,0,4);
+    border: 1px solid grey;
     box-shadow: 0 8px 8px -6px rgba(0,0,0,0.25);
-    box-sizing: initial;
-    background-color: white; 
-    }
-
-.cardWrapper {
-    margin: 30px 10px;
-}
-
-.points {
-    margin-top: 10px;
-    font-size: 20px;
-}
-
-.swiper {
-    height: 300px;
+    background-color: white;
 }

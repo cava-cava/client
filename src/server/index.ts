@@ -14,6 +14,8 @@ import {nextRound} from "./actions/nextRound";
 import {checkpoint} from "./actions/checkpoint";
 import {endTimer} from "./actions/endTimer";
 import {startTimer} from "./actions/startTimer";
+import {sendPointsUser} from "./actions/sendPointsUser";
+import {Card} from "./types/card";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -68,8 +70,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendPointsUser', (roomId, userId, points) => {
         const room:Room = rooms[roomId];
 
-        room.users[userId].points+= points;
-        if(room.users[userId].points < 0)  room.users[userId].points = 0
+        sendPointsUser(room.users[userId], points)
     });
 
     /**
@@ -105,18 +106,16 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets random card on click on Deck
      */
-    socket.on('deckClicked', (roomId: string) => {
+    socket.on('deckClicked', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];
-        console.log('deskClicked received')
+
         if(room.game.timerRunning) return;
-
-        let index = 0; 
-
-        let pickedCard;
+        let pickedCard:Card | undefined = undefined;
         if(room.game.cards) {
-            console.log('passé')
-            pickedCard = room.game.cards[index];
-            index = index++;
+            pickedCard = room.game.cards[room.game.idCards];
+            if(++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
+            sendPointsUser(room.users[userId], pickedCard.Points)
+            checkpoint(room, io)
         }
 
         io.to(room.id).emit('pickedCard', pickedCard)

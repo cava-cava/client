@@ -74,16 +74,29 @@ const Game = () => {
     }, [])
 
     const drawClick = () => {
-        console.color(`Tirer une carte`, colors.blue);
-        socket.emit('deckClicked', id)
+        if(player && user.id === player.id) {
+            console.color(`Tirer une carte`, colors.blue);
+            socket.emit('deckClicked', id, player.key)
+        } else {
+            console.color(`Tu ne peux pas de tirer de carte`, colors.blue);
+        }
     }
 
     const jokerClick = () => {
-        console.color(`joker`, colors.green);
+        if(currentCard) {
+            console.color(`joker`, colors.green);
+        } else {
+            console.color(`Tu ne peux pas de envoyer de carte joker`, colors.blue);
+        }
     }
 
     const dirtClick = () => {
-        console.color(`crasse`, colors.red);
+        if(player && user.id !== player.id && currentCard) {
+            console.color(`crasse`, colors.red);
+
+        } else {
+            console.color(`Tu ne peux pas de envoyer de carte crasse`, colors.blue);
+        }
     }
 
     return (
@@ -94,7 +107,7 @@ const Game = () => {
                 <>
                     {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
                     <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick}/></div>
-                    <div className={styles.GameCenter}><TheCards {...currentCard} /></div>
+                    {currentCard && <div className={styles.GameCenter}><TheCards Description={currentCard.Description} /></div>}
                     <div className={styles.GameBottom}>
                         <TheDeck number={user.joker} color='green' deskClick={jokerClick}/>
                         <TheDeck number={user.dirt} color='red' deskClick={dirtClick}/>
