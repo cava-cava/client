@@ -75,9 +75,11 @@ const Game = () => {
 
 
     const drawClick = () => {
+        socket.emit('nextRound', id)
+
         if(player && user.id === player.id) {
             console.color(`Tirer une carte`, colors.blue);
-            socket.emit('deckClicked', id, player.key)
+            //socket.emit('deckClicked', id, player.key)
         } else {
             console.color(`Tu ne peux pas de tirer de carte`, colors.blue);
         }

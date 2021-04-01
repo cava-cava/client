@@ -21,6 +21,7 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         id: socket.id,
         name: username,
         color: color,
+        ladder: 1,
         points: 0,
         joker: 2,
         dirt: 2,

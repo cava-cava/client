@@ -3,6 +3,7 @@ export interface User {
   id: string
   name: string
   color: string
+  ladder: number
   points: number
   joker: number
   dirt: number

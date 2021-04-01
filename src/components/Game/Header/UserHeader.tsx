@@ -19,7 +19,7 @@ const UserHeader: FunctionComponent<UserHeaderProps> = ({user, roomId}) => {
             </div>
             <div className={styles.user}>
                 <div>{user.name}</div>
-                <div>1er</div>
+                <div>{user.ladder === 1 ?  `${user.ladder}er`: `${user.ladder}eme`}</div>
             </div>
         </div>
     )
