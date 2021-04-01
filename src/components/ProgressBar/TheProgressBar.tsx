@@ -5,14 +5,15 @@ import {User} from "../../store/user/types";
 
 type TheProgressBarProps = {
     users: User[],
-    userPoints: number
+    user: User,
+    playerKey?: number
 }
 
-const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, userPoints}) =>
+const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, playerKey}) =>
     <div className={styles.TheProgressBar}>
-        <div className={styles.TheProgressBarValue} style={{width: `${userPoints}%`}}/>
+        <div className={styles.TheProgressBarValue} style={{width: `${user.points}%`, backgroundColor: user.color}}/>
         <div>
-            {users.map((user, index) => <UserProgressBar value={user.points} color={user.color} key={index}/>)}
+            {users.map((user, index) => <UserProgressBar user={user} playerKey={playerKey} key={index}/>)}
         </div>
     </div>
 

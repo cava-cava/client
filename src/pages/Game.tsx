@@ -107,7 +107,7 @@ const Game = () => {
     return (
         <div className={styles.Game}>
             <TheHeader user={user} code={id}/>
-            <TheProgressBar users={users} userPoints={user.points}/>
+            <TheProgressBar users={users} user={user} playerKey={player?.key}/>
             { (!triggerGuesses && !triggerOMG) &&
                 <>
                     {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
