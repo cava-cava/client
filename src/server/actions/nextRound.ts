@@ -12,7 +12,6 @@ import {startTimer} from "./startTimer";
  * @param io A connected socket.io server
  */
 export function nextRound(room: Room, io:Server) {
-    checkGameOver(room, io)
     checkpoint(room, io)
     room.game.round++
     if(room.game.round === room.game.idOMG) {

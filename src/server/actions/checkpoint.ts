@@ -1,6 +1,7 @@
 import {Room} from "../types/rooms";
 import {Server} from "socket.io";
 import {User} from "../../store/user/types";
+import {checkGameOver} from "./gameOver";
 
 /**
  * checkpoint for update users and my user in game room
@@ -21,4 +22,5 @@ export function checkpoint(room: Room, io:Server) {
         io.to(user.id).emit('checkpoint', user)
     })
     io.to(room.id).emit('updateListUsers', room.users);
+    checkGameOver(room, io)
 }
