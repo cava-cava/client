@@ -55,6 +55,13 @@ io.on("connect", (socket: ExtendedSocket) => {
         callback();
     });
 
+    socket.on('getListUsersInRoom', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room) {
+            socket.emit('updateListUsers', room.users);
+        }
+    });
+
     socket.on('addJoker', (roomId, userId) => {
         const room:Room = rooms[roomId];
 

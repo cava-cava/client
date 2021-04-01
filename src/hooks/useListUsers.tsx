@@ -12,6 +12,8 @@ const useListUsers = (id:string) => {
 
         socket.on('updateListUsers', updateListUsers);
 
+        socket.emit('getListUsersInRoom', id);
+
         return () => {
             socket.off('updateListUsers', updateListUsers);
             setUsers([])
