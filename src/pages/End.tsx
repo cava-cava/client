@@ -1,14 +1,16 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import styles from './End.module.scss'
+import {useSelector} from "react-redux";
+import {ApplicationState} from "../store";
+import UserHeader from "../components/Game/Header/UserHeader";
 
 const End = () => {
+    const user = useSelector((state: ApplicationState) => state.user.data);
+
     return (
         <div className={styles.End}>
-            <div>
-                <h1>Jujuonelove</h1>
-                <span>1er</span>
-            </div>
+            <UserHeader user={user} roomId={''}/>
             <div>
                 <h2>Le plus heureux/se</h2>
                 <p>
