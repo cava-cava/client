@@ -9,6 +9,7 @@ const useRoundEvent = () => {
 
         const winRoundEvent = () => {
             setWin(true)
+            setLose(false)
         }
 
         const loseRoundEvent = () => {

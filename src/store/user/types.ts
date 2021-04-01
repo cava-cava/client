@@ -9,6 +9,7 @@ export interface User {
   dirt: number
   answerGuess: string
   timerRunning: boolean
+  winBooty: boolean
 }
 
 export interface userState {

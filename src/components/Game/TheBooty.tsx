@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import styles from './TheBooty.module.scss'
 import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
@@ -10,8 +10,11 @@ type TheBootyProps = {
 }
 
 const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappiness = true}) => {
+    const [hasBooty, setHasBooty] = useState(false)
+
     const callback = () => {
-        socket.emit('endRoundEvent', roomId)
+        setHasBooty(true)
+        socket.emit('endRoundEvent', roomId, userKey)
     }
 
     const happinessClick = () => {
@@ -34,15 +37,20 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappin
 
     return (
         <div className={styles.TheBooty}>
-            <p>
-                Bravo ! Tu as gagné !<br/>
-                Tu peux choisir ta récompense.
-            </p>
-            <div className={styles.TheBootyButtons}>
-                {showHappiness && <button role="button" onClick={happinessClick}>+3% de bonheur</button>}
-                <button role="button" onClick={jokerClick}>1 carte Oh ça va</button>
-                <button role="button" onClick={dirtClick}>1 carte Cheh</button>
-            </div>
+            {!hasBooty ?
+                <>
+                    <p>
+                    Bravo ! Tu as gagné !<br/>
+                    Tu peux choisir ta récompense.
+                    </p>
+                    <div className={styles.TheBootyButtons}>
+                        {showHappiness && <button role="button" onClick={happinessClick}>+3% de bonheur</button>}
+                        <button role="button" onClick={jokerClick}>1 carte Oh ça va</button>
+                        <button role="button" onClick={dirtClick}>1 carte Cheh</button>
+                    </div>
+                </>
+                : <p>En attente des autres joueurs</p>
+            }
         </div>
     )
 }

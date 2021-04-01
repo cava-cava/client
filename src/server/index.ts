@@ -194,8 +194,12 @@ io.on("connect", (socket: ExtendedSocket) => {
         socket.to(room.id).emit('loseRoundEvent')
     });
 
-    socket.on('endRoundEvent', (roomId: string) => {
+    socket.on('endRoundEvent', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];
+
+        room.users[userId].winBooty = false
+        console.log(room.users.filter(user => user.winBooty).length)
+        if(room.users.filter(user => user.winBooty).length > 0) return
 
         if(room.game.triggerGuesses) {
             room.users.map(user => user.answerGuess = '')
