@@ -15,11 +15,10 @@ const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick, sty
         cards.push(<div className="card" style={{backgroundColor: color, top: (i * 10)+'px'}} key={i}></div>)
     }
 
-    return (
-        <div className={styles.TheDeck} onClick={deskClick} style={style}>
+    return number > 0 ?
+        (<div className={styles.TheDeck} onClick={deskClick} style={style}>
             {cards}
-        </div>
-    )
+        </div>) : null
 }
 
 export default TheDeck;
