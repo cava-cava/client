@@ -116,7 +116,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         sendPointsUser(room.users[playerId], pickedCard.Points)
         checkpoint(room, io)
         io.to(room.id).emit('pickedCard', pickedCard)
-        startTimer(room, io, 15)
+        startTimer(room, io, 5)
     });
 
     socket.on('sendJoker', (roomId: string, userId: number, playerId: number ) => {
@@ -133,13 +133,13 @@ io.on("connect", (socket: ExtendedSocket) => {
         if(!room.game.showAlternative) {
             room.game.showAlternative = true
         }else {
-            alternativeCard.Description = "OH CA VA"
+            alternativeCard.Description = "OH CA VA, JE M'EN BLC"
         }
         sendPointsUser(room.users[playerId], alternativeCard.Points)
         if(playerId !== userId) sendPointsUser(room.users[userId], alternativeCard.Points)
         checkpoint(room, io)
         io.to(room.id).emit('pickedCard', alternativeCard)
-        startTimer(room, io, 15)
+        startTimer(room, io, 5)
     })
 
     socket.on('sendDirt', (roomId: string, userId: number, playerId: number) => {
@@ -156,12 +156,12 @@ io.on("connect", (socket: ExtendedSocket) => {
         if(!room.game.showAlternative) {
             room.game.showAlternative = true
         }else {
-            alternativeCard.Description = "OH CHEH"
+            alternativeCard.Description = "OH CA VA PAS, ON SE MOQUE DE MOI :'("
         }
         sendPointsUser(room.users[playerId], alternativeCard.Points)
         checkpoint(room, io)
         io.to(room.id).emit('pickedCard', alternativeCard)
-        startTimer(room, io, 15)
+        startTimer(room, io, 5)
     })
 
     socket.on('endTimer', (roomId: string, userId: number) => {
