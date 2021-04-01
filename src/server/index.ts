@@ -198,7 +198,6 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         room.users[userId].winBooty = false
-        console.log(room.users.filter(user => user.winBooty).length)
         if(room.users.filter(user => user.winBooty).length > 0) return
 
         if(room.game.triggerGuesses) {
@@ -226,7 +225,7 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         room.users[userId].answerGuess = answer
     });
-
+    
     /**
      * Gets fired when a player leaves a room.
      */
