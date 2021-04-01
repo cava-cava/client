@@ -201,9 +201,11 @@ io.on("connect", (socket: ExtendedSocket) => {
         if(room.users.filter(user => user.winBooty).length > 0) return
 
         if(room.game.triggerGuesses) {
+            room.game.idStepGuess = -1
             room.users.map(user => user.answerGuess = '')
             room.game.triggerGuesses = false
             room.game.idUser = -1
+            if(++room.game.idGuesses < room.users.length) room.game.idGuesses = 0
         }
 
         if(room.game.triggerOMG) {
@@ -225,7 +227,7 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         room.users[userId].answerGuess = answer
     });
-    
+
     /**
      * Gets fired when a player leaves a room.
      */
