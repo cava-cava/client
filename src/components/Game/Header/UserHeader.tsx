@@ -10,14 +10,15 @@ type UserHeaderProps = {
 }
 
 const UserHeader: FunctionComponent<UserHeaderProps> = ({user, roomId}) => {
+    const style = {backgroundColor: user.color, borderColor: user.color}
     return (
         <div className={styles.UserHeader}>
-            <div className={styles.avatar}>
+            <div className={styles.avatar} style={style}>
                 <TheTimer userKey={user.key} roomId={roomId}>
                     <img src={avatar}/>
                 </TheTimer>
             </div>
-            <div className={styles.user}>
+            <div className={styles.user} style={style}>
                 <div>{user.name}</div>
                 <div>{user.ladder === 1 ?  `${user.ladder}er`: `${user.ladder}eme`}</div>
             </div>
