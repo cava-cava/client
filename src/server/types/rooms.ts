@@ -6,6 +6,7 @@ export interface Room {
     id: string,
     sockets: Socket[],
     users: User[],
+    usersDisconnected: User[],
     colors: string[],
     game: Game
 }

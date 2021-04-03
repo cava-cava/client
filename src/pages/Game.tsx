@@ -17,6 +17,8 @@ import TheGuess from "../components/Game/Guess/TheGuess";
 import {Guess} from "../server/types/guess";
 import {Card} from '../server/types/card'
 import TheCards from '../components/Cards/TheCards';
+import TheModal from "../components/Modal/TheModal";
+import useModal from "../hooks/useModal";
 
 const Game = () => {
     const dispatch = useDispatch();
@@ -28,12 +30,19 @@ const Game = () => {
     const [triggerGuesses, setTriggerGuesses] = useState(false);
     const [triggerOMG, setTriggerOMG] = useState(false);
     const [currentCard, setCurrentCard] = useState<Card>()
+    const { isShowing: isUsersDisconnected, toggle: toggleUsersDisconnected } = useModal();
+
 
     useRedirect();
 
     useEffect(() => {
         const getPlayer = (player: User) => {
             setPlayer(player)
+        }
+
+        const userDisconnected = (isDisconnected: boolean) => {
+            if(isDisconnected && !isUsersDisconnected) toggleUsersDisconnected()
+            else if(!isDisconnected && isUsersDisconnected) toggleUsersDisconnected()
         }
 
         const sendGuess = (guess: Guess) => {
@@ -55,6 +64,7 @@ const Game = () => {
         }
 
         socket.on('getPlayer', getPlayer);
+        socket.on('userDisconnected', userDisconnected);
         socket.on('sendGuess', sendGuess);
         socket.on('startRoundEvent', eventRound);
         socket.on('endRoundEvent', eventRound);
@@ -63,6 +73,7 @@ const Game = () => {
 
         return () => {
             socket.off('getPlayer', getPlayer);
+            socket.on('userDisconnected', userDisconnected);
             socket.off('sendGuess', sendGuess);
             socket.off('startRoundEvent', eventRound);
             socket.off('endRoundEvent', eventRound);
@@ -121,6 +132,14 @@ const Game = () => {
             }
             { (triggerGuesses && !triggerOMG) && <TheGuess roomId={id} question={guess?.question} users={users} userKey={user.key}/> }
             { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={id} userKey={user.key}/> }
+            <TheModal
+                isShowing={isUsersDisconnected}
+                hide={toggleUsersDisconnected}
+                title="Quelqu’un est déconnecté"
+                close={false}
+            >
+                Veuillez patienter
+            </TheModal>
         </div>
     );
 }
