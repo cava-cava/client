@@ -6,6 +6,7 @@ import styles from "./Rooms.module.scss"
 import {socket} from "../socketClient";
 import useError from "../hooks/useError";
 import useRedirect from "../hooks/useRedirect";
+import useLeaveRoom from "../hooks/useLeaveRoom";
 
 const Rooms = () => {
     const dispatch = useDispatch();
@@ -15,10 +16,7 @@ const Rooms = () => {
     const error = useError();
 
     useRedirect();
-
-    useEffect(() => {
-        socket.emit("leaveRoom", () => {console.log(`leaveRoom`);});
-    }, []);
+    useLeaveRoom();
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
