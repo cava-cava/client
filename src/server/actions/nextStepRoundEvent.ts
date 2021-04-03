@@ -3,6 +3,8 @@ import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {startTimer} from "./startTimer";
 import {ExtendedSocket} from "../types/socket";
+import {nextRound} from "./nextRound";
+import {endRoundEvent} from "./endRoundEvent";
 
 /**
  * Get fired next step round event for game room
@@ -19,14 +21,20 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
         }
         else {
             room.users.map(user => {
-                console.log(user)
-                if(room.users === user.answersGuess) {
+                const goodAnswers = user.answersGuess.filter((userAnswerGuess, index) => userAnswerGuess.answerGuess === room.users[index].answerGuess)
+                if(room.users.length === goodAnswers.length) {
                     user.winBooty = true
                     io.to(user.id).emit('winRoundEvent')
-                } else {
-                    io.to(user.id).emit('loseRoundEvent')
                 }
             })
+            const loseBootyUsers = room.users.filter(user => !user.winBooty)
+            if(loseBootyUsers.length === room.users.length) {
+                endRoundEvent(room, io)
+            }else {
+                loseBootyUsers.map(user => {
+                    io.to(user.id).emit('loseRoundEvent')
+                })
+            }
         }
     }
 }

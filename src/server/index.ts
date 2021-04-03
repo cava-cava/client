@@ -17,6 +17,7 @@ import {startTimer} from "./actions/startTimer";
 import {sendPointsUser} from "./actions/sendPointsUser";
 import {Card} from "./types/card";
 import {User} from "../store/user/types";
+import {endRoundEvent} from "./actions/endRoundEvent";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -51,8 +52,7 @@ io.on("connect", (socket: ExtendedSocket) => {
             if(room.game.isStart) socket.emit('error', "La room est en plein jeu");
             else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, io, socket, room);
             else socket.emit('error', "La room est complète");
-        }
-        else socket.emit('error', "La room n'existe pas");
+        } else socket.emit('error', "La room n'existe pas");
         callback();
     });
 
@@ -205,27 +205,8 @@ io.on("connect", (socket: ExtendedSocket) => {
 
     socket.on('endRoundEvent', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];
-
         room.users[userId].winBooty = false
-        if(room.users.filter(user => user.winBooty).length > 0) return
-
-        if(room.game.triggerGuesses) {
-            room.game.idStepGuess = -1
-            room.users.map(user => user.answerGuess = '')
-            room.game.triggerGuesses = false
-            room.game.idUser = -1
-            if(++room.game.idGuesses < room.users.length) room.game.idGuesses = 0
-        }
-
-        if(room.game.triggerOMG) {
-            room.game.triggerOMG = false
-            //Re-initialize OMG for the game
-            room.game.idOMG = initIdOMG(room)
-        }
-
-        io.to(room.id).emit('endRoundEvent')
-
-        nextRound(room, io)
+        endRoundEvent(room, io)
     });
 
     /**
