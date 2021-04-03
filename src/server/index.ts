@@ -16,6 +16,7 @@ import {endTimer} from "./actions/endTimer";
 import {startTimer} from "./actions/startTimer";
 import {sendPointsUser} from "./actions/sendPointsUser";
 import {Card} from "./types/card";
+import {User} from "../store/user/types";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -187,9 +188,17 @@ io.on("connect", (socket: ExtendedSocket) => {
         nextRound(room, io)
     })
 
-    socket.on('winRoundEvent', (roomId: string) => {
+    socket.on('pushAnswersGuess', (roomId: string, userId: number, user: User) => {
         const room:Room = rooms[roomId];
 
+        room.users[userId].answersGuess.push(user)
+    })
+
+    socket.on('winRoundEvent', (roomId: string, userId: number) => {
+        const room:Room = rooms[roomId];
+
+        if(room.users.filter(user => user.winBooty).length > 0) return
+        room.users[userId].winBooty = true
         socket.emit('winRoundEvent')
         socket.to(room.id).emit('loseRoundEvent')
     });

@@ -1,5 +1,4 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from 'react';
-import {colors} from "../../../mixins/color";
 import {socket} from "../../../socketClient";
 
 type QuestionGuessProps = {

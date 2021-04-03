@@ -13,6 +13,7 @@ export const initialState: userState = {
     joker: 2,
     dirt: 2,
     answerGuess: '',
+    answersGuess: [],
     timerRunning: false,
     winBooty: false
   },

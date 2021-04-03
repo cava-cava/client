@@ -8,6 +8,7 @@ export interface User {
   joker: number
   dirt: number
   answerGuess: string
+  answersGuess: User[]
   timerRunning: boolean
   winBooty: boolean
 }

@@ -1,7 +1,8 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import styles from './TheBooty.module.scss'
 import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
+import {shuffle} from "../../mixins/shuffle";
 
 type TheBootyProps = {
     roomId: string
@@ -11,6 +12,10 @@ type TheBootyProps = {
 
 const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappiness = true}) => {
     const [hasBooty, setHasBooty] = useState(false)
+
+    useEffect(() => {
+        socket.emit('endRoundEvent', roomId, userKey)
+    }, []);
 
     const callback = () => {
         setHasBooty(true)

@@ -12,7 +12,7 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
     const { win, lose } = useRoundEvent();
 
     const handleClick = () => {
-        socket.emit('winRoundEvent', roomId)
+        socket.emit('winRoundEvent', roomId, userKey)
     }
 
     return (
