@@ -10,6 +10,7 @@ export function createRoom(rooms: Rooms) {
         id: nanoid(5),
         sockets: [],
         users: [],
+        usersDisconnected: [],
         colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange'],
         game: {
             points: 100,

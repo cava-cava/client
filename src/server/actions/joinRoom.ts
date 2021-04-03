@@ -11,7 +11,6 @@ import {Server} from "socket.io";
  * @param room An object that represents a room from the `rooms` instance variable object
  */
 export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room:Room) => {
-    socket.key = -1
     socket.username = username
     const color = room.colors[0]
     socket.color = color

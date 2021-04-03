@@ -235,6 +235,8 @@ io.on("connect", (socket: ExtendedSocket) => {
 
     socket.on("disconnect", () => {
         leaveRooms(socket,rooms);
+        socket.emit('redirect', `/rooms/`);
+        socket.emit('error', "Tu t'es déconnecté");
         console.log(`disconnect ${socket.id}`);
     });
 });

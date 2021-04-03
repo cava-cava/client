@@ -17,9 +17,17 @@ export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
             room.sockets = room.sockets.filter((item) => item !== socket);
             //remove color and add to room object
             room.colors.push(socket.color)
+            // save disconnected user if game is start
+            if(room.game.isStart) {
+                const usersDisconnected = room.users.filter((user) => user.id === socket.id);
+                room.usersDisconnected = room.usersDisconnected.concat(usersDisconnected)
+                console.log(room.usersDisconnected)
+                if(room.usersDisconnected.length > 0) socket.to(room.id).emit('userDisconnected', true);
+            }
             // remove the user from the room object
             room.users = room.users.filter((user) => user.id !== socket.id);
-            socket.to(room.id).emit('updateListUsers', room.users);
+
+            if(!room.game.isStart) socket.to(room.id).emit('updateListUsers', room.users);
         }
         // Prepare to delete any rooms that are now empty
         if (room.sockets.length == 0) {
