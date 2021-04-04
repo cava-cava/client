@@ -20,10 +20,16 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
             startTimer(room, io, 10)
         }
         else {
-            room.users.map(user => {
-                const goodAnswers = user.answersGuess.filter((userAnswerGuess, index) => userAnswerGuess.answerGuess === room.users[index].answerGuess)
-                if(room.users.length === goodAnswers.length) {
-                    user.winBooty = true
+            room.users.map((user) => {
+                let winBooty = true
+                user.answersGuess.forEach((userAnswer, index) => {
+                    if(userAnswer.answerGuess !== room.users[index].answerGuess) {
+                        winBooty = false
+                        return;
+                    }
+                })
+                if(winBooty) {
+                    user.winBooty = winBooty
                     io.to(user.id).emit('winRoundEvent')
                 }
             })
