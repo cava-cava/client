@@ -26,13 +26,10 @@ export const joinRoomGame = (username:string, io:Server, socket:ExtendedSocket, 
         console.log(`${socket.username}[${socket.id}] Re Joined ${room.id}`);
         socket.emit('redirect', `/game/${room.id}`);
         if(room.usersDisconnected.length <= 0) {
-            console.log('full')
             room.users.sort((a, b) => (a.key > b.key) ? 1 : -1)
             socket.to(room.id).emit('updateListUsers', room.users);
             socket.to(room.id).emit('userDisconnected', false);
             nextRound(room, io)
-        } else {
-            socket.to(room.id).emit('userDisconnected', true);
         }
     }else socket.emit('error', "La room est en plein jeu");
 };
