@@ -9,7 +9,7 @@ const HelpHeader: FunctionComponent = () => {
 
     return (
         <div className={styles.HelpHeader}>
-            <button role="button" className={styles.icon} onClick={() => toggleHelp}>
+            <button role="button" className={styles.icon} onClick={toggleHelp}>
                 <img src={helpIcon}/>
             </button>
             <TheModal

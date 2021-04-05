@@ -3,13 +3,12 @@ import {createPortal} from "react-dom";
 import styles from './TheModal.module.scss'
 
 type TheModalProps = {
-    isShowing: boolean,
-    hide: () => void,
-    title: string,
-    close?: boolean
+    isShowing: boolean
+    hide: () => void
+    title: string
 }
 
-const TheModal: FunctionComponent<TheModalProps> = ({isShowing, hide, title, close= true, ...props}) =>
+const TheModal: FunctionComponent<TheModalProps> = ({isShowing, hide, title, ...props}) =>
     isShowing
         ? createPortal(
         <>
@@ -17,8 +16,7 @@ const TheModal: FunctionComponent<TheModalProps> = ({isShowing, hide, title, clo
                 <div>
                     <div className={styles.TheModalHeader}>
                         <h3>{title}</h3>
-                        {close && <button type="button" onClick={hide}><span>&times;</span></button>}
-
+                        <button type="button" onClick={hide}><span>&times;</span></button>
                     </div>
                     <div className={styles.TheModalBody}>{props.children}</div>
                 </div>
