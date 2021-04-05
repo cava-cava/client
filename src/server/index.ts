@@ -59,6 +59,12 @@ io.on("connect", (socket: ExtendedSocket) => {
         callback();
     });
 
+    socket.on('userDisconnected', (roomId:string) => {
+        const room: Room = rooms[roomId];
+        if (room.usersDisconnected.length > 0) socket.emit('userDisconnected', true);
+        else socket.emit('userDisconnected', false);
+    })
+
     socket.on('getListUsersInRoom', (roomId:string) => {
         const room:Room = rooms[roomId];
         if(room) {
