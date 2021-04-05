@@ -9,7 +9,7 @@ const SettingsHeader: FunctionComponent = () => {
 
     return (
         <div className={styles.SettingsHeader}>
-            <button role="button" className={styles.icon} onClick={toggleSettings}>
+            <button role="button" className={styles.icon} onClick={() => toggleSettings}>
                 <img src={settingsIcon}/>
             </button>
             <TheModal
