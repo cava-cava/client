@@ -21,7 +21,6 @@ export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
             if(room.game.isStart) {
                 const usersDisconnected = room.users.filter((user) => user.id === socket.id);
                 room.usersDisconnected = room.usersDisconnected.concat(usersDisconnected)
-                console.log(room.usersDisconnected)
                 if(room.usersDisconnected.length > 0) socket.to(room.id).emit('userDisconnected', true);
             }
             // remove the user from the room object

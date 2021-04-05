@@ -41,8 +41,7 @@ const Game = () => {
         }
 
         const userDisconnected = (isDisconnected: boolean) => {
-            if(isDisconnected && !isUsersDisconnected) toggleUsersDisconnected()
-            else if(!isDisconnected && isUsersDisconnected) toggleUsersDisconnected()
+            toggleUsersDisconnected(isDisconnected)
         }
 
         const sendGuess = (guess: Guess) => {

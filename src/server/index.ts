@@ -17,6 +17,7 @@ import {startTimer} from "./actions/startTimer";
 import {sendPointsUser} from "./actions/sendPointsUser";
 import {Card} from "./types/card";
 import {User} from "../store/user/types";
+import {joinRoomGame} from "./actions/joinRoomGame";
 import {endRoundEvent} from "./actions/endRoundEvent";
 
 const app = express();
@@ -49,7 +50,9 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('joinRoom', (username:string, roomId:string, callback) => {
         const room:Room = rooms[roomId];
         if(room) {
-            if(room.game.isStart) socket.emit('error', "La room est en plein jeu");
+            if(room.game.isStart) {
+                joinRoomGame(username, io, socket, room)
+            }
             else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, io, socket, room);
             else socket.emit('error', "La room est complète");
         } else socket.emit('error', "La room n'existe pas");
