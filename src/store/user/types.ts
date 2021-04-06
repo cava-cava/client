@@ -1,4 +1,5 @@
 import {AnswerEvent} from "../../server/types/answerEvent";
+import {StatisticsGame} from "../../server/types/statisticsGame";
 
 export interface User {
   key: number
@@ -10,7 +11,8 @@ export interface User {
   joker: number
   dirt: number
   winEvent: boolean
-  answerEvent: AnswerEvent
+  answerEvent: AnswerEvent,
+  statisticsGame: StatisticsGame
 }
 
 export interface userState {

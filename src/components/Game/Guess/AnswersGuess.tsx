@@ -41,7 +41,7 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({roomId, userKey, us
     return show ?
         <div>
             <p style={{color: users[stepEvent].color}}>Reponse de {users[stepEvent].name } ?</p>
-            {answersUser?.map((user, index) => <div key={index}><button onClick={() => handleClick(user.key)}>{user.answerGuess}</button></div>)}
+            {answersUser?.map((user, index) => <div key={index}><button onClick={() => handleClick(user.key)}>{user.answerEvent.myAnswer}</button></div>)}
         </div>
         : <p>En attente du timer...</p>
 }

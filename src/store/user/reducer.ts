@@ -16,6 +16,16 @@ export const initialState: userState = {
     answerEvent: {
       myAnswer: '',
       myAnswersUsers: []
+    },
+    statisticsGame: {
+      bonus: 0,
+      malus: 0,
+      useJoker: 0,
+      useJokerForMe: 0,
+      useJokerForOther: 0,
+      useDirt: 0,
+      guessWon: 0,
+      omgWon: 0
     }
   },
   errors: undefined,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {RouteParams} from "../types/params";
 import DidYouKnow from "../components/DidYouKnow";
@@ -14,8 +14,21 @@ const Room = () => {
     const {id}: RouteParams = useParams();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const users = useListUsers(id);
+    const [loading, setLoading] = useState<boolean>(false)
 
     useRedirect();
+
+    useEffect(() => {
+        const loadingEmit = (loading: boolean) => {
+            setLoading(loading)
+        }
+
+        socket.on('loading', loadingEmit);
+        return () => {
+            socket.off('loading', loadingEmit);
+            setLoading(false);
+        };
+    }, [])
 
     const isHost = () => {
         return users.length > 0 && users[0].id === user.id
@@ -32,14 +45,15 @@ const Room = () => {
             <h1>Room {id}</h1>
             <ListUsers users={users}/>
             <DidYouKnow/>
-            {users.length >= 4 && users.length <= 6 ?
+            {loading && <div>Loading...</div>}
+            {!loading && users.length >= 4 && users.length <= 6 ?
                 isHost() ? <div>
                             <button onClick={startGame}>Start game</button>
                            </div>
                     : <div>En attentes de l'hôte...</div>
                 : <div>En attentes d'autres joueurs...</div>
             }
-            <Link to="/rooms">Quitter</Link>
+            {!loading && <Link to="/rooms">Quitter</Link>}
         </div>
     );
 }
