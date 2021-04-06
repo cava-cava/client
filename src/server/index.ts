@@ -6,12 +6,7 @@ import { joinRoom } from "./actions/joinRoom";
 import {createRoom} from "./actions/createRoom";
 import {leaveRooms} from "./actions/leaveRooms";
 import {ExtendedSocket} from "./types/socket";
-import axios from "axios";
-import {initIdOMG} from "./actions/initOMG";
-import {shuffle} from "../mixins/shuffle";
-import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
-import {checkpoint} from "./actions/checkpoint";
 import {endTimer} from "./actions/endTimer";
 import {sendPointsUser} from "./actions/sendPointsUser";
 import {Card} from "./types/card";
@@ -19,6 +14,7 @@ import {User} from "../store/user/types";
 import {joinRoomGame} from "./actions/joinRoomGame";
 import {endRoundEvent} from "./actions/endRoundEvent";
 import {sendCard} from "./actions/sendCard";
+import {startGame} from "./actions/startGame";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -93,31 +89,9 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets fired when a host start a game in room.
      */
-    socket.on('startGame', async (roomId: string) => {
+    socket.on('startGame', (roomId: string) => {
         const room:Room = rooms[roomId];
-
-        //Initialize cards for the game
-        await axios.get('https://happiness-strapi.herokuapp.com/cards').then(({data}) => {
-            room.game.cards = shuffle(data)
-        })
-
-        //Initialize guesses for the game
-        await axios.get('https://happiness-strapi.herokuapp.com/guesses').then(({data}) => {
-            room.game.guesses = shuffle(data)
-        })
-
-        if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
-
-        //Init Key of users
-        room.users.map((user,index) => room.users[index].key = index)
-
-        //Initialize OMG for the game
-        room.game.idOMG = initIdOMG(room)
-
-        room.game.isStart = true
-        io.to(room.id).emit('redirect', `/game/${roomId}`);
-        checkpoint(room, io)
-        getPlayer(room, io)
+        startGame(room, io)
     });
 
     /**
@@ -136,7 +110,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendJoker', (roomId: string, userId: number, playerId: number ) => {
         const room: Room = rooms[roomId];
 
-        if (!room.timer.isRunning || !room.game.cards) return;
+        if (!room.timer.isRunning || !room.game.cards || room.users[userId].joker <= 0) return;
 
         if(--room.users[userId].joker < 0) room.users[userId].joker = 0
 
@@ -156,7 +130,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendDirt', (roomId: string, userId: number, playerId: number) => {
         const room: Room = rooms[roomId];
 
-        if (!room.timer.isRunning || !room.game.cards) return;
+        if (!room.timer.isRunning || !room.game.cards || room.users[userId].dirt <= 0) return;
 
         if(--room.users[userId].dirt < 0) room.users[userId].dirt = 0
 
