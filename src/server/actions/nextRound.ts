@@ -3,7 +3,6 @@ import {getPlayer} from "./getPlayer";
 import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {Guess} from "../types/guess";
-import {checkGameOver} from "./gameOver";
 import {startTimer} from "./startTimer";
 
 /**

@@ -14,7 +14,6 @@ export const initialState: userState = {
     dirt: 2,
     answerGuess: '',
     answersGuess: [],
-    timerRunning: false,
     winBooty: false
   },
   errors: undefined,

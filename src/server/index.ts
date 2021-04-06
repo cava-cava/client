@@ -13,7 +13,6 @@ import {getPlayer} from "./actions/getPlayer";
 import {nextRound} from "./actions/nextRound";
 import {checkpoint} from "./actions/checkpoint";
 import {endTimer} from "./actions/endTimer";
-import {startTimer} from "./actions/startTimer";
 import {sendPointsUser} from "./actions/sendPointsUser";
 import {Card} from "./types/card";
 import {User} from "../store/user/types";
@@ -127,7 +126,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('deckClicked', (roomId: string, playerId: number) => {
         const room: Room = rooms[roomId];
 
-        if (room.game.timerRunning || !room.game.cards) return;
+        if (room.timer.isRunning || !room.game.cards) return;
         if (++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
         room.game.showAlternative = false
         const pickedCard: Card = room.game.cards[room.game.idCards];
@@ -137,7 +136,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendJoker', (roomId: string, userId: number, playerId: number ) => {
         const room: Room = rooms[roomId];
 
-        if (!room.game.timerRunning || !room.game.cards) return;
+        if (!room.timer.isRunning || !room.game.cards) return;
 
         if(--room.users[userId].joker < 0) room.users[userId].joker = 0
 
@@ -157,7 +156,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendDirt', (roomId: string, userId: number, playerId: number) => {
         const room: Room = rooms[roomId];
 
-        if (!room.game.timerRunning || !room.game.cards) return;
+        if (!room.timer.isRunning || !room.game.cards) return;
 
         if(--room.users[userId].dirt < 0) room.users[userId].dirt = 0
 
@@ -172,16 +171,6 @@ io.on("connect", (socket: ExtendedSocket) => {
         }
         sendCard(playerId, alternativeCard, room, io)
     })
-
-    socket.on('endTimer', (roomId: string, userId: number) => {
-        const room:Room = rooms[roomId];
-        if(!room && userId !== 0 ) {
-            //isHost
-            return
-        }
-        endTimer(room, io, userId)
-    })
-
 
     socket.on('nextRound', (roomId: string) => {
         const room:Room = rooms[roomId];
@@ -217,6 +206,9 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         room.users[userId].answerGuess = answer
+
+        //check if all Users have answer
+        if(room.users.filter(user => !user.answerGuess || user.answerGuess.length === 0).length === 0) endTimer(room, io)
     });
 
     /**
