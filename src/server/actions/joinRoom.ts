@@ -28,6 +28,16 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         answerEvent: {
             myAnswer: '',
             myAnswersUsers: []
+        },
+        statisticsGame: {
+            bonus: 0,
+            malus: 0,
+            useJoker: 0,
+            useJokerForMe: 0,
+            useJokerForOther: 0,
+            useDirt: 0,
+            guessWon: 0,
+            omgWon: 0
         }
     };
     room.users.push(user);

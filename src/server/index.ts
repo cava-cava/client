@@ -9,12 +9,13 @@ import {ExtendedSocket} from "./types/socket";
 import {nextRound} from "./actions/nextRound";
 import {endTimer} from "./actions/endTimer";
 import {sendPointsUser} from "./actions/sendPointsUser";
-import {Card} from "./types/card";
 import {User} from "../store/user/types";
 import {joinRoomGame} from "./actions/joinRoomGame";
 import {endRoundEvent} from "./actions/endRoundEvent";
-import {sendCard} from "./actions/sendCard";
 import {startGame} from "./actions/startGame";
+import {getCard} from "./actions/getCard";
+import {sendJoker} from "./actions/sendJoker";
+import {sendDirt} from "./actions/sendDirt";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -68,22 +69,22 @@ io.on("connect", (socket: ExtendedSocket) => {
         }
     });
 
-    socket.on('addJoker', (roomId, userId) => {
+    socket.on('addJoker', (roomId:string, userKey:number) => {
         const room:Room = rooms[roomId];
 
-        room.users[userId].joker++;
+        room.users[userKey].joker++;
     });
 
-    socket.on('addDirt', (roomId, userId) => {
+    socket.on('addDirt', (roomId:string, userKey:number) => {
         const room:Room = rooms[roomId];
 
-        room.users[userId].dirt++;
+        room.users[userKey].dirt++;
     });
 
-    socket.on('sendPointsUser', (roomId, userId, points) => {
+    socket.on('sendPointsUser', (roomId:string, userKey:number, points:number) => {
         const room:Room = rooms[roomId];
 
-        sendPointsUser(room.users[userId], points)
+        sendPointsUser(room.users[userKey], points)
     });
 
     /**
@@ -97,89 +98,56 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets random card on click on Deck
      */
-    socket.on('deckClicked', (roomId: string, playerId: number) => {
+    socket.on('deckClicked', (roomId: string, playerKey: number) => {
         const room: Room = rooms[roomId];
 
-        if (room.timer.isRunning || !room.game.cards) return;
-        if (++room.game.cardGame.id >= room.game.cards.length) room.game.cardGame.id = 0
-        room.game.cardGame.showAlternative = false
-        const pickedCard: Card = room.game.cards[room.game.cardGame.id];
-        sendCard(playerId, pickedCard, room, io)
+        getCard(playerKey, room, io)
     });
 
-    socket.on('sendJoker', (roomId: string, userId: number, playerId: number ) => {
+    socket.on('sendJoker', (roomId: string, userKey: number, playerKey: number) => {
         const room: Room = rooms[roomId];
-
-        if (!room.timer.isRunning || !room.game.cards || room.users[userId].joker <= 0) return;
-
-        if(--room.users[userId].joker < 0) room.users[userId].joker = 0
-
-        const pickedCard: Card = room.game.cards[room.game.cardGame.id];
-        let alternativeCard: Card = pickedCard.Alternative[0];
-        alternativeCard.Points = Math.abs(pickedCard.Points)
-
-        if(!room.game.cardGame.showAlternative) {
-            room.game.cardGame.showAlternative = true
-        }else {
-            alternativeCard.Description = "OH CA VA, JE M'EN BLC"
-        }
-        if(playerId !== userId) sendPointsUser(room.users[userId], alternativeCard.Points)
-        sendCard(playerId, alternativeCard, room, io)
+        sendJoker(userKey, playerKey, room, io);
     })
 
-    socket.on('sendDirt', (roomId: string, userId: number, playerId: number) => {
+    socket.on('sendDirt', (roomId: string, userKey: number, playerKey: number) => {
         const room: Room = rooms[roomId];
-
-        if (!room.timer.isRunning || !room.game.cards || room.users[userId].dirt <= 0) return;
-
-        if(--room.users[userId].dirt < 0) room.users[userId].dirt = 0
-
-        const pickedCard: Card = room.game.cards[room.game.cardGame.id];
-        let alternativeCard: Card = pickedCard.Alternative[0];
-        alternativeCard.Points = -Math.abs(pickedCard.Points)
-
-        if(!room.game.cardGame.showAlternative) {
-            room.game.cardGame.showAlternative = true
-        }else {
-            alternativeCard.Description = "OH CA VA PAS, ON SE MOQUE DE MOI :'("
-        }
-        sendCard(playerId, alternativeCard, room, io)
+        sendDirt(userKey, playerKey, room, io);
     })
 
     socket.on('nextRound', (roomId: string) => {
         const room:Room = rooms[roomId];
-
         nextRound(room, io)
     })
 
-    socket.on('pushAnswersGuess', (roomId: string, userId: number, user: User) => {
+    socket.on('pushAnswersGuess', (roomId: string, userKey: number, user:User) => {
         const room:Room = rooms[roomId];
-
-        room.users[userId].answerEvent.myAnswersUsers.push(user)
+        room.users[userKey].answerEvent.myAnswersUsers.push(user)
     })
 
-    socket.on('winRoundEvent', (roomId: string, userId: number) => {
+    socket.on('winRoundEvent', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
 
         if(room.users.filter(user => user.winEvent).length > 0) return
-        room.users[userId].winEvent = true
+        room.users[userKey].winEvent = true
+        //add statistics winOmg
+        ++room.users[userKey].statisticsGame.omgWon
         socket.emit('winRoundEvent')
         socket.to(room.id).emit('loseRoundEvent')
     });
 
-    socket.on('endRoundEvent', (roomId: string, userId: number) => {
+    socket.on('endRoundEvent', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
-        room.users[userId].winEvent = false
+        room.users[userKey].winEvent = false
         endRoundEvent(room, io)
     });
 
     /**
      *
      */
-    socket.on('sendAnswerGuess', (roomId: string, userId: number, answer: string) => {
+    socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: string) => {
         const room:Room = rooms[roomId];
 
-        room.users[userId].answerEvent.myAnswer = answer
+        room.users[userKey].answerEvent.myAnswer = answer
 
         //check if all Users have answer
         if(room.users.filter(user => !user.answerEvent.myAnswer || user.answerEvent.myAnswer.length === 0).length === 0) endTimer(room, io)

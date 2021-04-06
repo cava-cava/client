@@ -20,6 +20,8 @@ export async function startGame(room: Room, io:Server) {
         room.game.cards = shuffle(data)
     })
 
+    if(room.game.cards && room.game.cards.length > 0) room.game.cardGame.id = 0
+
     //Initialize guesses for the game
     await axios.get('https://happiness-strapi.herokuapp.com/guesses').then(({data}) => {
         room.game.guesses = shuffle(data)

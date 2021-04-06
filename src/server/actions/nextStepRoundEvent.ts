@@ -29,6 +29,8 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
                 })
                 if(winEvent) {
                     user.winEvent = winEvent
+                    //add statistics guessWon
+                    ++user.statisticsGame.guessWon
                     io.to(user.id).emit('winRoundEvent')
                 }
             })

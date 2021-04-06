@@ -2,7 +2,6 @@ import {Room} from "../types/rooms";
 import {getPlayer} from "./getPlayer";
 import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
-import {Guess} from "../types/guess";
 import {startTimer} from "./startTimer";
 
 /**
@@ -22,6 +21,10 @@ export function nextRound(room: Room, io:Server) {
             room.game.omgEvent.trigger = false
             room.game.guessEvent.guess = (room.game.guesses && room.game.guesses.length > 0) ? room.game.guesses[room.game.guessEvent.id] : undefined
             io.to(room.id).emit('sendGuess', room.game.guessEvent.guess)
+        } else {
+            // next Card
+            if (room.game.cards && ++room.game.cardGame.id >= room.game.cards.length) room.game.cardGame.id = 0
+            room.game.cardGame.showAlternative = false
         }
         getPlayer(room, io)
     }
