@@ -101,9 +101,9 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room: Room = rooms[roomId];
 
         if (room.timer.isRunning || !room.game.cards) return;
-        if (++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
-        room.game.showAlternative = false
-        const pickedCard: Card = room.game.cards[room.game.idCards];
+        if (++room.game.cardGame.id >= room.game.cards.length) room.game.cardGame.id = 0
+        room.game.cardGame.showAlternative = false
+        const pickedCard: Card = room.game.cards[room.game.cardGame.id];
         sendCard(playerId, pickedCard, room, io)
     });
 
@@ -114,12 +114,12 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         if(--room.users[userId].joker < 0) room.users[userId].joker = 0
 
-        const pickedCard: Card = room.game.cards[room.game.idCards];
+        const pickedCard: Card = room.game.cards[room.game.cardGame.id];
         let alternativeCard: Card = pickedCard.Alternative[0];
         alternativeCard.Points = Math.abs(pickedCard.Points)
 
-        if(!room.game.showAlternative) {
-            room.game.showAlternative = true
+        if(!room.game.cardGame.showAlternative) {
+            room.game.cardGame.showAlternative = true
         }else {
             alternativeCard.Description = "OH CA VA, JE M'EN BLC"
         }
@@ -134,12 +134,12 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         if(--room.users[userId].dirt < 0) room.users[userId].dirt = 0
 
-        const pickedCard: Card = room.game.cards[room.game.idCards];
+        const pickedCard: Card = room.game.cards[room.game.cardGame.id];
         let alternativeCard: Card = pickedCard.Alternative[0];
         alternativeCard.Points = -Math.abs(pickedCard.Points)
 
-        if(!room.game.showAlternative) {
-            room.game.showAlternative = true
+        if(!room.game.cardGame.showAlternative) {
+            room.game.cardGame.showAlternative = true
         }else {
             alternativeCard.Description = "OH CA VA PAS, ON SE MOQUE DE MOI :'("
         }
@@ -155,21 +155,21 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('pushAnswersGuess', (roomId: string, userId: number, user: User) => {
         const room:Room = rooms[roomId];
 
-        room.users[userId].answersGuess.push(user)
+        room.users[userId].answerEvent.myAnswersUsers.push(user)
     })
 
     socket.on('winRoundEvent', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];
 
-        if(room.users.filter(user => user.winBooty).length > 0) return
-        room.users[userId].winBooty = true
+        if(room.users.filter(user => user.winEvent).length > 0) return
+        room.users[userId].winEvent = true
         socket.emit('winRoundEvent')
         socket.to(room.id).emit('loseRoundEvent')
     });
 
     socket.on('endRoundEvent', (roomId: string, userId: number) => {
         const room:Room = rooms[roomId];
-        room.users[userId].winBooty = false
+        room.users[userId].winEvent = false
         endRoundEvent(room, io)
     });
 
@@ -179,10 +179,10 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendAnswerGuess', (roomId: string, userId: number, answer: string) => {
         const room:Room = rooms[roomId];
 
-        room.users[userId].answerGuess = answer
+        room.users[userId].answerEvent.myAnswer = answer
 
         //check if all Users have answer
-        if(room.users.filter(user => !user.answerGuess || user.answerGuess.length === 0).length === 0) endTimer(room, io)
+        if(room.users.filter(user => !user.answerEvent.myAnswer || user.answerEvent.myAnswer.length === 0).length === 0) endTimer(room, io)
     });
 
     /**

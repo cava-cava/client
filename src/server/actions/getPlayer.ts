@@ -7,5 +7,5 @@ import {Server} from "socket.io";
  * @param io A connected socket.io server
  */
 export function getPlayer(room: Room, io:Server) {
-    io.to(room.id).emit('getPlayer', room.users[room.game.idUser]);
+    io.to(room.id).emit('getPlayer', room.users[room.game.playerGame.id]);
 }

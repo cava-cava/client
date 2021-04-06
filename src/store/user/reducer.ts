@@ -12,9 +12,11 @@ export const initialState: userState = {
     points: 0,
     joker: 2,
     dirt: 2,
-    answerGuess: '',
-    answersGuess: [],
-    winBooty: false
+    winEvent: false,
+    answerEvent: {
+      myAnswer: '',
+      myAnswersUsers: []
+    }
   },
   errors: undefined,
   loading: false

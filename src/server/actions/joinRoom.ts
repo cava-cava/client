@@ -24,10 +24,11 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         points: 0,
         joker: 2,
         dirt: 2,
-        answerGuess: '',
-        answersGuess: [],
-        timerRunning: false,
-        winBooty: false
+        winEvent: false,
+        answerEvent: {
+            myAnswer: '',
+            myAnswersUsers: []
+        }
     };
     room.users.push(user);
     room.sockets.push(socket);

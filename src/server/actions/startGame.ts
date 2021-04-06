@@ -13,7 +13,8 @@ import {getPlayer} from "./getPlayer";
  */
 export async function startGame(room: Room, io:Server) {
     if(room.game.isStart) return;
-
+    room.game.isLoading = true
+    io.to(room.id).emit('loading', room.game.isLoading);
     //Initialize cards for the game
     await axios.get('https://happiness-strapi.herokuapp.com/cards').then(({data}) => {
         room.game.cards = shuffle(data)
@@ -24,15 +25,17 @@ export async function startGame(room: Room, io:Server) {
         room.game.guesses = shuffle(data)
     })
 
-    if(room.game.guesses && room.game.guesses.length > 0) room.game.idGuesses = 0
+    if(room.game.guesses && room.game.guesses.length > 0) room.game.guessEvent.id = 0
 
     //Init Key of users
     room.users.map((user,index) => room.users[index].key = index)
 
     //Initialize OMG for the game
-    room.game.idOMG = initIdOMG(room)
+    room.game.omgEvent.id = initIdOMG(room)
 
+    room.game.isLoading = false
     room.game.isStart = true
+    io.to(room.id).emit('loading', room.game.isLoading);
     io.to(room.id).emit('redirect', `/game/${room.id}`);
     checkpoint(room, io)
     getPlayer(room, io)

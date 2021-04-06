@@ -15,15 +15,24 @@ export function createRoom(rooms: Rooms) {
         game: {
             points: 100,
             round: 0,
-            idUser: 0,
-            idCards: -1,
-            showAlternative: false,
-            idGuesses: 0,
-            idOMG: 0,
-            triggerGuesses: false,
-            idStepGuess: -1,
-            triggerOMG: false,
-            isStart: false
+            playerGame: {
+                id: 0
+            },
+            cardGame: {
+                id: -1,
+                showAlternative: false
+            },
+            guessEvent: {
+                id: -1,
+                trigger: false,
+                idStep: -1
+            },
+            omgEvent: {
+                id: -1,
+                trigger: false
+            },
+            isStart: false,
+            isLoading: false
         },
         timer: {
             seconds: 0,
