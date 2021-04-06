@@ -2,8 +2,6 @@ import {Room} from "../types/rooms";
 import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {startTimer} from "./startTimer";
-import {ExtendedSocket} from "../types/socket";
-import {nextRound} from "./nextRound";
 import {endRoundEvent} from "./endRoundEvent";
 
 /**
@@ -13,27 +11,28 @@ import {endRoundEvent} from "./endRoundEvent";
  */
 export function nextStepRoundEvent(room: Room,  io:Server) {
     checkpoint(room, io)
-    if (room.game.triggerGuesses && !room.game.triggerOMG) {
-        if(room.game.idStepGuess === -1) io.to(room.id).emit('startAnswersEvent')
-        if(++room.game.idStepGuess < room.users.length) {
-            io.to(room.id).emit('nextStepRoundEvent', room.game.idStepGuess)
+    if (room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
+        if(room.game.guessEvent.idStep === -1) io.to(room.id).emit('startAnswersEvent')
+        if(++room.game.guessEvent.idStep < room.users.length) {
+            io.to(room.id).emit('nextStepRoundEvent', room.game.guessEvent.idStep)
             startTimer(room, io, 10)
         }
         else {
             room.users.map((user) => {
-                let winBooty = true
-                user.answersGuess.forEach((userAnswer, index) => {
-                    if(userAnswer.answerGuess !== room.users[index].answerGuess) {
-                        winBooty = false
+                let winEvent = true
+                if(user.answerEvent.myAnswersUsers.length !== (room.users.length + room.usersDisconnected.length)) winEvent = false
+                else user.answerEvent.myAnswersUsers.forEach((userAnswer, index) => {
+                    if(userAnswer.answerEvent.myAnswer !== room.users[index].answerEvent.myAnswer) {
+                        winEvent = false
                         return;
                     }
                 })
-                if(winBooty) {
-                    user.winBooty = winBooty
+                if(winEvent) {
+                    user.winEvent = winEvent
                     io.to(user.id).emit('winRoundEvent')
                 }
             })
-            const loseBootyUsers = room.users.filter(user => !user.winBooty)
+            const loseBootyUsers = room.users.filter(user => !user.winEvent)
             if(loseBootyUsers.length === room.users.length) {
                 endRoundEvent(room, io)
             }else {

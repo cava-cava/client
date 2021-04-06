@@ -1,3 +1,5 @@
+import {AnswerEvent} from "../../server/types/answerEvent";
+
 export interface User {
   key: number
   id: string
@@ -7,9 +9,8 @@ export interface User {
   points: number
   joker: number
   dirt: number
-  answerGuess: string
-  answersGuess: User[]
-  winBooty: boolean
+  winEvent: boolean
+  answerEvent: AnswerEvent
 }
 
 export interface userState {

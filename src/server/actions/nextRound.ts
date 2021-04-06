@@ -13,18 +13,18 @@ import {startTimer} from "./startTimer";
 export function nextRound(room: Room, io:Server) {
     checkpoint(room, io)
     room.game.round++
-    if(room.game.round === room.game.idOMG) {
-        room.game.triggerGuesses = false
-        room.game.triggerOMG = true
+    if(room.game.round === room.game.omgEvent.id) {
+        room.game.guessEvent.trigger = false
+        room.game.omgEvent.trigger = true
     }else {
-        if(++room.game.idUser >= room.users.length) {
-            room.game.triggerGuesses = true
-            room.game.triggerOMG = false
-            const guess:Guess | undefined = (room.game.guesses && room.game.guesses.length > 0) ? room.game.guesses[room.game.idGuesses] : undefined
-            io.to(room.id).emit('sendGuess', guess)
+        if(++room.game.playerGame.id >= room.users.length) {
+            room.game.guessEvent.trigger = true
+            room.game.omgEvent.trigger = false
+            room.game.guessEvent.guess = (room.game.guesses && room.game.guesses.length > 0) ? room.game.guesses[room.game.guessEvent.id] : undefined
+            io.to(room.id).emit('sendGuess', room.game.guessEvent.guess)
         }
         getPlayer(room, io)
     }
-    io.to(room.id).emit('startRoundEvent', room.game.triggerGuesses, room.game.triggerOMG);
-    if(room.game.triggerGuesses && !room.game.triggerOMG) startTimer(room, io, 25);
+    io.to(room.id).emit('startRoundEvent', room.game.guessEvent.trigger, room.game.omgEvent.trigger);
+    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 25);
 }

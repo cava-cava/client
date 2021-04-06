@@ -13,7 +13,7 @@ export function endTimer(room: Room, io: Server) {
     io.to(room.id).emit('timer', 0)
     if(room.timer.interval) clearInterval(room.timer.interval)
     room.timer.isRunning = false
-    if (!room.game.triggerGuesses && !room.game.triggerOMG) {
+    if (!room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         io.to(room.id).emit('pickedCard', undefined)
         nextRound(room, io)
     } else {
