@@ -12,26 +12,8 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children})
     const [seconds, setSeconds] = useState(0)
     const countdownEl = useRef<SVGCircleElement>(null);
 
-    // Set up the interval.
     useEffect(() => {
-        const TimerOn = () => {
-            if (seconds > 0)
-                setSeconds(seconds - 1)
-            else return
-        }
-
-        if (seconds && seconds > 0) {
-            const interval = setInterval(TimerOn, 1000);
-            return () => clearInterval(interval);
-        } else if(userKey === 0){
-            // isHost
-            socket.emit('endTimer', roomId, userKey)
-        }
-    }, [seconds]);
-
-
-    useEffect(() => {
-        const startTimer = (seconds: number) => {
+        const timer = (seconds: number) => {
             setSeconds(seconds)
 
             if (null !== countdownEl.current) {
@@ -39,10 +21,10 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children})
             }
         }
 
-        socket.on("startTimer", startTimer)
+        socket.on("timer", timer)
 
         return () => {
-            socket.off("startTimer", startTimer)
+            socket.off("timer", timer)
         }
     }, []);
 

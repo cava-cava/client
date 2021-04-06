@@ -2,7 +2,8 @@ import {Room} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
 import {User} from "../../store/user/types";
 import {Server} from "socket.io";
-import {nextRound} from "./nextRound";
+import {startTimer} from "./startTimer";
+import {checkpoint} from "./checkpoint";
 
 /**
  * Will connect a socket to a specified game
@@ -27,9 +28,9 @@ export const joinRoomGame = (username:string, io:Server, socket:ExtendedSocket, 
         socket.emit('redirect', `/game/${room.id}`);
         if(room.usersDisconnected.length <= 0) {
             room.users.sort((a, b) => (a.key > b.key) ? 1 : -1)
-            socket.to(room.id).emit('updateListUsers', room.users);
+            checkpoint(room, io)
             socket.to(room.id).emit('userDisconnected', false);
-            nextRound(room, io)
+            startTimer(room)
         }
     }else socket.emit('error', "La room est en plein jeu");
 };

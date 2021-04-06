@@ -23,8 +23,11 @@ export function createRoom(rooms: Rooms) {
             triggerGuesses: false,
             idStepGuess: -1,
             triggerOMG: false,
-            isStart: false,
-            timerRunning: false
+            isStart: false
+        },
+        timer: {
+            seconds: 0,
+            isRunning: false
         }
     }
     while (rooms[room.id] || !room?.id) {
