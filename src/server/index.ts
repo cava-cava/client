@@ -19,6 +19,7 @@ import {Card} from "./types/card";
 import {User} from "../store/user/types";
 import {joinRoomGame} from "./actions/joinRoomGame";
 import {endRoundEvent} from "./actions/endRoundEvent";
+import {sendCard} from "./actions/sendCard";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -130,10 +131,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         if (++room.game.idCards >= room.game.cards.length) room.game.idCards = 0
         room.game.showAlternative = false
         const pickedCard: Card = room.game.cards[room.game.idCards];
-        sendPointsUser(room.users[playerId], pickedCard.Points)
-        checkpoint(room, io)
-        io.to(room.id).emit('pickedCard', pickedCard)
-        startTimer(room, io, 5)
+        sendCard(playerId, pickedCard, room, io)
     });
 
     socket.on('sendJoker', (roomId: string, userId: number, playerId: number ) => {
@@ -152,11 +150,8 @@ io.on("connect", (socket: ExtendedSocket) => {
         }else {
             alternativeCard.Description = "OH CA VA, JE M'EN BLC"
         }
-        sendPointsUser(room.users[playerId], alternativeCard.Points)
         if(playerId !== userId) sendPointsUser(room.users[userId], alternativeCard.Points)
-        checkpoint(room, io)
-        io.to(room.id).emit('pickedCard', alternativeCard)
-        startTimer(room, io, 5)
+        sendCard(playerId, alternativeCard, room, io)
     })
 
     socket.on('sendDirt', (roomId: string, userId: number, playerId: number) => {
@@ -175,10 +170,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         }else {
             alternativeCard.Description = "OH CA VA PAS, ON SE MOQUE DE MOI :'("
         }
-        sendPointsUser(room.users[playerId], alternativeCard.Points)
-        checkpoint(room, io)
-        io.to(room.id).emit('pickedCard', alternativeCard)
-        startTimer(room, io, 5)
+        sendCard(playerId, alternativeCard, room, io)
     })
 
     socket.on('endTimer', (roomId: string, userId: number) => {
