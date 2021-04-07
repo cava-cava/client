@@ -10,30 +10,27 @@ import {endRoundEvent} from "./endRoundEvent";
  * @param io A connected socket.io server
  */
 export function nextStepRoundEvent(room: Room,  io:Server) {
+    room.users.map(user => user.answerEvent.send = false)
     checkpoint(room, io)
     if (room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         if(room.game.guessEvent.idStep === -1) io.to(room.id).emit('startAnswersEvent')
-        if(++room.game.guessEvent.idStep < room.users.length) {
-            room.users.map(user => user.answerEvent.send = false)
+        if(++room.game.guessEvent.idStep < (room.users.length - 1)) {
             io.to(room.id).emit('nextStepRoundEvent', room.game.guessEvent.idStep)
             startTimer(room, io, 10)
         }
         else {
             room.users.forEach((user) => {
-                console.log(user.name)
                 let winEvent = true
                 if(user.answerEvent.myAnswersUsers.length !== (room.users.length + room.usersDisconnected.length)){
-                    console.log(user.answerEvent.myAnswersUsers.length, (room.users.length + room.usersDisconnected.length))
                     winEvent = false
+                } else {
+                    user.answerEvent.myAnswersUsers.forEach((answer) => {
+                        if(answer.answer !== room.users[answer.userKey].answerEvent.myAnswer.answer) {
+                            winEvent = false
+                            return;
+                        }
+                    })
                 }
-                else user.answerEvent.myAnswersUsers.forEach((userAnswer, index) => {
-                    console.log(index)
-                    if(userAnswer.answerEvent.myAnswer !== room.users[index].answerEvent.myAnswer) {
-                        console.log(userAnswer.answerEvent.myAnswer, room.users[index].answerEvent.myAnswer)
-                        winEvent = false
-                        return;
-                    }
-                })
                 if(winEvent) {
                     user.winEvent = winEvent
                     //add statistics guessWon

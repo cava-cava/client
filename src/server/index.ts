@@ -17,6 +17,7 @@ import {getCard} from "./actions/getCard";
 import {sendJoker} from "./actions/sendJoker";
 import {sendDirt} from "./actions/sendDirt";
 import {currentRound} from "./actions/currentRound";
+import {Answer} from "./types/answer";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -144,7 +145,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      *
      */
-    socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: string) => {
+    socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: Answer) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].answerEvent.myAnswer = answer
@@ -154,11 +155,12 @@ io.on("connect", (socket: ExtendedSocket) => {
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
     });
 
-    socket.on('pushAnswersGuess', (roomId: string, userKey: number, user:User) => {
+    socket.on('pushAnswersGuess', (roomId: string, userKey: number, answer:Answer) => {
         const room:Room = rooms[roomId];
-        room.users[userKey].answerEvent.myAnswersUsers.push(user)
+        room.users[userKey].answerEvent.myAnswersUsers.push(answer)
         room.users[userKey].answerEvent.send = true
-        //check if all Users have answer
+
+        //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
     })
 

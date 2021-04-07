@@ -26,7 +26,10 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         dirt: 2,
         winEvent: false,
         answerEvent: {
-            myAnswer: '',
+            myAnswer: {
+                userKey: -1,
+                answer: ''
+            },
             myAnswersUsers: [],
             send: false
         },

@@ -1,5 +1,7 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from 'react';
 import {socket} from "../../../socketClient";
+import {Answer} from "../../../server/types/answer";
+import useSend from "../../../hooks/useSend";
 
 type QuestionGuessProps = {
     roomId: string
@@ -8,7 +10,7 @@ type QuestionGuessProps = {
 
 const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey}) => {
     const [answer, setAnswer] = useState('');
-    const [submit, setSubmit] = useState(false)
+    const {send, setSend} = useSend(userKey)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAnswer(event.target.value);
@@ -17,13 +19,17 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey})
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         if(!answer || answer.length === 0) return;
-        socket.emit('sendAnswerGuess', roomId, userKey, answer)
-        setSubmit(true)
+        const myAnswer:Answer = {
+            userKey: userKey,
+            answer: answer
+        }
+        socket.emit('sendAnswerGuess', roomId, userKey, myAnswer)
+        setSend(true)
     }
 
     return (
         <div>
-            {!submit ?
+            {!send ?
                 <form autoComplete="off" onSubmit={handleSubmit}>
                     <input type="text" id="answer" name="answer" placeholder="Answer..." value={answer} onChange={handleChange}/>
                     <input type="submit" value="Envoyez"/>
