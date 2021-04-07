@@ -13,6 +13,7 @@ export interface User {
   winEvent: boolean
   answerEvent: AnswerEvent,
   statisticsGame: StatisticsGame
+  gameOver: string[]
 }
 
 export interface userState {

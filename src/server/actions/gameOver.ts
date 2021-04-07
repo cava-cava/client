@@ -9,7 +9,26 @@ import {Server} from "socket.io";
 export function checkGameOver(room: Room, io:Server) {
     room.users.map(user => {
         if(user.points >= room.game.points) {
+            gameOver(room)
             io.to(room.id).emit('redirect', `/end`);
         }
     })
+}
+
+const gameOver = (room: Room) => {
+    // if winner
+    const winner = room.users.filter(user => user.ladder === 1)
+    winner[0].gameOver.push('winner')
+    // if loser
+    const loser = room.users.filter(user => user.ladder === room.users.length)
+    loser[0].gameOver.push('loser')
+    // if bonus max
+    // if malus max
+    // if useJoker max
+    // if useJokerForOther max
+    // if useJokerForMe max
+    // if useDirt max
+    // if useGuessWon max
+    // if useOmgWon max
+
 }
