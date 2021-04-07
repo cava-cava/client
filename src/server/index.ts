@@ -16,6 +16,7 @@ import {startGame} from "./actions/startGame";
 import {getCard} from "./actions/getCard";
 import {sendJoker} from "./actions/sendJoker";
 import {sendDirt} from "./actions/sendDirt";
+import {currentRound} from "./actions/currentRound";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -59,7 +60,11 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('userDisconnected', (roomId:string) => {
         const room: Room = rooms[roomId];
         if (room.usersDisconnected.length > 0) socket.emit('userDisconnected', true);
-        else socket.emit('userDisconnected', false);
+        else {
+            room.users.sort((a, b) => (a.key > b.key) ? 1 : -1)
+            socket.emit('userDisconnected', false);
+            currentRound(room, io)
+        }
     })
 
     socket.on('getListUsersInRoom', (roomId:string) => {

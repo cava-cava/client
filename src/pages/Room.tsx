@@ -51,7 +51,7 @@ const Room = () => {
                             <button onClick={startGame}>Start game</button>
                            </div>
                     : <div>En attentes de l'hôte...</div>
-                : <div>En attentes d'autres joueurs...</div>
+                : !loading && <div>En attentes d'autres joueurs...</div>
             }
             {!loading && <Link to="/rooms">Quitter</Link>}
         </div>
