@@ -1,5 +1,6 @@
 import {Rooms} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
+import {stopTimer} from "./stopTimer";
 
 /**
  * Will make the socket leave any rooms that it is a part of
@@ -21,7 +22,10 @@ export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
             if(room.game.isStart) {
                 const usersDisconnected = room.users.filter((user) => user.id === socket.id);
                 room.usersDisconnected = room.usersDisconnected.concat(usersDisconnected)
-                if(room.usersDisconnected.length > 0) socket.to(room.id).emit('userDisconnected', true);
+                if(room.usersDisconnected.length > 0) {
+                    stopTimer(room)
+                    socket.to(room.id).emit('userDisconnected', true);
+                }
             }
             // remove the user from the room object
             room.users = room.users.filter((user) => user.id !== socket.id);

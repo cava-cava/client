@@ -8,15 +8,16 @@ import {endTimer} from "./endTimer";
  * @param io A connected socket.io server
  * @param seconds of timer
  */
-export function startTimer(room: Room, io:Server|null = null, seconds: number|null = null) {
-    if(seconds && io) {
+export function startTimer(room: Room, io:Server, seconds: number|null = null) {
+    if(seconds) {
         if(room.timer.interval) clearInterval(room.timer.interval)
         room.timer.seconds = seconds
-        io.to(room.id).emit('timer', room.timer.seconds)
         room.timer.interval = setInterval(() => {
-            if (--room.timer.seconds > 0 && room.timer.isRunning) io.to(room.id).emit('timer', room.timer.seconds)
+            if(!room.timer.isRunning) return
+            if (--room.timer.seconds > 0) io.to(room.id).emit('timer', room.timer.seconds)
             else if(room.timer.seconds <= 0) endTimer(room, io)
         }, 1000);
     }
-    room.timer.isRunning = true
+    io.to(room.id).emit('timer', room.timer.seconds)
+    if(room.timer.interval) room.timer.isRunning = true
 }
