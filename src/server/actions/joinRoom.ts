@@ -27,7 +27,8 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         winEvent: false,
         answerEvent: {
             myAnswer: '',
-            myAnswersUsers: []
+            myAnswersUsers: [],
+            send: false
         },
         statisticsGame: {
             bonus: 0,

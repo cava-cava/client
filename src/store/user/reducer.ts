@@ -15,7 +15,8 @@ export const initialState: userState = {
     winEvent: false,
     answerEvent: {
       myAnswer: '',
-      myAnswersUsers: []
+      myAnswersUsers: [],
+      send: false
     },
     statisticsGame: {
       bonus: 0,

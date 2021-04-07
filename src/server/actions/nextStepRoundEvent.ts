@@ -14,15 +14,22 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
     if (room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         if(room.game.guessEvent.idStep === -1) io.to(room.id).emit('startAnswersEvent')
         if(++room.game.guessEvent.idStep < room.users.length) {
+            room.users.map(user => user.answerEvent.send = false)
             io.to(room.id).emit('nextStepRoundEvent', room.game.guessEvent.idStep)
             startTimer(room, io, 10)
         }
         else {
-            room.users.map((user) => {
+            room.users.forEach((user) => {
+                console.log(user.name)
                 let winEvent = true
-                if(user.answerEvent.myAnswersUsers.length !== (room.users.length + room.usersDisconnected.length)) winEvent = false
+                if(user.answerEvent.myAnswersUsers.length !== (room.users.length + room.usersDisconnected.length)){
+                    console.log(user.answerEvent.myAnswersUsers.length, (room.users.length + room.usersDisconnected.length))
+                    winEvent = false
+                }
                 else user.answerEvent.myAnswersUsers.forEach((userAnswer, index) => {
+                    console.log(index)
                     if(userAnswer.answerEvent.myAnswer !== room.users[index].answerEvent.myAnswer) {
+                        console.log(userAnswer.answerEvent.myAnswer, room.users[index].answerEvent.myAnswer)
                         winEvent = false
                         return;
                     }

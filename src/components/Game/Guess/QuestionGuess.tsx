@@ -16,6 +16,7 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey})
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
+        if(!answer || answer.length === 0) return;
         socket.emit('sendAnswerGuess', roomId, userKey, answer)
         setSubmit(true)
     }
