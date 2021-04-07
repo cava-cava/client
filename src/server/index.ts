@@ -136,6 +136,16 @@ io.on("connect", (socket: ExtendedSocket) => {
         socket.to(room.id).emit('loseRoundEvent')
     });
 
+    socket.on('checkRoundEvent', (roomId: string, userKey: number) => {
+        const room:Room = rooms[roomId];
+        const user:User = room.users[userKey]
+
+        if(room.users.filter(user => user.winEvent).length === 0) return
+        if(user.winEvent) {
+            io.to(user.id).emit('winRoundEvent')
+         }else io.to(user.id).emit('loseRoundEvent')
+    });
+
     socket.on('endRoundEvent', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
         room.users[userKey].winEvent = false
@@ -162,6 +172,12 @@ io.on("connect", (socket: ExtendedSocket) => {
 
         //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
+    })
+
+    socket.on('send', (roomId: string, userKey: number) => {
+        const room:Room = rooms[roomId];
+        const user:User = room.users[userKey]
+        io.to(user.id).emit('send', user.answerEvent.send)
     })
 
     /**

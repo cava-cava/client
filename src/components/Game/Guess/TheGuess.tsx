@@ -16,7 +16,7 @@ type TheGuessProps = {
 }
 
 const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, userKey}) => {
-    const { win, lose } = useRoundEvent();
+    const { win, lose } = useRoundEvent(roomId, userKey);
     const [showAnswers, setShowAnswers] = useState(false)
 
     useEffect(() => {
