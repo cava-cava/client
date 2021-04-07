@@ -14,7 +14,10 @@ export const initialState: userState = {
     dirt: 2,
     winEvent: false,
     answerEvent: {
-      myAnswer: '',
+      myAnswer: {
+        userKey: -1,
+        answer: ''
+      },
       myAnswersUsers: [],
       send: false
     },

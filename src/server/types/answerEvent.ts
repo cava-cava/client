@@ -1,8 +1,8 @@
-import {User} from "../../store/user/types";
+import {Answer} from "./answer";
 
 export interface AnswerEvent {
-    myAnswer: string,
-    myAnswersUsers: User[]
+    myAnswer: Answer,
+    myAnswersUsers: Answer[]
     send: boolean
 }
 
