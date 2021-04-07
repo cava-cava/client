@@ -39,7 +39,8 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
             useDirt: 0,
             guessWon: 0,
             omgWon: 0
-        }
+        },
+        gameOver: []
     };
     room.users.push(user);
     room.sockets.push(socket);

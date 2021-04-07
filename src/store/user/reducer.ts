@@ -27,7 +27,8 @@ export const initialState: userState = {
       useDirt: 0,
       guessWon: 0,
       omgWon: 0
-    }
+    },
+    gameOver: []
   },
   errors: undefined,
   loading: false

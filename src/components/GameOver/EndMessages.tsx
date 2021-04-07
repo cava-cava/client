@@ -10,10 +10,15 @@ import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
 
-const EndMessages: FunctionComponent = () => {
+type EndMessagesProps = {
+    gameOver: string[],
+}
+
+const EndMessages: FunctionComponent<EndMessagesProps> = ({gameOver}) => {
     const dispatch = useDispatch();
     const messages: Message[] = useSelector((state: ApplicationState) => state.messages.data)
-    const [gameOvers, setGameOvers] = useState<Message[]>([])
+    const [gameOverMessages, setGameOverMessages] = useState<Message[]>([])
+
     /**
      * Fetch Messages
      */
@@ -34,16 +39,16 @@ const EndMessages: FunctionComponent = () => {
         if (!messages || messages.length <= 0) {
             fetchMessages()
         }
-        setGameOvers(messages)
+        setGameOverMessages(messages.filter(message => gameOver.indexOf(message.key) !== 1))
         return () => {
-            setGameOvers([])
+            setGameOverMessages([])
         }
     }, []);
     return (
         <div className={styles.EndMessages}>
-            {gameOvers.map((gameOver, index) =><div>
-                { index === 0 ? <h1>{gameOver.title}</h1> : <h2>{gameOver.title}</h2> }
-                <p>{gameOver.description}</p>
+            {gameOverMessages.map((gameOverMessage, index) =><div key={index}>
+                { index === 0 ? <h1>{gameOverMessage.title}</h1> : <h2>{gameOverMessage.title}</h2> }
+                <p>{gameOverMessage.description}</p>
             </div>)}
         </div>
     )

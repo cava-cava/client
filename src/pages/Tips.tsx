@@ -6,6 +6,7 @@ import {ApplicationState} from "../store";
 import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, FETCH_TIPS_SUCCESS, SET_JWT_TIPS, Tip} from "../store/tips/types";
 import axios from "axios";
 import styles from "./Tips.module.scss"
+import useLeaveRoom from "../hooks/useLeaveRoom";
 
 const Tips = () => {
     const history = useHistory();
@@ -13,6 +14,8 @@ const Tips = () => {
     const tips:Tip[] = useSelector((state: ApplicationState) => state.tips.data)
     const jwt = useSelector((state: ApplicationState) => state.tips.jwt);
     const [message, setMessage] = useState('');
+
+    useLeaveRoom();
 
     /**
      * Get JWT
