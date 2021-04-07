@@ -124,11 +124,6 @@ io.on("connect", (socket: ExtendedSocket) => {
         nextRound(room, io)
     })
 
-    socket.on('pushAnswersGuess', (roomId: string, userKey: number, user:User) => {
-        const room:Room = rooms[roomId];
-        room.users[userKey].answerEvent.myAnswersUsers.push(user)
-    })
-
     socket.on('winRoundEvent', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
 
@@ -153,10 +148,19 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].answerEvent.myAnswer = answer
+        room.users[userKey].answerEvent.send = true
 
-        //check if all Users have answer
-        if(room.users.filter(user => !user.answerEvent.myAnswer || user.answerEvent.myAnswer.length === 0).length === 0) endTimer(room, io)
+        //check if all Users have send answer
+        if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
     });
+
+    socket.on('pushAnswersGuess', (roomId: string, userKey: number, user:User) => {
+        const room:Room = rooms[roomId];
+        room.users[userKey].answerEvent.myAnswersUsers.push(user)
+        room.users[userKey].answerEvent.send = true
+        //check if all Users have answer
+        if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
+    })
 
     /**
      * Gets fired when a player leaves a room.

@@ -2,7 +2,6 @@ import {Room} from "../types/rooms";
 import {ExtendedSocket} from "../types/socket";
 import {User} from "../../store/user/types";
 import {Server} from "socket.io";
-import {currentRound} from "./currentRound";
 
 /**
  * Will connect a socket to a specified game
