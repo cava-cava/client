@@ -9,7 +9,7 @@ type OhMyGodProps = {
 }
 
 const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
-    const { win, lose } = useRoundEvent();
+    const { win, lose } = useRoundEvent(roomId, userKey);
 
     const handleClick = () => {
         socket.emit('winRoundEvent', roomId, userKey)

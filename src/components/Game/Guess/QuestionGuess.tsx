@@ -10,7 +10,7 @@ type QuestionGuessProps = {
 
 const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey}) => {
     const [answer, setAnswer] = useState('');
-    const {send, setSend} = useSend(userKey)
+    const {send, setSend} = useSend(roomId, userKey)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAnswer(event.target.value);

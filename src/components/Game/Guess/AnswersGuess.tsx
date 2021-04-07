@@ -12,7 +12,7 @@ type AnswersGuessProps = {
 }
 
 const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({roomId, userKey, users}) => {
-    const {send, setSend} = useSend(userKey)
+    const {send, setSend} = useSend(roomId, userKey)
     const [answers, setAnswers] = useState<Answer[]>()
     const [stepEvent, setStepEvent] = useState(0)
 
