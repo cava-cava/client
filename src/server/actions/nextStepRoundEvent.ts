@@ -25,7 +25,7 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
                     winEvent = false
                 } else {
                     user.answerEvent.myAnswersUsers.forEach((answer) => {
-                        if(answer.answer !== room.users[answer.userKey].answerEvent.myAnswer.answer) {
+                        if(answer.idStep && answer.answer !== room.users[answer.idStep].answerEvent.myAnswer.answer) {
                             winEvent = false
                             return;
                         }

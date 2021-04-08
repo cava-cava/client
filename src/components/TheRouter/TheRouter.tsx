@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
 import Home from "../../pages/Home";
@@ -11,6 +11,7 @@ import End from "../../pages/End";
 import Tips from "../../pages/Tips";
 import Labs from "../../pages/Labs";
 import Game from "../../pages/Game";
+import TheDevLinks from "./TheDevLinks";
 
 const TheRouter: FunctionComponent = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
@@ -18,11 +19,6 @@ const TheRouter: FunctionComponent = () => {
 
     return (
         <Router>
-            <nav>
-                <Link to='/rooms'>Rooms</Link>
-                -
-                <Link to='/end'>End</Link>
-            </nav>
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
@@ -34,6 +30,7 @@ const TheRouter: FunctionComponent = () => {
                 <Route exact path="/labs" component={Labs}/>
                 <Route path="*" component={Home}/>
             </Switch>
+            <TheDevLinks/>
         </Router>
         )
 }

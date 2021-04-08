@@ -1,7 +1,7 @@
 import {Room} from "../types/rooms";
 import {Server} from "socket.io";
 import {User} from "../../store/user/types";
-import {checkGameOver} from "./gameOver";
+import {checkGameOver} from "./checkGameOver";
 
 /**
  * checkpoint for update users and my user in game room

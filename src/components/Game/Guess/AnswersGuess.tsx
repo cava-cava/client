@@ -18,13 +18,13 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({roomId, userKey, us
 
     const handleClick = (myAnswer:Answer) => {
         setSend(true)
-        myAnswer.userKey = stepEvent
+        myAnswer.idStep = stepEvent
         socket.emit("pushAnswersGuess", roomId, userKey, myAnswer)
         const filterAnswers = answers?.filter(answerUser => answerUser !== myAnswer)
 
         if(filterAnswers?.length === 1) {
             const lastAnswer = filterAnswers[0]
-            lastAnswer.userKey = stepEvent + 1
+            lastAnswer.idStep = stepEvent + 1
             socket.emit("pushAnswersGuess", roomId, userKey, lastAnswer)
         }else setAnswers(filterAnswers)
     }

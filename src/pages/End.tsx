@@ -5,9 +5,12 @@ import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import UserHeader from "../components/Game/Header/UserHeader";
 import EndMessages from "../components/GameOver/EndMessages";
+import useLeaveRoom from "../hooks/useLeaveRoom";
 
 const End = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
+
+    useLeaveRoom()
 
     return (
         <div className={styles.End}>
