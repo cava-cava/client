@@ -24,6 +24,7 @@ export function createRoom(rooms: Rooms) {
             },
             guessEvent: {
                 id: -1,
+                answers: [],
                 trigger: false,
                 idStep: -1
             },

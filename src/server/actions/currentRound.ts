@@ -24,5 +24,5 @@ export function currentRound(room: Room, io:Server) {
             }
         }
     }
-    startTimer(room, io)
+    if(room.game.cardGame.card || room.game.guessEvent.guess) startTimer(room, io)
 }

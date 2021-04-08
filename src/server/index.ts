@@ -18,6 +18,7 @@ import {sendJoker} from "./actions/sendJoker";
 import {sendDirt} from "./actions/sendDirt";
 import {currentRound} from "./actions/currentRound";
 import {Answer} from "./types/answer";
+import {shuffle} from "../mixins/shuffle";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -152,14 +153,19 @@ io.on("connect", (socket: ExtendedSocket) => {
         endRoundEvent(room, io)
     });
 
-    /**
-     *
-     */
+    socket.on('getAnswers', (roomId: string, userKey: number) => {
+        const room:Room = rooms[roomId];
+        const user:User = room.users[userKey]
+        const answers:Answer[] = room.game.guessEvent.answers.filter(answer => (user.answerEvent.myAnswersUsers.filter(myAnswerUser => answer.userKey === myAnswerUser.userKey).length === 0))
+        io.to(user.id).emit('getAnswers', shuffle(answers))
+    });
+
     socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: Answer) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].answerEvent.myAnswer = answer
         room.users[userKey].answerEvent.send = true
+        room.game.guessEvent.answers.push(answer)
 
         //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
