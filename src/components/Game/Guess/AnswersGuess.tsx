@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import {socket} from "../../../socketClient";
-import {shuffle} from "../../../mixins/shuffle";
 import {Answer} from "../../../server/types/answer";
 import {User} from "../../../store/user/types";
 import useSend from "../../../hooks/useSend";
@@ -30,20 +29,23 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({roomId, userKey, us
     }
 
     useEffect(() => {
-        const cloneUsers = shuffle([...users])
-        let answers:Answer[] = [];
-        cloneUsers.forEach(user => answers.push(user.answerEvent.myAnswer))
-        setAnswers(answers)
-
         const nextStepRoundEvent = (step: number) => {
             setStepEvent(step)
             setSend(false)
         }
 
-        socket.on("nextStepRoundEvent", nextStepRoundEvent)
+        const getAnswers = (answers: Answer[]) => {
+            setAnswers(answers)
+            setStepEvent(users.length - answers.length)
+        }
 
+        socket.on("nextStepRoundEvent", nextStepRoundEvent)
+        socket.on("getAnswers", getAnswers)
+
+        socket.emit("getAnswers", roomId, userKey)
         return () => {
             socket.off("nextStepRoundEvent", nextStepRoundEvent)
+            socket.off("getAnswers", getAnswers)
         }
     }, []);
 

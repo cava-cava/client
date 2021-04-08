@@ -19,12 +19,12 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
             startTimer(room, io, 10)
         }
         else {
-            room.users.forEach((user) => {
+            room.users.map((user) => {
                 let winEvent = true
                 if(user.answerEvent.myAnswersUsers.length !== (room.users.length + room.usersDisconnected.length)){
                     winEvent = false
                 } else {
-                    user.answerEvent.myAnswersUsers.forEach((answer) => {
+                    user.answerEvent.myAnswersUsers.map((answer) => {
                         if(answer.idStep && answer.answer !== room.users[answer.idStep].answerEvent.myAnswer.answer) {
                             winEvent = false
                             return;
