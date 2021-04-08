@@ -1,0 +1,10 @@
+.TheDevLinks {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1;
+  > a {
+    color: white;
+    cursor: pointer;
+  }
+}

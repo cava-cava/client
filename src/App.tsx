@@ -10,9 +10,28 @@ import './mixins/browser-console-color'
 import TheRouter from "./components/TheRouter/TheRouter";
 import {useDispatch} from "react-redux";
 import {SET_ID} from "./store/user/types";
+import {FETCH_MESSAGES_ERROR, FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS, Message} from "./store/messages/types";
+import axios from "axios";
+import TheDevLinks from "./components/TheRouter/TheDevLinks";
 
 const App = () => {
     const dispatch = useDispatch();
+
+    /**
+     * Fetch End Messages
+     */
+    const fetchMessages = async () => {
+        dispatch({type: FETCH_MESSAGES_REQUEST})
+        await axios.get('https://happiness-strapi.herokuapp.com/game-overs').then(({data}) => {
+            dispatch({
+                type: FETCH_MESSAGES_SUCCESS,
+                payload: data.sort((a: Message, b: Message) => (a.position > b.position) ? 1 : -1)
+            })
+        }).catch(function (error) {
+            console.error(error)
+            dispatch({type: FETCH_MESSAGES_ERROR, payload: error.toString()})
+        })
+    }
 
     useEffect(() => {
         const connect = () => {
@@ -27,6 +46,7 @@ const App = () => {
         socket.on("connect", connect);
         socket.on("disconnect", disconnect)
 
+        fetchMessages()
         return () => {
             socket.off('connect', connect);
             socket.off("disconnect", disconnect)
@@ -53,7 +73,7 @@ const App = () => {
                 <img src={qrCode} alt="QR Code"/>
             </div>
             <MobilePrompt/>
-            {(!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && <SocketLog />}
+            <SocketLog />
         </div>
     );
 }

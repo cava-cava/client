@@ -1,34 +1,29 @@
 import {Room} from "../types/rooms";
-import {Server} from "socket.io";
+import {getMaxValue} from "./getMaxValue";
 
-/**
- * Get fired for get player in game room
- * @param room An object that represents a room from the `rooms` instance variable object
- * @param io A connected socket.io server
- */
-export function checkGameOver(room: Room, io:Server) {
+export const gameOver = (room: Room) => {
     room.users.map(user => {
-        if(user.points >= room.game.points) {
-            gameOver(room)
-            io.to(room.id).emit('redirect', `/end`);
-        }
+        user.gameOver = []
+        // if winner
+        if (user.ladder === 1) user.gameOver.push('winner')
+        // if loser
+        else if (user.ladder === room.users.length) user.gameOver.push('loser')
+
     })
-}
-
-const gameOver = (room: Room) => {
-    // if winner
-    const winner = room.users.filter(user => user.ladder === 1)
-    winner[0].gameOver.push('winner')
-    // if loser
-    const loser = room.users.filter(user => user.ladder === room.users.length)
-    loser[0].gameOver.push('loser')
     // if bonus max
+    getMaxValue(room, 'bonus')
     // if malus max
+    getMaxValue(room, 'malus')
     // if useJoker max
+    getMaxValue(room, 'useJoker')
     // if useJokerForOther max
+    getMaxValue(room, 'useJokerForOther')
     // if useJokerForMe max
+    getMaxValue(room, 'useJokerForMe')
     // if useDirt max
-    // if useGuessWon max
-    // if useOmgWon max
-
+    getMaxValue(room, 'useDirt')
+    // if guessWon max
+    getMaxValue(room, 'guessWon')
+    // if omgWon max
+    getMaxValue(room, 'omgWon')
 }
