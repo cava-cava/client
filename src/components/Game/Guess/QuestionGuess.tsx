@@ -1,12 +1,16 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from 'react';
-import {colors} from "../../../mixins/color";
+import {socket} from "../../../socketClient";
+import {Answer} from "../../../server/types/answer";
+import useSend from "../../../hooks/useSend";
 
 type QuestionGuessProps = {
-    question: string
+    roomId: string
+    userKey: number
 }
 
-const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({question}) => {
+const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey}) => {
     const [answer, setAnswer] = useState('');
+    const {send, setSend} = useSend(roomId, userKey)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setAnswer(event.target.value);
@@ -14,15 +18,24 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({question}) => {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        console.color('Envoyer la reponse au serveur socket io', colors.fuchsia)
+        if(!answer || answer.length === 0) return;
+        const myAnswer:Answer = {
+            userKey: userKey,
+            answer: answer
+        }
+        socket.emit('sendAnswerGuess', roomId, userKey, myAnswer)
+        setSend(true)
     }
+
     return (
         <div>
-            <p>{question}</p>
-            <form autoComplete="off" onSubmit={handleSubmit}>
-                <input type="text" id="answer" name="answer" placeholder="Answer..." value={answer} onChange={handleChange}/>
-                <input type="submit" value="Envoyez"/>
-            </form>
+            {!send ?
+                <form autoComplete="off" onSubmit={handleSubmit}>
+                    <input type="text" id="answer" name="answer" placeholder="Answer..." value={answer} onChange={handleChange}/>
+                    <input type="submit" value="Envoyez"/>
+                </form>
+                : <div>En attente des autres joueurs</div>}
+
         </div>
     )
 }

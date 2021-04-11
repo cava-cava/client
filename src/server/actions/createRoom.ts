@@ -1,7 +1,6 @@
 import {Room, Rooms} from "../types/rooms";
 import {nanoid} from "nanoid";
 
-
 /**
  * Create and generate nanoid for connect a socket to a room
  * @param rooms An Array of room
@@ -11,12 +10,34 @@ export function createRoom(rooms: Rooms) {
         id: nanoid(5),
         sockets: [],
         users: [],
+        usersDisconnected: [],
         colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange'],
         game: {
             points: 100,
             round: 0,
-            idUser: 0,
-            isStart: false
+            playerGame: {
+                id: 0
+            },
+            cardGame: {
+                id: -1,
+                showAlternative: false
+            },
+            guessEvent: {
+                id: -1,
+                answers: [],
+                trigger: false,
+                idStep: -1
+            },
+            omgEvent: {
+                id: -1,
+                trigger: false
+            },
+            isStart: false,
+            isLoading: false
+        },
+        timer: {
+            seconds: 0,
+            isRunning: false
         }
     }
     while (rooms[room.id] || !room?.id) {

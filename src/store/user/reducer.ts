@@ -1,12 +1,37 @@
 import {Reducer} from "redux";
 
-import {SET_ID, SET_NAME, UserActionTypes, userState} from "./types";
+import {SET_ID, SET_NAME, SET_USER, UserActionTypes, userState} from "./types";
 
 export const initialState: userState = {
   data: {
+    key: -1,
     id: '',
     name: '',
-    color: undefined
+    color: 'black',
+    ladder: 1,
+    points: 0,
+    joker: 2,
+    dirt: 2,
+    winEvent: false,
+    answerEvent: {
+      myAnswer: {
+        userKey: -1,
+        answer: ''
+      },
+      myAnswersUsers: [],
+      send: false
+    },
+    statisticsGame: {
+      bonus: 0,
+      malus: 0,
+      useJoker: 0,
+      useJokerForMe: 0,
+      useJokerForOther: 0,
+      useDirt: 0,
+      guessWon: 0,
+      omgWon: 0
+    },
+    gameOver: []
   },
   errors: undefined,
   loading: false
@@ -19,6 +44,9 @@ const reducer: Reducer<userState, UserActionTypes> = (state:userState = initialS
     }
     case SET_NAME: {
       return { ...state, data: {...state.data, name: action.payload,} };
+    }
+    case SET_USER: {
+      return { ...state, data: {...state.data, ...action.payload} };
     }
     default: {
       return state;

@@ -3,15 +3,16 @@ import UserHeader from "./UserHeader";
 import styles from  "./TheHeader.module.scss"
 import HelpHeader from "./HelpHeader";
 import SettingsHeader from "./SettingsHeader";
+import {User} from "../../../store/user/types";
 
 type TheHeaderProps = {
-    username: string,
+    user: User,
     code: string
 }
 
-const TheHeader: FunctionComponent<TheHeaderProps> = ({username, code}) =>
+const TheHeader: FunctionComponent<TheHeaderProps> = ({user, code}) =>
         <header className={styles.TheHeader}>
-            <UserHeader username={username}/>
+            <UserHeader user={user} roomId={code}/>
             <div className={styles.code}>{code}</div>
             <HelpHeader />
             <SettingsHeader />

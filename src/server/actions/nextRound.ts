@@ -1,23 +1,33 @@
 import {Room} from "../types/rooms";
-import {ExtendedSocket} from "../types/socket";
 import {getPlayer} from "./getPlayer";
+import {checkpoint} from "./checkpoint";
+import {Server} from "socket.io";
+import {startTimer} from "./startTimer";
 
 /**
  * Get fired for get player in game room
  * @param room An object that represents a room from the `rooms` instance variable object
- * @param socket A connected socket.io socket
+ * @param io A connected socket.io server
  */
-
-export function nextRound(room: Room, socket:ExtendedSocket) {
+export function nextRound(room: Room, io:Server) {
+    checkpoint(room, io)
     room.game.round++
-    if(room.game.round === room.game.idOMG) {
-        socket.emit('startOMG');
-        socket.to(room.id).emit('startOMG');
+    if(room.game.round === room.game.omgEvent.id) {
+        room.game.guessEvent.trigger = false
+        room.game.omgEvent.trigger = true
     }else {
-        if(++room.game.idUser >= room.users.length) {
-            console.log('envoyer un event guesses/devine qui')
-            room.game.idUser = 0
+        if(++room.game.playerGame.id >= room.users.length) {
+            room.game.guessEvent.trigger = true
+            room.game.omgEvent.trigger = false
+            room.game.guessEvent.guess = (room.game.guesses && room.game.guesses.length > 0) ? room.game.guesses[room.game.guessEvent.id] : undefined
+            io.to(room.id).emit('sendGuess', room.game.guessEvent.guess)
+        } else {
+            // next Card
+            if (room.game.cards && ++room.game.cardGame.id >= room.game.cards.length) room.game.cardGame.id = 0
+            room.game.cardGame.showAlternative = false
         }
-        getPlayer(room, socket)
+        getPlayer(room, io)
     }
+    io.to(room.id).emit('startRoundEvent', room.game.guessEvent.trigger, room.game.omgEvent.trigger);
+    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 25);
 }

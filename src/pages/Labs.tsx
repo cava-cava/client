@@ -1,16 +1,21 @@
-import React from 'react';
-import TheTimer from '../components/Timer/TheTimer'
-import {Link} from "react-router-dom";
-import Cards from '../components/Cards/Cards'
+import styles from "./Labs.module.scss";
+// three
+import { Canvas } from "@react-three/fiber";
+import OrbitControls from "../components/OrbitControls/OrbitControls";
+
+import ThreeCard from "../components/ThreeMeshes/Card";
+
 
 const Labs = () => {
     return (
-        <div className="Labs">
-            <h1>LABS</h1>
-            <TheTimer />
-            <Cards />
-        </div>
-    );
-}
+    <div className={styles.Labs}>
+      <Canvas shadows camera={{ position: [0, 0, 5] }}>
+        <ThreeCard />
+        <OrbitControls />
+      </Canvas>
+      {/* <button onClick={() => }>FLIP</button>  */}
+    </div>
+  );
+};
 
 export default Labs;

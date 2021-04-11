@@ -1,8 +1,15 @@
-import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, FETCH_TIPS_SUCCESS, Tip, TipsActionTypes} from "./types";
+import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, FETCH_TIPS_SUCCESS, SET_JWT_TIPS, Tip, TipsActionTypes} from "./types";
 
 export function FetchTipsRequest(): TipsActionTypes {
   return {
     type: FETCH_TIPS_REQUEST
+  }
+}
+
+export function SetJwtTips(jwt: string): TipsActionTypes {
+  return {
+    type: SET_JWT_TIPS,
+    payload: jwt
   }
 }
 

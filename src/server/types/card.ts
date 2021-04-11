@@ -1,3 +1,7 @@
 export interface Card {
-    //Fixme
+    id: number
+    Description: string
+    Points: number,
+    Alternative: Card[]
 }
+

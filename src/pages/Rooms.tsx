@@ -4,21 +4,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import styles from "./Rooms.module.scss"
 import {socket} from "../socketClient";
-import {useHistory} from "react-router";
+import useError from "../hooks/useError";
+import useRedirect from "../hooks/useRedirect";
+import useLeaveRoom from "../hooks/useLeaveRoom";
 
 const Rooms = () => {
-    const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const [name, setName] = useState(user.name);
     const [room, setRoom] = useState('');
-    const [error, setError] = useState('');
+    const error = useError();
 
-    socket.emit("leaveRoom", () => {console.log(`leaveRoom`);});
-
-    socket.on('redirect', (path: string) => history.push(path));
-
-    socket.on('error', (error: string) => setError(error));
+    useRedirect();
+    useLeaveRoom();
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);

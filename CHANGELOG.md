@@ -2,6 +2,63 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/happy-game/client/compare/v0.4.0...v0.5.0) (2021-04-11)
+
+
+### Features
+
+*  dynamic card draw ([c1011ac](https://github.com/happy-game/client/commit/c1011ac3ca2242dc222a4187951d23aa39fcc3f9))
+* add joker and dirt dynamic ([7636e07](https://github.com/happy-game/client/commit/7636e073dc42c1bb8ac29ffc6b1835644207d422))
+* add key for User type ([3bcb2db](https://github.com/happy-game/client/commit/3bcb2db04b6e00bbaf473a0c25a82d3595af08d0))
+* AnswerGuess (front) ([941416b](https://github.com/happy-game/client/commit/941416b5f497e2f20ee29670ee9964ed97977b8b))
+* checkpoint after each round and progress bar dynamic ([18e4906](https://github.com/happy-game/client/commit/18e4906874d1c48cd8fba8025e3e0af8bca9dfc7))
+* end ladder ([4d1197a](https://github.com/happy-game/client/commit/4d1197ad5ef4b5f9007be75d8895bb4848d2fe83))
+* end round gesses if all loose ([3590a5a](https://github.com/happy-game/client/commit/3590a5a5da78e4c7f146867b7d40113a51ec74b8))
+* gameOver and endMessage ([787dbce](https://github.com/happy-game/client/commit/787dbcedb0e8e57bb06b4c870912f207e34072f6))
+* interface Game ([9e0cd88](https://github.com/happy-game/client/commit/9e0cd886515b435165acf4c24fd10e16c8dd7398))
+* ladder ([2b7d0b7](https://github.com/happy-game/client/commit/2b7d0b711bfc73d5239d3037eab4a0dbcc212083))
+* OMG win and lose ([4a6a09b](https://github.com/happy-game/client/commit/4a6a09b5b2edcfc4aad48eab76e3578e9c653b52))
+* pickedCard ([defa304](https://github.com/happy-game/client/commit/defa304b9ca617692f68c5f3926e898dd204f1c3))
+* re add PWA ([dcc17bf](https://github.com/happy-game/client/commit/dcc17bff31acda9c4f5a6eafd6b1badbe0db6390))
+* reset show alternative card ([af4311c](https://github.com/happy-game/client/commit/af4311c2b7c3e8be7b61d32afe9a5f0865f26661))
+* send Joker and Dirt ([8c6dcf9](https://github.com/happy-game/client/commit/8c6dcf9319e0cb64da14527ed54288ff16d7ed39))
+* show all end messages ([b7e9df8](https://github.com/happy-game/client/commit/b7e9df865cf333174737dd88e8da912b7ba35842))
+* show modal if user is disconnected ([0720d85](https://github.com/happy-game/client/commit/0720d854ebfa58d97179484a395643ec005912a1))
+* show who is answer ([c74ae4c](https://github.com/happy-game/client/commit/c74ae4cb21b0b1e0cba8af0e6009e303ba2c0fdc))
+* step guess ([1667018](https://github.com/happy-game/client/commit/16670188d8e347d8f270e2dd3466bf6184b66790))
+* Timer update with event socket ([96357c9](https://github.com/happy-game/client/commit/96357c9163af1371b30de92f3436dbe0649560ee))
+* use leave room hooks ([36c01ef](https://github.com/happy-game/client/commit/36c01ef128ba8416526cbea1bdf1ef4957b30760))
+* user reconnected ([2537d0f](https://github.com/happy-game/client/commit/2537d0f13fb6621f0ce3ee6cf24808da94ff5a8b))
+* user reconnected in AnswerEvent ([64a3032](https://github.com/happy-game/client/commit/64a303299fbddeb84b8f96ce55347eacd95b8bbe))
+* user reconnected in cardGame ([dd8984f](https://github.com/happy-game/client/commit/dd8984fbc939facae51714b7507eb59ba42ef1e9))
+* **ProgressBar:** show user round ([1ec6b46](https://github.com/happy-game/client/commit/1ec6b469e569ce107eb966831a4abd4c46fa1278))
+* **server:** refactor server and add statistics game ([6009a24](https://github.com/happy-game/client/commit/6009a2436c5a6dbbff411930513c99639c59d930))
+* **server:** send Card ([0660442](https://github.com/happy-game/client/commit/0660442b98b9a6751f2a74e0d7400f702968363a))
+* useRoundEvent ([9ecac16](https://github.com/happy-game/client/commit/9ecac16cd176f3533fb255a3c1bac39e6170418b))
+* **TheBooty:** actions click socket - send Points User ([c9c1b5d](https://github.com/happy-game/client/commit/c9c1b5d0ef5659932ddf565cc0cb7522465813a0))
+
+
+### Bug Fixes
+
+* bug draw ([90e109d](https://github.com/happy-game/client/commit/90e109d2ea94826a48aea2a57fc9a1fec56090a3))
+* for the demo ([cdc7374](https://github.com/happy-game/client/commit/cdc7374a17fc849d10b1d116eb51d55fecca87b7))
+* get Card and start and end Timer ([9ffe7c0](https://github.com/happy-game/client/commit/9ffe7c01ba56be9a06429413fad503db893f011f))
+* get List user in mounted ([43cabfd](https://github.com/happy-game/client/commit/43cabfd0ca4f41c0948d38674e7ce2cdc428be16))
+* margin nav ([32f6a4d](https://github.com/happy-game/client/commit/32f6a4d89e7012e77944ccd69d18a48ed45abaad))
+* modal component ([1897b37](https://github.com/happy-game/client/commit/1897b37381b5299588e1c2feed1c27349ad1762d))
+* nextStepRound ([1c33169](https://github.com/happy-game/client/commit/1c33169e1f39372287fb547d791373abbd4c5709))
+* performance socket client with useEffect ([b53a73b](https://github.com/happy-game/client/commit/b53a73bb78ddb60ef21faff7dc65f3c14eb9229f))
+* send and winner when user is reconnected ([4f9d021](https://github.com/happy-game/client/commit/4f9d0213218dc20c365d1ba23ca011be5df2324c))
+* server gameOver ([89684d2](https://github.com/happy-game/client/commit/89684d23d3b4135e7d0c454926304afba78321ab))
+* The Booty Guess/OMG ([67b09c8](https://github.com/happy-game/client/commit/67b09c81e6585cef18d1498596447c3488a9c91c))
+* TheDeck show if number > 0 ([a4ccce4](https://github.com/happy-game/client/commit/a4ccce400586536e8dc6fe7279e65bdd53efa5d8))
+* Timer > now is host endTimer ([8f58f6b](https://github.com/happy-game/client/commit/8f58f6b5bd58cdbb2d24f44bc8a03a2298fc1bc2))
+* timer answer ([d2ec177](https://github.com/happy-game/client/commit/d2ec177110350af32b17939037a2c20644252099))
+* timer for card and wording ([36d97ac](https://github.com/happy-game/client/commit/36d97acbe9b7d693783e10de3fa6f1ba72b928d2))
+* updateListUsers ([8034f71](https://github.com/happy-game/client/commit/8034f715d7cbcf5d5c09c1dfe24d4ea8f950b117))
+* win guess event ([a903a6c](https://github.com/happy-game/client/commit/a903a6c6e4224ef9361d6ef17ce0f3f2157d2740))
+* **Tips:** get jwt for send tips ([a1b1362](https://github.com/happy-game/client/commit/a1b1362b724e55a2847b93bf7da586933fcef657))
+
 ## [0.4.0](https://github.com/happy-game/client/compare/v0.3.0...v0.4.0) (2021-03-28)
 
 
