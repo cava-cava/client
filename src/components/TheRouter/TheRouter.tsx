@@ -21,7 +21,7 @@ const TheRouter: FunctionComponent = () => {
         <Router>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
+                <Route exact path="/setup" component={Setup}/>
                 <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
                 <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={isAuth}/>
                 <PrivateRoute component={Game} exact={false} path="/game/:id" redirectTo="/setup" condition={isAuth}/>
