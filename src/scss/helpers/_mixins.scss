@@ -83,3 +83,21 @@
   width: $width;
   height: $height;
 }
+
+
+@mixin defaultBackground() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 30vh);
+  background: #000 url("../../assets/png/background.jpeg") center center no-repeat;
+  background-size: 100% 100%;
+  padding: 15vh 0;
+
+  @include media('exclude-mobile') {
+    border-radius: $radius;
+    height: calc(100% - 150px);
+    padding: 75px  0;
+  }
+}

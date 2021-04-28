@@ -7,11 +7,18 @@ import './scss/index.scss';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import WebFont from "webfontloader";
 
 const history = createBrowserHistory();
 
 const initialState: any = {};
 const store = configureStore(history, initialState);
+
+WebFont.load({
+    google: {
+        families: ['Oswald:300,400,700', 'sans-serif']
+    }
+});
 
 ReactDOM.render(
     <Provider store={store}>
