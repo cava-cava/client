@@ -1,11 +1,17 @@
+@import "../../scss/helpers";
+
 .InputText {
-    background: url("../../assets/svg/input-text.svg") center center no-repeat;
-    background-size: 100% 100%;
-    border: none;
-    outline: none;
-    width: 55%;
-    padding: 10px 25px;
-    height: 35px;
-    font-weight: bold;
-    font-size: 20px;
+  background: url("../../assets/svg/input-text.svg") center center no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  outline: none;
+  width: 55%;
+  padding: 10px 25px;
+  height: 35px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.InputTextError {
+    color: $red;
 }

@@ -1,7 +1,12 @@
+@import "../scss/helpers";
+
 .Rooms {
-  input {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
+  @include defaultBackground;
+
+  > div {
+    position: relative;
+    height: 100%;
   }
 }
+
+

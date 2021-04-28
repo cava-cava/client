@@ -7,17 +7,16 @@ type InputTextProps = {
     placeholder?: string,
     maxLength?: number,
     value: string,
-    setValue: (value: string) => void
+    setValue: (value: string) => void,
+    hasError: boolean
 }
 
-const InputText: FunctionComponent<InputTextProps> = ({id, name, maxLength, placeholder, value, setValue}) => {
+const InputText: FunctionComponent<InputTextProps> = ({id, name, maxLength, placeholder, value, setValue, hasError}) => {
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
     }
 
-    return (
-        <input type="text" className={styles.InputText} id={id} name={name} maxLength={maxLength} placeholder={placeholder} value={value} onChange={handleChange}/>
-    )
+    return (<input type="text" className={`${styles.InputText} ${hasError && styles.InputTextError}`} id={id} name={name} maxLength={maxLength} placeholder={placeholder} value={value} onChange={handleChange} />)
 }
 
 export default InputText;
