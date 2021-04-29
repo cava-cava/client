@@ -28,7 +28,10 @@
       max-width: 300px;
     }
 
-    @include media('mobile') {
+    @include media('tablet') {
+      display: none;
+    }
+    @include media('low-tablet') {
       display: none;
     }
   }
@@ -43,7 +46,11 @@
       border-radius: 20px;
     }
 
-    @include media('mobile') {
+    @include media('tablet') {
+      display: none;
+    }
+
+    @include media('low-tablet') {
       display: none;
     }
   }
@@ -56,13 +63,10 @@
     &Phone {
       position: relative;
       margin: auto;
-      min-width: 355px;
-      min-height: 725px;
-      max-width: 340px;
-      max-height: 725px;
       border-radius: $radius;
       box-shadow: 0 0 0 11px #1f1f1f, 0 0 0 13px #191919, 0 0 0 20px #111;
       background: white;
+      @include deviceContainer;
     }
   }
 }

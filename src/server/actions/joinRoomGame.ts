@@ -6,15 +6,18 @@ import {Server} from "socket.io";
 /**
  * Will connect a socket to a specified game
  * @param username string
+ * @param avatar string
  * @param io A connected socket.io server
  * @param socket A connected socket.io socket
  * @param room An object that represents a room from the `rooms` instance variable object
  */
-export const joinRoomGame = (username:string, io:Server, socket:ExtendedSocket, room:Room) => {
+export const joinRoomGame = (username:string, avatar:string, io:Server, socket:ExtendedSocket, room:Room) => {
     const usersDisconnected = room.usersDisconnected.filter(user => user.name === username)
     if(usersDisconnected.length > 0) {
         const user:User = usersDisconnected[0]
         socket.username = username
+        socket.avatar = avatar
+        user.avatar = avatar
         user.id = socket.id
         socket.color = user.color
         room.colors = room.colors.filter(color => user.color !== color)

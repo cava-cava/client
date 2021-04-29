@@ -36,24 +36,24 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets fired when a user wants to create a new room.
      */
-    socket.on('createRoom', (username:string, callback) => {
+    socket.on('createRoom', (username:string, avatar: string, callback) => {
         const room:Room = createRoom(rooms)
         rooms[room.id] = room;
         // have the socket join the room they've just created.
-        joinRoom(username, io, socket, room);
+        joinRoom(username, avatar, io, socket, room);
         callback();
     });
 
     /**
      * Gets fired when a player has joined a room.
      */
-    socket.on('joinRoom', (username:string, roomId:string, callback) => {
+    socket.on('joinRoom', (username:string, avatar: string, roomId:string, callback) => {
         const room:Room = rooms[roomId];
         if(room) {
             if(room.game.isStart) {
-                joinRoomGame(username, io, socket, room)
+                joinRoomGame(username, avatar, io, socket, room)
             }
-            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, io, socket, room);
+            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, avatar, io, socket, room);
             else socket.emit('error', "La room est complète");
         } else socket.emit('error', "La room n'existe pas");
         callback();

@@ -20,4 +20,8 @@ button, input {
 
 button {
   cursor: pointer;
+
+  &:focus {
+    animation: push 0.3s linear 1;
+  }
 }

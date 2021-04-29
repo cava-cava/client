@@ -84,6 +84,12 @@
   height: $height;
 }
 
+@mixin deviceContainer() {
+  min-width: 355px;
+  min-height: 725px;
+  max-width: 340px;
+  max-height: 725px;
+}
 
 @mixin defaultBackground() {
   position: absolute;

@@ -7,11 +7,27 @@
   outline: none;
   width: 55%;
   padding: 10px 25px;
-  height: 35px;
-  font-weight: bold;
+  height: 45px;
+  font-weight: 700;
   font-size: 20px;
+
+  &[name="join"] {
+    color: $black;
+    font-size: 16px;
+    background: url("../../assets/svg/button-transparent.svg") center center no-repeat;
+    padding: 0 20px 5px;
+    height: 60px;
+    width: 110px;
+    background-size: 100% 100%;
+    text-align: center;
+  }
 }
 
 .InputTextError {
+  color: $red;
+  animation: buzz-out 0.75s linear 1;
+
+  &[name="join"] {
     color: $red;
+  }
 }
