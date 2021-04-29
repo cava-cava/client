@@ -1,36 +1,23 @@
-import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
-import {useHistory} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
+import React from 'react';
+import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
-import {SET_NAME} from "../store/user/types";
+import styles from './Setup.module.scss'
+import AvatarHeader from "../components/Avatar/AvatarHeader";
+import SelectAvatar from "../components/Avatar/SelectAvatar";
+import FormUsername from "../components/Form/FormUsername";
 
 const Setup = () => {
-    const history = useHistory();
     const user = useSelector((state: ApplicationState) => state.user.data);
-    const [name, setName] = useState(user.name);
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        if(name) history.push('/rooms')
-    }, []);
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
-    }
-
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        if(name) {
-            dispatch({type: SET_NAME, payload: name})
-            history.push('/rooms')
-        }
-    }
     return (
-        <div className="setup">
-            <h1>Setup</h1>
-            <form autoComplete="off" onSubmit={handleSubmit}>
-                <input type="text" id="name" name="name" maxLength={12} placeholder="PseudoCool74" value={name} onChange={handleChange}/>
-                <input type="submit" value="Démarrez"/>
-            </form>
+        <div className={styles.Setup}>
+            <div>
+                <div>
+                    <AvatarHeader color={"noir"} avatarNumber={user.avatar} />
+                    <SelectAvatar color={"noir"} />
+                </div>
+               <FormUsername name={user.name} showSubmit={true}/>
+            </div>
         </div>
     );
 }

@@ -1,5 +1,11 @@
+@import "src/scss/helpers";
+
 .SocketLog {
     position: fixed;
     top: 5px;
     right: 5px;
+
+    @include media('mobile') {
+        display: none;
+    }
 }
