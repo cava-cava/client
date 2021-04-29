@@ -1,17 +1,35 @@
-import React, {FunctionComponent} from 'react';
-import styles from './TheCards.module.scss'
+import React, { FunctionComponent } from "react";
+import styles from "./TheCards.module.scss";
+
+import lottie from "./../../assets/anims/teste/data.json";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import cardWaouh from "./../../assets/png/carte_waouh.png";
+import cardCheh from "./../../assets/png/carte_cheh.png";
 
 type TheCardsProps = {
-    Description: string
-}
+  Description: string;
+  points: number;
+  animation: string
+};
 
-const TheCards: FunctionComponent<TheCardsProps> = ({Description}) => {
-
-    return (
-        <div className={styles.TheCards}>
-            {Description}
-        </div>
-    )
-}
+const TheCards: FunctionComponent<TheCardsProps> = ({
+  Description,
+  points,
+  animation
+}) => {
+  return (
+    <div className={styles.TheCards}>
+      <div className={styles.CardContainer}>
+        <img
+          className={styles.Card}
+          src={points > 0 ? cardWaouh : cardCheh}
+          alt='carte'
+        ></img>
+        <Player autoplay loop src={animation} className={styles.anim} />
+        <div className={`${styles.description} ${points > 0 ? styles.waouh : styles.cheh}`}>{Description}</div>
+      </div>
+    </div>
+  );
+};
 
 export default TheCards;
