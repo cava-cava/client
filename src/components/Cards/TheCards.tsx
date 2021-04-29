@@ -9,11 +9,13 @@ import cardCheh from "./../../assets/png/carte_cheh.png";
 type TheCardsProps = {
   Description: string;
   points: number;
+  animation: string
 };
 
 const TheCards: FunctionComponent<TheCardsProps> = ({
   Description,
   points,
+  animation
 }) => {
   return (
     <div className={styles.TheCards}>
@@ -23,8 +25,8 @@ const TheCards: FunctionComponent<TheCardsProps> = ({
           src={points > 0 ? cardWaouh : cardCheh}
           alt='carte'
         ></img>
-        <Player autoplay loop src={lottie} className={styles.anim} />
-        <div className={styles.description}>{Description}</div>
+        <Player autoplay loop src={animation} className={styles.anim} />
+        <div className={`${styles.description} ${points > 0 ? styles.waouh : styles.cheh}`}>{Description}</div>
       </div>
     </div>
   );

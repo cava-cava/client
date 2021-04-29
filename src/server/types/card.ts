@@ -3,5 +3,7 @@ export interface Card {
     Description: string
     Points: number,
     Alternative: Card[]
+    animation: string,
+    audio: string,
 }
 
