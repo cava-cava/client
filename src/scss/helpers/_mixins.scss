@@ -89,6 +89,7 @@
   min-height: 725px;
   max-width: 340px;
   max-height: 725px;
+  overflow: hidden;
 }
 
 @mixin defaultBackground() {

@@ -1,10 +1,25 @@
 .TheHeader {
   display: flex;
 
+  .codeContainer {
+position: relative;
+width: 23%
+  }
+
+  .border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .code {
     font-style: italic;
     font-weight: 400;
     font-size: 14px;
     margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
   }
 }

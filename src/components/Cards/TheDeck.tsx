@@ -6,6 +6,7 @@ type TheDeckProps = {
     color?: string,
     deskClick: () => void,
     style: object
+    joker?: boolean
 }
 
 const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick, style}) => {
