@@ -25,9 +25,3 @@ button, input[type="submit"] {
     animation: push 0.3s linear 1;
   }
 }
-.fade-enter-active, .fade-exit-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-exit /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
