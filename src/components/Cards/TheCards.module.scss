@@ -1,13 +1,46 @@
 .TheCards {
-    position: absolute;
-    height: 40%;
-    width: 90%;
-    top: 0;
-    bottom: 0;
-    display: block;
-    margin: auto;
-    border-radius: 10px;
-    border: 1px solid grey;
-    box-shadow: 0 8px 8px -6px rgba(0,0,0,0.25);
-    background-color: white;
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  top: 0;
+  bottom: 0;
+  display: block;
+  margin: auto;
+}
+
+.CardContainer {
+  position: relative;
+  height: 56%;
+  width: 69%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(10deg);
+}
+.description {
+  font-family: "OswaldBold";
+  font-size: 15px;
+  position: absolute;
+  text-align: left;
+  width: 75%;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+}
+
+.anim {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  width: 78%;
+  /* top: 50%; */
+  transform: translate(-50%, -50%);
+}
+.Card {
+  height: auto;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  // transform: rotate(10deg);
 }
