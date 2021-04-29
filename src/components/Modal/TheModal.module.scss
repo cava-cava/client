@@ -9,10 +9,9 @@
     height: 100%;
     z-index: 10;
     padding: 0;
-    overflow-y: scroll;
 
     > div {
-        padding: 20px;
+        padding: 75px 2rem;
     }
 
     @include media('exclude-mobile') {
@@ -40,13 +39,17 @@
 
         button {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            right: 5%;
+            top: 5%;
             cursor: pointer;
+            background: none;
+            border: none;
         }
     }
 
     &Body {
         line-height: 1;
+        margin-top: 2rem;
+        text-align: center;
     }
 }

@@ -1,0 +1,27 @@
+@import "../../scss/helpers";
+
+.StartGame {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+    margin: auto;
+    text-align: center;
+
+    > div {
+        color: $grey;
+    }
+
+    > button {
+        font-size: 18px;
+        font-weight: 700;
+        background: url("../../assets/svg/button-black.svg") center center no-repeat;
+        padding: 10px 20px 15px;
+        height: 60px;
+        width: 150px;
+        background-size: 100% 100%;
+        border: none;
+        color: $white;
+    }
+}

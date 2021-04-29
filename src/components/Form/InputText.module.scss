@@ -11,8 +11,11 @@
   font-weight: 700;
   font-size: 20px;
 
+  &::placeholder {
+    color: $grey;
+  }
+
   &[name="join"] {
-    color: $black;
     font-size: 16px;
     background: url("../../assets/svg/button-transparent.svg") center center no-repeat;
     padding: 0 20px 5px;
@@ -20,14 +23,14 @@
     width: 110px;
     background-size: 100% 100%;
     text-align: center;
+
+    &::placeholder {
+      color: $black;
+    }
   }
 }
 
 .InputTextError {
   color: $red;
   animation: buzz-out 0.75s linear 1;
-
-  &[name="join"] {
-    color: $red;
-  }
 }

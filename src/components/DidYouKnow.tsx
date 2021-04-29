@@ -4,6 +4,9 @@ import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import {shuffle} from "../mixins/shuffle";
+import TitleImg from "./TitleImg";
+import title from "../assets/title/saviez-vous.png"
+import styles from './DidYouKnow.module.scss'
 
 const DidYouKnow: FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -29,8 +32,8 @@ const DidYouKnow: FunctionComponent = () => {
     }, []);
 
     return (knows && knows[0]?.text) ? (
-        <div>
-            <h2>Le Saviez-vous</h2>
+        <div className={styles.DidYouKnow}>
+            <TitleImg src={title} />
             <p>{knows[0]?.text}</p>
         </div>
     ) : null

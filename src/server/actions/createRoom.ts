@@ -1,5 +1,6 @@
 import {Room, Rooms} from "../types/rooms";
 import {nanoid} from "nanoid";
+import {shuffle} from "../../mixins/shuffle";
 
 /**
  * Create and generate nanoid for connect a socket to a room
@@ -11,7 +12,7 @@ export function createRoom(rooms: Rooms) {
         sockets: [],
         users: [],
         usersDisconnected: [],
-        colors: ['red', 'blue', 'yellow', 'green', 'purple', 'orange'],
+        colors: shuffle(['#006EFF', '#ED3780', '#00F090', '#8733EA', '#FC8A28', '#FFF500']),
         game: {
             points: 100,
             round: 0,
