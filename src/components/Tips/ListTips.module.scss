@@ -1,5 +1,11 @@
 .ListTips {
   overflow-y: scroll;
-  height: 70vh;
+  height: 50%;
   width: 100%;
+
+  > div {
+    background: url("../../assets/svg/bulle_2.svg") center center no-repeat;
+    background-size: 100% 100%;
+    width: 80%;
+  }
 }

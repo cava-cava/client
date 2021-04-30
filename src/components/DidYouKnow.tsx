@@ -28,7 +28,7 @@ const DidYouKnow: FunctionComponent = () => {
     useEffect(() => {
         if (!knows || knows.length <= 0) {
             fetchKnows()
-        }
+        } else dispatch({type: FETCH_KNOWS_SUCCESS, payload: shuffle(knows)})
     }, []);
 
     return (knows && knows[0]?.text) ? (

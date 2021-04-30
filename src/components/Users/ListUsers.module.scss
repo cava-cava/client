@@ -14,6 +14,11 @@
     margin: auto;
     background: url("../../assets/svg/cercle.svg") center center no-repeat;
     background-size: 100% 100%;
+
+    > div {
+      font-weight: 700;;
+    }
+
     img {
       width: 100%;
     }

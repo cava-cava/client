@@ -1,18 +1,29 @@
-.Form {
-  &Tips {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 5%;
-    display: flex;
+@import "../scss/helpers";
 
-    textarea {
-      resize: none;
-      width: 70%;
+.Tips {
+  @include defaultBackground;
+
+  > div {
+    &:first-child {
+      position: relative;
+      height: 100%;
+      padding: 0 2rem;
+
+      > img {
+        object-fit: contain;
+        height: 100px;
+      }
+
+      p {
+        font-weight: 700;
+        font-size: 16px;
+      }
     }
 
-    input {
-      width: 30%;
+    &:last-child {
+      position: absolute;
+      right: 5%;
+      top: 5%;
     }
   }
 }
