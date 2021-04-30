@@ -1,0 +1,22 @@
+@import "../scss/helpers";
+
+.TheButton {
+  display: block;
+  margin: auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: $white;
+  background: url("../assets/svg/button-black.svg") center center no-repeat;
+  line-height: 53px;
+  height: 60px;
+  width: 140px;
+  background-size: 100% 100%;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:focus,&:active {
+    animation: push 0.3s linear 1;
+  }
+}

@@ -20,7 +20,7 @@ const Rooms = () => {
         <div className={styles.Rooms}>
             <div>
                 <Link to={"/setup"}>
-                    <AvatarHeader color={"noir"} avatarNumber={user.avatar} />
+                    <AvatarHeader color={"black"} avatarNumber={user.avatar} />
                 </Link>
                 <FormUsername name={user.name} showSubmit={false}/>
                 <FormJoinRoom username={user.name} avatar={user.avatar} />
