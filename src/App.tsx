@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styles from './App.module.scss';
 import {MobilePrompt} from "./components/Prompt/MobilePrompt";
-import logo from './assets/svg/logo.svg'
+import logo from './assets/png/logo.png'
 import qrCode from './assets/png/qr.png'
 import {socket} from "./socketClient";
 import SocketLog from "./components/SocketLog";
@@ -13,9 +13,11 @@ import {SET_ID} from "./store/user/types";
 import {FETCH_MESSAGES_ERROR, FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS, Message} from "./store/messages/types";
 import axios from "axios";
 import AppDescription from "./components/AppDescription";
+import useDidYouKnow from "./hooks/useDidYouKnow";
 
 const App = () => {
     const dispatch = useDispatch();
+    useDidYouKnow();
 
     /**
      * Fetch End Messages
