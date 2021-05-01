@@ -1,16 +1,12 @@
 import React, {FormEvent, FunctionComponent, useEffect, useState} from 'react';
-import styles from "../../pages/Tips.module.scss";
+import styles from "./FormTips.module.scss";
 import InputText from "./InputText";
-import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, SET_JWT_TIPS, Tip} from "../../store/tips/types";
+import {ADD_TIPS_SUCCESS, FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, SET_JWT_TIPS, Tip} from "../../store/tips/types";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
 
-type FormTipsProps = {
-    setTips: (tip: Tip) => void
-}
-
-const FormTips: FunctionComponent<FormTipsProps> = ({setTips}) => {
+const FormTips: FunctionComponent = () => {
     const dispatch = useDispatch();
     const jwt = useSelector((state: ApplicationState) => state.tips.jwt);
     const [message, setMessage] = useState('');
@@ -28,7 +24,6 @@ const FormTips: FunctionComponent<FormTipsProps> = ({setTips}) => {
             identifier: 'Happiness',
             password: 'Happiness',
         }).then(({data}) => {
-            console.log(data)
             dispatch({type: SET_JWT_TIPS, payload: data.jwt})
         })
             .catch(function (error) {
@@ -53,7 +48,7 @@ const FormTips: FunctionComponent<FormTipsProps> = ({setTips}) => {
                 Authorization: `Bearer ${jwt}`
             }
         }).then(() => {
-            setTips(tip)
+            dispatch({type: ADD_TIPS_SUCCESS, payload: tip})
             setMessage('');
         }).catch((error) => {
             console.error(error);
@@ -62,8 +57,11 @@ const FormTips: FunctionComponent<FormTipsProps> = ({setTips}) => {
     }
 
     return (
-        <form className={styles.FormTips} autoComplete="off" onSubmit={handleSubmit}>
-            <InputText id={"tips"} name={"tips"} value={message} setValue={setMessage} hasError={false}/>
+        <form className={`${styles.FormTips} ${message.length > 0 && styles.FormTipsActive}`} autoComplete="off" onSubmit={handleSubmit}>
+            <div>
+                <InputText id={"tips"} name={"tips"} value={message} setValue={setMessage} hasError={false}/>
+                <input type="submit" value=""/>
+            </div>
         </form>
     )
 }

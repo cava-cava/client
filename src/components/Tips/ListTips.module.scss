@@ -1,11 +1,33 @@
 .ListTips {
-  overflow-y: scroll;
-  height: 50%;
   width: 100%;
 
   > div {
-    background: url("../../assets/svg/bulle_2.svg") center center no-repeat;
-    background-size: 100% 100%;
     width: 80%;
+    > p {
+      width: 90%;
+      word-break: break-word;
+    }
+
+    &:nth-child(n) {
+      right: auto;
+      margin-right: auto;
+      margin-left: 0;
+    }
+
+    &:nth-child(2n) {
+      text-align: right;
+      left: auto;
+      right: 0;
+      margin-right: 0;
+      margin-left: auto;
+    }
+
+    &:first-child {
+      width: 100%;
+
+      > p {
+        width: 100%;
+      }
+    }
   }
 }

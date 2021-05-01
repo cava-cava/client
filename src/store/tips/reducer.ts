@@ -1,6 +1,7 @@
 import {Reducer} from "redux";
 
 import {
+  ADD_TIPS_SUCCESS,
   FETCH_TIPS_ERROR,
   FETCH_TIPS_REQUEST,
   FETCH_TIPS_SUCCESS,
@@ -23,6 +24,11 @@ const reducer: Reducer<tipsState, TipsActionTypes> = (state:tipsState = initialS
     }
     case FETCH_TIPS_SUCCESS: {
       return { ...state, loading: false, data: action.payload };
+    }
+    case ADD_TIPS_SUCCESS: {
+      const tips = [...state.data]
+      tips.push(action.payload)
+      return { ...state, loading: false, data: tips};
     }
     case SET_JWT_TIPS: {
       return { ...state, loading: false, jwt: action.payload };

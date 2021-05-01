@@ -7,16 +7,25 @@
     &:first-child {
       position: relative;
       height: 100%;
-      padding: 0 2rem;
 
       > img {
         object-fit: contain;
         height: 100px;
       }
 
-      p {
+      > p {
         font-weight: 700;
         font-size: 16px;
+      }
+
+      > div {
+        overflow-y: scroll;
+        height: 65%;
+        padding: 0 2rem;
+      }
+
+      > form {
+        margin-top: 1rem;
       }
     }
 

@@ -19,12 +19,6 @@ const Tips = () => {
     useLeaveRoom();
 
     /**
-     * Set Tips
-     */
-    const setTips = (tip: Tip) => {
-        tips.push(tip)
-    }
-    /**
      * Fetch Tips
      */
     const fetchTips = async () => {
@@ -47,13 +41,15 @@ const Tips = () => {
         <div className={styles.Tips}>
             <div>
                 <TitleImg src={title} />
-                <p>
-                    Ici tu peux t’exprimer en apportant
-                    des conseils pour déculpabiliser
-                    sur la pression du bonheur !
-                </p>
-                <ListTips tips={tips}/>
-                <FormTips setTips={setTips}/>
+                <div>
+                    <p>
+                        Ici tu peux t’exprimer en apportant
+                        des conseils pour déculpabiliser
+                        sur la pression du bonheur !
+                    </p>
+                    <ListTips tips={tips}/>
+                </div>
+                <FormTips />
             </div>
             <div>
                 <Link to="/end"><IconClose/></Link>
