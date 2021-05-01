@@ -1,0 +1,14 @@
+.MessageTips {
+    position: relative;
+    margin-bottom: -25px;
+
+    > p {
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: left;
+        margin-right: 1rem;
+        margin-left: 1rem;
+        font-weight: 300;
+    }
+}

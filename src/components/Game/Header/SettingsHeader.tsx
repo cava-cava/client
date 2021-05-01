@@ -3,6 +3,7 @@ import styles from './SettingsHeader.module.scss'
 import settingsIcon from '../../../assets/svg/settings.svg'
 import useModal from "../../../hooks/useModal";
 import TheModal from "../../Modal/TheModal";
+import title from "../../../assets/title/parametres.png"
 
 const SettingsHeader: FunctionComponent = () => {
     const { isShowing: isSettingsShowed, toggle: toggleSettings } = useModal();
@@ -15,9 +16,9 @@ const SettingsHeader: FunctionComponent = () => {
             <TheModal
                 isShowing={isSettingsShowed}
                 hide={toggleSettings}
-                title="Paramètres du jeu"
+                title={title}
             >
-                Ici c'est les paramètres du jeu
+                En cours de développement ...
             </TheModal>
         </div>
     )

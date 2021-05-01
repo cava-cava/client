@@ -54,8 +54,8 @@ io.on("connect", (socket: ExtendedSocket) => {
                 joinRoomGame(username, avatar, io, socket, room)
             }
             else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, avatar, io, socket, room);
-            else socket.emit('error', "La room est complète");
-        } else socket.emit('error', "La room n'existe pas");
+            else socket.emit('error', "La partie est complète");
+        } else socket.emit('error', "La partie n'existe pas");
         callback();
     });
 

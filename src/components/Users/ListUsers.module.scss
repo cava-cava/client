@@ -1,0 +1,26 @@
+.ListUsers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 30px 17px;
+  grid-template-areas:
+    ". . ."
+    ". . .";
+
+  > div {
+    width: 40px;
+    height: 38px;
+    padding: 7px;
+    margin: auto;
+    background: url("../../assets/svg/cercle.svg") center center no-repeat;
+    background-size: 100% 100%;
+
+    > div {
+      font-weight: 700;;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

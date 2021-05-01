@@ -13,8 +13,8 @@ const Setup = () => {
         <div className={styles.Setup}>
             <div>
                 <div>
-                    <AvatarHeader color={"noir"} avatarNumber={user.avatar} />
-                    <SelectAvatar color={"noir"} />
+                    <AvatarHeader color={"black"} avatarNumber={user.avatar} />
+                    <SelectAvatar color={"black"} />
                 </div>
                <FormUsername name={user.name} showSubmit={true}/>
             </div>

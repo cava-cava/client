@@ -1,20 +1,27 @@
+@import "../scss/helpers";
 .End {
+    @include gameOverBackground;
+
+    > div {
+        &:first-child {
+            position: relative;
+            height: 100%;
+        }
+    }
+
     &Buttons {
         display: flex;
         position: absolute;
-        bottom: 20px;
+        bottom: 1rem;
         width: 100%;
 
         > a {
-            cursor: pointer;
-            margin: auto;
-            width: 100%;
-            background: #007aff;
-            padding: 5px 10px;
-            max-width: 80px;
-
             &:first-child {
-                background: lightgrey;
+                margin-right: 0.5rem;
+            }
+
+            &:last-child {
+                margin-left: 0.5rem;
             }
         }
     }

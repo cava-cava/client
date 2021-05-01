@@ -1,4 +1,12 @@
-import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, FETCH_TIPS_SUCCESS, SET_JWT_TIPS, Tip, TipsActionTypes} from "./types";
+import {
+  ADD_TIPS_SUCCESS,
+  FETCH_TIPS_ERROR,
+  FETCH_TIPS_REQUEST,
+  FETCH_TIPS_SUCCESS,
+  SET_JWT_TIPS,
+  Tip,
+  TipsActionTypes
+} from "./types";
 
 export function FetchTipsRequest(): TipsActionTypes {
   return {
@@ -17,6 +25,13 @@ export function FetchTipsSuccess(Tips: Tip[]): TipsActionTypes {
   return {
     type: FETCH_TIPS_SUCCESS,
     payload: Tips
+  }
+}
+
+export function AddTipsSuccess(Tip: Tip): TipsActionTypes {
+  return {
+    type: ADD_TIPS_SUCCESS,
+    payload: Tip
   }
 }
 

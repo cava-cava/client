@@ -1,0 +1,14 @@
+@import "../../scss/helpers";
+
+.CodeHeader {
+  font-size: 18px;
+  font-weight: 700;
+  background: url("../../assets/svg/button-transparent.svg") center center no-repeat;
+  padding: 10px 20px 15px;
+  height: 60px;
+  width: 120px;
+  background-size: 100% 100%;
+  border: none;
+  color: $black;
+  margin-bottom: 1rem;
+}

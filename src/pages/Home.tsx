@@ -6,7 +6,7 @@ const Home = () => {
     const history = useHistory();
     useEffect(() => {
        setTimeout(()=>{history.push('/setup')}, 5000)
-    });
+    }, []);
     return (
     <div className={styles.Home}/>
   );
