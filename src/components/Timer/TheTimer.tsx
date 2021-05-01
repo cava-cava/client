@@ -32,7 +32,6 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children})
         <div className={styles.TheTimer}>
             <div>{children}</div>
             {(seconds && seconds > 0) ? <svg><circle ref={countdownEl} r="32" cx="32" cy="32" /></svg> : null}
-            {/* {seconds} */}
         </div>
     )
 }

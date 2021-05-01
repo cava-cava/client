@@ -21,5 +21,5 @@ export function sendDirt(userKey:number, playerKey:number, room: Room, io:Server
     if(--room.users[userKey].dirt < 0) room.users[userKey].dirt = 0
     // add statistics use dirt
     ++room.users[userKey].statisticsGame.useDirt;
-    sendCard(playerKey, alternativeCard, room, io)
+    sendCard(playerKey, alternativeCard, room, io, true)
 }

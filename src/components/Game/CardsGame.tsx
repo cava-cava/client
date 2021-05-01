@@ -7,6 +7,8 @@ import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
 import {User} from "../../store/user/types";
 import {Card} from "../../server/types/card";
+import {Room} from "./../../server/types/rooms"
+
 
 import cardPiocheCheh from "./../../assets/png/carte_pioche_cheh.png";
 import cardPiocheNoir from "./../../assets/png/carte_pioche_noir.png";
@@ -21,6 +23,7 @@ type TheGameProps = {
 
 const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
     const [currentCard, setCurrentCard] = useState<Card>()
+    const [isAlternative, setIsAlternative] = useState<boolean>(false)
 
     const drawClick = () => {
         if(player && user.id === player.id) {
@@ -51,8 +54,9 @@ const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
     }
 
     useEffect(() => {
-        const pickedCard = (card:Card) => {
+        const pickedCard = (card:Card, isAlternative:boolean) => {
             setCurrentCard(card);
+            setIsAlternative(isAlternative);
             console.log('card picked', card)
         }
         socket.on('pickedCard', pickedCard);
@@ -64,13 +68,13 @@ const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
         <>
             {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
-            {currentCard && <div className={styles.GameCenter}><TheCards Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
+            {currentCard && <div className={styles.GameCenter}><TheCards alternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
             <div className={styles.Pioche}>
                 <div className={styles.container}>
-                    <TheBottomDeck number={user.joker} joker={false} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
+                    <TheBottomDeck number={user.joker} joker={true} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
                 </div>
                 <div className={styles.container}>
-                    <TheBottomDeck number={user.dirt} joker={true} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
+                    <TheBottomDeck number={user.dirt} joker={false} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
                 </div>
             </div>
         </>

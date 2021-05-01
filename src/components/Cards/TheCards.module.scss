@@ -15,6 +15,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(10deg);
+
+
+}
+
+.isAlternative {
+  transform: translate(-50%, -50%) rotate(-10deg)!important;
 }
 
 .description {

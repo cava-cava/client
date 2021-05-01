@@ -1,12 +1,13 @@
 .UserProgressBar {
   position: absolute;
-  top: 0;
+  top: -10px;
   bottom: 0;
   margin: auto;
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   border-radius: 100%;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
   transition: 0.6s left ease-in-out;
 
   &Active {
@@ -16,7 +17,7 @@
 
 
   img {
-    width: 100%;
+    width: 75%;
     object-fit: contain;
   }
 }

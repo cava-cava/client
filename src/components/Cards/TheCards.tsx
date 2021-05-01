@@ -9,19 +9,21 @@ import cardCheh from "./../../assets/png/carte_cheh.png";
 type TheCardsProps = {
   Description: string;
   points: number;
-  animation: string
+  animation: string;
+  alternative: boolean;
 };
 
 const TheCards: FunctionComponent<TheCardsProps> = ({
   Description,
   points,
-  animation
+  animation,
+  alternative
 }) => {
   return (
     <div className={styles.TheCards}>
-      <div className={styles.CardContainer}>
+      <div className={`${styles.CardContainer} ${alternative ? styles.isAlternative : styles.regular}`}>
         <img
-          className={styles.Card}
+          className={styles.Card} 
           src={points > 0 ? cardWaouh : cardCheh}
           alt='carte'
         ></img>
