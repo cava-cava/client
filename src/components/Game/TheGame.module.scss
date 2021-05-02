@@ -4,6 +4,7 @@
     height: 100%;
     padding: 10px;
     border-radius: $radius;
+    
 
     &.ChehCard {
         background-image: url('../../assets/jpg/fond_outch.jpeg');
@@ -18,5 +19,7 @@
     &.devineQui {
         background-image: url('../../assets/jpg/fond_devinequi.jpeg');
         background-size: 100% 100%;
+        display: flex;
+        align-items: center;
     }
 }
