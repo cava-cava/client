@@ -2,6 +2,9 @@ import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from 'react'
 import {socket} from "../../../socketClient";
 import {Answer} from "../../../server/types/answer";
 import useSend from "../../../hooks/useSend";
+import styles from './TheGuess.module.scss'
+
+import InputText from '../../Form/InputText'
 
 type QuestionGuessProps = {
     roomId: string
@@ -30,9 +33,11 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey})
     return (
         <div>
             {!send ?
-                <form autoComplete="off" onSubmit={handleSubmit}>
-                    <input type="text" id="answer" name="answer" placeholder="Answer..." value={answer} onChange={handleChange}/>
-                    <input type="submit" value="Envoyez"/>
+                <form autoComplete="off" onSubmit={handleSubmit} className={styles.form}>
+
+                    {/* <InputText id={"answer"} name={"answer"} placeholder="Answer..." value={answer} onChange={handleChange}/> */}
+                    <input className={styles.input} type="text" id="answer" name="answer" placeholder="Answer..." value={answer} onChange={handleChange}/>
+                    <input className={styles.submit}type="submit" value="Envoyer"/>
                 </form>
                 : <div>En attente des autres joueurs</div>}
 
