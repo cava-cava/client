@@ -16,7 +16,7 @@ const End = () => {
     return (
         <div className={styles.End}>
             <div>
-                <AvatarHeader color={user.color} avatarNumber={user.avatar} />
+                <AvatarHeader color={user.color.replace('#', '')} avatarNumber={user.avatar} />
                 <EndMessages gameOver={user.gameOver}/>
             </div>
             <div className={styles.EndButtons}>

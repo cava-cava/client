@@ -10,7 +10,9 @@ const ListUsers: FunctionComponent<ListUsersProps> = ({users}) => {
         {[...Array(6)].map((x, index) => (
             <div key={index}>
                 <div>
-                    { users[index] && <img src={`/smiley/${users[index].color.replace('#', '')}/smiley_${users[index].avatar}.png`}/> }
+                    <div>
+                        { users[index] && <img src={`/smiley/${users[index].color.replace('#', '')}/smiley_${users[index].avatar}.png`}/> }
+                    </div>
                 </div>
                 { users[index] && <div>{users[index].name}</div>}
             </div>

@@ -13,7 +13,6 @@ import {Card} from "../types/card";
  * @param io A connected socket.io server
  */
 export function sendCard(playerKey: number, card:Card ,room: Room, io:Server, isAlternative=false) {
-    console.log(card)
     sendPointsUser(room.users[playerKey], card.Points)
     checkpoint(room, io)
     io.to(room.id).emit('pickedCard', card, isAlternative)

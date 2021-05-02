@@ -15,5 +15,6 @@ export interface Game {
     omgEvent: OmgEvent
     playerGame: PlayerGame
     isStart: boolean
+    isGameOver: boolean
     isLoading: boolean
 }

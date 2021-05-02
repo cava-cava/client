@@ -11,9 +11,11 @@ import {checkpoint} from "./checkpoint";
 export function checkGameOver(room: Room, io: Server) {
     room.users.map(user => {
         if (user.points >= room.game.points) {
+            room.game.isGameOver = true
             gameOver(room)
             checkpoint(room,io)
             io.to(room.id).emit('redirect', `/end`);
         }
     })
 }
+

@@ -34,6 +34,7 @@ export function createRoom(rooms: Rooms) {
                 trigger: false
             },
             isStart: false,
+            isGameOver: false,
             isLoading: false
         },
         timer: {
