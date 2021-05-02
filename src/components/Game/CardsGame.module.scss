@@ -4,7 +4,11 @@
     height: 100%;
     padding: 10px;
     border-radius: $radius;
-    
+
+    > p {
+        margin: 0;
+    }
+
 
     &.ChehCard {
         background-image: url('../../assets/jpg/fond_outch.jpeg');
