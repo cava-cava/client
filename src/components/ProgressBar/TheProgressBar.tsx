@@ -12,7 +12,7 @@ type TheProgressBarProps = {
 
 const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, playerKey}) =>
     <div className={styles.TheProgressBar}>
-        <img className={styles.jauge} src={progressBar} />
+        <img src={progressBar} />
         <div className={styles.TheProgressBarValue} style={{width: `${user.points}%`, backgroundColor: user.color}}/>
         <div>
             {users.map((user, index) => <UserProgressBar user={user} playerKey={playerKey} key={index}/>)}
