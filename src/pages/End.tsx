@@ -18,10 +18,10 @@ const End = () => {
             <div>
                 <AvatarHeader color={user.color} avatarNumber={user.avatar} />
                 <EndMessages gameOver={user.gameOver}/>
-                <div className={styles.EndButtons}>
-                    <Link to="/rooms" className={stylesButton.TheButton}>Rejouez</Link>
-                    <Link to="/tips" className={stylesButton.TheButton}>Tips</Link>
-                </div>
+            </div>
+            <div className={styles.EndButtons}>
+                <Link to="/rooms" className={stylesButton.TheButton}>Rejouez</Link>
+                <Link to="/tips" className={stylesButton.TheButton}>Tips</Link>
             </div>
         </div>
     );
