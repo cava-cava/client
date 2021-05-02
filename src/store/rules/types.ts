@@ -1,3 +1,5 @@
+import {FileStrapi} from "../../server/types/fileStrapi";
+
 export interface Rules {
   But?: string,
   Deroulement?: string,
@@ -7,11 +9,7 @@ export interface Rules {
 export interface RulesCards {
   title: string
   description: string
-  image: RulesCardsImg
-}
-
-export interface RulesCardsImg {
-  url: string
+  image: FileStrapi
 }
 
 export interface rulesState {

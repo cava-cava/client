@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from "react";
 import styles from "./TheCards.module.scss";
-
-import lottie from "./../../assets/anims/teste/data.json";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
 import cardWaouh from "./../../assets/png/carte_waouh.png";
 import cardCheh from "./../../assets/png/carte_cheh.png";
+import {FileStrapi} from "../../server/types/fileStrapi";
 
 type TheCardsProps = {
   Description: string;
   points: number;
-  animation: string;
+  animation: FileStrapi;
   alternative: boolean;
 };
 
@@ -23,11 +22,11 @@ const TheCards: FunctionComponent<TheCardsProps> = ({
     <div className={styles.TheCards}>
       <div className={`${styles.CardContainer} ${alternative ? styles.isAlternative : styles.regular}`}>
         <img
-          className={styles.Card} 
+          className={styles.Card}
           src={points > 0 ? cardWaouh : cardCheh}
           alt='carte'
         ></img>
-        <Player autoplay loop src={animation} className={styles.anim} />
+        <Player autoplay src={animation.url} className={styles.anim} />
         <div className={`${styles.description} ${points > 0 ? styles.waouh : styles.cheh}`}>{Description}</div>
       </div>
     </div>
