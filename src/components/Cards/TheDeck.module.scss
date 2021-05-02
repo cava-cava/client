@@ -1,9 +1,6 @@
 .TheDeck {
   position: relative;
-  margin: 0 auto;
   padding: 0;
-  height: 5.5em;
-  width: 4em;
   cursor: pointer;
 
   .card {
@@ -20,5 +17,10 @@
     bottom: 0;
     box-shadow: .2em .2em .5em #333;
     background-color: dodgerblue;
+  }
+
+  .deck {
+    width: 75%;
+    height: auto;
   }
 }

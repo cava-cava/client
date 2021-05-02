@@ -15,13 +15,14 @@ import cardPiocheNoir from "./../../assets/png/carte_pioche_noir.png";
 import cardPiocheCava from "./../../assets/png/carte_pioche_oh_ca_va.png";
 import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
 
-type TheGameProps = {
+type CardsGameProps = {
     player?: User
     user: User
     roomId: string
+    setCardType: (value:string) => void
 }
 
-const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
+const CardsGame: FunctionComponent<CardsGameProps> = ({player, user, roomId, setCardType}) => {
     const [currentCard, setCurrentCard] = useState<Card>()
     const [isAlternative, setIsAlternative] = useState<boolean>(false)
 
@@ -56,6 +57,17 @@ const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
     useEffect(() => {
         const pickedCard = (card:Card, isAlternative:boolean) => {
             setCurrentCard(card);
+            if(card){
+                console.log('ifcurrentcard')
+                if(card.Points > 0){
+                    setCardType('waouh')
+                    console.log('waouh')
+                }
+                else {
+                    console.log('cheh')
+                    setCardType('cheh')
+                }
+            }
             setIsAlternative(isAlternative);
             console.log('card picked', card)
         }
@@ -81,4 +93,4 @@ const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
     )
 }
 
-export default TheGame;
+export default CardsGame;
