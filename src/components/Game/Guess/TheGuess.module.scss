@@ -3,10 +3,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-image: url("../../../assets/jpg/fond_devinequi.jpeg");
+  background-size: 100% 100%;
 
   & .question {
-      width: 75%;
+    width: 75%;
   }
+
 
   .buttonContainer {
     position: relative;
@@ -15,11 +18,11 @@
   }
 
   .answerContainer {
-      display: flex;
-      flex-direction: column;
-      height: auto;
-      position: relative;
-      align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    position: relative;
+    align-items: center;
   }
 
   .buttonInner {
@@ -31,14 +34,13 @@
   }
 
   .buttonContainer {
-      margin-bottom: 20px;
-      height: 65px;
-      width: 234px;
+    margin-bottom: 20px;
+    height: 65px;
+    width: 234px;
   }
 
   .answerScreen {
     height: auto;
-
   }
 
   .button {

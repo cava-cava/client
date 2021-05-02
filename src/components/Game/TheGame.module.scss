@@ -1,0 +1,17 @@
+@import "../../scss/helpers";
+
+.TheGame {
+    height: 100%;
+    padding: 10px;
+    border-radius: $radius;
+
+    &.ChehCard {
+        background-image: url('../../assets/jpg/fond_outch.jpeg');
+        background-size: 100% 100%;
+    }
+
+    &.WaouhCard {
+        background-image: url('../../assets/jpg/fond_waouh.jpeg');
+        background-size: 100% 100%;
+    }
+}
