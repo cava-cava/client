@@ -17,7 +17,7 @@ const UserHeader: FunctionComponent<UserHeaderProps> = ({user, roomId}) => {
             <img src={borderAvatar} className={styles.borderAvatar} />
             <div className={styles.avatar} >
                 <TheTimer userKey={user.key} roomId={roomId}>
-                    <img src={avatar}/>
+                    <img src={`/smiley/${user.color.replace('#', '')}/smiley_${user.avatar}.png`}/>
                 </TheTimer>
             </div>
             <div className={styles.user} >
