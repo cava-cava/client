@@ -14,6 +14,7 @@ const MessageTips: FunctionComponent<MessageTipsProps> = ({index, message, date}
     return (
         <div className={styles.MessageTips} style={{opacity: date ? 1 : 0.5}}>
             <p>{message}</p>
+            {!date && <p>en attente de validation...</p>}
             {
                 index === 0 ? <img src={bull1}/> :
                     index % 2 === 0 ? <img src={bull3}/> : <img src={bull2} />
