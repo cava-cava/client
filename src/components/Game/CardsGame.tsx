@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import styles from "../../pages/Game.module.scss";
+import styles from "./CardsGame.module.scss";
 import TheDeck from "../Cards/TheDeck";
 import TheBottomDeck from "../Cards/TheBottomDeck";
 import TheCards from "../Cards/TheCards";
@@ -20,12 +20,12 @@ type CardsGameProps = {
     player?: User
     user: User
     roomId: string
-    setCardType: (value:string) => void
 }
 
-const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, roomId, setCardType}) => {
+const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, roomId}) => {
     const [currentCard, setCurrentCard] = useState<Card>()
     const [isAlternative, setIsAlternative] = useState<boolean>(false)
+    const [cardType, setCardType] = useState<string>('');
 
     const drawClick = () => {
         if(player && user.id === player.id) {
@@ -59,16 +59,13 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         const pickedCard = (card:Card, isAlternative:boolean) => {
             setCurrentCard(card);
             if(card){
-                console.log('ifcurrentcard')
                 if(card.Points > 0){
                     setCardType('waouh')
-                    console.log('waouh')
                 }
                 else {
-                    console.log('cheh')
                     setCardType('cheh')
                 }
-            }
+            } else setCardType('')
             setIsAlternative(isAlternative);
             console.log('card picked', card)
         }
@@ -78,7 +75,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         };
     }, [])
     return (
-        <>
+        <div className={`${styles.CardsGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard}` }>
             <TheHeader user={user} code={roomId}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
             {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
@@ -92,7 +89,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
                     <TheBottomDeck number={user.dirt} joker={false} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

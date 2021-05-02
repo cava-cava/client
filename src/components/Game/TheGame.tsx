@@ -1,5 +1,4 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import styles from "./TheGame.module.scss";
 import CardsGame from "./CardsGame";
 import TheGuess from "./Guess/TheGuess";
 import OhMyGod from "./OhMyGod";
@@ -20,7 +19,6 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
     const users = useListUsers(roomId);
     const [player, setPlayer] = useState<User>();
     const [guess, setGuess] = useState<Guess>();
-    const [cardType, setCardType] = useState<string>('');
     const [triggerGuesses, setTriggerGuesses] = useState(false);
     const [triggerOMG, setTriggerOMG] = useState(false);
 
@@ -59,11 +57,11 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
     }, [])
 
     return (
-        <div className={`${styles.TheGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard} ${triggerGuesses && styles.devineQui}` }>
-            { (!triggerGuesses && !triggerOMG) && <CardsGame setCardType={setCardType} users={users} player={player} user={user} roomId={roomId}/>}
+        <>
+            { (!triggerGuesses && !triggerOMG) && <CardsGame users={users} player={player} user={user} roomId={roomId}/>}
             { (triggerGuesses && !triggerOMG) && <TheGuess roomId={roomId} question={guess?.question} users={users} userKey={user.key}/> }
             { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={roomId} userKey={user.key}/> }
-        </div>
+        </>
     )
 }
 
