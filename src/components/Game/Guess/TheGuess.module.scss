@@ -1,3 +1,122 @@
 .TheGuess {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  & .question {
+      width: 75%;
+  }
+
+  .buttonContainer {
+    position: relative;
+    width: 75%;
+    cursor: pointer;
+  }
+
+  .answerContainer {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      position: relative;
+      align-items: center;
+  }
+
+  .buttonInner {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+  }
+
+  .buttonContainer {
+      margin-bottom: 20px;
+      height: 65px;
+      width: 234px;
+  }
+
+  .answerScreen {
+    height: auto;
+
+  }
+
+  .button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
+  .input {
+    background: url("../../../assets/svg/input-text.svg") center center
+      no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    outline: none;
+    width: 55%;
+    padding: 10px 25px;
+    height: 45px;
+    font-weight: 700;
+    font-size: 20px;
+
+    &::placeholder {
+      color: rgb(83, 81, 81);
+    }
+
+    &[name="join"] {
+      font-size: 16px;
+      background: url("../../../assets/svg/button-transparent.svg") center
+        center no-repeat;
+      padding: 0 20px 5px;
+      height: 60px;
+      width: 110px;
+      background-size: 100% 100%;
+      text-align: center;
+
+      &::placeholder {
+        color: #000;
+      }
+    }
+  }
+
+  input[type="submit"] {
+    position: absolute;
+    bottom: 13%;
+    right: 10%;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background: url("../../../assets/svg/button-black.svg") center center
+      no-repeat;
+    padding: 10px 20px 15px;
+    height: 60px;
+    width: 140px;
+    background-size: 100% 100%;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .question {
+    font-size: 22px;
+    margin: 0 auto;
+    width: 75%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+
+  .logo {
+    width: 75%;
+    height: auto;
+    align-self: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

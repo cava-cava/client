@@ -8,6 +8,8 @@ import AnswersGuess from "./AnswersGuess";
 import {socket} from "../../../socketClient";
 import {shuffle} from "../../../mixins/shuffle";
 
+import devinequiLogo from '../../../assets/png/logo_devinequi.png'
+
 type TheGuessProps = {
     roomId: string,
     question?: string,
@@ -31,9 +33,10 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
     }, []);
 
     return (
-        <div className={styles.TheGuess}>
-            <h1>Devine qui ?</h1>
-            <p>{question}</p>
+        <div className={`${styles.TheGuess} ${showAnswers ? styles.answer : styles.question}`}>
+            {/* <h1>Devine qui ?</h1> */}
+            <img className={styles.logo} src={devinequiLogo}/>
+            {(question && !showAnswers && !win && !lose) && <p className={styles.question}>{question}</p>}
             {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey}/>}
             {(showAnswers && !win && !lose) && <AnswersGuess roomId={roomId} userKey={userKey} users={users}/>}
             <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} showHappiness={false}/>
