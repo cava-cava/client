@@ -11,7 +11,13 @@
     padding: 0;
 
     > div {
-        padding: 75px 2rem;
+        padding: 75px 0;
+
+        > div {
+            padding: 0 2rem;
+            overflow-y: scroll;
+            height: calc(100vh - 150px);
+        }
     }
 
     @include media('exclude-mobile') {
@@ -22,6 +28,12 @@
         left: 64px;
         margin: auto;
         border-radius: $radius;
+
+        > div {
+            > div {
+                height: ($deviceHeight - 150px);
+            }
+        }
     }
 
     @include media('tablet') {

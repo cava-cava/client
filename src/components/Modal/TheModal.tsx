@@ -16,11 +16,13 @@ const TheModal: FunctionComponent<TheModalProps> = ({isShowing, hide, title, ...
         <>
             <div className={styles.TheModal}>
                 <div>
-                    <div className={styles.TheModalHeader}>
-                        <TitleImg src={title}/>
-                        <button type="button" onClick={hide}><IconClose/></button>
+                    <div>
+                        <div className={styles.TheModalHeader}>
+                            <TitleImg src={title}/>
+                            <button type="button" onClick={hide}><IconClose/></button>
+                        </div>
+                        <div className={styles.TheModalBody}>{props.children}</div>
                     </div>
-                    <div className={styles.TheModalBody}>{props.children}</div>
                 </div>
             </div>
         </>,

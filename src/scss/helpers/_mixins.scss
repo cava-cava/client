@@ -86,9 +86,9 @@
 
 @mixin deviceContainer() {
   min-width: 355px;
-  min-height: 725px;
+  min-height: $deviceHeight;
   max-width: 340px;
-  max-height: 725px;
+  max-height: $deviceHeight;
 }
 
 @mixin defaultBackground() {

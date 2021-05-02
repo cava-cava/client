@@ -2,7 +2,7 @@ import React, {FunctionComponent} from 'react';
 import styles from './HelpHeader.module.scss'
 import helpIcon from '../../../assets/svg/information.svg'
 import useModal from "../../../hooks/useModal";
-import TheModal from "../../Modal/TheModal";
+import HelpModal from "../../Modal/HelpModal";
 
 const HelpHeader: FunctionComponent = () => {
     const { isShowing: isHelpShowed, toggle: toggleHelp } = useModal();
@@ -12,13 +12,7 @@ const HelpHeader: FunctionComponent = () => {
             <button role="button" className={styles.icon} onClick={toggleHelp}>
                 <img src={helpIcon}/>
             </button>
-            <TheModal
-                isShowing={isHelpShowed}
-                hide={toggleHelp}
-                title="Règles du jeu"
-            >
-                Ici c'est les règles du jeu
-            </TheModal>
+            <HelpModal isShowing={isHelpShowed} hide={toggleHelp} />
         </div>
     )
 }
