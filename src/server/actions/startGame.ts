@@ -33,7 +33,7 @@ export async function startGame(room: Room, io:Server) {
     room.users.map((user,index) => room.users[index].key = index)
 
     //Initialize OMG for the game
-    room.game.omgEvent.id = 1
+    room.game.omgEvent.id = initIdOMG(room)
 
     room.game.isLoading = false
     room.game.isStart = true
