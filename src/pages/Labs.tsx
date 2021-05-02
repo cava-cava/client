@@ -44,10 +44,10 @@ const Labs = () => {
 
         <div className={styles.Pioche}>
           <div className={styles.container}>
-            <TheBottomDeck number={2} joker={false} assets={[cardPiocheCheh, cardPiocheNoir]} />
+            <TheBottomDeck number={2} assets={[cardPiocheCheh, cardPiocheNoir]} />
           </div>
           <div className={styles.container}>
-            <TheBottomDeck number={2} joker={true} assets={[cardPiocheCava, cardPiocheJaune]}/>
+            <TheBottomDeck number={2} assets={[cardPiocheCava, cardPiocheJaune]}/>
           </div>
         </div>
       </div>
