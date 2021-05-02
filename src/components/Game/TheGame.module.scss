@@ -1,6 +1,9 @@
+@import "../../scss/helpers";
+
 .TheGame {
     height: 100%;
     padding: 10px;
+    border-radius: $radius;
 
     &.ChehCard {
         background-image: url('../../assets/jpg/fond_outch.jpeg');

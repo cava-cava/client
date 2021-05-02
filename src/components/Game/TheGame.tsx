@@ -1,7 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import TheHeader from "./Header/TheHeader";
 import styles from "./TheGame.module.scss";
-import TheProgressBar from "../ProgressBar/TheProgressBar";
 import CardsGame from "./CardsGame";
 import TheGuess from "./Guess/TheGuess";
 import OhMyGod from "./OhMyGod";
@@ -62,9 +60,7 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
 
     return (
         <div className={`${styles.TheGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard} ${triggerGuesses && styles.devineQui}` }>
-            <TheHeader user={user} code={roomId}/>
-            <TheProgressBar users={users} user={user} playerKey={player?.key}/>
-            { (!triggerGuesses && !triggerOMG) && <CardsGame setCardType={setCardType} player={player} user={user} roomId={roomId}/>}
+            { (!triggerGuesses && !triggerOMG) && <CardsGame setCardType={setCardType} users={users} player={player} user={user} roomId={roomId}/>}
             { (triggerGuesses && !triggerOMG) && <TheGuess roomId={roomId} question={guess?.question} users={users} userKey={user.key}/> }
             { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={roomId} userKey={user.key}/> }
         </div>
