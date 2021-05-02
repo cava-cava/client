@@ -36,8 +36,7 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
             <p>{question}</p>
             {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey}/>}
             {(showAnswers && !win && !lose) && <AnswersGuess roomId={roomId} userKey={userKey} users={users}/>}
-            { (win && !lose) && <TheBooty roomId={roomId} userKey={userKey} showHappiness={false}/> }
-            { (lose && !win) && <span>Tu as perdu</span> }
+            <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} showHappiness={false}/>
         </div>
     )
 }

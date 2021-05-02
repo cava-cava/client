@@ -7,22 +7,23 @@ import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
 import {User} from "../../store/user/types";
 import {Card} from "../../server/types/card";
-import {Room} from "./../../server/types/rooms"
-
 
 import cardPiocheCheh from "./../../assets/png/carte_pioche_cheh.png";
 import cardPiocheNoir from "./../../assets/png/carte_pioche_noir.png";
 import cardPiocheCava from "./../../assets/png/carte_pioche_oh_ca_va.png";
 import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
+import TheHeader from "./Header/TheHeader";
+import TheProgressBar from "../ProgressBar/TheProgressBar";
 
 type CardsGameProps = {
+    users: User[]
     player?: User
     user: User
     roomId: string
     setCardType: (value:string) => void
 }
 
-const CardsGame: FunctionComponent<CardsGameProps> = ({player, user, roomId, setCardType}) => {
+const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, roomId, setCardType}) => {
     const [currentCard, setCurrentCard] = useState<Card>()
     const [isAlternative, setIsAlternative] = useState<boolean>(false)
 
@@ -78,6 +79,8 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({player, user, roomId, set
     }, [])
     return (
         <>
+            <TheHeader user={user} code={roomId}/>
+            <TheProgressBar users={users} user={user} playerKey={player?.key}/>
             {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
             {currentCard && <div className={styles.GameCenter}><TheCards alternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
