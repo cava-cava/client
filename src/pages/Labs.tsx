@@ -3,7 +3,7 @@ import styles from "./Labs.module.scss";
 import { Canvas } from "@react-three/fiber";
 import OrbitControls from "../components/OrbitControls/OrbitControls";
 
-import ThreeCard from "../components/ThreeMeshes/Card";
+import TheBottomDeck from "../components/Cards/TheBottomDeck";
 
 import cardCheh from "./../assets/png/carte_cheh.png";
 import cardWaouh from "./../assets/png/carte_waouh.png";
@@ -33,12 +33,21 @@ const Labs = () => {
           </div>
         </div>
 
-        <div className={styles.Pioche}>
+        {/* <div className={styles.Pioche}>
           <div className={styles.container}>
             <img className={styles.Cheh} src={cardPiocheCheh}></img>
           </div>
           <div className={styles.container}>
             <img className={styles.Cava} src={cardPiocheCava}></img>
+          </div>
+        </div> */}
+
+        <div className={styles.Pioche}>
+          <div className={styles.container}>
+            <TheBottomDeck number={2} joker={false} assets={[cardPiocheCheh, cardPiocheNoir]} />
+          </div>
+          <div className={styles.container}>
+            <TheBottomDeck number={2} joker={true} assets={[cardPiocheCava, cardPiocheJaune]}/>
           </div>
         </div>
       </div>

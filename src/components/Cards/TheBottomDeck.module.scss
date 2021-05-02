@@ -1,6 +1,8 @@
-.TheDeck {
+.TheBottomDeck {
   position: relative;
+  margin: 0 auto;
   padding: 0;
+  height: 5.5em;
   cursor: pointer;
 
   .card {
@@ -18,9 +20,25 @@
     box-shadow: .2em .2em .5em #333;
     background-color: dodgerblue;
   }
-
-  .deck {
-    width: 75%;
-    height: auto;
+  .container {
+    position: relative;
+    width: calc(100% / 2 - 10px);
   }
+}
+
+
+.actionCard {
+  z-index: 999;
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 80%;
+}
+
+.invertedCard {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
 }

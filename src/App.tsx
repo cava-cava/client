@@ -58,7 +58,7 @@ const App = () => {
     return (
         <div className={styles.App}>
             <div className={styles.AppLogo}>
-                <img src={logo} alt="Logo"/>
+                <img src={logo} alt="Logo2"/>
             </div>
             <div className={styles.AppDescription}>
                 <AppDescription />

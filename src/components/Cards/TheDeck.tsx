@@ -1,11 +1,14 @@
 import React, {FunctionComponent} from 'react';
 import styles from './TheDeck.module.scss'
 
+import deck from './../../assets/png/deck3.png'
+
 type TheDeckProps = {
     number: number,
     color?: string,
     deskClick: () => void,
     style: object
+    joker?: boolean
 }
 
 const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick, style}) => {
@@ -17,7 +20,7 @@ const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick, sty
 
     return number > 0 ?
         (<div className={styles.TheDeck} onClick={deskClick} style={style}>
-            {cards}
+            <img className={styles.deck} src={deck}/>
         </div>) : null
 }
 

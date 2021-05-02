@@ -27,5 +27,5 @@ export function sendJoker(userKey:number, playerKey:number, room: Room, io:Serve
     } else ++room.users[userKey].statisticsGame.useJokerForMe;
     // add statistics use joker
     ++room.users[userKey].statisticsGame.useJoker;
-    sendCard(playerKey, alternativeCard, room, io)
+    sendCard(playerKey, alternativeCard, room, io, true)
 }

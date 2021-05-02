@@ -1,20 +1,30 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import styles from "../../pages/Game.module.scss";
 import TheDeck from "../Cards/TheDeck";
+import TheBottomDeck from "../Cards/TheBottomDeck";
 import TheCards from "../Cards/TheCards";
 import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
 import {User} from "../../store/user/types";
 import {Card} from "../../server/types/card";
+import {Room} from "./../../server/types/rooms"
 
-type TheGameProps = {
+
+import cardPiocheCheh from "./../../assets/png/carte_pioche_cheh.png";
+import cardPiocheNoir from "./../../assets/png/carte_pioche_noir.png";
+import cardPiocheCava from "./../../assets/png/carte_pioche_oh_ca_va.png";
+import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
+
+type CardsGameProps = {
     player?: User
     user: User
     roomId: string
+    setCardType: (value:string) => void
 }
 
-const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
+const CardsGame: FunctionComponent<CardsGameProps> = ({player, user, roomId, setCardType}) => {
     const [currentCard, setCurrentCard] = useState<Card>()
+    const [isAlternative, setIsAlternative] = useState<boolean>(false)
 
     const drawClick = () => {
         if(player && user.id === player.id) {
@@ -45,8 +55,20 @@ const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
     }
 
     useEffect(() => {
-        const pickedCard = (card:Card) => {
+        const pickedCard = (card:Card, isAlternative:boolean) => {
             setCurrentCard(card);
+            if(card){
+                console.log('ifcurrentcard')
+                if(card.Points > 0){
+                    setCardType('waouh')
+                    console.log('waouh')
+                }
+                else {
+                    console.log('cheh')
+                    setCardType('cheh')
+                }
+            }
+            setIsAlternative(isAlternative);
             console.log('card picked', card)
         }
         socket.on('pickedCard', pickedCard);
@@ -58,13 +80,17 @@ const TheGame: FunctionComponent<TheGameProps> = ({player, user, roomId}) => {
         <>
             {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
-            {currentCard && <div className={styles.GameCenter}><TheCards Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
-            <div className={styles.GameBottom}>
-                <TheDeck number={user.joker} color='green' deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
-                <TheDeck number={user.dirt} color='red' deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
+            {currentCard && <div className={styles.GameCenter}><TheCards alternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
+            <div className={styles.Pioche}>
+                <div className={styles.container}>
+                    <TheBottomDeck number={user.joker} joker={true} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
+                </div>
+                <div className={styles.container}>
+                    <TheBottomDeck number={user.dirt} joker={false} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
+                </div>
             </div>
         </>
     )
 }
 
-export default TheGame;
+export default CardsGame;

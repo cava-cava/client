@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import styles from './HelpHeader.module.scss'
-import helpIcon from '../../../assets/svg/information.svg'
+import helpIcon from '../../../assets/svg/btn_info.svg'
 import useModal from "../../../hooks/useModal";
 import HelpModal from "../../Modal/HelpModal";
 

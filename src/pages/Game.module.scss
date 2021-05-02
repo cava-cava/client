@@ -1,8 +1,12 @@
 .Game {
-  padding: 0 10px;
+  padding: 20px 10px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
 
   &Center {
-    margin-top: 30%;
+    // margin-top: 30%;
   }
 
   &Bottom {
@@ -10,5 +14,43 @@
     position: absolute;
     bottom: 15px;
     width: 100%;
+  }
+
+  > p {
+    margin-block-start: 4px;
+  }
+}
+
+.Background {
+  position:absolute;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+
+.GameInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width:100%;
+  box-sizing: border-box;
+}
+
+.Pioche {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  height: 190px;
+  width: 80%;
+  justify-content: space-between;
+  left: 50%;
+  transform: translate(-50%, 50%);
+
+  .container {
+    position: relative;
+    width: calc(100% / 2 - 10px);
   }
 }
