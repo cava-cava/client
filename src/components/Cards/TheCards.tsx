@@ -11,25 +11,27 @@ type TheCardsProps = {
   Description: string;
   points: number;
   animation: FileStrapi;
-  alternative: boolean;
+  isAlternative: boolean;
+  alternativeProps: any;
 };
 
 const TheCards: FunctionComponent<TheCardsProps> = ({
   Description,
   points,
   animation,
-  alternative
+  isAlternative,
+  alternativeProps
 }) => {
   return (
     <div className={styles.TheCards}>
-      <div className={`${styles.CardContainer} ${alternative ? styles.isAlternative : styles.regular}`}>
+      <div className={`${styles.CardContainer} ${isAlternative ? styles.isAlternative : styles.regular}`}>
         <img
-          className={`${styles.Card} ${alternative && points > 0 && styles.ohCaVaImg} `}
-          src={!alternative ? (points > 0 ? cardWaouh : cardOutch) : (points > 0 ? cardOhCaVa : cardCheh) }
+          className={`${styles.Card} ${isAlternative && points > 0 && styles.ohCaVaImg} `}
+          src={!isAlternative ? (points > 0 ? cardWaouh : cardOutch) : (points > 0 ? cardOhCaVa : cardCheh) }
           alt='carte'
         ></img>
-        <Player autoplay src={animation.url} className={styles.anim} />
-        <div className={`${styles.description} ${alternative && points < 0 && styles.cheh}`}>{Description}</div>
+        <Player autoplay src={animation ? animation.url : '' } className={styles.anim} />
+        <div className={`${styles.description} ${isAlternative && points < 0 && styles.cheh}`}>{Description}</div>
       </div>
     </div>
   );
