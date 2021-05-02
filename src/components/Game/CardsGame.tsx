@@ -67,7 +67,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
                 }
             } else setCardType('')
             setIsAlternative(isAlternative);
-            console.log('card picked', card)
         }
         socket.on('pickedCard', pickedCard);
         return () => {
