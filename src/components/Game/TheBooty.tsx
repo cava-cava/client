@@ -52,8 +52,8 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey,
                     </div>
                 </div>
             }
-            {(win && !lose) && hasBooty && <p>En attente des autres joueurs</p>}
-            {(!win && lose) && hasBooty && <p>Tu as perdu</p>}
+            {(win && !lose) && hasBooty && <p>En attente des autres joueurs ...</p>}
+            {(!win && lose) && <p>Tu as perdu ...</p>}
         </div>
     ) : null
 }
