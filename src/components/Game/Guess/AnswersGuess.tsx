@@ -45,7 +45,6 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
 
     const getAnswers = (answers: Answer[]) => {
       setAnswers(answers);
-      setStepEvent(users.length - answers.length);
     };
 
     socket.on("nextStepRoundEvent", nextStepRoundEvent);
@@ -67,7 +66,7 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
         {answers?.map((answer, index) => (
           <div key={index} className={styles.buttonContainer} onClick={() => handleClick(answer)}>
             <div className={styles.buttonInner}>
-              <img src={borderButton} className={styles.border} alt={""} />
+              <img src={borderButton} className={styles.border} />
               <p className={styles.button}>
                 {answer.answer}
               </p>
