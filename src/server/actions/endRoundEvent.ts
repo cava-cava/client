@@ -20,7 +20,7 @@ export function endRoundEvent(room: Room, io:Server) {
         room.game.guessEvent.answers = []
         room.game.guessEvent.trigger = false
         room.game.playerGame.id = -1
-        if(++room.game.guessEvent.id < room.users.length) room.game.guessEvent.id = 0
+        if(room.game.guesses && ++room.game.guessEvent.id >= room.game.guesses.length) room.game.guessEvent.id = 0
     }
 
     if(room.game.omgEvent.trigger) {
