@@ -9,7 +9,7 @@
     padding: 5px;
     width: 52px;
     height: 48Px;
-    left: 52%;  
+    left: 52%;
     top: 52%;
     transform: translate(-50%, -50%);
     position: absolute;
@@ -30,7 +30,6 @@
       stroke-dashoffset: 0;
       stroke-linecap: butt;
       stroke-width: 5px;
-      stroke: rgb(48, 48, 197);
       fill: none;
       animation: countdown linear forwards;
       animation-duration: 5s;
