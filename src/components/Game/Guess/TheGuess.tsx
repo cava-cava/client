@@ -6,9 +6,8 @@ import TheBooty from "../TheBooty";
 import useRoundEvent from "../../../hooks/useRoundEvent";
 import AnswersGuess from "./AnswersGuess";
 import {socket} from "../../../socketClient";
-import {shuffle} from "../../../mixins/shuffle";
-
 import devinequiLogo from '../../../assets/png/logo_devinequi.png'
+import TheHeader from "../Header/TheHeader";
 
 type TheGuessProps = {
     roomId: string,
@@ -34,7 +33,7 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
 
     return (
         <div className={`${styles.TheGuess} ${showAnswers ? styles.answer : styles.question}`}>
-            {/* <h1>Devine qui ?</h1> */}
+            <TheHeader user={users[userKey]} roomId={roomId} triggerGuesses={true}/>
             <img className={styles.logo} src={devinequiLogo}/>
             {(question && !showAnswers && !win && !lose) && <p className={styles.question}>{question}</p>}
             {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey}/>}

@@ -76,7 +76,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
     }, [])
     return (
         <div className={`${styles.CardsGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard}` }>
-            <TheHeader user={user} code={roomId}/>
+            <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
             {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>

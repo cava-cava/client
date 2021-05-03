@@ -4,15 +4,18 @@ import styles from  "./TheHeader.module.scss"
 import HelpHeader from "./HelpHeader";
 import SettingsHeader from "./SettingsHeader";
 import {User} from "../../../store/user/types";
+import TimerGuess from "../Guess/TimerGuess";
 
 type TheHeaderProps = {
     user: User,
-    code: string
+    roomId: string,
+    triggerGuesses: boolean
 }
 
-const TheHeader: FunctionComponent<TheHeaderProps> = ({user, code}) =>
+const TheHeader: FunctionComponent<TheHeaderProps> = ({user, roomId, triggerGuesses}) =>
         <header className={styles.TheHeader}>
-            <UserHeader user={user} roomId={code}/>
+            {!triggerGuesses && <UserHeader user={user} roomId={roomId}/>}
+            {triggerGuesses && <TimerGuess />}
             <div>
                 <HelpHeader />
                 <SettingsHeader />

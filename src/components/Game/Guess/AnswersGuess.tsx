@@ -20,7 +20,7 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
 }) => {
   const { send, setSend } = useSend(roomId, userKey);
   const [answers, setAnswers] = useState<Answer[]>();
-  const [stepEvent, setStepEvent] = useState(0);
+  const [stepEvent, setStepEvent] = useState<number>(0);
 
   const handleClick = (myAnswer: Answer) => {
     setSend(true);
@@ -60,8 +60,8 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
 
   return !send ? (
     <div className={styles.answerScreen}>
-      <p style={{ color: users[stepEvent].color }}>
-        Reponse de {users[stepEvent].name} ?
+      <p style={{ color: users[stepEvent]?.color }}>
+        Reponse de {users[stepEvent]?.name} ?
       </p>
       <div className={styles.answerContainer}>
         {answers?.map((answer, index) => (
