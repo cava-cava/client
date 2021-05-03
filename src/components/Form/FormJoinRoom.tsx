@@ -35,6 +35,14 @@ const FormJoinRoom: FunctionComponent<FormJoinRoomProps> = ({username, avatar, m
         if(error.length > 0) setShowError(true)
     }, [error])
 
+    useEffect(() => {
+        return () => {
+            setRoom('')
+            setShowError(false)
+            setSendEmit(false)
+        }
+    },[])
+
     return (
         <form autoComplete="off" className={styles.FormJoinRoom} onKeyUp={keypressJoinRoom}>
             <InputText id={"join"} name={"join"} maxLength={maxLength} placeholder="Rejoindre partie" value={room} setValue={setRoom} hasError={showError}/>
