@@ -29,5 +29,5 @@ export function nextRound(room: Room, io:Server) {
         getPlayer(room, io)
     }
     io.to(room.id).emit('startRoundEvent', room.game.guessEvent.trigger, room.game.omgEvent.trigger);
-    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 25);
+    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 45);
 }

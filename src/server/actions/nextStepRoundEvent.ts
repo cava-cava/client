@@ -3,6 +3,8 @@ import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {startTimer} from "./startTimer";
 import {endRoundEvent} from "./endRoundEvent";
+import {sendAnswerGuess} from "./sendAnswerGuess";
+import {Answer} from "../types/answer";
 
 /**
  * Get fired next step round event for game room
@@ -10,10 +12,21 @@ import {endRoundEvent} from "./endRoundEvent";
  * @param io A connected socket.io server
  */
 export function nextStepRoundEvent(room: Room,  io:Server) {
-    room.users.map(user => user.answerEvent.send = false)
     checkpoint(room, io)
     if (room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
-        if(room.game.guessEvent.idStep === -1) io.to(room.id).emit('startAnswersEvent')
+        if(room.game.guessEvent.idStep === -1) {
+            room.users.map((user) => {
+                if(!user.answerEvent.myAnswer.answer || user.answerEvent.myAnswer.answer.length === 0) {
+                    const answer:Answer= {
+                        userKey: user.key,
+                        answer: `Pas de reponse - ${user.name}`
+                    }
+                    sendAnswerGuess(room, user.key, answer)
+                }
+            })
+            io.to(room.id).emit('startAnswersEvent')
+        }
+        room.users.map(user => user.answerEvent.send = false)
         if(++room.game.guessEvent.idStep < (room.users.length - 1)) {
             io.to(room.id).emit('nextStepRoundEvent', room.game.guessEvent.idStep)
             startTimer(room, io, 10)
