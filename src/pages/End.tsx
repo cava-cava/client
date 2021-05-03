@@ -17,7 +17,7 @@ const End = () => {
         <div className={styles.End}>
             <div>
                 <AvatarHeader color={user.color.replace('#', '')} avatarNumber={user.avatar} />
-                <EndMessages gameOver={user.gameOver}/>
+                <EndMessages gameOver={user.gameOver.length > 0 ? user.gameOver : ['default']}/>
             </div>
             <div className={styles.EndButtons}>
                 <Link to="/rooms" className={stylesButton.TheButton}>Rejouez</Link>
