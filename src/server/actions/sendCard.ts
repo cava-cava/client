@@ -16,5 +16,5 @@ export function sendCard(playerKey: number, card:Card ,room: Room, io:Server, is
     sendPointsUser(room.users[playerKey], card.Points)
     checkpoint(room, io)
     io.to(room.id).emit('pickedCard', card, isAlternative)
-    startTimer(room, io, 5)
+    startTimer(room, io, 20)
 }

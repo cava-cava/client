@@ -20,7 +20,7 @@ const StartGame: FunctionComponent<StartGameProps> = ({roomId,isHost, loading, u
         <div className={styles.StartGame}>
             {loading && <div>Chargement...</div>}
             {!loading && usersLength >= 4 && usersLength <= 6 ?
-                isHost ? <button onClick={startGame}>C'est partie</button> : <div>En attente de l'hôte...</div>
+                isHost ? <button onClick={startGame}>C'est parti !</button> : <div>En attente de l'hôte...</div>
             : !loading && <div>En attente des autres joueurs...</div> }
         </div>
     )

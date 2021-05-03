@@ -26,7 +26,7 @@ const CodeHeader: FunctionComponent<CodeHeaderProps> = ({roomId}) => {
         };
     }, []);
 
-    return (<button className={styles.CodeHeader} onClick={copyClick}>{isCopied ? 'Copier' : roomId}</button>)
+    return (<button className={styles.CodeHeader} onClick={copyClick}>{isCopied ? 'Copié' : roomId}</button>)
 }
 
 export default CodeHeader;
