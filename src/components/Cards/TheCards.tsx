@@ -10,17 +10,15 @@ import {FileStrapi} from "../../server/types/fileStrapi";
 type TheCardsProps = {
   Description: string;
   points: number;
-  animation: FileStrapi;
+  animation?: FileStrapi;
   isAlternative: boolean;
-  alternativeProps: any;
 };
 
 const TheCards: FunctionComponent<TheCardsProps> = ({
   Description,
   points,
   animation,
-  isAlternative,
-  alternativeProps
+  isAlternative
 }) => {
   return (
     <div className={styles.TheCards}>
@@ -30,7 +28,7 @@ const TheCards: FunctionComponent<TheCardsProps> = ({
           src={!isAlternative ? (points > 0 ? cardWaouh : cardOutch) : (points > 0 ? cardOhCaVa : cardCheh) }
           alt='carte'
         ></img>
-        <Player autoplay src={animation ? animation.url : '' } className={styles.anim} />
+        <Player autoplay src={animation ? animation.url : (points > 0) ? '/Sohcava.json' : '/Scheh.json' } className={styles.anim} />
         <div className={`${styles.description} ${isAlternative && points < 0 && styles.cheh}`}>{Description}</div>
       </div>
     </div>

@@ -65,8 +65,8 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
       </p>
       <div className={styles.answerContainer}>
         {answers?.map((answer, index) => (
-          <div className={styles.buttonContainer} onClick={() => handleClick(answer)}>
-            <div key={index} className={styles.buttonInner}>
+          <div key={index} className={styles.buttonContainer} onClick={() => handleClick(answer)}>
+            <div className={styles.buttonInner}>
               <img src={borderButton} className={styles.border} alt={""} />
               <p className={styles.button}>
                 {answer.answer}

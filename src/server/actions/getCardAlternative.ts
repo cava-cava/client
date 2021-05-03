@@ -17,6 +17,7 @@ export function getCardAlternative(description:string, room: Room) {
     }else {
         alternativeCard = room.game.cardGame.card
         alternativeCard.Description = description
+        alternativeCard.animation = undefined
     }
 
     return alternativeCard;

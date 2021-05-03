@@ -5,7 +5,7 @@ export interface Card {
     Description: string
     Points: number,
     Alternative: Card[]
-    animation: FileStrapi,
+    animation?: FileStrapi,
     audio: string,
 }
 
