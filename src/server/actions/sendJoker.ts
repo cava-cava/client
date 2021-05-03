@@ -15,7 +15,7 @@ export function sendJoker(userKey:number, playerKey:number, room: Room, io:Serve
     // check if can put a joker card
     if (!room.timer.isRunning || !room.game.cards || !room.game.cardGame.card || room.users[userKey].joker <= 0) return;
     // get card alternative
-    const alternativeCard = getCardAlternative("OH CA VA, JE M'EN BLC", room)
+    const alternativeCard = getCardAlternative("Tu fais genre que tout va bien... Tu affiches ton meilleur sourire !", room)
     if(!alternativeCard) return;
     alternativeCard.Points = Math.abs(room.game.cardGame.card.Points)
     // use Joker
