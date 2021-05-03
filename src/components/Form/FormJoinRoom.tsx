@@ -15,12 +15,15 @@ const FormJoinRoom: FunctionComponent<FormJoinRoomProps> = ({username, avatar, m
     const error = useError();
     const [room, setRoom] = useState('');
     const [showError, setShowError] = useState(false);
+    const [sendEmit, setSendEmit] = useState(false)
 
     const keypressJoinRoom = () => {
-        if(!maxLength) return
+        if(!maxLength || sendEmit) return
+        setSendEmit(true);
         if(room.length >= maxLength) {
             socket.emit("joinRoom", username, avatar, room, () => {
                 console.log(`JoinRoom`);
+                setSendEmit(false);
                 if(error.length > 0) setShowError(true)
             });
         } else if(showError) {

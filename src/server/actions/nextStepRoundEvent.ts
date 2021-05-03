@@ -39,12 +39,11 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
                 }
             })
             const loseBootyUsers = room.users.filter(user => !user.winEvent)
-            if(loseBootyUsers.length === room.users.length) {
-                endRoundEvent(room, io)
-            }else {
                 loseBootyUsers.map(user => {
                     io.to(user.id).emit('loseRoundEvent')
                 })
+            if(loseBootyUsers.length === room.users.length) {
+                setTimeout(() => endRoundEvent(room, io), 3000)
             }
         }
     }
