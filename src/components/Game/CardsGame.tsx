@@ -14,8 +14,7 @@ import cardPiocheCava from "./../../assets/png/carte_pioche_oh_ca_va.png";
 import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
 import TheHeader from "./Header/TheHeader";
 import TheProgressBar from "../ProgressBar/TheProgressBar";
-import { isWebGL2Available } from '@react-three/drei';
-import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'node:constants';
+
 
 type CardsGameProps = {
     users: User[]
