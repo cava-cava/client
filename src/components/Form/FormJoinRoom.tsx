@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {FormEvent, FunctionComponent, useEffect, useState} from 'react';
 import InputText from "./InputText";
 import styles from './FormJoinRoom.module.scss'
 import ErrorMessage from "./ErrorMessage";
@@ -19,8 +19,8 @@ const FormJoinRoom: FunctionComponent<FormJoinRoomProps> = ({username, avatar, m
 
     const keypressJoinRoom = () => {
         if(!maxLength || sendEmit) return
-        setSendEmit(true);
         if(room.length >= maxLength) {
+            setSendEmit(true);
             socket.emit("joinRoom", username, avatar, room, () => {
                 console.log(`JoinRoom`);
                 setSendEmit(false);
@@ -44,7 +44,7 @@ const FormJoinRoom: FunctionComponent<FormJoinRoomProps> = ({username, avatar, m
     },[])
 
     return (
-        <form autoComplete="off" className={styles.FormJoinRoom} onKeyUp={keypressJoinRoom}>
+        <form autoComplete="off" className={styles.FormJoinRoom} onKeyUp={keypressJoinRoom} onSubmit={(event: FormEvent) => event.preventDefault()}>
             <InputText id={"join"} name={"join"} maxLength={maxLength} placeholder="Rejoindre partie" value={room} setValue={setRoom} hasError={showError}/>
             {showError && <ErrorMessage error={error} />}
         </form>
