@@ -14,6 +14,7 @@ import cardPiocheCava from "./../../assets/png/carte_pioche_oh_ca_va.png";
 import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
 import TheHeader from "./Header/TheHeader";
 import TheProgressBar from "../ProgressBar/TheProgressBar";
+import MessageGame from "./MessageGame";
 
 
 type CardsGameProps = {
@@ -28,10 +29,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
     const [isAlternative, setIsAlternative] = useState<boolean>(false)
     const [cardType, setCardType] = useState<string>('')
 
-    const [billboardText, setBillboardText] = useState('')
-    const [actionUser, setActionUser] = useState('')
-    const [actionCardType, setActionCardType] = useState<string>('')
-
     const drawClick = () => {
         if(player && user.id === player.id) {
             console.color(`Tirer une carte`, colors.blue);
@@ -43,8 +40,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
 
     const jokerClick = () => {
         if(player && currentCard && currentCard.Points < 0) {
-            setActionUser(user.name);
-            setActionCardType('Oh ça va')
             console.color(`joker`, colors.green);
             socket.emit('sendJoker', roomId, user.key, player.key)
         } else {
@@ -54,8 +49,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
 
     const dirtClick = () => {
         if(player && user.id !== player.id && currentCard && currentCard.Points > 0) {
-            setActionUser(user.name)
-            setActionCardType('Cheh')
             console.color(`crasse`, colors.purple);
             socket.emit('sendDirt', roomId, user.key, player.key)
 
@@ -84,19 +77,11 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         };
     }, [])
 
-    useEffect(() => {
-        if(isAlternative)
-            setBillboardText(`${actionUser} à posé une carte ${actionCardType} !`)
-        else
-         setBillboardText(`Au tour de ${player?.name}`)
-    }, [player, isAlternative])
-
-
     return (
         <div className={`${styles.CardsGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard}` }>
             <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
-            <div className={styles.billBoard}>{player && <p>{billboardText}</p>}</div>
+            <MessageGame />
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
             {currentCard && <div className={styles.GameCenter}><TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
             <div className={styles.Pioche}>
@@ -109,6 +94,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             </div>
         </div>
     )
-}   
+}
 
 export default CardsGame;

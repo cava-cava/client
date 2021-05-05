@@ -28,5 +28,5 @@ export const joinRoomGame = (username:string, avatar:string, io:Server, socket:E
         console.log(`${socket.username}[${socket.id}] Re Joined ${room.id}`);
         socket.emit('redirect', `/game/${room.id}`);
         if(room.usersDisconnected.length <= 0) socket.to(room.id).emit('userDisconnected', false);
-    }else socket.emit('error', "La partie est en cours");
+    }else socket.emit('message', "La partie est en cours...");
 };

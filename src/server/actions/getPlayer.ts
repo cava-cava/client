@@ -8,4 +8,5 @@ import {Server} from "socket.io";
  */
 export function getPlayer(room: Room, io:Server) {
     io.to(room.id).emit('getPlayer', room.users[room.game.playerGame.id]);
+    io.to(room.id).emit('message', `Au tour de ${room.users[room.game.playerGame.id].name}`);
 }

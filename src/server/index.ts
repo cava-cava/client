@@ -55,8 +55,8 @@ io.on("connect", (socket: ExtendedSocket) => {
                 joinRoomGame(username, avatar, io, socket, room)
             }
             else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, avatar, io, socket, room);
-            else socket.emit('error', "La partie est complète");
-        } else socket.emit('error', "La partie n'existe pas");
+            else socket.emit('message', "La partie est complète...");
+        } else socket.emit('message', "La partie n'existe pas...");
         callback();
     });
 
@@ -203,7 +203,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on("disconnect", () => {
         leaveRooms(socket,rooms);
         socket.emit('redirect', `/rooms/`);
-        socket.emit('error', "Tu t'es déconnecté");
+        socket.emit('message', "Tu t'es déconnecté...");
         console.log(`disconnect ${socket.id}`);
     });
 });

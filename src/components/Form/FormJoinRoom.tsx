@@ -2,7 +2,7 @@ import React, {FormEvent, FunctionComponent, useEffect, useState} from 'react';
 import InputText from "./InputText";
 import styles from './FormJoinRoom.module.scss'
 import ErrorMessage from "./ErrorMessage";
-import useError from "../../hooks/useError";
+import useMessage from "../../hooks/useMessage";
 import {socket} from "../../socketClient";
 
 type FormJoinRoomProps = {
@@ -12,7 +12,7 @@ type FormJoinRoomProps = {
 }
 
 const FormJoinRoom: FunctionComponent<FormJoinRoomProps> = ({username, avatar, maxLength=5}) => {
-    const error = useError();
+    const {message: error, color} = useMessage();
     const [room, setRoom] = useState('');
     const [showError, setShowError] = useState(false);
     const [sendEmit, setSendEmit] = useState(false)
