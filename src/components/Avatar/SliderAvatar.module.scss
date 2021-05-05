@@ -1,0 +1,38 @@
+.SliderAvatar {
+  display: flex;
+  margin-bottom: 10%;
+
+  > * {
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &:last-child {
+      margin-right: auto;
+    }
+  }
+
+  > button {
+    background: none;
+    border: none;
+    padding: 0;
+    height: 3rem;
+    width: 3rem;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    &:first-child {
+      background: url("../../assets/svg/arrowL.svg") center center no-repeat;
+    }
+
+    &:last-child {
+      background: url("../../assets/svg/arrowR.svg") center center no-repeat;
+    }
+  }
+
+  > div {
+    margin: auto 1rem;
+    width: 75px;
+    height: 75px;
+  }
+}

@@ -70,7 +70,6 @@ const App = () => {
                 <img src={qrCode} alt="QR Code"/>
             </div>
             <MobilePrompt/>
-            <SocketLog />
         </div>
     );
 }
