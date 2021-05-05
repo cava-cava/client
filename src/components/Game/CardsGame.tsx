@@ -97,7 +97,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         <div className={`${styles.CardsGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard}` }>
             <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
-            {/* {player && <p style={{color: player.color}}>Au tour de {player.name}</p>} */}
             <div className={styles.billBoard}>{player && <p>{billboardText}</p>}</div>
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
             {currentCard && <div className={styles.GameCenter}><TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
@@ -111,6 +110,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             </div>
         </div>
     )
-}
+}   
 
 export default CardsGame;
