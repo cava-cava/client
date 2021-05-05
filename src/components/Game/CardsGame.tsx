@@ -14,6 +14,8 @@ import cardPiocheCava from "./../../assets/png/carte_pioche_oh_ca_va.png";
 import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
 import TheHeader from "./Header/TheHeader";
 import TheProgressBar from "../ProgressBar/TheProgressBar";
+import { isWebGL2Available } from '@react-three/drei';
+import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'node:constants';
 
 type CardsGameProps = {
     users: User[]
@@ -25,7 +27,9 @@ type CardsGameProps = {
 const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, roomId}) => {
     const [currentCard, setCurrentCard] = useState<Card>()
     const [isAlternative, setIsAlternative] = useState<boolean>(false)
-    const [cardType, setCardType] = useState<string>('');
+    const [cardType, setCardType] = useState<string>('')
+
+    const [billboardText, setBillboardText] = useState('')
 
     const drawClick = () => {
         if(player && user.id === player.id) {
@@ -74,11 +78,23 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             socket.off('pickedCard', pickedCard);
         };
     }, [])
+
+
+    useEffect(() => {
+        if(isAlternative)
+        setBillboardText(`${player?.name} t'a mis un carte action `)
+        else
+        setBillboardText(`Au tour de ${player?.name}`)
+        
+    }, [player, isAlternative])
+
+
     return (
         <div className={`${styles.CardsGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard}` }>
             <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
-            {player && <p style={{color: player.color}}>Au tour de {player.name}</p>}
+            {/* {player && <p style={{color: player.color}}>Au tour de {player.name}</p>} */}
+            <div className={styles.billBoard}>{player && <p>{billboardText}</p>}</div>
             <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
             {currentCard && <div className={styles.GameCenter}><TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
             <div className={styles.Pioche}>
