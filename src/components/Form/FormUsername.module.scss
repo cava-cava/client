@@ -4,19 +4,10 @@
     margin-top: 15%;
 
     input[type=submit] {
-        position: absolute;
-        bottom: 13%;
-        right: 10%;
+        @include theButton;
+
         font-size: 18px;
         font-weight: 700;
-        color: $white;
-        background: url("../../assets/svg/button-black.svg") center center no-repeat;
-        padding: 10px 20px 15px;
-        height: 60px;
-        width: 140px;
-        background-size: 100% 100%;
-        border: none;
-        text-align: center;
-        cursor: pointer;
+        margin: 1.5rem 3rem auto auto;
     }
 }
