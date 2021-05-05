@@ -20,6 +20,8 @@ import {currentRound} from "./actions/currentRound";
 import {Answer} from "./types/answer";
 import {shuffle} from "../mixins/shuffle";
 import {sendAnswerGuess} from "./actions/sendAnswerGuess";
+import {startTimer} from "./actions/startTimer";
+import {stopTimer} from "./actions/stopTimer";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -192,12 +194,14 @@ io.on("connect", (socket: ExtendedSocket) => {
         leaveRooms(socket,rooms);
     });
 
-    socket.on('logMySocket', () => {
-        console.log('logMySocket:',socket)
+    socket.on('startTimer', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room.game.cardGame.card || room.game.guessEvent.guess) startTimer(room, io)
     });
 
-    socket.on('logRooms', () => {
-        console.log('logRooms:',rooms)
+    socket.on('stopTimer', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        stopTimer(room)
     });
 
     socket.on("disconnect", () => {

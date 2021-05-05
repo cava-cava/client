@@ -6,6 +6,7 @@ import { socket } from "../socketClient";
 import useRedirect from "../hooks/useRedirect";
 import TheGame from "../components/Game/TheGame";
 import CodeHeader from "../components/Code/CodeHeader";
+import SocketLog from "../components/SocketLog";
 
 const Game = () => {
   const { id }: RouteParams = useParams();
@@ -30,18 +31,21 @@ const Game = () => {
   }, []);
 
   return (
-    <div className={styles.Game}>
-      <div className={styles.GameInner}>
-        {isUsersDisconnected ? (
-          <div className={styles.GameDisconnected}>
-            <CodeHeader roomId={id} />
-            <div>Quelqu’un est déconnecté, Veuillez patienter</div>
+      <>
+        <div className={styles.Game}>
+          <div className={styles.GameInner}>
+            {isUsersDisconnected ? (
+                <div className={styles.GameDisconnected}>
+                  <CodeHeader roomId={id} />
+                  <div>Quelqu’un est déconnecté, Veuillez patienter</div>
+                </div>
+            ) : (
+                <TheGame roomId={id} />
+            )}
           </div>
-        ) : (
-          <TheGame roomId={id} />
-        )}
-      </div>
-    </div>
+        </div>
+        <SocketLog roomId={id} />
+      </>
   );
 };
 
