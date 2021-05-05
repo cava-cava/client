@@ -1,0 +1,15 @@
+.AnswersGuess {
+  > div {
+    flex-direction: column;
+
+    > button {
+      margin: 0.5rem auto;
+      width: 80%;
+      background: none;
+      border: 2px solid;
+      border-image: url('../../../assets/svg/button-transparent.svg') 20/20px;
+      min-height: 2.5rem;
+      padding: 10px 15px;
+    }
+  }
+}

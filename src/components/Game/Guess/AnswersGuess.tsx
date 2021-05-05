@@ -3,9 +3,7 @@ import { socket } from "../../../socketClient";
 import { Answer } from "../../../server/types/answer";
 import { User } from "../../../store/user/types";
 import useSend from "../../../hooks/useSend";
-
-import styles from "./TheGuess.module.scss";
-import borderButton from "./../../../assets/png/borderButton.png";
+import styles from "./AnswersGuess.module.scss";
 
 type AnswersGuessProps = {
   roomId: string;
@@ -58,21 +56,10 @@ const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
   }, []);
 
   return !send ? (
-    <div className={styles.answerScreen}>
-      <p style={{ color: users[stepEvent]?.color }}>
-        Reponse de {users[stepEvent]?.name} ?
-      </p>
-      <div className={styles.answerContainer}>
-        {answers?.map((answer, index) => (
-          <div key={index} className={styles.buttonContainer} onClick={() => handleClick(answer)}>
-            <div className={styles.buttonInner}>
-              <img src={borderButton} className={styles.border} />
-              <p className={styles.button}>
-                {answer.answer}
-              </p>
-            </div>
-          </div>
-        ))}
+    <div className={styles.AnswersGuess}>
+      <p style={{ color: users[stepEvent]?.color }}>Reponse de {users[stepEvent]?.name} ?</p>
+      <div>
+        {answers?.map((answer, index) => (<button key={index} onClick={() => handleClick(answer)}>{answer.answer}</button>))}
       </div>
     </div>
   ) : (

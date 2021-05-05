@@ -6,39 +6,6 @@
     width: 75%;
   }
 
-
-  .buttonContainer {
-    position: relative;
-    width: 75%;
-    cursor: pointer;
-  }
-
-  .answerContainer {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    position: relative;
-    align-items: center;
-  }
-
-  .buttonInner {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    top: 0;
-    left: 0;
-  }
-
-  .buttonContainer {
-    margin-bottom: 20px;
-    height: 65px;
-    width: 234px;
-  }
-
-  .answerScreen {
-    height: auto;
-  }
-
   .button {
     position: absolute;
     top: 50%;
