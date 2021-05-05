@@ -30,6 +30,8 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
     const [cardType, setCardType] = useState<string>('')
 
     const [billboardText, setBillboardText] = useState('')
+    const [actionUser, setActionUser] = useState('')
+    const [actionCardType, setActionCardType] = useState<string>('')
 
     const drawClick = () => {
         if(player && user.id === player.id) {
@@ -42,6 +44,8 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
 
     const jokerClick = () => {
         if(player && currentCard && currentCard.Points < 0) {
+            setActionUser(user.name);
+            setActionCardType('Oh ça va')
             console.color(`joker`, colors.green);
             socket.emit('sendJoker', roomId, user.key, player.key)
         } else {
@@ -51,6 +55,8 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
 
     const dirtClick = () => {
         if(player && user.id !== player.id && currentCard && currentCard.Points > 0) {
+            setActionUser(user.name)
+            setActionCardType('Cheh')
             console.color(`crasse`, colors.purple);
             socket.emit('sendDirt', roomId, user.key, player.key)
 
@@ -60,7 +66,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
     }
 
     useEffect(() => {
-        const pickedCard = (card:Card, isAlternative:boolean) => {
+        const pickedCard = (card:Card, isAlternative:boolean, ) => {
             setCurrentCard(card);
             if(card){
                 if(card.Points > 0){
@@ -79,13 +85,11 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         };
     }, [])
 
-
     useEffect(() => {
         if(isAlternative)
-        setBillboardText(`${player?.name} t'a mis un carte action `)
+            setBillboardText(`${actionUser} à posé une carte ${actionCardType} !`)
         else
-        setBillboardText(`Au tour de ${player?.name}`)
-        
+         setBillboardText(`Au tour de ${player?.name}`)
     }, [player, isAlternative])
 
 
