@@ -12,6 +12,7 @@
       right: auto;
       margin-right: auto;
       margin-left: 0;
+      border-image: url('../../assets/svg/bulle_3.svg') 30/30px;
     }
 
     &:nth-child(2n) {
@@ -20,10 +21,13 @@
       right: 0;
       margin-right: 0;
       margin-left: auto;
+      border-image: url('../../assets/svg/bulle_2.svg') 30/30px;
     }
 
     &:first-child {
       width: 100%;
+      border-image: url('../../assets/svg/bulle_1.svg') 30/30px;
+
     }
   }
 }
