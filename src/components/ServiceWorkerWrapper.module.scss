@@ -1,6 +1,6 @@
-@import "../../scss/helpers";
+@import "../scss/helpers";
 
-.AndroidPrompt {
+.ServiceWorkerWrapper {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -29,9 +29,5 @@
         background: gainsboro;
       }
     }
-  }
-
-  @include media('exclude-mobile') {
-    display: none;
   }
 }
