@@ -9,7 +9,6 @@ type InputTextProps = {
     value?: string,
     setValue?: (value: string) => void,
     hasError?: boolean
-    onChange?: (event: ChangeEvent<any>) => void
 }
 
 const InputText: FunctionComponent<InputTextProps> = ({id, name, maxLength, placeholder, value, setValue, hasError}) => {

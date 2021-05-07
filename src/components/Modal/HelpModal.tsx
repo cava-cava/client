@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
 import axios from "axios";
 import {FETCH_RULES_ERROR, FETCH_RULES_REQUEST, FETCH_RULES_SUCCESS, Rules} from "../../store/rules/types";
-import HelpModalCards from "./HelpModalCards";
+import HelpModalCards from "./Sub-Modal/HelpModalCards";
 import arrow from "../../assets/svg/arrow.svg";
 
 type HelpModalProps = {

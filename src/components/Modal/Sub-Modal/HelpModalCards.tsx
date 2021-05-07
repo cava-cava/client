@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import styles from './HelpModalCards.module.scss'
-import {RulesCards} from "../../store/rules/types";
+import {RulesCards} from "../../../store/rules/types";
 
 type HelpModalCardsProps = {
     cards: RulesCards[]
