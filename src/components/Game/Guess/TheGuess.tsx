@@ -34,8 +34,8 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
     return (
         <div className={`${styles.TheGuess} ${showAnswers ? styles.answer : styles.question}`}>
             <TheHeader user={users[userKey]} roomId={roomId} triggerGuesses={true}/>
-            <img className={styles.logo} src={devinequiLogo}/>
-            {(question && !showAnswers && !win && !lose) && <p className={styles.question}>{question}</p>}
+            <img src={devinequiLogo}/>
+            {(question && !showAnswers && !win && !lose) && <p>{question}</p>}
             {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey}/>}
             {(showAnswers && !win && !lose) && <AnswersGuess roomId={roomId} userKey={userKey} users={users}/>}
             <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} showHappiness={false}/>
