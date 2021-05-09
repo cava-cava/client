@@ -1,0 +1,51 @@
+@import "../../scss/helpers";
+
+.CardsGame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% - 2rem);
+    height: calc(100vh - 1rem);
+    padding: 1rem 1rem 0;
+    overflow: hidden;
+
+    @include media('exclude-mobile') {
+        border-radius: $radius;
+        height: calc(100% - 1rem);
+    }
+
+    > p {
+        margin: 0;
+    }
+
+    &.ChehCard {
+        background-image: url('../../assets/jpg/fond_outch.jpeg');
+        background-size: 100% 100%;
+    }
+
+    &.WaouhCard {
+        background-image: url('../../assets/jpg/fond_waouh.jpeg');
+        background-size: 100% 100%;
+    }
+
+    &.devineQui {
+        background-image: url('../../assets/jpg/fond_devinequi.jpeg');
+        background-size: 100% 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    > div {
+        &:last-child {
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            flex-direction: row;
+            height: 190px;
+            width: 80%;
+            justify-content: space-between;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+    }
+}

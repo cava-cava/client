@@ -1,3 +1,5 @@
+@import "src/scss/helpers";
+
 .TheDevLinks {
   position: fixed;
   left: 20px;
@@ -6,5 +8,9 @@
   > a {
     color: white;
     cursor: pointer;
+  }
+
+  @include media('mobile') {
+    display: none;
   }
 }

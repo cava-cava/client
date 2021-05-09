@@ -1,9 +1,86 @@
 .Labs {
   width: 100%;
-  height: 500px;
+  height: 100%;
+  position: absolute;
+}
+
+.LabsInner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .Canvas {
   height: 100%;
   width: 100%;
+}
+
+.Card {
+  height: auto;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  // transform: rotate(10deg);
+}
+
+.CardContainer {
+  position: relative;
+  height: 63%;
+  width: 69%;
+  transform: rotate(10deg);
+}
+.description {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  position: absolute;
+  text-align: left;
+  width: 75%;
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%);
+}
+
+.anim {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  width: 78%;
+  /* top: 50%; */
+  transform: translate(-50%, -50%);
+}
+
+.Pioche {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  height: 190px;
+  width: 80%;
+  justify-content: space-between;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: red;
+
+  .container {
+    position: relative;
+    width: calc(100% / 2 - 10px);
+  }
+
+  .Cheh {
+    width: 90%;
+    position: absolute;
+    top: 15%;
+    left: 0;
+  }
+
+  .Cava {
+    width: 90%;
+    position: absolute;
+    top: 15%;
+    left: 0;
+  }
 }

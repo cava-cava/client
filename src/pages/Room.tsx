@@ -9,6 +9,11 @@ import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import useRedirect from "../hooks/useRedirect";
 import useListUsers from "../hooks/useListUsers";
+import styles from './Room.module.scss'
+import SettingsHeader from "../components/Game/Header/SettingsHeader";
+import IconClose from "../components/IconClose";
+import StartGame from "../components/Form/StartGame";
+import CodeHeader from "../components/Code/CodeHeader";
 
 const Room = () => {
     const {id}: RouteParams = useParams();
@@ -30,30 +35,20 @@ const Room = () => {
         };
     }, [])
 
-    const isHost = () => {
-        return users.length > 0 && users[0].id === user.id
-    }
-
-    const startGame = () => {
-        socket.emit("startGame", id, () => {
-            console.log(`startGame`);
-        });
-    }
-
     return (
-        <div className="Room">
-            <h1>Room {id}</h1>
-            <ListUsers users={users}/>
-            <DidYouKnow/>
-            {loading && <div>Loading...</div>}
-            {!loading && users.length >= 4 && users.length <= 6 ?
-                isHost() ? <div>
-                            <button onClick={startGame}>Start game</button>
-                           </div>
-                    : <div>En attentes de l'hôte...</div>
-                : !loading && <div>En attentes d'autres joueurs...</div>
-            }
-            {!loading && <Link to="/rooms">Quitter</Link>}
+        <div className={styles.Room}>
+            <div>
+                <CodeHeader roomId={id} />
+                <DidYouKnow/>
+                <ListUsers users={users}/>
+                <StartGame roomId={id} isHost={(users.length > 0 && users[0].id === user.id)} loading={loading} usersLength={users.length}/>
+            </div>
+
+            <div>
+                <SettingsHeader />
+                {!loading && <Link to="/rooms"><IconClose/></Link>}
+            </div>
+
         </div>
     );
 }

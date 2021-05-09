@@ -23,11 +23,17 @@
     padding: 2rem;
     color: white;
 
-    > p {
+    > div {
       margin: auto;
       max-width: 300px;
     }
 
+    @include media('tablet') {
+      display: none;
+    }
+    @include media('low-tablet') {
+      display: none;
+    }
     @include media('mobile') {
       display: none;
     }
@@ -43,6 +49,13 @@
       border-radius: 20px;
     }
 
+    @include media('tablet') {
+      display: none;
+    }
+
+    @include media('low-tablet') {
+      display: none;
+    }
     @include media('mobile') {
       display: none;
     }
@@ -56,13 +69,10 @@
     &Phone {
       position: relative;
       margin: auto;
-      min-width: 340px;
-      min-height: 620px;
-      max-width: 340px;
-      max-height: 620px;
-      border-radius: 40px;
+      border-radius: $radius;
       box-shadow: 0 0 0 11px #1f1f1f, 0 0 0 13px #191919, 0 0 0 20px #111;
       background: white;
+      @include deviceContainer;
     }
   }
 }

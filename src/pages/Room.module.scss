@@ -1,0 +1,24 @@
+@import "../scss/helpers";
+
+.Room {
+  @include defaultBackground;
+
+  > div {
+    &:first-child {
+      position: relative;
+      height: 100%;
+      padding: 0 2rem;
+    }
+
+    &:last-child {
+      position: absolute;
+      right: 5%;
+      top: 5%;
+      display: flex;
+
+      > * {
+        margin: 0 5px;
+      }
+    }
+  }
+}

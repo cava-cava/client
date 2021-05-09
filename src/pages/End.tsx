@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import styles from './End.module.scss'
+import stylesButton from '../components/TheButton.module.scss'
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
-import UserHeader from "../components/Game/Header/UserHeader";
 import EndMessages from "../components/GameOver/EndMessages";
 import useLeaveRoom from "../hooks/useLeaveRoom";
+import AvatarHeader from "../components/Avatar/AvatarHeader";
 
 const End = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
@@ -14,11 +15,13 @@ const End = () => {
 
     return (
         <div className={styles.End}>
-            <UserHeader user={user} roomId={''}/>
-            <EndMessages gameOver={user.gameOver}/>
+            <div>
+                <AvatarHeader color={user.color.replace('#', '')} avatarNumber={user.avatar} />
+                <EndMessages gameOver={user.gameOver.length > 0 ? user.gameOver : ['default']}/>
+            </div>
             <div className={styles.EndButtons}>
-                <Link to="/rooms">Rejouez</Link>
-                <Link to="/tips">Tips</Link>
+                <Link to="/rooms" className={stylesButton.TheButton}>Rejouez</Link>
+                <Link to="/tips" className={stylesButton.TheButton}>Tips</Link>
             </div>
         </div>
     );

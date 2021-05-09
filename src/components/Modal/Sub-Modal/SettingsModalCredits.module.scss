@@ -1,0 +1,43 @@
+@import "../../../scss/helpers";
+
+.SettingsModalCredits {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 1.4rem;
+    margin: 0.75rem 0;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  > div {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    > * {
+      margin: auto;
+    }
+
+    > img {
+      width: 50%;
+      height: 5rem;
+      object-fit: contain;
+    }
+
+    a {
+      color: $black;
+      margin: 0.25rem auto;
+    }
+  }
+}

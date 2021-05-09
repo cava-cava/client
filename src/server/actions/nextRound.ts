@@ -25,9 +25,9 @@ export function nextRound(room: Room, io:Server) {
             // next Card
             if (room.game.cards && ++room.game.cardGame.id >= room.game.cards.length) room.game.cardGame.id = 0
             room.game.cardGame.showAlternative = false
+            getPlayer(room, io)
         }
-        getPlayer(room, io)
     }
     io.to(room.id).emit('startRoundEvent', room.game.guessEvent.trigger, room.game.omgEvent.trigger);
-    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 25);
+    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 45);
 }

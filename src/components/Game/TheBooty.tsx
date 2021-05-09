@@ -4,12 +4,14 @@ import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
 
 type TheBootyProps = {
+    win: boolean
+    lose: boolean
     roomId: string
     userKey: number
     showHappiness?: boolean
 }
 
-const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappiness = true}) => {
+const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey, showHappiness = true}) => {
     const [hasBooty, setHasBooty] = useState(false)
 
     const callback = () => {
@@ -35,10 +37,10 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappin
         callback()
     }
 
-    return (
+    return (win || lose) ? (
         <div className={styles.TheBooty}>
-            {!hasBooty ?
-                <>
+            {((win && !lose) && !hasBooty) &&
+                <div>
                     <p>
                     Bravo ! Tu as gagné !<br/>
                     Tu peux choisir ta récompense.
@@ -48,11 +50,12 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({roomId, userKey, showHappin
                         <button role="button" onClick={jokerClick}>1 carte Oh ça va</button>
                         <button role="button" onClick={dirtClick}>1 carte Cheh</button>
                     </div>
-                </>
-                : <p>En attente des autres joueurs</p>
+                </div>
             }
+            {(win && !lose) && hasBooty && <p>En attente des autres joueurs ...</p>}
+            {(!win && lose) && <p>Tu as perdu ...</p>}
         </div>
-    )
+    ) : null
 }
 
 export default TheBooty;

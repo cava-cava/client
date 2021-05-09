@@ -1,0 +1,42 @@
+.FormTips {
+  > div {
+    position: relative;
+    display: inline;
+
+    > input {
+      &[type="submit"] {
+        display: none;
+        position: absolute;
+        right: 0.75rem;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 1.25rem;
+        background: none;
+        border: none;
+      }
+
+      &[type="text"] {
+        background: url("../../assets/svg/input_crayon.svg") center center no-repeat;
+        background-size: 100% 100%;
+        width: 70%;
+        padding-right: 50px;
+      }
+    }
+  }
+
+  &Active{
+    > div {
+      > input {
+        &[type="submit"] {
+          display: block;
+        }
+
+        &[type="text"] {
+          background: url("../../assets/svg/input_fleche.svg") center center no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+  }
+}

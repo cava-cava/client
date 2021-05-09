@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {socket} from "../socketClient";
 import {User} from "../store/user/types";
 
-const useListUsers = (id:string) => {
+const useListUsers = (id:string, eventSocketOn:string = 'updateListUsers', eventSocketEmit:string = 'getListUsersInRoom') => {
     const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
@@ -10,12 +10,12 @@ const useListUsers = (id:string) => {
             setUsers(users)
         }
 
-        socket.on('updateListUsers', updateListUsers);
+        socket.on(eventSocketOn, updateListUsers);
 
-        socket.emit('getListUsersInRoom', id);
+        socket.emit(eventSocketEmit, id);
 
         return () => {
-            socket.off('updateListUsers', updateListUsers);
+            socket.off(eventSocketOn, updateListUsers);
             setUsers([])
         };
     }, []);

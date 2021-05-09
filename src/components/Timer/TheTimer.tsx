@@ -1,38 +1,31 @@
 import React, {FunctionComponent, ReactElement, useEffect, useRef, useState} from 'react';
 import styles from './TheTimer.module.scss'
-import {socket} from "../../socketClient";
+import useTimer from "../../hooks/useTimer";
 
 type TheTimerProps = {
-    userKey: number
-    roomId: string
+    color: string
     children: ReactElement
 }
 
-const TheTimer: FunctionComponent<TheTimerProps> = ({userKey, roomId, children}) => {
-    const [seconds, setSeconds] = useState(0)
+const TheTimer: FunctionComponent<TheTimerProps> = ({color, children}) => {
     const countdownEl = useRef<SVGCircleElement>(null);
+    const seconds = useTimer()
+    const [lastTimer, setLastTimer] = useState(0)
+    const [showTimer, setShowTimer] = useState(true)
 
     useEffect(() => {
-        const timer = (seconds: number) => {
-            setSeconds(seconds)
-
-            if (null !== countdownEl.current) {
-                countdownEl.current.style.animationDuration = `${seconds}s`;
+            console.log(seconds)
+            if(seconds > (lastTimer + 1) || seconds < (lastTimer - 1)){
+                setShowTimer(false)
+                setTimeout(() => setShowTimer(true), 50)
             }
-        }
-
-        socket.on("timer", timer)
-
-        return () => {
-            socket.off("timer", timer)
-        }
-    }, []);
+            setLastTimer(seconds)
+    }, [seconds])
 
     return (
         <div className={styles.TheTimer}>
             <div>{children}</div>
-            {(seconds && seconds > 0) ? <svg><circle ref={countdownEl} r="22" cx="25" cy="25" /></svg> : null}
-            {seconds}
+            {(showTimer && seconds && seconds > 0) ? <svg><circle ref={countdownEl} r="29" cx="32" cy="35" stroke={color} /></svg> : null}
         </div>
     )
 }

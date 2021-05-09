@@ -1,0 +1,11 @@
+.FormJoinRoom {
+  margin-top: 10%;
+
+  input[type="text"] {
+    &:focus,&:active {
+      &::placeholder {
+        color: transparent;
+      }
+    }
+  }
+}

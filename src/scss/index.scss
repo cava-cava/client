@@ -2,16 +2,49 @@
 @import "fonts";
 @import "transitions";
 
-body {
+html, html body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
+  background-color: #212121;
 
   @include media('mobile') {
-    background-color: white;
+    background: $white;
   }
+}
+
+* {
+  font-family: 'Oswald', sans-serif;
+}
+
+button, input {
+  outline: none;
+}
+
+button, input[type="submit"] {
+  cursor: pointer;
+
+  &:focus,&:active {
+    animation: push 0.3s linear 1;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: $white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $grey;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.9;
 }

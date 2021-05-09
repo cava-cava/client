@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styles from './App.module.scss';
 import {MobilePrompt} from "./components/Prompt/MobilePrompt";
-import logo from './assets/svg/logo.svg'
+import logo from './assets/png/logo.png'
 import qrCode from './assets/png/qr.png'
 import {socket} from "./socketClient";
 import SocketLog from "./components/SocketLog";
@@ -12,10 +12,12 @@ import {useDispatch} from "react-redux";
 import {SET_ID} from "./store/user/types";
 import {FETCH_MESSAGES_ERROR, FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS, Message} from "./store/messages/types";
 import axios from "axios";
-import TheDevLinks from "./components/TheRouter/TheDevLinks";
+import AppDescription from "./components/AppDescription";
+import useDidYouKnow from "./hooks/useDidYouKnow";
 
 const App = () => {
     const dispatch = useDispatch();
+    useDidYouKnow();
 
     /**
      * Fetch End Messages
@@ -51,20 +53,15 @@ const App = () => {
             socket.off('connect', connect);
             socket.off("disconnect", disconnect)
         }
-    })
+    }, [])
 
     return (
         <div className={styles.App}>
             <div className={styles.AppLogo}>
-                <img src={logo} alt="Logo"/>
+                <img src={logo} alt="Logo2"/>
             </div>
             <div className={styles.AppDescription}>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget sem sed enim fringilla tempus in
-                    pulvinar diam. Proin varius tellus ac egestas facilisis. Aliquam at diam eget dolor placerat
-                    sollicitudin at vitae nisl. Duis pulvinar, ex sagittis porttitor lobortis, odio tortor sollicitudin
-                    ante, eu hendrerit ante dolor mollis nibh.
-                </p>
+                <AppDescription />
             </div>
             <section className={styles.AppPhone}>
                 <TheRouter/>
@@ -73,7 +70,6 @@ const App = () => {
                 <img src={qrCode} alt="QR Code"/>
             </div>
             <MobilePrompt/>
-            <SocketLog />
         </div>
     );
 }

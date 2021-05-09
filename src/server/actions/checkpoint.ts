@@ -22,5 +22,5 @@ export function checkpoint(room: Room, io:Server) {
         io.to(user.id).emit('checkpoint', user)
     })
     io.to(room.id).emit('updateListUsers', room.users);
-    checkGameOver(room, io)
+    if(!room.game.isGameOver) checkGameOver(room, io)
 }

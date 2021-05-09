@@ -1,39 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import styles from './Game.module.scss'
+import React, {useEffect, useState} from "react";
 import {RouteParams} from "../types/params";
 import {useParams} from "react-router";
 import {socket} from "../socketClient";
 import useRedirect from "../hooks/useRedirect";
 import TheGame from "../components/Game/TheGame";
+import SocketLog from "../components/SocketLog";
+import DisconnectedUsers from "../components/Users/DisconnectedUsers";
+import useListUsers from "../hooks/useListUsers";
 
 const Game = () => {
     const {id}: RouteParams = useParams();
-    const [isUsersDisconnected, setIsUsersDisconnected] = useState<boolean>(false);
+    const usersDisconnected = useListUsers(id, 'updateListUsersDisconnected', 'getListUsersDisconnectedInRoom')
+    const [isUsersDisconnected, setIsUsersDisconnected] = useState<boolean>(
+        false
+    );
 
     useRedirect();
 
     useEffect(() => {
         const userDisconnected = (isDisconnected: boolean) => {
-            setIsUsersDisconnected(isDisconnected)
-        }
+            setIsUsersDisconnected(isDisconnected);
+        };
 
-        socket.on('userDisconnected', userDisconnected);
+        socket.on("userDisconnected", userDisconnected);
 
-        socket.emit('userDisconnected', id)
+        socket.emit("userDisconnected", id);
         return () => {
-            socket.off('userDisconnected', userDisconnected);
+            socket.off("userDisconnected", userDisconnected);
             setIsUsersDisconnected(false);
         };
-    }, [])
+    }, []);
 
     return (
-        <div className={styles.Game}>
-            {isUsersDisconnected ?
-                <div>Quelqu’un est déconnecté, Veuillez patienter</div>
-                : <TheGame roomId={id}/>
-            }
-        </div>
+        <>
+            <>
+                {isUsersDisconnected ? (
+                    <DisconnectedUsers roomId={id} users={usersDisconnected}/>
+                ) : (
+                    <TheGame roomId={id}/>
+                )}
+            </>
+            <SocketLog roomId={id}/>
+        </>
     );
-}
+};
 
 export default Game;

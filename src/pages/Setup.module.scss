@@ -1,0 +1,11 @@
+@import "../scss/helpers";
+
+.Setup {
+  @include defaultBackground;
+
+  > div {
+    position: relative;
+    height: 100%;
+  }
+}
+

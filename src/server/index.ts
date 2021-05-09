@@ -19,6 +19,9 @@ import {sendDirt} from "./actions/sendDirt";
 import {currentRound} from "./actions/currentRound";
 import {Answer} from "./types/answer";
 import {shuffle} from "../mixins/shuffle";
+import {sendAnswerGuess} from "./actions/sendAnswerGuess";
+import {startTimer} from "./actions/startTimer";
+import {stopTimer} from "./actions/stopTimer";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -36,26 +39,26 @@ io.on("connect", (socket: ExtendedSocket) => {
     /**
      * Gets fired when a user wants to create a new room.
      */
-    socket.on('createRoom', (username:string, callback) => {
+    socket.on('createRoom', (username:string, avatar: string, callback) => {
         const room:Room = createRoom(rooms)
         rooms[room.id] = room;
         // have the socket join the room they've just created.
-        joinRoom(username, io, socket, room);
+        joinRoom(username, avatar, io, socket, room);
         callback();
     });
 
     /**
      * Gets fired when a player has joined a room.
      */
-    socket.on('joinRoom', (username:string, roomId:string, callback) => {
+    socket.on('joinRoom', (username:string, avatar: string, roomId:string, callback) => {
         const room:Room = rooms[roomId];
         if(room) {
             if(room.game.isStart) {
-                joinRoomGame(username, io, socket, room)
+                joinRoomGame(username, avatar, io, socket, room)
             }
-            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, io, socket, room);
-            else socket.emit('error', "La room est complète");
-        } else socket.emit('error', "La room n'existe pas");
+            else if(room.sockets.length < 6 || room.users.length < 6) joinRoom(username, avatar, io, socket, room);
+            else socket.emit('message', "La partie est complète...");
+        } else socket.emit('message', "La partie n'existe pas...");
         callback();
     });
 
@@ -73,6 +76,13 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
         if(room) {
             socket.emit('updateListUsers', room.users);
+        }
+    });
+
+    socket.on('getListUsersDisconnectedInRoom', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room) {
+            socket.emit('updateListUsersDisconnected', room.usersDisconnected);
         }
     });
 
@@ -163,9 +173,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: Answer) => {
         const room:Room = rooms[roomId];
 
-        room.users[userKey].answerEvent.myAnswer = answer
-        room.users[userKey].answerEvent.send = true
-        room.game.guessEvent.answers.push(answer)
+        sendAnswerGuess(room, userKey, answer)
 
         //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
@@ -193,18 +201,20 @@ io.on("connect", (socket: ExtendedSocket) => {
         leaveRooms(socket,rooms);
     });
 
-    socket.on('logMySocket', () => {
-        console.log('logMySocket:',socket)
+    socket.on('startTimer', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room.game.cardGame.card || room.game.guessEvent.guess) startTimer(room, io)
     });
 
-    socket.on('logRooms', () => {
-        console.log('logRooms:',rooms)
+    socket.on('stopTimer', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        stopTimer(room)
     });
 
     socket.on("disconnect", () => {
         leaveRooms(socket,rooms);
         socket.emit('redirect', `/rooms/`);
-        socket.emit('error', "Tu t'es déconnecté");
+        socket.emit('message', "Tu t'es déconnecté...");
         console.log(`disconnect ${socket.id}`);
     });
 });

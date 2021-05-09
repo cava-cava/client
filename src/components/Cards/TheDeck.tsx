@@ -1,23 +1,31 @@
 import React, {FunctionComponent} from 'react';
 import styles from './TheDeck.module.scss'
+import deck from './../../assets/png/deck3.png'
+import {colors} from "../../mixins/color";
+import {socket} from "../../socketClient";
+import {User} from "../../store/user/types";
 
 type TheDeckProps = {
     number: number,
-    color?: string,
-    deskClick: () => void,
     style: object
+    roomId: string
+    player?: User
+    userId: string
 }
 
-const TheDeck: FunctionComponent<TheDeckProps> = ({number, color, deskClick, style}) => {
-    let cards: any = []
-
-    for (let i = 0; i < number; i++) {
-        cards.push(<div className="card" style={{backgroundColor: color, top: (i * 10)+'px'}} key={i}></div>)
+const TheDeck: FunctionComponent<TheDeckProps> = ({number, style, roomId, player, userId}) => {
+    const deskClick = () => {
+        if(player && userId === player.id) {
+            console.color(`Tirer une carte`, colors.blue);
+            socket.emit('deckClicked', roomId, player.key)
+        } else {
+            console.color(`Tu ne peux pas de tirer de carte`, colors.blue);
+        }
     }
 
     return number > 0 ?
         (<div className={styles.TheDeck} onClick={deskClick} style={style}>
-            {cards}
+            <img src={deck}/>
         </div>) : null
 }
 

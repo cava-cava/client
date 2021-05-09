@@ -1,7 +1,7 @@
-import React, {FunctionComponent, useEffect} from 'react';
+import React, {FunctionComponent} from 'react';
 import styles from "./ListTips.module.scss";
-import CardTips from "./CardTips";
 import {Tip} from "../../store/tips/types";
+import MessageTips from "./MessageTips";
 
 type ListTipsProps = {
     tips: Tip[]
@@ -10,7 +10,7 @@ type ListTipsProps = {
 const ListTips: FunctionComponent<ListTipsProps> = ({tips}) => {
     return (
         <div className={styles.ListTips}>
-            {tips.map((tip:Tip, index:number) => <CardTips key={index} message={tip.message}/>)}
+            {tips.length === 0 ? <div>Loading...</div> : tips.map((tip:Tip, index:number) => <MessageTips key={index} index={index} message={tip.message} date={tip.published_at}/>)}
         </div>)
 }
 

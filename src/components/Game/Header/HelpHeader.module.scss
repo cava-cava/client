@@ -1,5 +1,7 @@
 .HelpHeader {
     margin: auto;
+    display: flex;
+    height: 100%;
 
     .icon {
         background: transparent;
@@ -12,6 +14,9 @@
 
         img {
             width: 100%;
+            height: 100%;
         }
     }
 }
+
+

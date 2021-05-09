@@ -83,3 +83,65 @@
   width: $width;
   height: $height;
 }
+
+@mixin deviceContainer() {
+  min-width: 355px;
+  min-height: $deviceHeight;
+  max-width: 340px;
+  max-height: $deviceHeight;
+}
+
+@mixin defaultBackground() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 30vh);
+  background: url("../../assets/jpg/background.jpeg") center center no-repeat;
+  background-size: 100% 100%;
+  padding: 15vh 0;
+
+  @include media('exclude-mobile') {
+    border-radius: $radius;
+    height: calc(100% - 150px);
+    padding: 75px  0;
+  }
+}
+
+@mixin gameOverBackground() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 30vh);
+  background: url("../../assets/jpg/gameOver.jpeg") center center no-repeat;
+  background-size: 100% 100%;
+  padding: 15vh 0;
+
+  @include media('exclude-mobile') {
+    border-radius: $radius;
+    height: calc(100% - 150px);
+    padding: 75px  0;
+  }
+}
+
+@mixin theButton() {
+  display: block;
+  margin: auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: $white;
+  background: url("../../assets/svg/button-black.svg") center center no-repeat;
+  line-height: 53px;
+  height: 60px;
+  width: 140px;
+  background-size: 100% 100%;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:focus,&:active {
+    animation: push 0.3s linear 1;
+  }
+}

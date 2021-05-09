@@ -1,0 +1,14 @@
+.AvatarHeader {
+    display: flex;
+    margin: auto auto 10%;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    background: url("../../assets/svg/cercle.svg") center center no-repeat;
+    background-size: 100% 100%;
+
+    img {
+        width: 100%;
+        object-fit: contain;
+    }
+}

@@ -1,0 +1,25 @@
+.MessageTips {
+    position: relative;
+    border: 2px solid;
+    border-image: url('../../assets/svg/bulle_1.svg') 30/30px;
+    margin-top: -15px;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    > p {
+        text-align: left;
+        margin: 0;
+        padding: 0.25rem 1rem 0;
+        font-weight: 300;
+
+        &:last-child {
+            padding: 0.25rem 1rem 1.75rem;
+        }
+
+        &:nth-child(2) {
+            font-size: 12px;
+        }
+    }
+}

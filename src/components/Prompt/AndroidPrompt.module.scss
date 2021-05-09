@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background: white;
+  background: $white;
   padding: 10px 0;
 
   div {
@@ -18,8 +18,8 @@
     }
 
     button {
-      background: black;
-      color: white;
+      background: $black;
+      color: $white;
       border: none;
       border-radius: 20px;
       padding: 4px 12px;

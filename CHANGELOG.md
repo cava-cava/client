@@ -2,6 +2,70 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/happy-game/client/compare/v0.5.0...v1.0.0) (2021-05-09)
+
+
+### Features
+
+* Add animation  ([7a0fb8a](https://github.com/happy-game/client/commit/7a0fb8a760a075f95266eb6447366867d4efe6c7))
+* add App description component and dynamic ([79b8a48](https://github.com/happy-game/client/commit/79b8a48a507293b434dce6c9ce046edbddbfc0c5))
+* add default animation ([12d1256](https://github.com/happy-game/client/commit/12d1256a0994204837229d33a48935ab0d2c3ec6))
+* add favicon ([0786d4b](https://github.com/happy-game/client/commit/0786d4b68c861dc44f89e0c8270a372a57ea172d))
+* add pwa and update version notification ([1e9a3ae](https://github.com/happy-game/client/commit/1e9a3ae99164e5089ca3f80308d3b89122d628ae))
+* add slider in select avatar ([22b842b](https://github.com/happy-game/client/commit/22b842be6ae8802684229edbb4c1e01ffadb70eb))
+* add timer guess ([70f3aca](https://github.com/happy-game/client/commit/70f3aca202d24b957c944f0d0dd9ea622636e205))
+* card integration ([1ee56f8](https://github.com/happy-game/client/commit/1ee56f8715286f6af4aa35bab5f30a252ed9693d))
+* change lang html ([ade1cd4](https://github.com/happy-game/client/commit/ade1cd432bee64163f91b3ace650e528d893374c))
+* change socketLOg to start timer & stop timer ([dcbb019](https://github.com/happy-game/client/commit/dcbb019358c950f6403611eb37ba7a31a5b05f3f))
+* componentization setup ([3865398](https://github.com/happy-game/client/commit/38653987fb4175fcd5eea65d803a4d48a8a9106e))
+* devine qui first screen done ([d79fed3](https://github.com/happy-game/client/commit/d79fed3e4a0a421566409695be1476ad4354eb59))
+* error message in inputText ([19d7e3e](https://github.com/happy-game/client/commit/19d7e3ea49b9192465280d21cb7fae946d0792b5))
+* message par default ([5398f28](https://github.com/happy-game/client/commit/5398f28608bf529ed5ca45ef6b44c3f1aaebae31))
+* modal parameters ([e4a6cff](https://github.com/happy-game/client/commit/e4a6cffdadf1c994aaa2547c750f408db1112e2e))
+* style disconnected users and waiting users ([5d1e691](https://github.com/happy-game/client/commit/5d1e69185323012c9630d2f2896fae56742c6ff4))
+* style end messages ([036a620](https://github.com/happy-game/client/commit/036a6207ac3f0630291393183b5134042522dbf6))
+* style Setup  ([58d840e](https://github.com/happy-game/client/commit/58d840eabe1ea47dc4f77596b4d721fa48c4046d))
+* surenchere texte ([d26d76b](https://github.com/happy-game/client/commit/d26d76bcc11ca0d27a24550959542c9ce949fbe3))
+* transition page ([09ba888](https://github.com/happy-game/client/commit/09ba8884cac8787b1c568b52e8ac0d32df19203f))
+* update favicon / accueil ([4d7a9b9](https://github.com/happy-game/client/commit/4d7a9b94930d0420af4d6a95319338d93697408e))
+* update use message / error in global socket io ([2a23ded](https://github.com/happy-game/client/commit/2a23ded1cdb06223f79287f205fe909c0cd9ec60))
+* validation message ([3004fcb](https://github.com/happy-game/client/commit/3004fcb9f0e63f2d427d3ec99eb7069bcc84abdc))
+
+
+### Bug Fixes
+
+* App style and Did you knows ([e250e3a](https://github.com/happy-game/client/commit/e250e3a7188433445d5ff22a91164408eafb4982))
+* border answer ([82d310d](https://github.com/happy-game/client/commit/82d310de36d3dceba138e30f7b611ad46e1e8f18))
+* border image in tips ([f200f89](https://github.com/happy-game/client/commit/f200f890be9e6396733112aaf801108b156a8923))
+* Bottom Deck ([88f6798](https://github.com/happy-game/client/commit/88f6798ab3bc6d76706aca6b8b17e2f7732b37b0))
+* code diconnected users ([8143203](https://github.com/happy-game/client/commit/814320356c6490efbc333758469d8a596fca1cf8))
+* connexion multiple and lose all users ([3f4d5fe](https://github.com/happy-game/client/commit/3f4d5fe50c2b164440b4ba9f7fddc8dab05cd3a7))
+* devinequi background ([1185386](https://github.com/happy-game/client/commit/11853864643fe514277fd904cb98d6f21c0f530b))
+* did you know, room, list user, parameters style ([2a226c0](https://github.com/happy-game/client/commit/2a226c05584a2d9ead43b782254b47bf702c887b))
+* dynamic header game ([e3df2e1](https://github.com/happy-game/client/commit/e3df2e14329d0a0de27b70e90639abb052c6b7bf))
+* end message style ([de00902](https://github.com/happy-game/client/commit/de009024153cc1526f3c100a33f578191b5c4f7b))
+* form join room ([4c877ff](https://github.com/happy-game/client/commit/4c877fff18c0fdfaac94d53629bccb349612dc52))
+* gameOver ([c65ed84](https://github.com/happy-game/client/commit/c65ed8455831553b868759416223374a2411ec5e))
+* getPlayer in cards round ([42ac72f](https://github.com/happy-game/client/commit/42ac72f9b30a2c7e46e140b55e9ad3f45dd1c5fd))
+* good background for pioche cards ([ab8a96f](https://github.com/happy-game/client/commit/ab8a96f49ad6b373df2a0edaf8953e6981fcd8d0))
+* JoinRoom ([c3480d3](https://github.com/happy-game/client/commit/c3480d338e39722da0225113de90d965598c1405))
+* placeholder join room ([0441e4a](https://github.com/happy-game/client/commit/0441e4a95af3c7d63de1a73c7595f281d1e0267f))
+* progressBar and card background ([3cb924f](https://github.com/happy-game/client/commit/3cb924f1a9b0d5e08b2d9fb8788da39cd698f345))
+* rapid Timer ([7580c05](https://github.com/happy-game/client/commit/7580c05583e6424f654bfb516ee4e4691e1739dd))
+* seconds timer ([c866fef](https://github.com/happy-game/client/commit/c866fefb84076f6fc1015d1da141080e95d14fa7))
+* server omg ([9ad1b7e](https://github.com/happy-game/client/commit/9ad1b7e8de8869ea62bdf96ca18e70dd04ec8777))
+* show answers ([d9df685](https://github.com/happy-game/client/commit/d9df685504b660cf9e98d17225ebd3445d03a1d2))
+* step users ([09bdac5](https://github.com/happy-game/client/commit/09bdac51305cd3bc5c19c9dc8c83fd77389865d5))
+* style cards ([27e79e8](https://github.com/happy-game/client/commit/27e79e8fecf55507a0d033e2135e8afab6fa0709))
+* style guess and question guess ([5b42bc7](https://github.com/happy-game/client/commit/5b42bc71cf843fd6c04da483500be3744a82c61f))
+* style mobile game and question guesses ([169edc2](https://github.com/happy-game/client/commit/169edc2c6c760682a8e0b42e50f461a4fbb0022e))
+* style progressBar ([b5c1adb](https://github.com/happy-game/client/commit/b5c1adb1a78fd5fa2c6922c4a4f4b0a83456215f))
+* style setup page ([ae66532](https://github.com/happy-game/client/commit/ae6653256e3ac6d5e3f4f1042953ae1f142b71d0))
+* timer ([d18a895](https://github.com/happy-game/client/commit/d18a89581f6c036e8c0a91d804d50c3dd1569d2d))
+* Timer cards and id guesses ([40b30fb](https://github.com/happy-game/client/commit/40b30fb01369cdc6c3b1c8c9a54764980bcb2b30))
+* timer styles ([db1517c](https://github.com/happy-game/client/commit/db1517c13dcbd3290068e51cc8694fad046f3f6f))
+* width tips ([d1b2007](https://github.com/happy-game/client/commit/d1b2007268483c5f524224fccde281e5991200e8))
+
 ## [0.5.0](https://github.com/happy-game/client/compare/v0.4.0...v0.5.0) (2021-04-11)
 
 

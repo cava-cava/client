@@ -6,7 +6,8 @@ import TheBooty from "../TheBooty";
 import useRoundEvent from "../../../hooks/useRoundEvent";
 import AnswersGuess from "./AnswersGuess";
 import {socket} from "../../../socketClient";
-import {shuffle} from "../../../mixins/shuffle";
+import devinequiLogo from '../../../assets/png/logo_devinequi.png'
+import TheHeader from "../Header/TheHeader";
 
 type TheGuessProps = {
     roomId: string,
@@ -31,14 +32,14 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
     }, []);
 
     return (
-        <div className={styles.TheGuess}>
-            <h1>Devine qui ?</h1>
-            <p>{question}</p>
+        <section className={`${styles.TheGuess} ${showAnswers ? styles.answer : styles.question}`}>
+            <TheHeader user={users[userKey]} roomId={roomId} triggerGuesses={true}/>
+            <img src={devinequiLogo}/>
+            {(question && !showAnswers && !win && !lose) && <p>{question}</p>}
             {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey}/>}
             {(showAnswers && !win && !lose) && <AnswersGuess roomId={roomId} userKey={userKey} users={users}/>}
-            { (win && !lose) && <TheBooty roomId={roomId} userKey={userKey} showHappiness={false}/> }
-            { (lose && !win) && <span>Tu as perdu</span> }
-        </div>
+            <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} showHappiness={false}/>
+        </section>
     )
 }
 

@@ -1,0 +1,28 @@
+.ListUsers {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  > div {
+    width: calc((100% / 3) - 1rem);
+    margin: 15px auto;
+    padding: 0 0.5rem;
+
+    > div:first-child {
+      width: 40px;
+      height: 38px;
+      padding: 7px;
+      margin: auto;
+      background: url("../../assets/svg/cercle.svg") center center no-repeat;
+      background-size: 100% 100%;
+    }
+
+    > div:last-child {
+      font-weight: 700;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

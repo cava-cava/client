@@ -1,5 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
 import Home from "../../pages/Home";
@@ -19,20 +20,32 @@ const TheRouter: FunctionComponent = () => {
 
     return (
         <Router>
-            <Switch>
-                <Route exact path="/" component={Home}/>
-                <PrivateRoute component={Setup} exact path="/setup" redirectTo="/rooms" condition={!isAuth}/>
-                <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
-                <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup" condition={isAuth}/>
-                <PrivateRoute component={Game} exact={false} path="/game/:id" redirectTo="/setup" condition={isAuth}/>
-                <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
-                <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
-                <Route exact path="/labs" component={Labs}/>
-                <Route path="*" component={Home}/>
-            </Switch>
+            <Route render={({location}) => (
+                <TransitionGroup>
+                    <CSSTransition
+                        key={location.key}
+                        classNames="page"
+                        timeout={600}
+                    >
+                        <Switch location={location}>
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/setup" component={Setup}/>
+                            <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
+                            <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup"
+                                          condition={isAuth}/>
+                            <PrivateRoute component={Game} exact={false} path="/game/:id" redirectTo="/setup"
+                                          condition={isAuth}/>
+                            <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
+                            <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
+                            <Route exact path="/labs" component={Labs}/>
+                            <Route path="*" component={Home}/>
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+            )}/>
             <TheDevLinks/>
         </Router>
-        )
+    )
 }
 
 export default TheRouter;

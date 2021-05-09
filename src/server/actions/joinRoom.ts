@@ -6,12 +6,14 @@ import {Server} from "socket.io";
 /**
  * Will connect a socket to a specified room
  * @param username string
+ * @param avatar string
  * @param io A connected socket.io server
  * @param socket A connected socket.io socket
  * @param room An object that represents a room from the `rooms` instance variable object
  */
-export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room:Room) => {
+export const joinRoom = (username:string, avatar:string, io:Server, socket:ExtendedSocket, room:Room) => {
     socket.username = username
+    socket.avatar = avatar
     const color = room.colors[0]
     socket.color = color
     room.colors.shift()
@@ -20,6 +22,7 @@ export const joinRoom = (username:string, io:Server, socket:ExtendedSocket, room
         id: socket.id,
         name: username,
         color: color,
+        avatar: avatar,
         ladder: 1,
         points: 0,
         joker: 2,
