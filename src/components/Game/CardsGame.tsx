@@ -29,15 +29,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
     const [isAlternative, setIsAlternative] = useState<boolean>(false)
     const [cardType, setCardType] = useState<string>('')
 
-    const drawClick = () => {
-        if(player && user.id === player.id) {
-            console.color(`Tirer une carte`, colors.blue);
-            socket.emit('deckClicked', roomId, player.key)
-        } else {
-            console.color(`Tu ne peux pas de tirer de carte`, colors.blue);
-        }
-    }
-
     const jokerClick = () => {
         if(player && currentCard && currentCard.Points < 0) {
             console.color(`joker`, colors.green);
@@ -82,15 +73,11 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
             <MessageGame />
-            <TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
+            <TheDeck number={5} roomId={roomId} player={player} userId={user.id} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
             {currentCard && <TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/>}
-            <div className={styles.Pioche}>
-                <div className={styles.container}>
-                    <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
-                </div>
-                <div className={styles.container}>
-                    <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
-                </div>
+            <div>
+                <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
+                <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
             </div>
         </div>
     )
