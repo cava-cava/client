@@ -10,7 +10,7 @@ type WaitingUsersProps = {
 const WaitingUsers: FunctionComponent<WaitingUsersProps> = ({text, users}) => {
     return (
         <div>
-            { text && <div>{text}</div> }
+            { text && <p>{text}</p> }
             <ListUsers users={users} arrayLength={users.length}/>
         </div>
     )

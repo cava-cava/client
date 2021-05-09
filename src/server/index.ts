@@ -79,6 +79,13 @@ io.on("connect", (socket: ExtendedSocket) => {
         }
     });
 
+    socket.on('getListUsersDisconnectedInRoom', (roomId:string) => {
+        const room:Room = rooms[roomId];
+        if(room) {
+            socket.emit('updateListUsersDisconnected', room.usersDisconnected);
+        }
+    });
+
     socket.on('addJoker', (roomId:string, userKey:number) => {
         const room:Room = rooms[roomId];
 

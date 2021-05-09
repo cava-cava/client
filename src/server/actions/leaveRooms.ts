@@ -24,6 +24,7 @@ export const leaveRooms = (socket:ExtendedSocket, rooms:Rooms) => {
                 room.usersDisconnected = room.usersDisconnected.concat(usersDisconnected)
                 if(room.usersDisconnected.length > 0) {
                     stopTimer(room)
+                    socket.to(room.id).emit('updateListUsersDisconnected', room.usersDisconnected);
                     socket.to(room.id).emit('userDisconnected', true);
                 }
             }

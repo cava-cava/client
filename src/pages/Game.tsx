@@ -6,9 +6,11 @@ import useRedirect from "../hooks/useRedirect";
 import TheGame from "../components/Game/TheGame";
 import SocketLog from "../components/SocketLog";
 import DisconnectedUsers from "../components/Users/DisconnectedUsers";
+import useListUsers from "../hooks/useListUsers";
 
 const Game = () => {
     const {id}: RouteParams = useParams();
+    const usersDisconnected = useListUsers(id, 'updateListUsersDisconnected', 'getListUsersDisconnectedInRoom')
     const [isUsersDisconnected, setIsUsersDisconnected] = useState<boolean>(
         false
     );
@@ -33,7 +35,7 @@ const Game = () => {
         <>
             <>
                 {isUsersDisconnected ? (
-                    <DisconnectedUsers roomId={id}/>
+                    <DisconnectedUsers roomId={id} users={usersDisconnected}/>
                 ) : (
                     <TheGame roomId={id}/>
                 )}

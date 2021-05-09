@@ -4,8 +4,9 @@
   flex-wrap: wrap;
 
   > div {
-    width: calc((100% / 3) - 16px);
-    margin: 15px 8px;
+    width: calc((100% / 3) - 1rem);
+    margin: 15px auto;
+    padding: 0 0.5rem;
 
     > div:first-child {
       width: 40px;

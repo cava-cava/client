@@ -27,6 +27,7 @@ export const joinRoomGame = (username:string, avatar:string, io:Server, socket:E
         room.usersDisconnected = room.usersDisconnected.filter(userDisconnected => userDisconnected.key !== user.key)
         console.log(`${socket.username}[${socket.id}] Re Joined ${room.id}`);
         socket.emit('redirect', `/game/${room.id}`);
+        socket.to(room.id).emit('updateListUsersDisconnected', room.usersDisconnected);
         if(room.usersDisconnected.length <= 0) socket.to(room.id).emit('userDisconnected', false);
     }else socket.emit('message', "La partie est en cours...");
 };
