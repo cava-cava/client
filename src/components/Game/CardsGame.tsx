@@ -82,8 +82,8 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
             <MessageGame />
-            <div className={styles.GameCenter}><TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/></div>
-            {currentCard && <div className={styles.GameCenter}><TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/></div>}
+            <TheDeck number={5} deskClick={drawClick} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
+            {currentCard && <TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/>}
             <div className={styles.Pioche}>
                 <div className={styles.container}>
                     <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>

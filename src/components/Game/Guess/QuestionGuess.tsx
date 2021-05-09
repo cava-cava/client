@@ -5,6 +5,8 @@ import useSend from "../../../hooks/useSend";
 import styles from './QuestionGuess.module.scss'
 
 import InputText from '../../Form/InputText'
+import ErrorMessage from "../../Form/ErrorMessage";
+import WaitingUsers from "../../Users/WaitingUsers";
 
 type QuestionGuessProps = {
     roomId: string
@@ -13,27 +15,41 @@ type QuestionGuessProps = {
 
 const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey}) => {
     const [answer, setAnswer] = useState('');
+    const [error, setError] = useState('');
+    const [showError, setShowError] = useState(false);
     const {send, setSend} = useSend(roomId, userKey)
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        if(!answer || answer.length === 0) return;
-        const myAnswer:Answer = {
-            userKey: userKey,
-            answer: answer
+        if(!answer || answer.length === 0) {
+            if(!error || error.length === 0) setError(`Réponse vide...`)
+            if(!showError) setShowError(true)
+        } else {
+            const myAnswer:Answer = {
+                userKey: userKey,
+                answer: answer
+            }
+            socket.emit('sendAnswerGuess', roomId, userKey, myAnswer)
+            setSend(true)
         }
-        socket.emit('sendAnswerGuess', roomId, userKey, myAnswer)
-        setSend(true)
+    }
+
+    const keypressEvent = () => {
+        if(answer.length > 0) {
+            if(error && error.length > 0) setError(``)
+            if(showError) setShowError(false)
+        }
     }
 
     return (
         <div className={styles.QuestionGuess}>
             {!send ?
-                <form autoComplete="off" onSubmit={handleSubmit}>
-                    <InputText id={"answer"} name={"answer"} placeholder="Answer..." setValue={setAnswer} />
+                <form autoComplete="off" onSubmit={handleSubmit} onKeyUp={keypressEvent}>
+                    <InputText id={"answer"} name={"answer"} placeholder="Réponse..." setValue={setAnswer} hasError={!!(error && error.length > 0)}/>
+                    <ErrorMessage error={error} />
                     <input type="submit" value="Envoyer"/>
                 </form>
-                : <div>En attente des autres joueurs</div>}
+                : <WaitingUsers text="En attente des autres joueurs ..." users={[]}/>}
         </div>
     )
 }

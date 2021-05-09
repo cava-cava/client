@@ -3,11 +3,12 @@ import {User} from "../../store/user/types";
 import styles from "./ListUsers.module.scss"
 
 type ListUsersProps = {
-    users: User[]
+    users: User[],
+    arrayLength?: number
 }
-const ListUsers: FunctionComponent<ListUsersProps> = ({users}) => {
+const ListUsers: FunctionComponent<ListUsersProps> = ({users, arrayLength=6}) => {
     return (<div className={styles.ListUsers}>
-        {[...Array(6)].map((x, index) => (
+        {[...Array(arrayLength)].map((x, index) => (
             <div key={index}>
                 <div>
                     <div>

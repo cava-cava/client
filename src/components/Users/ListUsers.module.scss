@@ -1,13 +1,12 @@
 .ListUsers {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 30px 17px;
-  grid-template-areas:
-    ". . ."
-    ". . .";
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
 
   > div {
+    width: calc((100% / 3) - 16px);
+    margin: 15px 8px;
+
     > div:first-child {
       width: 40px;
       height: 38px;

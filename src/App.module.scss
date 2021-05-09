@@ -34,6 +34,9 @@
     @include media('low-tablet') {
       display: none;
     }
+    @include media('mobile') {
+      display: none;
+    }
   }
 
   &Code {
@@ -51,6 +54,9 @@
     }
 
     @include media('low-tablet') {
+      display: none;
+    }
+    @include media('mobile') {
       display: none;
     }
   }
