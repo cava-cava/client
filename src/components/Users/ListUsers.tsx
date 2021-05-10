@@ -5,8 +5,9 @@ import styles from "./ListUsers.module.scss"
 type ListUsersProps = {
     users: User[],
     arrayLength?: number
+    showName?: boolean
 }
-const ListUsers: FunctionComponent<ListUsersProps> = ({users, arrayLength=6}) => {
+const ListUsers: FunctionComponent<ListUsersProps> = ({users, arrayLength=6, showName = true}) => {
     return (<div className={styles.ListUsers}>
         {[...Array(arrayLength)].map((x, index) => (
             <div key={index}>
@@ -15,7 +16,7 @@ const ListUsers: FunctionComponent<ListUsersProps> = ({users, arrayLength=6}) =>
                         { users[index] && <img src={`/smiley/${users[index].color.replace('#', '')}/smiley_${users[index].avatar}.png`}/> }
                     </div>
                 </div>
-                { users[index] && <div>{users[index].name}</div>}
+                { (showName && users[index]) && <div>{users[index].name}</div>}
             </div>
         ))}
     </div>)

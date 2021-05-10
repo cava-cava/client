@@ -33,7 +33,7 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
     return (
         <section className={`${styles.TheGuess} ${showAnswers ? styles.answer : styles.question}`}>
             <TheHeader user={users[userKey]} roomId={roomId} triggerGuesses={true}/>
-            {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey} question={question}/>}
+            {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey} question={question} usersWaiting={users.filter(user => !user.answerEvent.send)}/>}
             {(showAnswers && !win && !lose) && <AnswersGuess roomId={roomId} userKey={userKey} users={users}/>}
             <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} showHappiness={false}/>
         </section>

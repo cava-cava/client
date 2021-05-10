@@ -2,7 +2,7 @@
 .TheGuess {
   @include gameOverBackground;
 
-  > header {
+  > * {
     padding: 0 1rem;
   }
 }

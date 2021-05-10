@@ -7,14 +7,16 @@ import InputText from '../../Form/InputText'
 import ErrorMessage from "../../Form/ErrorMessage";
 import WaitingUsers from "../../Users/WaitingUsers";
 import devinequiLogo from "../../../assets/png/logo_devinequi.png";
+import {User} from "../../../store/user/types";
 
 type QuestionGuessProps = {
     roomId: string
     userKey: number
     question?: string
+    usersWaiting: User[]
 }
 
-const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, question}) => {
+const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, question, usersWaiting}) => {
     const [answer, setAnswer] = useState('');
     const [error, setError] = useState('');
     const [showError, setShowError] = useState(false);
@@ -52,7 +54,7 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, 
                     <ErrorMessage error={error} />
                     <input type="submit" value="Envoyer"/>
                 </form>
-                : <WaitingUsers text="En attente des autres joueurs ..." users={[]}/>}
+                : (<WaitingUsers text="En attente des autres joueurs..." users={usersWaiting}/>)}
         </div>
     )
 }

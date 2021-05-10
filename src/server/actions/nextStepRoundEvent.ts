@@ -21,14 +21,13 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
                         userKey: user.key,
                         answer: `Pas de reponse - ${user.name}`
                     }
-                    sendAnswerGuess(room, user.key, answer)
+                    sendAnswerGuess(room, user.key, answer, io)
                 }
             })
             io.to(room.id).emit('startAnswersEvent')
         }
         room.users.map(user => user.answerEvent.send = false)
         if(++room.game.guessEvent.idStep < (room.users.length - 1)) {
-            io.to(room.id).emit('nextStepRoundEvent', room.game.guessEvent.idStep)
             startTimer(room, io, 10)
         }
         else {

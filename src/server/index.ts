@@ -173,7 +173,7 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: Answer) => {
         const room:Room = rooms[roomId];
 
-        sendAnswerGuess(room, userKey, answer)
+        sendAnswerGuess(room, userKey, answer, io)
 
         //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
