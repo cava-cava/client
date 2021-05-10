@@ -21,9 +21,9 @@ const EndMessages: FunctionComponent<EndMessagesProps> = ({gameOver}) => {
         }
     }, []);
     return (
-        <>
-            {gameOverMessages.map((gameOverMessage, index) => <EndMessage key={index} title={gameOverMessage.title} description={gameOverMessage.description}/>)}
-        </>
+        <div>
+            {gameOverMessages.map((gameOverMessage, index) => <EndMessage key={index} showImg={index === 0} img={gameOverMessage.illustration.url} title={gameOverMessage.title} description={gameOverMessage.description}/>)}
+        </div>
     )
 }
 

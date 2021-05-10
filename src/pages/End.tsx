@@ -1,27 +1,24 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import styles from './End.module.scss'
-import stylesButton from '../components/TheButton.module.scss'
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 import EndMessages from "../components/GameOver/EndMessages";
 import useLeaveRoom from "../hooks/useLeaveRoom";
-import AvatarHeader from "../components/Avatar/AvatarHeader";
+import useGameOverMessages from "../hooks/useGameOverMessages";
 
 const End = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
 
     useLeaveRoom()
+    useGameOverMessages()
 
     return (
         <div className={styles.End}>
-            <div>
-                <AvatarHeader color={user.color.replace('#', '')} avatarNumber={user.avatar} />
-                <EndMessages gameOver={user.gameOver.length > 0 ? user.gameOver : ['default']}/>
-            </div>
+            <EndMessages gameOver={user.gameOver.length > 0 ? user.gameOver : ['default']}/>
             <div className={styles.EndButtons}>
-                <Link to="/rooms" className={stylesButton.TheButton}>Rejouez</Link>
-                <Link to="/tips" className={stylesButton.TheButton}>Tips</Link>
+                <Link to="/rooms">Rejouez</Link>
+                <Link to="/tips">Tips</Link>
             </div>
         </div>
     );

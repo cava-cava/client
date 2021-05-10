@@ -1,4 +1,16 @@
 .EndMessage {
+  > img {
+    width: 8.75rem;
+    position: relative;
+    left: 5px;
+    object-fit: contain;
+    object-position: center;
+
+    + h2 {
+      margin-top: 1rem;
+    }
+  }
+
   > h2 {
     font-size: 2rem;
   }
