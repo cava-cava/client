@@ -6,7 +6,6 @@ import TheBooty from "../TheBooty";
 import useRoundEvent from "../../../hooks/useRoundEvent";
 import AnswersGuess from "./AnswersGuess";
 import {socket} from "../../../socketClient";
-import devinequiLogo from '../../../assets/png/logo_devinequi.png'
 import TheHeader from "../Header/TheHeader";
 
 type TheGuessProps = {
@@ -34,9 +33,7 @@ const TheGuess: FunctionComponent<TheGuessProps> = ({roomId, question, users, us
     return (
         <section className={`${styles.TheGuess} ${showAnswers ? styles.answer : styles.question}`}>
             <TheHeader user={users[userKey]} roomId={roomId} triggerGuesses={true}/>
-            {(showAnswers && !win && !lose) && <img src={devinequiLogo}/> }
-            {(question && !showAnswers && !win && !lose) && <p>{question}</p>}
-            {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey}/>}
+            {(question && !showAnswers && !win && !lose) && <QuestionGuess roomId={roomId} userKey={userKey} question={question}/>}
             {(showAnswers && !win && !lose) && <AnswersGuess roomId={roomId} userKey={userKey} users={users}/>}
             <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} showHappiness={false}/>
         </section>
