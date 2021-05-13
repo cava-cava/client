@@ -1,8 +1,13 @@
+@import "../../scss/helpers";
+
 .TheProgressBar {
     position: relative;
     margin-top: 10px;
     height: 35px;
     width: 100%;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 100px;
 
     > div {
         &:last-child {
@@ -18,17 +23,18 @@
         top: 0;
         left: 0;
         position: absolute;
+        z-index: 0;
     }
 
     &Value{
-        box-shadow: 0 10px 40px -10px #fff;
         border-radius: 100px;
-        background: yellow;
-        height: 17px;
+        background: $yellow;
+        height: 15px;
         width: 0;
         transition: 0.6s width ease-in-out;
         position: absolute;
-        top: 4px;
-        left: 0;
+        top: 5px;
+        left: 10px;
+        z-index: -1;
     }
 }
