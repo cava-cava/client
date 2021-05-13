@@ -20,7 +20,7 @@
         }
     }
 
-    @include media('exclude-mobile') {
+    @include media('exclude-low-tablet') {
         @include deviceContainer;
         padding: 0;
         bottom: 0;

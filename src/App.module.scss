@@ -65,7 +65,7 @@
     width: 100%;
   }
 
-  @include media('exclude-mobile') {
+  @include media('exclude-low-tablet') {
     &Phone {
       position: relative;
       margin: auto;

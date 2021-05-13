@@ -10,7 +10,7 @@
   background-size: 100% 100%;
   padding: 15vh 0;
 
-  @include media('exclude-mobile') {
+  @include media('exclude-low-tablet') {
     border-radius: $radius;
     height: calc(100% - 150px);
     padding: 75px  0;
@@ -18,6 +18,12 @@
 
   > img:first-child {
     width: 70%;
+  }
+
+  > p {
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 700;
   }
 
   &Interaction {

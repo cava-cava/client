@@ -1,55 +1,67 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { socket } from "../../../socketClient";
-import { Answer } from "../../../server/types/answer";
-import { User } from "../../../store/user/types";
-import useSend from "../../../hooks/useSend";
+import React, {FunctionComponent, useEffect, useState} from "react";
+import {socket} from "../../../socketClient";
+import {Answer} from "../../../server/types/answer";
+import {User} from "../../../store/user/types";
 import styles from "./AnswersGuess.module.scss";
 import ListUsers from "../../Users/ListUsers";
 import WaitingUsers from "../../Users/WaitingUsers";
+import useSend from "../../../hooks/useSend";
+import ButtonAnswersGuess from "./ButtonAnswersGuess";
+import MessageGame from "../MessageGame";
 
 type AnswersGuessProps = {
-  roomId: string;
-  userKey: number;
-  users: User[];
+    roomId: string
+    userKey: number
+    users: User[]
+    showResults: boolean
 };
 
 const AnswersGuess: FunctionComponent<AnswersGuessProps> = ({
-  roomId,
-  userKey,
-  users,
-}) => {
-  const { send, setSend } = useSend(roomId, userKey);
-  const [answers, setAnswers] = useState<Answer[]>();
-  const [stepEvent, setStepEvent] = useState<number>(0);
+                                                                roomId,
+                                                                userKey,
+                                                                users,
+                                                                showResults
+                                                            }) => {
+    const {send, setSend} = useSend(roomId, userKey);
+    const [answers, setAnswers] = useState<Answer[]>([]);
+    const allAnswersUserKey = users[userKey].answerEvent.allAnswersUserKey
 
-  const handleClick = (myAnswer: Answer) => {
-    setSend(true);
-    myAnswer.idStep = stepEvent;
-    socket.emit("pushAnswersGuess", roomId, userKey, myAnswer);
-  };
-
-  useEffect(() => {
-    const getAnswers = (answers: Answer[]) => {
-      setAnswers(answers.filter(answer => answer.userKey !== userKey));
+    const handleClick = (myAnswer: Answer) => {
+        if (allAnswersUserKey.length === 0 || send) return
+        myAnswer.myAnswerKey = allAnswersUserKey[0]
+        socket.emit("pushAnswersGuess", roomId, userKey, myAnswer)
     };
 
-    socket.on("getAnswers", getAnswers);
+    useEffect(() => {
+        const getAnswers = (answers: Answer[]) => {
+            setAnswers(answers);
+        };
 
-    socket.emit("getAnswers", roomId, userKey);
-    return () => {
-      socket.off("getAnswers", getAnswers);
-    };
-  }, []);
+        socket.on("getAnswers", getAnswers);
 
-  return !send ? (
-    <div className={styles.AnswersGuess}>
-      <p>Qu'est-ce qu'à répondu {users[stepEvent]?.name} ?</p>
-      <ListUsers users={[users[stepEvent]]} arrayLength={1} showName={false}/>
-      <div>
-        {answers?.map((answer, index) => (<button key={index} onClick={() => handleClick(answer)}>{answer.answer}</button>))}
-      </div>
-    </div>
-  ) : (<WaitingUsers text="En attente des autres joueurs..." users={users.filter(user => !user.answerEvent.send)}/>);
+
+        socket.emit("getAnswers", roomId, userKey);
+        return () => {
+            socket.off("getAnswers", getAnswers);
+        };
+    }, []);
+
+    return (
+        <div className={styles.AnswersGuess}>
+            <MessageGame />
+            {allAnswersUserKey.length > 0 &&
+                <ListUsers users={[users[allAnswersUserKey[0]]]} arrayLength={1} showName={false}/>
+            }
+            {(!send || showResults) &&
+                                        <div>
+                                            {answers?.map((answer, index) => (
+                                                <ButtonAnswersGuess key={index} userKey={userKey} answer={answer} users={users}
+                                                                    handleClick={handleClick} showResults={showResults}/>))}
+                                        </div>
+            }
+            { (send && !showResults) && <WaitingUsers text="En attente des autres joueurs..." users={users.filter(user => !user.answerEvent.send)}/>}
+        </div>
+    )
 };
 
 export default AnswersGuess;

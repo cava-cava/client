@@ -48,8 +48,8 @@
     ##Device = Exclude Most of the Smartphones Mobiles (Portrait)
     ##Screen = B/w -- to 480px
   */
-  @if $media == "exclude-mobile"{
-    @media screen and (min-width: #{$sm}) {
+  @if $media == "exclude-low-tablet"{
+    @media screen and (min-width: #{$md}) {
       @content;
     }
   }
@@ -57,7 +57,7 @@
     ##Device = Landscape
   */
   @if $media == "landscape"{
-    @media screen and (orientation: landscape) {
+    @media screen and (max-width: #{$md}) and (orientation: landscape) {
       @content;
     }
   }
@@ -101,7 +101,7 @@
   background-size: 100% 100%;
   padding: 15vh 0;
 
-  @include media('exclude-mobile') {
+  @include media('exclude-low-tablet') {
     border-radius: $radius;
     height: calc(100% - 150px);
     padding: 75px  0;
@@ -118,7 +118,7 @@
   background-size: 100% 100%;
   padding: 15vh 0;
 
-  @include media('exclude-mobile') {
+  @include media('exclude-low-tablet') {
     border-radius: $radius;
     height: calc(100% - 150px);
     padding: 75px  0;

@@ -9,7 +9,7 @@
   background: #000 url("../assets/jpg/accueil.jpeg") center center no-repeat;
   background-size: contain;
 
-  @include media('exclude-mobile') {
+  @include media('exclude-low-tablet') {
     border-radius: $radius;
   }
 }

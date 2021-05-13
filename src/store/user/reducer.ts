@@ -19,8 +19,10 @@ export const initialState: userState = {
         userKey: -1,
         answer: ''
       },
+      allAnswersUserKey:[],
       myAnswersUsers: [],
-      send: false
+      send: false,
+      winEvent: false
     },
     statisticsGame: {
       bonus: 0,

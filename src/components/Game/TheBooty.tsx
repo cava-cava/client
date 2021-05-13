@@ -2,16 +2,19 @@ import React, {FunctionComponent, useState} from 'react';
 import styles from './TheBooty.module.scss'
 import {colors} from "../../mixins/color";
 import {socket} from "../../socketClient";
+import WaitingUsers from "../Users/WaitingUsers";
+import {User} from "../../store/user/types";
 
 type TheBootyProps = {
     win: boolean
     lose: boolean
     roomId: string
     userKey: number
+    users: User[]
     showHappiness?: boolean
 }
 
-const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey, showHappiness = true}) => {
+const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey, users,showHappiness = true}) => {
     const [hasBooty, setHasBooty] = useState(false)
 
     const callback = () => {
@@ -52,8 +55,7 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey,
                     </div>
                 </div>
             }
-            {(win && !lose) && hasBooty && <p>En attente des autres joueurs ...</p>}
-            {(!win && lose) && <p>Tu as perdu ...</p>}
+            {((!win && lose) || hasBooty) && <WaitingUsers users={users} text={"En attente des autres joueurs ..."}/>}
         </div>
     ) : null
 }

@@ -6,7 +6,6 @@ import styles from './QuestionGuess.module.scss'
 import InputText from '../../Form/InputText'
 import ErrorMessage from "../../Form/ErrorMessage";
 import WaitingUsers from "../../Users/WaitingUsers";
-import devinequiLogo from "../../../assets/png/logo_devinequi.png";
 import {User} from "../../../store/user/types";
 
 type QuestionGuessProps = {
@@ -46,7 +45,6 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, 
 
     return (
         <div className={styles.QuestionGuess}>
-            <img src={devinequiLogo}/>
             {question && <p>{question}</p>}
             {!send ?
                 <form autoComplete="off" onSubmit={handleSubmit} onKeyUp={keypressEvent}>

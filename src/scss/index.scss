@@ -24,8 +24,14 @@ button, input {
 button, input[type="submit"] {
   cursor: pointer;
 
-  &:focus,&:active {
-    animation: push 0.3s linear 1;
+  &:not(:disabled) {
+    &:focus,&:active {
+      animation: push 0.3s linear 1;
+    }
+  }
+
+  &:disabled {
+    color: inherit;
   }
 }
 
@@ -47,4 +53,16 @@ img {
 
 ::-webkit-scrollbar-thumb:hover {
   opacity: 0.9;
+}
+
+@include media('landscape') {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 }

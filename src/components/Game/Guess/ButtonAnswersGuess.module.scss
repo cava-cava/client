@@ -1,0 +1,49 @@
+@import "../../../scss/helpers";
+
+.ButtonAnswersGuess {
+  margin: 1rem auto;
+  width: 85%;
+  background: none;
+  border: 2px solid;
+  border-image: url('../../../assets/svg/button-transparent.svg') 20/20px;
+  min-height: 2.5rem;
+  padding: 7px 7px;
+  position: relative;
+
+  > div {
+
+    &:last-child {
+      display: flex;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1rem;
+      width: 75%;
+      margin: auto;
+
+      > img {
+        width: 2rem;
+        margin: auto;
+      }
+    }
+  }
+
+  &Background {
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 100px;
+
+    &Active {
+      background: $grey;
+    }
+
+    &Good {
+      background: $yellow;
+    }
+
+    &Bad {
+      background: $black;
+      color: $white;
+    }
+  }
+}

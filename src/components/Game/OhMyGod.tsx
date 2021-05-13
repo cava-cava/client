@@ -7,13 +7,15 @@ import TitleImg from "../TitleImg";
 import title from '../../assets/title/omg.png'
 import click from '../../assets/svg/appuyer.svg'
 import illustration from '../../assets/png/illuOMG.png'
+import {User} from "../../store/user/types";
 
 type OhMyGodProps = {
     roomId: string,
-    userKey: number
+    userKey: number,
+    users: User[]
 }
 
-const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
+const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey, users}) => {
     const { win, lose } = useRoundEvent(roomId, userKey);
 
     const handleClick = () => {
@@ -34,7 +36,8 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey}) => {
                 </button>
             </div>
             }
-            <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} />
+            {lose && <p>Tu as perdu...</p>}
+            <TheBooty win={win} lose={lose} roomId={roomId} userKey={userKey} users={users.filter(user => user.winEvent)}/>
         </div>
     )
 }
