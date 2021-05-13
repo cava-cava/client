@@ -23,10 +23,11 @@ button, input {
 
 button, input[type="submit"] {
   cursor: pointer;
+  transition: 0.3s transform ease;
 
   &:not(:disabled) {
     &:focus,&:active {
-      animation: push 0.3s linear 1;
+      transform: scale(0.8);
     }
   }
 
