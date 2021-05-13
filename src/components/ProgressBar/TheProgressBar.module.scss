@@ -2,14 +2,25 @@
 
 .TheProgressBar {
     position: relative;
-    margin-top: 10px;
-    height: 35px;
+    margin: 10px 0;
     width: 100%;
-    z-index: 0;
-    overflow: hidden;
-    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.1s transform ease;
+
+    &:focus,&:active {
+        transform: scale(0.98);
+    }
 
     > div {
+        &:first-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+            width: 100%;
+            border-radius: 0 100px 100px 0;
+        }
         &:last-child {
             width: calc(100% - 25px);
             position: relative;
@@ -29,11 +40,11 @@
     &Value{
         border-radius: 100px;
         background: $yellow;
-        height: 15px;
+        height: 50%;
         width: 0;
         transition: 0.6s width ease-in-out;
         position: absolute;
-        top: 5px;
+        top: 4px;
         left: 10px;
         z-index: -1;
     }

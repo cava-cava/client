@@ -5,10 +5,10 @@ import {User} from "../../store/user/types";
 
 type UserProgressBarProps = {
     user: User,
-    playerKey?: number
+    activeKey?: number
 }
-const UserProgressBar: FunctionComponent<UserProgressBarProps> = ({user, playerKey}) =>
-    <div className={(playerKey && playerKey === user.key) ? (`${styles.UserProgressBar}  ${styles.UserProgressBarActive}`) : styles.UserProgressBar} style={{left: `${user.points}%`}}>
+const UserProgressBar: FunctionComponent<UserProgressBarProps> = ({user, activeKey}) =>
+    <div className={((activeKey || activeKey === 0) && activeKey === user.key) ? (`${styles.UserProgressBar}  ${styles.UserProgressBarActive}`) : styles.UserProgressBar} style={{left: `${user.points}%`}}>
         <img src={`/smiley/${user.color.replace('#', '')}/smiley_${user.avatar}.png`}/>
     </div>
 
