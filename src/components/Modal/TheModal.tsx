@@ -1,8 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import {createPortal} from "react-dom";
 import styles from './TheModal.module.scss'
-import TitleImg from "../TitleImg";
 import IconClose from "../IconClose";
+import TheTitle from "../TheTitle";
 
 type TheModalProps = {
     isShowing: boolean
@@ -18,7 +18,7 @@ const TheModal: FunctionComponent<TheModalProps> = ({isShowing, hide, title, ...
                 <div>
                     <div>
                         <div className={styles.TheModalHeader}>
-                            <TitleImg src={title}/>
+                            <TheTitle title={title}/>
                             <button type="button" onClick={hide}><IconClose/></button>
                         </div>
                         <div className={styles.TheModalBody}>{props.children}</div>

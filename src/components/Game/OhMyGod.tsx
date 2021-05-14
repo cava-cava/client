@@ -3,8 +3,7 @@ import styles from './OhMyGod.module.scss'
 import {socket} from "../../socketClient";
 import TheBooty from "./TheBooty";
 import useRoundEvent from "../../hooks/useRoundEvent";
-import TitleImg from "../TitleImg";
-import title from '../../assets/title/omg.png'
+import TheTitle from "../TheTitle";
 import click from '../../assets/svg/appuyer.svg'
 import illustration from '../../assets/png/illuOMG.png'
 import {User} from "../../store/user/types";
@@ -24,7 +23,7 @@ const OhMyGod: FunctionComponent<OhMyGodProps> = ({roomId, userKey, users}) => {
 
     return (
         <div className={styles.OhMyGod}>
-            <TitleImg src={title}/>
+            <TheTitle title={"OMG"}/>
             { (!win && !lose) &&
             <div className={styles.OhMyGodInteraction}>
                 <button role="button" onClick={handleClick}>

@@ -10,6 +10,10 @@
   background-size: 100% 100%;
   padding: 15vh 0;
 
+  h1 {
+    font-size: 6rem;
+  }
+
   @include media('exclude-low-tablet') {
     border-radius: $radius;
     height: calc(100% - 150px);

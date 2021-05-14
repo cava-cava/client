@@ -3,8 +3,7 @@ import styles from "./DisconnectedUsers.module.scss";
 import CodeHeader from "../Code/CodeHeader";
 import WaitingUsers from "./WaitingUsers";
 import {User} from "../../store/user/types";
-import TitleImg from "../TitleImg";
-import title from "../../assets/title/deconnexion.png"
+import TheTitle from "../TheTitle";
 
 type DisconnectedUsersProps = {
     roomId: string
@@ -15,7 +14,7 @@ const DisconnectedUsers: FunctionComponent<DisconnectedUsersProps> = ({roomId, u
     return (
         <div className={styles.DisconnectedUsers}>
             <div>
-                <TitleImg src={title}/>
+                <TheTitle title={"Deconnexion"}/>
                 <CodeHeader roomId={roomId}/>
                 <WaitingUsers text="Une ou plusieurs personnes sont déconnectées, Veuillez patienter..." users={users}/>
             </div>

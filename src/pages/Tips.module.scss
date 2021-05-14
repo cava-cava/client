@@ -3,6 +3,11 @@
 .Tips {
   @include defaultBackground;
 
+  h1 {
+    font-size: 6rem;
+    margin-top: 0;
+  }
+
   > div {
     &:first-child {
       position: relative;

@@ -1,6 +1,5 @@
 import React, {FunctionComponent} from 'react';
 import TheModal from "./TheModal";
-import title from "../../assets/title/parametres.png"
 import SettingsModalCredits from "./Sub-Modal/SettingsModalCredits";
 import InputRange from "../Form/InputRange";
 import {useDispatch, useSelector} from "react-redux";
@@ -32,7 +31,7 @@ const SettingsModal: FunctionComponent<SettingsModalProps> = ({isShowing, hide})
         <TheModal
             isShowing={isShowing}
             hide={hide}
-            title={title}>
+            title="paramètres">
             <div>
                 <div className={styles.SettingsModal}>
                     <h2>Volume</h2>
