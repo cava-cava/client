@@ -13,6 +13,8 @@ import Tips from "../../pages/Tips";
 import Labs from "../../pages/Labs";
 import Game from "../../pages/Game";
 import TheDevLinks from "./TheDevLinks";
+import Cards from "../../pages/Cards";
+import Omg from "../../pages/Omg";
 
 const TheRouter: FunctionComponent = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
@@ -38,6 +40,8 @@ const TheRouter: FunctionComponent = () => {
                             <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                             <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
                             <Route exact path="/labs" component={Labs}/>
+                            <Route exact path="/debug/cards" component={Cards}/>
+                            <Route exact path="/debug/omg" component={Omg}/>
                             <Route path="*" component={Home}/>
                         </Switch>
                     </CSSTransition>
