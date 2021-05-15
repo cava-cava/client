@@ -6,10 +6,10 @@ html, html body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #212121;
+  background: $white;
 
-  @include media('mobile') {
-    background: $white;
+  @include media('exclude-low-tablet') {
+    background-color: #212121;
   }
 }
 

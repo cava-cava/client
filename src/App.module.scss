@@ -11,13 +11,15 @@
     top: 0;
     left: 0;
     width: 125px;
+    display: none;
 
-    @include media('mobile') {
-      display: none;
+    @include media('exclude-low-tablet') {
+      display: block;
     }
   }
 
   &Description {
+    display: none;
     width: 100%;
     margin: auto;
     padding: 2rem;
@@ -28,20 +30,15 @@
       max-width: 300px;
     }
 
-    @include media('tablet') {
-      display: none;
-    }
-    @include media('low-tablet') {
-      display: none;
-    }
-    @include media('mobile') {
-      display: none;
+    @include media('exclude-low-tablet') {
+      display: block;
     }
   }
 
   &Code {
     width: 100%;
     margin: auto;
+    display: none;
 
     img {
       width: 100%;
@@ -49,15 +46,8 @@
       border-radius: 20px;
     }
 
-    @include media('tablet') {
-      display: none;
-    }
-
-    @include media('low-tablet') {
-      display: none;
-    }
-    @include media('mobile') {
-      display: none;
+    @include media('exclude-low-tablet') {
+      display: block;
     }
   }
 

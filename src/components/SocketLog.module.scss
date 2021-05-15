@@ -4,8 +4,9 @@
     position: fixed;
     top: 5px;
     right: 5px;
+    display: none;
 
-    @include media('mobile') {
-        display: none;
+    @include media('exclude-low-tablet') {
+        display: block;
     }
 }

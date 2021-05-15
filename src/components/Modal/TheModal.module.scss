@@ -36,14 +36,6 @@
         }
     }
 
-    @include media('tablet') {
-        left: 0;
-    }
-
-    @include media('low-tablet') {
-        left: 0;
-    }
-
     &Header {
         h1 {
             font-size: 4rem;
