@@ -1,0 +1,11 @@
+@import "../../scss/helpers";
+
+.TheCanvas {
+  canvas {
+    height: 100vh!important;
+
+    @include media('exclude-low-tablet') {
+      height: $deviceHeight!important;
+    }
+  }
+}
