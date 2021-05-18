@@ -64,9 +64,11 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
                 } else {
                     user.answerEvent.myAnswersUsers.map((myAnswerUser) => {
                         if(myAnswerUser.myAnswerKey !== myAnswerUser.userKey) {
-                            winEvent = false
-                            io.to(user.id).emit('message', `Tu as perdu ...`)
-                            return;
+                            if(winEvent) {
+                                winEvent = false
+                                io.to(user.id).emit('message', `Tu as perdu ...`)
+                            }
+                            ++user.statisticsGame.guessLost
                         }
                     })
                 }

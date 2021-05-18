@@ -24,6 +24,8 @@ export const gameOver = (room: Room) => {
     getMaxValue(room, 'useDirt')
     // if guessWon max
     getMaxValue(room, 'guessWon')
+    // if guessLost max
+    getMaxValue(room, 'guessLost')
     // if omgWon max
     getMaxValue(room, 'omgWon')
 }
