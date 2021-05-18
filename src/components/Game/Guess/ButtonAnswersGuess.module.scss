@@ -1,7 +1,7 @@
 @import "../../../scss/helpers";
 
 .ButtonAnswersGuess {
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   width: 85%;
   background: none;
   border: 2px solid;
@@ -17,13 +17,20 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom: -1rem;
+      bottom: -2.2rem;
       width: 75%;
       margin: auto;
 
-      > img {
-        width: 2rem;
+      > div {
+        display: flex;
+        flex-direction: column;
         margin: auto;
+        padding: 0 0.5rem;
+
+        > img {
+          width: 2rem;
+          margin: auto;
+        }
       }
     }
   }

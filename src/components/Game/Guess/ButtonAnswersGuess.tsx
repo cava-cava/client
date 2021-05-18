@@ -31,10 +31,16 @@ const ButtonAnswersGuess: FunctionComponent<ButtonAnswersGuessProps> = ({
             <div
                 className={`${styles.ButtonAnswersGuessBackground} ${(!showResults && myAnswer.length > 0) && styles.ButtonAnswersGuessBackgroundActive} ${(showResults && showGoodAnswerUser) && styles.ButtonAnswersGuessBackgroundBad} ${(showResults && !showGoodAnswerUser) && styles.ButtonAnswersGuessBackgroundGood}`}>{answer.answer}</div>
             <div>
-                {(myAnswer.length > 0 && (myAnswer[0].myAnswerKey || myAnswer[0].myAnswerKey === 0) && users[myAnswer[0].myAnswerKey]) ? (<img
-                    src={`/smiley/${users[myAnswer[0].myAnswerKey].color.replace('#', '')}/smiley_${users[myAnswer[0].myAnswerKey].avatar}.png`}/>) : null}
-                {(showResults && showGoodAnswerUser) && <img
-                    src={`/smiley/${users[answer.userKey].color.replace('#', '')}/smiley_${users[answer.userKey].avatar}.png`}/>}
+                {(myAnswer.length > 0 && (myAnswer[0].myAnswerKey || myAnswer[0].myAnswerKey === 0) && users[myAnswer[0].myAnswerKey]) ?
+                    (<div>
+                            <img src={`/smiley/${users[myAnswer[0].myAnswerKey].color.replace('#', '')}/smiley_${users[myAnswer[0].myAnswerKey].avatar}.png`}/>
+                            <div>{users[myAnswer[0].myAnswerKey].name}</div>
+                    </div>) : null}
+                {(showResults && showGoodAnswerUser) ?
+                    (<div>
+                        <img src={`/smiley/${users[answer.userKey].color.replace('#', '')}/smiley_${users[answer.userKey].avatar}.png`}/>
+                        <div>{users[answer.userKey].name}</div>
+                    </div>) : null}
             </div>
         </button>
     );
