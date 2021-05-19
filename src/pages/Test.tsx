@@ -6,7 +6,7 @@ import TheTitle from "../components/TheTitle";
 import {useControls} from "leva";
 import ThePlaneVideo from "../components/WebGl/ThePlaneVideo";
 // @ts-ignore
-import videoSrc from "../assets/test.mp4"
+import videoSrc from "../assets/mp4/test.mp4"
 
 const Test = () => {
     const selects = useControls({
