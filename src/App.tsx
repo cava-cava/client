@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import styles from './App.module.scss';
 import {MobilePrompt} from "./components/Prompt/MobilePrompt";
-import qrCode from './assets/png/qr.png'
+import bgLeft from './assets/png/appBgLeft.png'
+import bgRight from './assets/png/appBgRight.png'
 import {socket} from "./socketClient";
 import {colors} from './mixins/color'
 import './mixins/browser-console-color'
@@ -39,9 +40,11 @@ const App = () => {
     return (
         <div className={styles.App}>
             <div>
+                <img src={bgLeft}/>
                 <section className={styles.AppPhone}>
                     <TheRouter/>
                 </section>
+                <img src={bgRight}/>
             </div>
             <QrCodeApp />
             <MobilePrompt/>
