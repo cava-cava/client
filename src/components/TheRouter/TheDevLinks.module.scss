@@ -2,8 +2,10 @@
 
 .TheDevLinks {
   position: fixed;
-  left: 20px;
-  bottom: 20px;
+  left: 0;
+  right: 0;
+  top: 1rem;
+  margin: auto;
   z-index: 1;
   display: none;
 

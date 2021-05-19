@@ -4,59 +4,57 @@
   position: relative;
   text-align: center;
   height: 100vh;
-  display: flex;
 
-  &Logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 125px;
-    display: none;
-
-    @include media('exclude-low-tablet') {
-      display: block;
-    }
+  @include media('low-tablet') {
+    background: none!important;
   }
 
-  &Description {
-    display: none;
-    width: 100%;
-    margin: auto;
-    padding: 2rem;
-    color: white;
-
-    > div {
-      margin: auto;
-      max-width: 300px;
-    }
-
-    @include media('exclude-low-tablet') {
-      display: block;
-    }
-  }
-
-  &Code {
-    width: 100%;
-    margin: auto;
-    display: none;
-
-    img {
-      width: 100%;
-      max-width: 150px;
-      border-radius: 20px;
-    }
-
-    @include media('exclude-low-tablet') {
-      display: block;
-    }
-  }
-
-  &Phone {
-    width: 100%;
+  @include media('mobile') {
+    background: none!important;
   }
 
   @include media('exclude-low-tablet') {
-    &Phone {
+    background: url("assets/png/appBg.png") center center no-repeat;
+    background-size: contain;
+
+    > div {
+      &:first-child {
+        display: flex;
+        margin: auto;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    &::before,
+    &::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    &::before {
+      left: 0;
+      top: 0;
+      background: url("assets/png/logo.png") top center no-repeat;
+      background-size: contain;
+    }
+
+    &::after {
+      right: 0;
+      bottom: 0;
+      background: url("assets/png/appGob.png") bottom center no-repeat;
+      background-size: contain;
+    }
+  }
+
+
+  &Phone {
+    width: 100%;
+
+    @include media('exclude-low-tablet') {
       position: relative;
       margin: auto;
       border-radius: $radius;

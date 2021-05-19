@@ -9,7 +9,7 @@ html, html body {
   background: $white;
 
   @include media('exclude-low-tablet') {
-    background-color: #212121;
+    background-color: $black;
   }
 }
 

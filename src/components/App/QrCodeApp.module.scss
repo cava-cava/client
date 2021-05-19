@@ -1,0 +1,32 @@
+@import "../../scss/helpers";
+
+.QrCodeApp {
+  display: none;
+  width: 50%;
+  position: absolute;
+  z-index: 1;
+  bottom: 2rem;
+  left: 2rem;
+  color: $white;
+  text-align: left;
+  font-size: 18px;
+
+  > div {
+    margin: auto 1rem;
+
+    > p {
+      margin: 0 0 0.5rem;
+    }
+  }
+
+  > img {
+    width: 5rem;
+    object-fit: contain;
+    object-position: center;
+  }
+
+
+  @include media('exclude-low-tablet') {
+    display: flex;
+  }
+}

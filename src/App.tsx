@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './App.module.scss';
 import {MobilePrompt} from "./components/Prompt/MobilePrompt";
-import logo from './assets/png/logo.png'
 import qrCode from './assets/png/qr.png'
 import {socket} from "./socketClient";
 import {colors} from './mixins/color'
@@ -9,9 +8,9 @@ import './mixins/browser-console-color'
 import TheRouter from "./components/TheRouter/TheRouter";
 import {useDispatch} from "react-redux";
 import {SET_ID} from "./store/user/types";
-import AppDescription from "./components/AppDescription";
 import useDidYouKnow from "./hooks/useDidYouKnow";
 import useGameOverMessages from "./hooks/useGameOverMessages";
+import QrCodeApp from "./components/App/QrCodeApp";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -39,18 +38,12 @@ const App = () => {
 
     return (
         <div className={styles.App}>
-            <div className={styles.AppLogo}>
-                <img src={logo} alt="Logo2"/>
+            <div>
+                <section className={styles.AppPhone}>
+                    <TheRouter/>
+                </section>
             </div>
-            <div className={styles.AppDescription}>
-                <AppDescription />
-            </div>
-            <section className={styles.AppPhone}>
-                <TheRouter/>
-            </section>
-            <div className={styles.AppCode}>
-                <img src={qrCode} alt="QR Code"/>
-            </div>
+            <QrCodeApp />
             <MobilePrompt/>
         </div>
     );
