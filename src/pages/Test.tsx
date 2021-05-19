@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Omg.module.scss'
+import styles from './Test.module.scss'
 import TheSprite from "../components/WebGl/TheSprite";
 import TheCanvas from "../components/WebGl/TheCanvas";
 import TheTitle from "../components/TheTitle";
@@ -8,14 +8,14 @@ import ThePlaneVideo from "../components/WebGl/ThePlaneVideo";
 // @ts-ignore
 import videoSrc from "../assets/test.mp4"
 
-const Omg = () => {
+const Test = () => {
     const selects = useControls({
         mesh: { options: { Sprite: "sprite", Video: "video" } },
     })
     const [{ omgWin }, set] = useControls(() => ({ omgWin: false }))
 
     return (
-        <div className={styles.Omg}>
+        <div className={styles.Test}>
             <TheCanvas showPerf={true}>
                 {selects.mesh === "sprite" && <TheSprite textureSrc={"https://i.imgur.com/Oj6RJV9.png"} args={[4, 4, 1]} position={[0, 0, 0]}
                                                          triggerAnimate={omgWin} onClick={() => set({ omgWin: true })}/>}
@@ -27,4 +27,4 @@ const Omg = () => {
     );
 }
 
-export default Omg;
+export default Test;

@@ -7,7 +7,7 @@ const TheDevLinks: FunctionComponent = () => {
             <nav className={styles.TheDevLinks}>
                 <Link to='/debug/cards'>Cards</Link>
                 -
-                <Link to='/debug/omg'>Omg</Link>
+                <Link to='/debug/test'>Test</Link>
                 -
                 <Link to='/rooms'>Rooms</Link>
                 -
