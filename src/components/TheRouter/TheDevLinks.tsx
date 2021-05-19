@@ -9,9 +9,9 @@ const TheDevLinks: FunctionComponent = () => {
                 -
                 <Link to='/debug/test'>Test</Link>
                 -
-                <Link to='/rooms'>Rooms</Link>
+                <Link to='/labs'>Labs</Link>
                 -
-                <Link to='/end'>End</Link>
+                <Link to='/rooms'>Rooms</Link>
             </nav>
     ) : null
 }
