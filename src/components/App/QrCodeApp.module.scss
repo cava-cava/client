@@ -28,5 +28,9 @@
 
   @include media('exclude-low-tablet') {
     display: flex;
+
+    @include media('tablet') {
+      display: none;
+    }
   }
 }
