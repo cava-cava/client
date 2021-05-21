@@ -1,6 +1,6 @@
-import React, {FunctionComponent, Suspense} from 'react';
+import React, {FunctionComponent} from 'react';
 import {Perf} from "r3f-perf";
-import {Canvas} from "@react-three/fiber";
+import {Canvas, useThree} from "@react-three/fiber";
 import styles from "./TheCanvas.module.scss"
 
 type TheCanvasProps = {
@@ -11,9 +11,7 @@ const TheCanvas: FunctionComponent<TheCanvasProps> = ({showPerf = (!process.env.
     return (
         <div className={styles.TheCanvas}>
             <Canvas>
-                <Suspense fallback={null}>
-                    {props.children}
-                </Suspense>
+                {props.children}
                 <ambientLight intensity={1}/>
                 {showPerf && <Perf position={'bottom-right'}/>}
             </Canvas>

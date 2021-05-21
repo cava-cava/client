@@ -1,24 +1,13 @@
-import React, {useRef} from 'react';
+import React, {Suspense} from 'react';
 import TheCanvas from "../components/WebGl/TheCanvas";
-
-function Background({...props}) {
-    const mesh = useRef()
-
-    return (
-        <mesh
-            {...props}
-            ref={mesh}
-        >
-            <planeBufferGeometry args={[4, 5]}/>
-            <meshStandardMaterial color={'hotpink'}/>
-        </mesh>
-    )
-}
+import TheDeck from "../components/WebGl/TheDeck";
 
 const Cards = () => {
     return (
         <TheCanvas>
-            <Background position={[0, 0, 0]}/>
+            <Suspense fallback={null}>
+                <TheDeck/>
+            </Suspense>
         </TheCanvas>
     );
 }

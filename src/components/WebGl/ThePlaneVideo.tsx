@@ -1,5 +1,4 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
-import {useAspect} from "@react-three/drei";
 
 type ThePlaneVideoProps = {
     videoSrc: string
