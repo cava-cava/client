@@ -10,11 +10,11 @@ import Rooms from "../../pages/Rooms";
 import Room from "../../pages/Room";
 import End from "../../pages/End";
 import Tips from "../../pages/Tips";
-import Labs from "../../pages/Labs";
 import Game from "../../pages/Game";
 import TheDevLinks from "./TheDevLinks";
 import Cards from "../../pages/Cards";
 import Test from "../../pages/Test";
+import Omg from "../../pages/Omg";
 
 const TheRouter: FunctionComponent = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
@@ -39,7 +39,7 @@ const TheRouter: FunctionComponent = () => {
                                           condition={isAuth}/>
                             <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
                             <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
-                            <Route exact path="/labs" component={Labs}/>
+                            <Route exact path="/debug/omg" component={Omg}/>
                             <Route exact path="/debug/cards" component={Cards}/>
                             <Route exact path="/debug/test" component={Test}/>
                             <Route path="*" component={Home}/>
