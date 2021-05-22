@@ -1,12 +1,13 @@
 @import "src/scss/helpers";
 
 .SocketLog {
-    position: fixed;
-    top: 5px;
-    right: 5px;
-    display: none;
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  display: none;
+  z-index: 2;
 
-    @include media('exclude-low-tablet') {
-        display: block;
-    }
+  @include media('exclude-low-tablet') {
+    display: block;
+  }
 }
