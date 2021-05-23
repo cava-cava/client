@@ -18,6 +18,8 @@
         width: 100%;
 
         > a {
+            @include theButton;
+
             &:first-child {
                 margin-right: 0.5rem;
             }

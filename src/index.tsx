@@ -17,6 +17,9 @@ const store = configureStore(history, initialState);
 WebFont.load({
     google: {
         families: ['Oswald:300,400,700', 'sans-serif']
+    },
+    custom: {
+        families: ['Okay']
     }
 });
 

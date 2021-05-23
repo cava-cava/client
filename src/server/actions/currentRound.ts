@@ -20,7 +20,6 @@ export function currentRound(room: Room, io:Server) {
             io.to(room.id).emit('sendGuess', room.game.guessEvent.guess)
             if(room.game.guessEvent.idStep !== -1 && room.game.guessEvent.idStep < room.users.length) {
                 io.to(room.id).emit('startAnswersEvent')
-                io.to(room.id).emit('nextStepRoundEvent', room.game.guessEvent.idStep)
             }
         }
     }

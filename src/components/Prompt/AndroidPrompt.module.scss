@@ -31,7 +31,7 @@
     }
   }
 
-  @include media('exclude-mobile') {
+  @include media('exclude-low-tablet') {
     display: none;
   }
 }

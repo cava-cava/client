@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useEffect} from 'react';
 import TheModal from "./TheModal";
-import title from '../../assets/title/regles.png'
 import styles from './HelpModal.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
@@ -39,7 +38,7 @@ const HelpModal: FunctionComponent<HelpModalProps> = ({isShowing, hide}) => {
         <TheModal
             isShowing={isShowing}
             hide={hide}
-            title={title}
+            title="règles"
         >
             <div className={styles.HelpModal}>
                 { (rules && rules.But) &&

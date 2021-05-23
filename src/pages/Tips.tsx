@@ -7,8 +7,7 @@ import {FETCH_TIPS_ERROR, FETCH_TIPS_REQUEST, FETCH_TIPS_SUCCESS, Tip} from "../
 import axios from "axios";
 import styles from "./Tips.module.scss"
 import useLeaveRoom from "../hooks/useLeaveRoom";
-import title from '../assets/title/tips.png'
-import TitleImg from "../components/TitleImg";
+import TheTitle from "../components/TheTitle";
 import FormTips from "../components/Form/FormTips";
 import IconClose from "../components/IconClose";
 
@@ -40,7 +39,7 @@ const Tips = () => {
     return (
         <div className={styles.Tips}>
             <div>
-                <TitleImg src={title} />
+                <TheTitle title={"Tips"} />
                 <div>
                     <p>
                         Ici tu peux t’exprimer en apportant

@@ -1,8 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
-import TitleImg from "./TitleImg";
-import title from "../assets/title/saviez-vous.png"
+import TheTitle from "./TheTitle";
 import styles from './DidYouKnow.module.scss'
 import useDidYouKnow from "../hooks/useDidYouKnow";
 import {Know} from "../store/knows/types";
@@ -13,7 +12,7 @@ const DidYouKnow: FunctionComponent = () => {
 
     return (knows && knows[0]?.text) ? (
         <div className={styles.DidYouKnow}>
-            <TitleImg src={title} />
+            <TheTitle title={"Le Saviez-vous"} />
             <p>{knows[0]?.text}</p>
         </div>
     ) : null

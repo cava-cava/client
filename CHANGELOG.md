@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/happy-game/client/compare/v1.0.0...v1.1.0) (2021-05-23)
+
+
+### Features
+
+* add game over message guessLost ([52e8ce3](https://github.com/happy-game/client/commit/52e8ce3da2c4fd114d09b64f5ea9fe255be80108))
+* add labs link ([289334d](https://github.com/happy-game/client/commit/289334d1abc5b76771f43e19227cd26dcf6fae84))
+* add mp4 ([226ce94](https://github.com/happy-game/client/commit/226ce94ffc972daef43584c85a06c7a08844b5ca))
+* add new font ([fb50517](https://github.com/happy-game/client/commit/fb50517590815fb6fb7d5ea3e51423d072952395))
+* App integration ([0c4b6cc](https://github.com/happy-game/client/commit/0c4b6ccd7f16e454da6063d55e3c4e3b97389a0a))
+* change Omg page debug for Test page debug ([d1d0028](https://github.com/happy-game/client/commit/d1d0028d39000ca30a096eb0b2183d28b040cde3))
+* create page debug cards and omg for webgl ([ca4473f](https://github.com/happy-game/client/commit/ca4473f41ff90cd4df7c89c94e277ca42e37886c))
+* debug page cards and omg ([f0b567e](https://github.com/happy-game/client/commit/f0b567e9e988b094eecbf9ce7a63e1659482447f))
+* delete labs and add omg prototype page ([a7efcd2](https://github.com/happy-game/client/commit/a7efcd245fe091145f455d8e0b3c7e4c9d34a312))
+* integration homepage ([e3b767d](https://github.com/happy-game/client/commit/e3b767d2a42ee33a70d0ea48ed24cb8278abdad4))
+* new version game over messages ([872984c](https://github.com/happy-game/client/commit/872984cd61be71922643a85d1143f7dd69a5e3e3))
+* show name user for answer guesses ([ff66453](https://github.com/happy-game/client/commit/ff66453491d2b72f0546fb24d14ccd032f54cfc1))
+* test video texture ([8c56703](https://github.com/happy-game/client/commit/8c56703868a43a2b6fd17c955436ed5d1c60935a))
+* update devLinks and qrCode ([aa2f47d](https://github.com/happy-game/client/commit/aa2f47d54b20e4870f4f6b6c673b76de3989abd3))
+* update homepage ([d03b145](https://github.com/happy-game/client/commit/d03b145d81352bae757f7a695f22aae7b821736e))
+* **ProgressBar:** click see each users ([034ad23](https://github.com/happy-game/client/commit/034ad2341a8412666ad7be4cce7ba8d449bfd4d0))
+* update title and description ([b90dd07](https://github.com/happy-game/client/commit/b90dd07101b0ebdbdf3eba9e67128fdd3b36c787))
+* waiting users for questions users ([67f581a](https://github.com/happy-game/client/commit/67f581a80f8cd9531d98ef80ead079c2c9c4ba62))
+
+
+### Bug Fixes
+
+* mixin style low tablet / desktop ([30af07c](https://github.com/happy-game/client/commit/30af07cde9dd9077a8ebe64792c885bcdaa0431f))
+* orthographe ([7199014](https://github.com/happy-game/client/commit/7199014b4b92b8e3beed7107d8cfd92d600834ec))
+* style focus and active btn ([a15b9f4](https://github.com/happy-game/client/commit/a15b9f46952ded89f1b75d792c37626f0157620d))
+* style progress bar ([6e37ee4](https://github.com/happy-game/client/commit/6e37ee46af960be6e62c6716d50c20f173058580))
+* style question guesses ([591c948](https://github.com/happy-game/client/commit/591c9485a485035ddc3cee27eb522d29717c32a5))
+
 ## [1.0.0](https://github.com/happy-game/client/compare/v0.5.0...v1.0.0) (2021-05-09)
 
 

@@ -2,20 +2,13 @@
 .TheGuess {
   @include gameOverBackground;
 
-  > p {
-    padding: 0 2rem;
-    font-size: 22px;
-    margin: 0 auto 1.5rem;
-    font-weight: bold;
+  > * {
+    padding: 0 1rem;
   }
 
   > img {
-    width: 85%;
+    width: 90%;
     height: auto;
     align-self: center;
-  }
-
-  > header {
-    padding: 0 1rem;
   }
 }

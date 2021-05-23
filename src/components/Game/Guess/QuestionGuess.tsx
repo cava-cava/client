@@ -3,17 +3,19 @@ import {socket} from "../../../socketClient";
 import {Answer} from "../../../server/types/answer";
 import useSend from "../../../hooks/useSend";
 import styles from './QuestionGuess.module.scss'
-
 import InputText from '../../Form/InputText'
 import ErrorMessage from "../../Form/ErrorMessage";
 import WaitingUsers from "../../Users/WaitingUsers";
+import {User} from "../../../store/user/types";
 
 type QuestionGuessProps = {
     roomId: string
     userKey: number
+    question?: string
+    usersWaiting: User[]
 }
 
-const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey}) => {
+const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey, question, usersWaiting}) => {
     const [answer, setAnswer] = useState('');
     const [error, setError] = useState('');
     const [showError, setShowError] = useState(false);
@@ -43,13 +45,14 @@ const QuestionGuess: FunctionComponent<QuestionGuessProps> = ({roomId, userKey})
 
     return (
         <div className={styles.QuestionGuess}>
+            {question && <p>{question}</p>}
             {!send ?
                 <form autoComplete="off" onSubmit={handleSubmit} onKeyUp={keypressEvent}>
                     <InputText id={"answer"} name={"answer"} placeholder="Réponse..." setValue={setAnswer} hasError={!!(error && error.length > 0)}/>
                     <ErrorMessage error={error} />
                     <input type="submit" value="Envoyer"/>
                 </form>
-                : <WaitingUsers text="En attente des autres joueurs ..." users={[]}/>}
+                : (<WaitingUsers text="En attente des autres joueurs..." users={usersWaiting}/>)}
         </div>
     )
 }

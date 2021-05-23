@@ -20,12 +20,11 @@
         }
     }
 
-    @include media('exclude-mobile') {
+    @include media('exclude-low-tablet') {
         @include deviceContainer;
         padding: 0;
         bottom: 0;
         right: 0;
-        left: 64px;
         margin: auto;
         border-radius: $radius;
 
@@ -36,17 +35,9 @@
         }
     }
 
-    @include media('tablet') {
-        left: 0;
-    }
-
-    @include media('low-tablet') {
-        left: 0;
-    }
-
     &Header {
-        h3 {
-            text-align: center;
+        h1 {
+            font-size: 4rem;
         }
 
         button {

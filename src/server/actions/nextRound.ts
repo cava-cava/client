@@ -29,5 +29,5 @@ export function nextRound(room: Room, io:Server) {
         }
     }
     io.to(room.id).emit('startRoundEvent', room.game.guessEvent.trigger, room.game.omgEvent.trigger);
-    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 45);
+    if(room.game.guessEvent.trigger && !room.game.omgEvent.trigger) startTimer(room, io, 40);
 }

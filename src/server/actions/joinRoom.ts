@@ -34,7 +34,9 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
                 answer: ''
             },
             myAnswersUsers: [],
-            send: false
+            allAnswersUserKey: [],
+            send: false,
+            winEvent: false
         },
         statisticsGame: {
             bonus: 0,
@@ -44,6 +46,7 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
             useJokerForOther: 0,
             useDirt: 0,
             guessWon: 0,
+            guessLost: 0,
             omgWon: 0
         },
         gameOver: []

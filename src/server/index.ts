@@ -22,6 +22,8 @@ import {shuffle} from "../mixins/shuffle";
 import {sendAnswerGuess} from "./actions/sendAnswerGuess";
 import {startTimer} from "./actions/startTimer";
 import {stopTimer} from "./actions/stopTimer";
+import {pushAnswersGuess} from "./actions/pushAnswersGuess";
+import React from "react";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -145,6 +147,7 @@ io.on("connect", (socket: ExtendedSocket) => {
         ++room.users[userKey].statisticsGame.omgWon
         socket.emit('winRoundEvent')
         socket.to(room.id).emit('loseRoundEvent')
+        io.to(room.id).emit('updateListUsers', room.users);
     });
 
     socket.on('checkRoundEvent', (roomId: string, userKey: number) => {
@@ -166,14 +169,14 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('getAnswers', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
         const user:User = room.users[userKey]
-        const answers:Answer[] = room.game.guessEvent.answers.filter(answer => (user.answerEvent.myAnswersUsers.filter(myAnswerUser => answer.userKey === myAnswerUser.userKey).length === 0))
+        const answers:Answer[] = room.game.guessEvent.answers.filter(answer => answer.userKey !== userKey)
         io.to(user.id).emit('getAnswers', shuffle(answers))
     });
 
     socket.on('sendAnswerGuess', (roomId: string, userKey: number, answer: Answer) => {
         const room:Room = rooms[roomId];
 
-        sendAnswerGuess(room, userKey, answer)
+        sendAnswerGuess(room, userKey, answer, io)
 
         //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)
@@ -181,8 +184,15 @@ io.on("connect", (socket: ExtendedSocket) => {
 
     socket.on('pushAnswersGuess', (roomId: string, userKey: number, answer:Answer) => {
         const room:Room = rooms[roomId];
-        room.users[userKey].answerEvent.myAnswersUsers.push(answer)
-        room.users[userKey].answerEvent.send = true
+        const user:User = room.users[userKey]
+
+        pushAnswersGuess(room, user, answer, io)
+
+        io.to(room.id).emit('updateListUsers', room.users);
+
+        if(user.answerEvent.allAnswersUserKey.length > 0) {
+            socket.emit('message', `Qu'est-ce qu'à répondu ${room.users[user.answerEvent.allAnswersUserKey[0]].name} ?`)
+        } else socket.emit('message', '')
 
         //check if all Users have send answer
         if(room.users.filter(user => !user.answerEvent.send).length === 0) endTimer(room, io)

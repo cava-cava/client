@@ -1,15 +1,17 @@
-import React, {useEffect} from 'react';
-import {useHistory} from "react-router";
+import React from 'react';
 import styles from './Home.module.scss'
+import {Link} from 'react-router-dom'
+import homeImg from '../assets/jpg/accueil.jpeg'
 
 const Home = () => {
-    const history = useHistory();
-    useEffect(() => {
-       setTimeout(()=>{history.push('/setup')}, 5000)
-    }, []);
     return (
-    <div className={styles.Home}/>
-  );
+        <div className={styles.Home}>
+            <img src={homeImg} alt="ça va ça va"/>
+            <p>Le jeu complètement déjanté qui
+                vous fera relativiser sur le bonheur !</p>
+            <Link to="/setup">Jouer !</Link>
+        </div>
+    );
 }
 
 export default Home;

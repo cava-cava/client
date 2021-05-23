@@ -1,9 +1,12 @@
+import {FileStrapi} from "../../server/types/fileStrapi";
+
 export interface Message {
   id?: number
   key: string
   title: string
   description: string
   position: number
+  illustration: FileStrapi
 }
 
 export interface messagesState {

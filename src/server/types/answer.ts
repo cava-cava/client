@@ -1,5 +1,5 @@
 export interface Answer {
     userKey: number
-    idStep?: number
+    myAnswerKey?: number
     answer: string
 }

@@ -60,7 +60,7 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
         <>
             { (!triggerGuesses && !triggerOMG) && <CardsGame users={users} player={player} user={user} roomId={roomId}/>}
             { (triggerGuesses && !triggerOMG) && <TheGuess roomId={roomId} question={guess?.question} users={users} userKey={user.key}/> }
-            { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={roomId} userKey={user.key}/> }
+            { (triggerOMG && !triggerGuesses) && <OhMyGod roomId={roomId} userKey={user.key} users={users}/> }
         </>
     )
 }

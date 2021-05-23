@@ -4,73 +4,74 @@
   position: relative;
   text-align: center;
   height: 100vh;
-  display: flex;
 
-  &Logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 125px;
-
-    @include media('mobile') {
-      display: none;
+  > div {
+    &:first-child {
+      > img {
+        display: none;
+      }
     }
   }
 
-  &Description {
-    width: 100%;
-    margin: auto;
-    padding: 2rem;
-    color: white;
-
+  @include media('exclude-low-tablet') {
     > div {
-      margin: auto;
-      max-width: 300px;
+      &:first-child {
+        margin: auto;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 25px 20px;
+        grid-template-areas: ". . .";
+
+        > img {
+          display: block;
+          margin: auto;
+        }
+
+        @include media('tablet') {
+          display: flex;
+
+          > img {
+            display: none;
+          }
+        }
+      }
     }
 
-    @include media('tablet') {
-      display: none;
-    }
-    @include media('low-tablet') {
-      display: none;
-    }
-    @include media('mobile') {
-      display: none;
-    }
-  }
-
-  &Code {
-    width: 100%;
-    margin: auto;
-
-    img {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
       width: 100%;
-      max-width: 150px;
-      border-radius: 20px;
+      height: 100%;
     }
 
-    @include media('tablet') {
-      display: none;
+    &::before {
+      left: 0;
+      top: 0;
+      background: url("assets/png/logo.png") top left no-repeat;
+      background-size: contain;
     }
 
-    @include media('low-tablet') {
-      display: none;
-    }
-    @include media('mobile') {
-      display: none;
+    &::after {
+      right: 0;
+      bottom: 0;
+      background: url("assets/png/appGob.png") bottom right no-repeat;
+      background-size: contain;
     }
   }
+
 
   &Phone {
     width: 100%;
-  }
 
-  @include media('exclude-mobile') {
-    &Phone {
+    @include media('exclude-low-tablet') {
       position: relative;
+      z-index: 1;
       margin: auto;
       border-radius: $radius;
-      box-shadow: 0 0 0 11px #1f1f1f, 0 0 0 13px #191919, 0 0 0 20px #111;
+      box-shadow: 0 0 0 11px #1f1f1f, 0 0 0 13px #191919, 0 0 0 20px #111, 0 0 35px 20px $white;
       background: white;
       @include deviceContainer;
     }

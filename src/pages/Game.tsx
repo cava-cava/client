@@ -7,6 +7,8 @@ import TheGame from "../components/Game/TheGame";
 import SocketLog from "../components/SocketLog";
 import DisconnectedUsers from "../components/Users/DisconnectedUsers";
 import useListUsers from "../hooks/useListUsers";
+import {useSelector} from "react-redux";
+import {ApplicationState} from "../store";
 
 const Game = () => {
     const {id}: RouteParams = useParams();
@@ -14,6 +16,7 @@ const Game = () => {
     const [isUsersDisconnected, setIsUsersDisconnected] = useState<boolean>(
         false
     );
+    const userKey = useSelector((state: ApplicationState) => state.user.data.key);
 
     useRedirect();
 
@@ -40,7 +43,7 @@ const Game = () => {
                     <TheGame roomId={id}/>
                 )}
             </>
-            <SocketLog roomId={id}/>
+            <SocketLog roomId={id} userKey={userKey}/>
         </>
     );
 };

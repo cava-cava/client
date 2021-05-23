@@ -6,6 +6,7 @@ export interface StatisticsGame {
     useJokerForOther: number
     useDirt: number
     guessWon: number
+    guessLost: number
     omgWon: number
 }
 
