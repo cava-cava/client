@@ -1,5 +1,6 @@
 export interface Settings {
-  volume: number
+  volume: number,
+  debug: boolean,
 }
 
 export interface settingsState {
@@ -9,10 +10,16 @@ export interface settingsState {
 }
 
 export const SET_VOLUME_SETTINGS = "@@settings/SET_VOLUME_SETTINGS";
+export const SET_DEBUG_SETTINGS = "@@settings/SET_DEBUG_SETTINGS";
 
 interface SetVolumeSettings {
   type: typeof SET_VOLUME_SETTINGS
   payload: number
 }
 
-export type SettingsActionTypes = SetVolumeSettings;
+interface SetDebugSettings {
+  type: typeof SET_DEBUG_SETTINGS
+  payload: boolean
+}
+
+export type SettingsActionTypes = SetVolumeSettings | SetDebugSettings;

@@ -1,4 +1,4 @@
-import {SET_VOLUME_SETTINGS, SettingsActionTypes} from "./types";
+import {SET_DEBUG_SETTINGS, SET_VOLUME_SETTINGS, SettingsActionTypes} from "./types";
 
 export function SetVolumeSettings(volume: number): SettingsActionTypes {
   return {
@@ -6,3 +6,11 @@ export function SetVolumeSettings(volume: number): SettingsActionTypes {
     payload: volume
   }
 }
+
+export function SetDebugSettings(debug: boolean): SettingsActionTypes {
+  return {
+    type: SET_DEBUG_SETTINGS,
+    payload: debug
+  }
+}
+
