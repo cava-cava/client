@@ -19,21 +19,23 @@ export async function startGame(room: Room, io:Server) {
     await axios.get('https://happiness-strapi.herokuapp.com/cards').then(({data}) => {
         room.game.cards = shuffle(data)
     })
-
     if(room.game.cards && room.game.cards.length > 0) room.game.cardGame.id = 0
 
     //Initialize guesses for the game
     await axios.get('https://happiness-strapi.herokuapp.com/guesses').then(({data}) => {
         room.game.guesses = shuffle(data)
     })
-
     if(room.game.guesses && room.game.guesses.length > 0) room.game.guessEvent.id = 0
+
+    //Initialize OMG for the game
+    await axios.get('https://happiness-strapi.herokuapp.com/omgs').then(({data}) => {
+        room.game.omgs = shuffle(data)
+    })
+    if(room.game.omgs && room.game.omgs.length > 0) room.game.omgEvent.id = 0
+    room.game.omgEvent.idTrigger = 1
 
     //Init Key of users
     room.users.map((user,index) => room.users[index].key = index)
-
-    //Initialize OMG for the game
-    room.game.omgEvent.id = initIdOMG(room)
 
     room.game.isLoading = false
     room.game.isStart = true

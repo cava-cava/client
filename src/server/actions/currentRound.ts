@@ -22,6 +22,9 @@ export function currentRound(room: Room, io:Server) {
                 io.to(room.id).emit('startAnswersEvent')
             }
         }
+        if (!room.game.guessEvent.trigger && room.game.omgEvent.trigger) {
+            io.to(room.id).emit('sendOmg', room.game.omgEvent.omg)
+        }
     }
     if(room.game.cardGame.card || room.game.guessEvent.guess) startTimer(room, io)
 }

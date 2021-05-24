@@ -31,7 +31,9 @@ export function createRoom(rooms: Rooms) {
             },
             omgEvent: {
                 id: -1,
-                trigger: false
+                trigger: false,
+                idTrigger: 0,
+                idStep: -1
             },
             isStart: false,
             isGameOver: false,
