@@ -11,7 +11,7 @@
 
 
   > img {
-    height: 100%;
+    height: 120%;
 
     + div {
       position: absolute;
@@ -30,7 +30,7 @@
       text-align: left;
       width: 75%;
       left: 50%;
-      bottom: 12%;
+      bottom: 7%;
       transform: translateX(-50%);
     }
   }
