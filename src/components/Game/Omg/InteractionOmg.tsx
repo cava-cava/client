@@ -30,8 +30,8 @@ const InteractionOmg: FunctionComponent<InteractionOmgProps> = ({
             {type === "click" &&
                 <div onClick={onClick}>
                     <div>
-                        {active && <Player autoplay src={animationBefore}/>}
-                        {!active && <Player autoplay src={animationAfter}/>}
+                        {!active && <Player autoplay src={animationBefore}/>}
+                        {active && <Player autoplay src={animationAfter}/>}
                     </div>
                     <div>
                         <img src={click}/>
@@ -42,8 +42,8 @@ const InteractionOmg: FunctionComponent<InteractionOmgProps> = ({
             {type === "swipe" &&
                 <SwipeInteractionOmg type={type} active={active} setActive={setActive} >
                     <div>
-                        {active && <Player autoplay src={animationBefore}/>}
-                        {!active && <Player autoplay src={animationAfter}/>}
+                        {!active && <Player autoplay src={animationBefore}/>}
+                        {active && <Player autoplay src={animationAfter}/>}
                     </div>
                     <div>
                         <img src={swipe}/>
