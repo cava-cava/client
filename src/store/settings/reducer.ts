@@ -1,10 +1,17 @@
 import {Reducer} from "redux";
-import {SET_DEBUG_SETTINGS, SET_VOLUME_SETTINGS, SettingsActionTypes, settingsState} from "./types";
+import {
+  SET_DEBUG_SETTINGS,
+  SET_HOMEPAGE_SETTINGS,
+  SET_VOLUME_SETTINGS,
+  SettingsActionTypes,
+  settingsState
+} from "./types";
 
 export const initialState: settingsState = {
   data: {
     volume: 0.75,
-    debug: false
+    debug: false,
+    homepage: false
   },
   errors: undefined,
   loading: false
@@ -17,6 +24,9 @@ const reducer: Reducer<settingsState, SettingsActionTypes> = (state:settingsStat
     }
     case SET_DEBUG_SETTINGS: {
       return { ...state, loading: false, data: {...state.data, debug: action.payload} };
+    }
+    case SET_HOMEPAGE_SETTINGS: {
+      return { ...state, loading: false, data: {...state.data, homepage: action.payload} };
     }
     default: {
       return state;

@@ -19,6 +19,7 @@ import Omg from "../../pages/Omg";
 const TheRouter: FunctionComponent = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const isAuth: boolean = !!user.name
+    const homepage = useSelector((state: ApplicationState) => state.settings.data.homepage);
 
     return (
         <Router>
@@ -31,7 +32,7 @@ const TheRouter: FunctionComponent = () => {
                     >
                         <Switch location={location}>
                             <Route exact path="/" component={Home}/>
-                            <Route exact path="/setup" component={Setup}/>
+                            <PrivateRoute component={Setup} exact path="/setup" redirectTo="/" condition={homepage}/>
                             <PrivateRoute component={Rooms} exact path="/rooms" redirectTo="/setup" condition={isAuth}/>
                             <PrivateRoute component={Room} exact={false} path="/rooms/:id" redirectTo="/setup"
                                           condition={isAuth}/>
