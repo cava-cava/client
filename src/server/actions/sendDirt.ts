@@ -19,6 +19,7 @@ export function sendDirt(userKey:number, playerKey:number, room: Room, io:Server
     alternativeCard.Points = -Math.abs(room.game.cardGame.card.Points)
     // use Dirt
     if(--room.users[userKey].dirt < 0) room.users[userKey].dirt = 0
+    io.to(room.id).emit('message', `${room.users[room.game.playerGame.id].name} à posé une carte Cheh !`);
     // add statistics use dirt
     ++room.users[userKey].statisticsGame.useDirt;
     sendCard(playerKey, alternativeCard, room, io, true)
