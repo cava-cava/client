@@ -3,6 +3,7 @@ import click from "../../../assets/svg/appuyer.svg";
 import swipe from "../../../assets/svg/swipe.svg";
 import {Player} from "@lottiefiles/react-lottie-player";
 import styles from './InteractionOmg.module.scss'
+import SwipeInteractionOmg from "./SwipeInteractionOmg";
 
 type InteractionOmgProps = {
     type: string,
@@ -26,83 +27,32 @@ const InteractionOmg: FunctionComponent<InteractionOmgProps> = ({
 
     return (
         <div className={styles.InteractionOmg}>
-            <div onClick={onClick} >
-                <Player controls={true} autoplay src={active ? animationAfter : animationBefore}/>
-            </div>
             {type === "click" &&
-            <div>
-                <img src={click}/>
-                <span>Appuyer</span>
-            </div>
+                <div onClick={onClick}>
+                    <div>
+                        {active && <Player autoplay src={animationBefore}/>}
+                        {!active && <Player autoplay src={animationAfter}/>}
+                    </div>
+                    <div>
+                        <img src={click}/>
+                        <span>Appuyer</span>
+                    </div>
+                </div>
             }
             {type === "swipe" &&
-            <div>
-                <img src={swipe}/>
-                <span>Swiper</span>
-            </div>
+                <SwipeInteractionOmg type={type} active={active} setActive={setActive} >
+                    <div>
+                        {active && <Player autoplay src={animationBefore}/>}
+                        {!active && <Player autoplay src={animationAfter}/>}
+                    </div>
+                    <div>
+                        <img src={swipe}/>
+                        <span>Swiper</span>
+                    </div>
+                </SwipeInteractionOmg>
             }
         </div>
     )
 }
 
 export default InteractionOmg;
-
-/*
-const SwipeItem: FunctionComponent = ({...props}) => {
-    const handleStart = (clientX:number) => {
-
-    }
-
-    const handleMove = (clientX:number) => {
-
-    }
-
-    const handleEnd = () => {
-
-    }
-
-    const handleTouchStart = (touchStartEvent:any) => {
-        touchStartEvent.preventDefault();
-    }
-
-    const handleTouchMove = (touchMoveEvent:any) => {
-        handleMove(touchMoveEvent.targetTouches[0].clientX);
-    }
-
-    const handleTouchEnd = () => {
-        handleEnd();
-    }
-
-    const handleMouseDown = (mouseDownEvent:any) => {
-        mouseDownEvent.preventDefault();
-        handleStart(mouseDownEvent.clientX);
-    }
-
-    const handleMouseMove = (mouseMoveEvent:any) => {
-        handleMove(mouseMoveEvent.clientX);
-    }
-
-    const handleMouseUp = () => {
-        handleEnd();
-    }
-
-    const handleMouseLeave = () => {
-        handleMouseUp();
-    }
-
-        return (
-            <div
-                onTouchStart={(touchStartEvent) => handleTouchStart(touchStartEvent)}
-                onTouchMove={touchMoveEvent => handleTouchMove(touchMoveEvent)}
-                onTouchEnd={() => handleTouchEnd()}
-                // The following event handlers are for mouse compatibility:
-                onMouseDown={mouseDownEvent => handleMouseDown(mouseDownEvent)}
-                onMouseMove={mouseMoveEvent => handleMouseMove(mouseMoveEvent)}
-                onMouseUp={() => handleMouseUp()}
-                onMouseLeave={() => handleMouseLeave()}
-            >
-                    {props.children}
-            </div>
-        );
-}
-*/
