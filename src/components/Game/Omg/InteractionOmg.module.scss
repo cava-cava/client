@@ -1,0 +1,38 @@
+@import "../../../scss/helpers";
+
+.InteractionOmg {
+  > div {
+    &:first-child {
+      > div {
+        width: 75%;
+        margin: auto;
+      }
+    }
+
+    &:last-child {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+      animation-name: swipe-bob;
+      animation-duration: 1.5s;
+      animation-delay: .3s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      animation-direction: alternate;
+
+      > img {
+        width: 75px;
+        display: block;
+        margin: auto;
+      }
+
+      > span {
+        margin-top: 0.5rem;
+        font-weight: 700;
+        font-size: 16px;
+      }
+    }
+  }
+}
