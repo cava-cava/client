@@ -9,11 +9,13 @@ const Omg = () => {
     const myInputBefore = useRef<any>()
     const myInputAfter = useRef<any>()
     const [omgWin, setOmgWin] = useState(false)
+    const [showControls, setShowControls] = useState(true)
     const [type, setType] = useState("click")
     const [animationBefore, setAnimationBefore] = useState("")
     const [animationAfter, setAnimationAfter] = useState("")
 
     const parameters = {
+        showControls: showControls,
         type: type,
         loadBefore: () => {
             if (null !== myInputBefore.current) {
@@ -36,6 +38,7 @@ const Omg = () => {
 
     useEffect(() => {
         const gui = new dat.GUI();
+        gui.add(parameters, 'showControls').name('Show Controls animation');
         gui.add(parameters, 'loadBefore').name('Load animation before interaction');
         gui.add(parameters, 'loadAfter').name('Load animation after interaction');
         gui.add(parameters, 'type', {
@@ -51,7 +54,7 @@ const Omg = () => {
     return (
         <div className={styles.Omg}>
             <TheTitle title={omgWin ? "Win" : "Lose"}/>
-            <InteractionOmg type={type} active={omgWin} setActive={setActive} animationBefore={animationBefore}
+            <InteractionOmg controls={showControls} type={type} active={omgWin} setActive={setActive} animationBefore={animationBefore}
                             animationAfter={animationAfter}/>
             <InputFile refs={myInputBefore} setValue={setAnimationBefore}/>
             <InputFile refs={myInputAfter} setValue={setAnimationAfter}/>
