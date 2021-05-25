@@ -32,7 +32,7 @@ export async function startGame(room: Room, io:Server) {
         room.game.omgs = shuffle(data)
     })
     if(room.game.omgs && room.game.omgs.length > 0) room.game.omgEvent.id = 0
-    room.game.omgEvent.idTrigger = 1
+    room.game.omgEvent.idTrigger = initIdOMG(room)
 
     //Init Key of users
     room.users.map((user,index) => room.users[index].key = index)

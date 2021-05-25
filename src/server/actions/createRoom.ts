@@ -33,7 +33,8 @@ export function createRoom(rooms: Rooms) {
                 id: -1,
                 trigger: false,
                 idTrigger: 0,
-                idStep: -1
+                idStep: 0,
+                win: false
             },
             isStart: false,
             isGameOver: false,

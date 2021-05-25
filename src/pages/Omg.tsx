@@ -38,7 +38,7 @@ const Omg = () => {
 
     useEffect(() => {
         const gui = new dat.GUI();
-        gui.add(parameters, 'showControls').name('Show Controls animation');
+        gui.add(parameters, 'showControls').name('Show Controls animation').onChange(value => setShowControls(value));;
         gui.add(parameters, 'loadBefore').name('Load animation before interaction');
         gui.add(parameters, 'loadAfter').name('Load animation after interaction');
         gui.add(parameters, 'type', {
@@ -55,7 +55,7 @@ const Omg = () => {
         <div className={styles.Omg}>
             <TheTitle title={omgWin ? "Win" : "Lose"}/>
             <InteractionOmg controls={showControls} type={type} active={omgWin} setActive={setActive} animationBefore={animationBefore}
-                            animationAfter={animationAfter}/>
+                            animationAfter={animationAfter} canDoInteraction={true}/>
             <InputFile refs={myInputBefore} setValue={setAnimationBefore}/>
             <InputFile refs={myInputAfter} setValue={setAnimationAfter}/>
         </div>

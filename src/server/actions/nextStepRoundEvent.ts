@@ -92,6 +92,22 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
         else {
             endRoundEvent(room, io)
         }
+    } else if (!room.game.guessEvent.trigger && room.game.omgEvent.trigger) {
+        console.log(room.game.omgEvent.idStep)
+        if (room.game.omgEvent.idStep === 0) {
+            startTimer(room, io, 3)
+        } else if (room.game.omgEvent.idStep === 1 && room.users.filter(user => user.winOmg).length > 0) {
+            room.users.map(user => {
+                if(!user.winOmg) io.to(user.id).emit('loseRoundEvent')
+                else {
+                    user.winEvent = true
+                    io.to(user.id).emit('winRoundEvent')
+                }
+            })
+        } else {
+            endRoundEvent(room, io)
+        }
+        ++room.game.omgEvent.idStep
     }
     //update list users
     io.to(room.id).emit('updateListUsers', room.users);

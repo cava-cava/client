@@ -28,6 +28,7 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
         joker: 2,
         dirt: 2,
         winEvent: false,
+        winOmg: false,
         answerEvent: {
             myAnswer: {
                 userKey: -1,

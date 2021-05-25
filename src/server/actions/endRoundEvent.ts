@@ -44,7 +44,8 @@ export function endRoundEvent(room: Room, io: Server) {
             id: (room.game.omgs && ++room.game.omgEvent.id >= room.game.omgs.length) ? 0 : room.game.omgEvent.id,
             trigger: false,
             idTrigger: initIdOMG(room),
-            idStep: -1
+            idStep: 0,
+            win: false
         }
     }
 

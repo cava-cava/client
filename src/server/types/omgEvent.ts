@@ -6,5 +6,6 @@ export interface OmgEvent {
     idTrigger: number
     omg?: Omg
     idStep: number
+    win: boolean
 }
 

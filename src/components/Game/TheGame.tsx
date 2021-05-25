@@ -46,6 +46,7 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
             dispatch({type: SET_USER, payload: user});
         }
 
+        socket.emit('getRoundEvent', roomId);
         socket.on('getPlayer', getPlayer);
         socket.on('sendGuess', sendGuess);
         socket.on('sendOmg', sendOmg);

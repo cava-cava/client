@@ -14,6 +14,7 @@ export const initialState: userState = {
     joker: 2,
     dirt: 2,
     winEvent: false,
+    winOmg: false,
     answerEvent: {
       myAnswer: {
         userKey: -1,
