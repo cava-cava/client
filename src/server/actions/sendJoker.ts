@@ -20,9 +20,9 @@ export function sendJoker(userKey:number, playerKey:number, room: Room, io:Serve
     alternativeCard.Points = Math.abs(room.game.cardGame.card.Points)
     // use Joker
     if(--room.users[userKey].joker < 0) room.users[userKey].joker = 0
+    io.to(room.id).emit('message', `${room.users[userKey].name} à posé une carte Oh Ça Va !`);
     // use Joker for other
     if(playerKey !== userKey) {
-        io.to(room.id).emit('message', `${room.users[room.game.playerGame.id].name} à posé une carte Oh Ça Va !`);
         sendPointsUser(room.users[userKey], alternativeCard.Points)
         ++room.users[userKey].statisticsGame.useJokerForOther;
     } else ++room.users[userKey].statisticsGame.useJokerForMe;
