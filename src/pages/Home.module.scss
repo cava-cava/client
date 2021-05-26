@@ -10,16 +10,19 @@
   background-size: contain;
   text-align: center;
 
-  > img {
-    width: 90%;
+  > video {
+    width: 100%;
     border-radius: $radius;
     margin-top: 75px;
+    position: relative;
   }
 
   > p {
     color: $white;
     width: 65%;
     margin: -2rem auto 0;
+    position: relative;
+    z-index: 1;
   }
 
   > a {

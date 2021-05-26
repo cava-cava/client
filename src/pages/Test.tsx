@@ -4,7 +4,6 @@ import TheSprite from "../components/WebGl/TheSprite";
 import TheCanvas from "../components/WebGl/TheCanvas";
 import TheTitle from "../components/TheTitle";
 import ThePlaneVideo from "../components/WebGl/ThePlaneVideo";
-// @ts-ignore
 import videoSrc from "../assets/mp4/test.mp4"
 import * as dat from "dat.gui";
 

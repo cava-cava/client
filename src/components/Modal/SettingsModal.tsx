@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {ApplicationState} from "../../store";
 import {SET_VOLUME_SETTINGS} from "../../store/settings/types";
 import styles from './SettingsModal.module.scss'
-// @ts-ignore
 import volumeSound from "../../assets/mp3/tick.mp3"
 
 type SettingsModalProps = {
