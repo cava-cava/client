@@ -14,7 +14,6 @@ const TheTimer: FunctionComponent<TheTimerProps> = ({color, children}) => {
     const [showTimer, setShowTimer] = useState(true)
 
     useEffect(() => {
-            console.log(seconds)
             if(seconds > (lastTimer + 1) || seconds < (lastTimer - 1)){
                 setShowTimer(false)
                 setTimeout(() => setShowTimer(true), 50)

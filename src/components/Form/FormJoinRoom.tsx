@@ -22,7 +22,6 @@ const FormJoinRoom: FunctionComponent<FormJoinRoomProps> = ({username, avatar, m
         if(room.length >= maxLength) {
             setSendEmit(true);
             socket.emit("joinRoom", username, avatar, room, () => {
-                console.log(`JoinRoom`);
                 setSendEmit(false);
                 if(error.length > 0) setShowError(true)
             });
