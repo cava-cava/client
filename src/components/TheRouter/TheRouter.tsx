@@ -15,6 +15,7 @@ import TheDevLinks from "./TheDevLinks";
 import Cards from "../../pages/Cards";
 import Test from "../../pages/Test";
 import Omg from "../../pages/Omg";
+import Messages from "../../pages/Messages";
 
 const TheRouter: FunctionComponent = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
@@ -38,7 +39,8 @@ const TheRouter: FunctionComponent = () => {
                                           condition={isAuth}/>
                             <PrivateRoute component={Game} exact={false} path="/game/:id" redirectTo="/setup"
                                           condition={isAuth}/>
-                            <PrivateRoute component={End} exact path="/end" redirectTo="/setup" condition={isAuth}/>
+                            <PrivateRoute component={End} exact={false} path="/end/:id" redirectTo="/setup" condition={isAuth}/>
+                            <PrivateRoute component={Messages} exact path="/messages" redirectTo="/setup" condition={isAuth}/>
                             <PrivateRoute component={Tips} exact path="/tips" redirectTo="/setup" condition={isAuth}/>
                             <Route exact path="/debug/omg" component={Omg}/>
                             <Route exact path="/debug/cards" component={Cards}/>
