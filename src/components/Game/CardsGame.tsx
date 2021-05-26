@@ -76,8 +76,8 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             <TheDeck number={5} roomId={roomId} player={player} userId={user.id} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
             {currentCard && <TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/>}
             <div>
-                <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5'}}/>
-                <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5'}}/>
+                <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5', marginRight: 'auto'}}/>
+                <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5', marginLeft: 'auto'}}/>
             </div>
         </div>
     )
