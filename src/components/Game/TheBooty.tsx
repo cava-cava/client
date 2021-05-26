@@ -49,7 +49,7 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey,
                     Tu peux choisir ta récompense.
                     </p>
                     <div className={styles.TheBootyButtons}>
-                        {showHappiness && <button role="button" onClick={happinessClick}>+3% de bonheur</button>}
+                        {showHappiness && <button role="button" onClick={happinessClick}>+10% de bonheur</button>}
                         <button role="button" onClick={jokerClick}>1 carte Oh ça va</button>
                         <button role="button" onClick={dirtClick}>1 carte Cheh</button>
                     </div>
