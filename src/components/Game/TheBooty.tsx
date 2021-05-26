@@ -23,8 +23,8 @@ const TheBooty: FunctionComponent<TheBootyProps> = ({win, lose, roomId, userKey,
     }
 
     const happinessClick = () => {
-        console.color(`+3% bonheur`, colors.blue);
-        socket.emit('sendPointsUser', roomId, userKey, 3)
+        console.color(`+10% bonheur`, colors.blue);
+        socket.emit('sendPointsUser', roomId, userKey, 10)
         callback()
     }
 
