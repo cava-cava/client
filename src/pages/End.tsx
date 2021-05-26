@@ -6,23 +6,31 @@ import {ApplicationState} from "../store";
 import TheTitle from "../components/TheTitle";
 import useListUsers from "../hooks/useListUsers";
 import {RouteParams} from "../types/params";
-import {useParams} from "react-router";
+import {useHistory, useParams} from "react-router";
 
 const End = () => {
+    const history = useHistory();
     const {id}: RouteParams = useParams();
     const user = useSelector((state: ApplicationState) => state.user.data);
     const users = useListUsers(id);
     const winners = users.filter((user) => user.ladder === 1)
     const [animation, setAnimation] = useState(false)
-    const idRef = useRef<any>();
+    const idRefAnimation = useRef<any>();
+    const idRefNext = useRef<any>();
 
     useEffect(() => {
-        const id = setTimeout(() => {setAnimation(true)}, 1000);
-        if (null !== idRef.current) {
-            idRef.current = id;
+        const idAnime = setTimeout(() => {setAnimation(true)}, 1000);
+        if (null !== idRefAnimation.current) {
+            idRefAnimation.current = idAnime;
+        }
+
+        const idNext = setTimeout(() => {history.push("/messages");}, 60000);
+        if (null !== idRefNext.current) {
+            idRefNext.current = idNext;
         }
         return () => {
-            clearTimeout(idRef.current)
+            clearTimeout(idRefAnimation.current)
+            clearTimeout(idRefNext.current)
         };
     }, []);
 
@@ -48,7 +56,7 @@ const End = () => {
                     </>
                 }
             </div>
-            <Link to="/messages">Votre message</Link>
+            <Link to="/messages">Continuez</Link>
         </div>
     );
 }
