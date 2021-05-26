@@ -2,6 +2,10 @@
 @import "fonts";
 @import "transitions";
 
+html {
+  animation: fadeIn 300ms ease-in;
+}
+
 html, html body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
