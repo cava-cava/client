@@ -20,7 +20,7 @@ const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, pl
     }
 
     useEffect(() => {
-        setActiveKey(playerKey ? playerKey : -1)
+        setActiveKey((playerKey || playerKey === 0) ? playerKey : -1)
     }, [playerKey])
 
     return (
@@ -28,7 +28,7 @@ const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, pl
             <div>
                 <img src={progressBar}/>
                 <div className={styles.TheProgressBarValue}
-                     style={{width: `${user.points}%`, backgroundColor: user.color}}/>
+                     style={{width: user.points > 50 ? `calc(${user.points}% - 10px)` : `${user.points}%`, backgroundColor: user.color}}/>
             </div>
             <div>
                 {users.map((user, index) => <UserProgressBar user={user} activeKey={activeKey} key={index}/>)}
