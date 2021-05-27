@@ -25,25 +25,25 @@ const SliderTutorial: FunctionComponent = () => {
     return(
         <Slider {...settings} className={styles.SliderTutorial}>
             <div>
-                <video src={tuto1} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto1} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
             <div>
-                <video src={tuto2} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto2} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
             <div>
-                <video src={tuto3} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto3} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
             <div>
-                <video src={tuto4} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto4} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
             <div>
-                <video src={tuto5} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto5} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
             <div>
-                <video src={tuto6} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto6} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
             <div>
-                <video src={tuto7} autoPlay={true} loop={false} muted={true} controls={false}/>
+                <video src={tuto7} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             </div>
         </Slider>
     )

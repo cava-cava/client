@@ -16,7 +16,7 @@ const Home = () => {
 
     return (
         <div className={styles.Home}>
-            <video src={logoAnimation} autoPlay={true} muted={true}/>
+            <video src={logoAnimation} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
             <p>Le jeu complètement déjanté qui
                 vous fera relativiser sur le bonheur !</p>
             <Link to="/setup">Jouer !</Link>
