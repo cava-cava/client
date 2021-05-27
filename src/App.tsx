@@ -12,10 +12,12 @@ import {SET_ID} from "./store/user/types";
 import useDidYouKnow from "./hooks/useDidYouKnow";
 import useGameOverMessages from "./hooks/useGameOverMessages";
 import QrCodeApp from "./components/App/QrCodeApp";
+import useTutorial from "./hooks/useTutorial";
 
 const App = () => {
     const dispatch = useDispatch();
     useDidYouKnow();
+    useTutorial();
     useGameOverMessages();
 
     useEffect(() => {

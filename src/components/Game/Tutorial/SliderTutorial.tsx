@@ -1,17 +1,18 @@
 import React, {FunctionComponent} from 'react';
 import styles from "./SliderTutorial.module.scss"
 import Slider from "react-slick";
-import tuto1 from '../../../assets/mp4/tuto/tuto1.mp4'
-import tuto2 from '../../../assets/mp4/tuto/tuto2.mp4'
-import tuto3 from '../../../assets/mp4/tuto/tuto3.mp4'
-import tuto4 from '../../../assets/mp4/tuto/tuto4.mp4'
-import tuto5 from '../../../assets/mp4/tuto/tuto5.mp4'
-import tuto6 from '../../../assets/mp4/tuto/tuto6.mp4'
-import tuto7 from '../../../assets/mp4/tuto/tuto7.mp4'
 import LeftArrow from "../../Arrow/LeftArrow";
 import RightArrow from "../../Arrow/RightArrow";
+import useTutorial from "../../../hooks/useTutorial";
+import {Tutorial} from "../../../store/tutorial/types";
+import {useSelector} from "react-redux";
+import {ApplicationState} from "../../../store";
 
 const SliderTutorial: FunctionComponent = () => {
+    const tutorial:Tutorial = useSelector((state: ApplicationState) => state.tutorial.data)
+
+    useTutorial();
+
     const settings = {
         dots: true,
         infinite: true,
@@ -24,27 +25,13 @@ const SliderTutorial: FunctionComponent = () => {
 
     return(
         <Slider {...settings} className={styles.SliderTutorial}>
-            <div>
-                <video src={tuto1} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
-            <div>
-                <video src={tuto2} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
-            <div>
-                <video src={tuto3} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
-            <div>
-                <video src={tuto4} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
-            <div>
-                <video src={tuto5} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
-            <div>
-                <video src={tuto6} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
-            <div>
-                <video src={tuto7} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
-            </div>
+            {
+                tutorial.videos.map((video, index) =>
+                    <div key={index}>
+                        <video src={video.url} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
+                    </div>
+                )
+            }
         </Slider>
     )
 }
