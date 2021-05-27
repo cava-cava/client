@@ -39,7 +39,6 @@ export function endRoundEvent(room: Room, io: Server) {
 
     if (room.game.omgEvent.trigger) {
         //Re-initialize OMG for the game
-        if(room.game.omgs && room.game.omgs.length > 0) room.game.omgEvent.id = 0
         room.game.omgEvent = {
             id: (room.game.omgs && ++room.game.omgEvent.id >= room.game.omgs.length) ? 0 : room.game.omgEvent.id,
             trigger: false,
