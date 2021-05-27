@@ -15,6 +15,7 @@ export interface User {
   winOmg: boolean
   answerEvent: AnswerEvent,
   statisticsGame: StatisticsGame
+  isReady: boolean
   gameOver: string[]
 }
 

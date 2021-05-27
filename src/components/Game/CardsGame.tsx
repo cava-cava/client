@@ -15,6 +15,7 @@ import cardPiocheJaune from "./../../assets/png/carte_pioche_jaune.png";
 import TheHeader from "./Header/TheHeader";
 import TheProgressBar from "../ProgressBar/TheProgressBar";
 import MessageGame from "./MessageGame";
+import WaitingUsers from "../Users/WaitingUsers";
 
 
 type CardsGameProps = {
@@ -71,13 +72,21 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         <div className={`${styles.CardsGame} ${cardType === 'waouh' && styles.WaouhCard} ${cardType === 'cheh' && styles.ChehCard}` }>
             <TheHeader user={user} roomId={roomId} triggerGuesses={false}/>
             <TheProgressBar users={users} user={user} playerKey={player?.key}/>
-            <MessageGame />
-            <TheDeck number={5} roomId={roomId} player={player} userId={user.id} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
-            {currentCard && <TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/>}
-            <div>
-                <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5', marginRight: 'auto'}}/>
-                <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5', marginLeft: 'auto'}}/>
-            </div>
+            {users.filter(user => user.isReady).length === users.length ?
+                <>
+                    <MessageGame />
+                    <TheDeck number={5} roomId={roomId} player={player} userId={user.id} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
+                    {currentCard && <TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/>}
+                    <div>
+                        <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5', marginRight: 'auto'}}/>
+                        <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (player && user.id !== player.id && currentCard && currentCard.Points > 0) ? '1' : '0.5', marginLeft: 'auto'}}/>
+                    </div>
+                </>
+            :
+                <section>
+                    <WaitingUsers text="En attente des autres joueurs..."  users={users.filter(user => !user.isReady)}/>
+                </section>
+            }
         </div>
     )
 }

@@ -1,0 +1,25 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.slick-dots {
+  li{
+    button{
+      &:before {
+        opacity: 1;
+        content: '';
+        background: url("../assets/svg/slider/dot.svg") center center no-repeat;
+        transition: 600ms background ease;
+      }
+    }
+
+    &.slick-active{
+      button{
+        &:before {
+          opacity: 1;
+          content: '';
+          background: url("../assets/svg/slider/dotCheck.svg") center center no-repeat;
+        }
+      }
+    }
+  }
+}

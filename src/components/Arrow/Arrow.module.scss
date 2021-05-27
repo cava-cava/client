@@ -1,0 +1,17 @@
+.Arrow {
+  background: none;
+  border: none;
+  padding: 0;
+  height: 3rem;
+  width: 3rem;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  &Left {
+    background: url("../../assets/svg/arrowL.svg") center center no-repeat;
+  }
+
+  &Right {
+    background: url("../../assets/svg/arrowR.svg") center center no-repeat;
+  }
+}

@@ -9,6 +9,7 @@ import {SET_USER, User} from "../../store/user/types";
 import {Guess} from "../../server/types/guess";
 import {socket} from "../../socketClient";
 import {Omg} from "../../server/types/omg";
+import TheTutorial from "./TheTutorial";
 
 type TheGameProps = {
     roomId: string
@@ -66,11 +67,12 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
         };
     }, [])
 
-    return (
+    return(
         <>
-            { (!triggerGuesses && !triggerOMG) && <CardsGame users={users} player={player} user={user} roomId={roomId}/>}
-            { (triggerGuesses && !triggerOMG) && <TheGuess roomId={roomId} question={guess?.question} users={users} userKey={user.key}/> }
-            { (triggerOMG && !triggerGuesses) && <TheOmg roomId={roomId} userKey={user.key} users={users} omg={omg}/> }
+            { (!user.isReady) && <TheTutorial roomId={roomId} userKey={user.key}/>}
+            { (user.isReady && !triggerGuesses && !triggerOMG) && <CardsGame users={users} player={player} user={user} roomId={roomId}/>}
+            { (user.isReady && triggerGuesses && !triggerOMG) && <TheGuess roomId={roomId} question={guess?.question} users={users} userKey={user.key}/> }
+            { (user.isReady && triggerOMG && !triggerGuesses) && <TheOmg roomId={roomId} userKey={user.key} users={users} omg={omg}/> }
         </>
     )
 }

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-Plan_de_travail_1">
+      <rect width="20" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="Plan_de_travail_1" data-name="Plan de travail – 1" clip-path="url(#clip-Plan_de_travail_1)">
+    <rect width="20" height="20" fill="#fff"/>
+    <path id="Tracé_3152" data-name="Tracé 3152" d="M83.826,473.779c-3.494-1.267-8,.151-9.777,3.506a3.7,3.7,0,0,0-1.231,2.89,3.879,3.879,0,0,0,.584,1.95,7.748,7.748,0,0,0,.888,5.363,7.342,7.342,0,0,0,8.887,2.881,8.913,8.913,0,0,0,5.96-8.1A8.533,8.533,0,0,0,83.826,473.779Z" transform="translate(-70.98 -472.084)"/>
+  </g>
+</svg>

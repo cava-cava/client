@@ -27,6 +27,8 @@ import React from "react";
 import {nextStepRoundEvent} from "./actions/nextStepRoundEvent";
 import {winOmg} from "./actions/winOmg";
 import {getRoundEvent} from "./actions/getRoundEvent";
+import {checkpoint} from "./actions/checkpoint";
+import {getPlayer} from "./actions/getPlayer";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -76,6 +78,18 @@ io.on("connect", (socket: ExtendedSocket) => {
             currentRound(room, io)
         }
     })
+
+    socket.on('isReady', (roomId:string, userKey:number) => {
+        const room:Room = rooms[roomId];
+
+        if(room) {
+            room.users[userKey].isReady = true
+            checkpoint(room, io)
+            if(room.users.filter(user => user.isReady).length === room.users.length) {
+                getPlayer(room,io)
+            }
+        }
+    });
 
     socket.on('getListUsersInRoom', (roomId:string) => {
         const room:Room = rooms[roomId];

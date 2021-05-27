@@ -36,6 +36,7 @@ export const initialState: userState = {
       guessLost: 0,
       omgWon: 0
     },
+    isReady: false,
     gameOver: []
   },
   errors: undefined,
