@@ -93,7 +93,6 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
             endRoundEvent(room, io)
         }
     } else if (!room.game.guessEvent.trigger && room.game.omgEvent.trigger) {
-        console.log(room.game.omgEvent.idStep)
         if (room.game.omgEvent.idStep === 0) {
             startTimer(room, io, 3)
         } else if (room.game.omgEvent.idStep === 1 && room.users.filter(user => user.winOmg).length > 0) {

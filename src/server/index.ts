@@ -158,7 +158,6 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('winOmg', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
         const user = room.users[userKey]
-        console.log(roomId, userKey, room.users.filter(user => user.winOmg).length > 0, room.game.omgEvent.win)
         if(room.users.filter(user => user.winOmg).length > 0 || room.game.omgEvent.win) return
         user.winOmg = true
         room.game.omgEvent.win = true
@@ -169,7 +168,6 @@ io.on("connect", (socket: ExtendedSocket) => {
     });
 
     socket.on('checkWinOmg', (roomId: string, userKey: number) => {
-        console.log(roomId, userKey)
         const room:Room = rooms[roomId];
         const user = room.users[userKey]
         if(user && user.winOmg && room.game.omgEvent.win) {
