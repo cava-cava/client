@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import * as serviceWorker from '../serviceWorkerRegistration';
 import styles from "./ServiceWorkerWrapper.module.scss";
 
@@ -12,23 +12,19 @@ const ServiceWorkerWrapper: FunctionComponent = () => {
     };
 
     useEffect(() => {
-        serviceWorker.register({ onUpdate: onSWUpdate });
+        serviceWorker.register({onUpdate: onSWUpdate});
     }, []);
 
     const reloadPage = () => {
-        waitingWorker?.postMessage({ type: 'SKIP_WAITING' });
+        waitingWorker?.postMessage({type: 'SKIP_WAITING'});
         setShowReload(false);
         window.location.reload(true);
     };
 
     return showReload ? (
         <div className={styles.ServiceWorkerWrapper} onClick={reloadPage}>
-            <div>
-                <p>A new version is available!</p>
-            </div>
-            <div>
-                <button onClick={reloadPage}>Update</button>
-            </div>
+            <p>Une nouvelle version est disponible!</p>
+            <button onClick={reloadPage}>Mettre à jour</button>
         </div>
     ) : null;
 }

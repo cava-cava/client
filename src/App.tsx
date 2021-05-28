@@ -13,6 +13,7 @@ import useDidYouKnow from "./hooks/useDidYouKnow";
 import useGameOverMessages from "./hooks/useGameOverMessages";
 import QrCodeApp from "./components/App/QrCodeApp";
 import useTutorial from "./hooks/useTutorial";
+import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const App = () => {
             </div>
             <QrCodeApp />
             <MobilePrompt/>
+            <ServiceWorkerWrapper/>
         </div>
     );
 }

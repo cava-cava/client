@@ -18,7 +18,8 @@ export const MobilePrompt: FunctionComponent = () => {
                        copyBody={body}
                        copyShareButtonLabel="1) Appuyez sur le bouton 'Partager'"
                        copyAddHomeButtonLabel="2) Appuyez sur 'Ajouter à l'écran d'accueil'"
-                       copyClosePrompt={close}/>
+                       copyClosePrompt={close}
+                       permanentlyHideOnDismiss={false}/>
         </>
     ) : null;
 }
