@@ -1,13 +1,22 @@
 @import "../../scss/helpers";
 
 .FormUsername {
+  margin-top: 4vh;
+
+  @include media('exclude-low-tablet') {
     margin-top: 15%;
+  }
 
-    input[type=submit] {
-        @include theButton;
 
-        font-size: 18px;
-        font-weight: 700;
-        margin: 1.5rem 3rem auto auto;
+  input[type=submit] {
+    @include theButton;
+
+    font-size: 18px;
+    font-weight: 700;
+    margin: 2.5vh 10vw auto auto;
+
+    @include media('exclude-low-tablet') {
+      margin: 6.5% 13.5% auto auto;
     }
+  }
 }
