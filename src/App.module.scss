@@ -79,5 +79,11 @@
       background: white;
       @include deviceContainer;
     }
+
+    > div > * {
+      @include media('landscape') {
+        height: 100vw;
+      }
+    }
   }
 }
