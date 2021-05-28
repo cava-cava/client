@@ -86,7 +86,7 @@
 
 @mixin deviceContainer() {
   min-width: 355px;
-  min-height: $deviceHeight;
+  height: 100%;
   max-width: 340px;
   max-height: $deviceHeight;
 }
