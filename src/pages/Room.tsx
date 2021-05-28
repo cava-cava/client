@@ -41,7 +41,9 @@ const Room = () => {
                 <CodeHeader roomId={id} />
                 <DidYouKnow/>
                 <ListUsers users={users}/>
-                <StartGame roomId={id} isHost={(users.length > 0 && users[0].id === user.id)} loading={loading} usersLength={users.length}/>
+                <div>
+                    <StartGame roomId={id} isHost={(users.length > 0 && users[0].id === user.id)} loading={loading} usersLength={users.length}/>
+                </div>
             </div>
 
             <div>
