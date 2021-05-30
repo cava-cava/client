@@ -19,14 +19,11 @@ const End = () => {
     const idRefNext = useRef<any>();
 
     useEffect(() => {
-        const idAnime = setTimeout(() => {setAnimation(true)}, 1000);
+        const idAnime = setTimeout(() => {
+            setAnimation(true)
+        }, 1000);
         if (null !== idRefAnimation.current) {
             idRefAnimation.current = idAnime;
-        }
-
-        const idNext = setTimeout(() => {history.push("/messages");}, 60000);
-        if (null !== idRefNext.current) {
-            idRefNext.current = idNext;
         }
         return () => {
             clearTimeout(idRefAnimation.current)
@@ -39,24 +36,27 @@ const End = () => {
             <div>
                 <TheTitle title={user.ladder === 1 ? "Gagner" : "Perdu"}/>
                 {winners.length > 0 &&
-                    <>
-                        <div className={styles.EndWinner}>
-                            <p>Bravo ! Au gagnant !</p>
-                            {winners.map((winner, indexWinner)=> <p key={indexWinner}>{winner.name}</p>)}
-                        </div>
-                        <div className={styles.EndProgress}>
+                <>
+                    <div className={styles.EndWinner}>
+                        <p>Bravo ! Au gagnant !</p>
+                        {winners.map((winner, indexWinner) => <p key={indexWinner}>{winner.name}</p>)}
+                    </div>
+                    <div className={styles.EndProgress}>
+                        <div>
                             <div style={{width: animation ? '100%' : '0%'}}>
-                                {winners.map((avatar, indexAvatar)=>
+                                {winners.map((avatar, indexAvatar) =>
                                     <div key={indexAvatar}>
-                                        <img src={`/smiley/${avatar.color.replace('#', '')}/smiley_${avatar.avatar}.png`}/>
+                                        <img
+                                            src={`/smiley/${avatar.color.replace('#', '')}/smiley_${avatar.avatar}.png`}/>
                                     </div>
                                 )}
                             </div>
                         </div>
-                    </>
+                    </div>
+                </>
                 }
+                <Link to="/messages">Continuez</Link>
             </div>
-            <Link to="/messages">Continuez</Link>
         </div>
     );
 }
