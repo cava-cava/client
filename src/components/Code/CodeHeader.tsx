@@ -1,32 +1,17 @@
-import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
+import React, {FunctionComponent, useEffect, useRef} from 'react';
 import styles from './CodeHeader.module.scss'
+import useCopyClipboard from "../../hooks/useCopyClipboard";
 
 type CodeHeaderProps = {
     roomId: string
 }
 
 const CodeHeader: FunctionComponent<CodeHeaderProps> = ({roomId}) => {
-    const idRef = useRef<any>();
-    const [isCopied, setIsCopied] = useState(false)
+    const [isCopied, setCopied] = useCopyClipboard(roomId, {
+        successDuration: 1000,
+    });
 
-    const copyClick = () => {
-        navigator.clipboard.writeText(roomId)
-        if(!isCopied) setIsCopied(true)
-        else clearTimeout(idRef.current)
-        const id = setTimeout(() => {setIsCopied(false);}, 1000);
-        if (null !== idRef.current) {
-            idRef.current = id;
-        }
-    }
-
-
-    useEffect(() => {
-        return () => {
-            clearTimeout(idRef.current)
-        };
-    }, []);
-
-    return (<button className={styles.CodeHeader} onClick={copyClick}>{isCopied ? 'Copié' : roomId}</button>)
+    return (<button className={styles.CodeHeader} onClick={setCopied}>{isCopied ? 'Copié' : roomId}</button>)
 }
 
 export default CodeHeader;
