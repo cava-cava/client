@@ -10,12 +10,12 @@ type TheDeckProps = {
     style: object
     roomId: string
     player?: User
-    userId: string
+    userKey: number
 }
 
-const TheDeck: FunctionComponent<TheDeckProps> = ({number, style, roomId, player, userId}) => {
+const TheDeck: FunctionComponent<TheDeckProps> = ({number, style, roomId, player, userKey}) => {
     const deskClick = () => {
-        if(player && userId === player.id) {
+        if(player && userKey === player.key) {
             console.color(`Tirer une carte`, colors.blue);
             socket.emit('deckClicked', roomId, player.key)
         } else {

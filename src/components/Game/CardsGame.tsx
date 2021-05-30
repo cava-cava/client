@@ -75,7 +75,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
             {users.filter(user => user.isReady).length === users.length ?
                 <>
                     <MessageGame />
-                    <TheDeck number={5} roomId={roomId} player={player} userId={user.id} style={{opacity: (player && user.id === player.id) ? '1' : '0.5'}}/>
+                    <TheDeck number={5} roomId={roomId} player={player} userKey={user.key} style={{opacity: (player && user.key === player.key) ? '1' : '0.5'}}/>
                     {currentCard && <TheCards isAlternative={isAlternative} Description={currentCard.Description} points={currentCard.Points} animation={currentCard.animation}/>}
                     <div>
                         <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (player && currentCard && currentCard.Points < 0) ? '1' : '0.5', marginRight: 'auto'}}/>

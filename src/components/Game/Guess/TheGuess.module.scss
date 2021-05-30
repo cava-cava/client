@@ -1,9 +1,21 @@
 @import "../../../scss/helpers";
+
 .TheGuess {
   @include gameOverBackground;
 
   > * {
     padding: 0 1rem;
+  }
+
+  > div {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  h1 {
+    font-size: 6rem;
+    filter: blur(0.2px);
+    margin: 2rem 0;
   }
 
   > img {

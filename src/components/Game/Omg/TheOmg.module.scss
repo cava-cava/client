@@ -12,6 +12,7 @@
 
   h1 {
     font-size: 6rem;
+    margin-top: 0;
   }
 
   @include media('exclude-low-tablet') {

@@ -11,12 +11,11 @@
     }
 
     > div {
-        padding: 0 2rem;
-
         &:first-child {
             position: relative;
             height: 100%;
             padding: 0 2rem;
+            overflow: hidden scroll;
         }
     }
 
