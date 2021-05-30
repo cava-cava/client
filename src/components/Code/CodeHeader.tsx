@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useRef} from 'react';
+import React, {FunctionComponent} from 'react';
 import styles from './CodeHeader.module.scss'
 import useCopyClipboard from "../../hooks/useCopyClipboard";
 

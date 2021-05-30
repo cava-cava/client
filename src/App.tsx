@@ -43,11 +43,11 @@ const App = () => {
     return (
         <div className={styles.App}>
             <div>
-                <img src={bgLeft}/>
+                <img src={bgLeft} alt=""/>
                 <section className={styles.AppPhone}>
                     <TheRouter/>
                 </section>
-                <img src={bgRight}/>
+                <img src={bgRight} alt=""/>
             </div>
             <QrCodeApp />
             <MobilePrompt/>
