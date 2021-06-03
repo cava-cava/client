@@ -29,6 +29,13 @@
       color: $black;
     }
   }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    background: inherit;
+    border: inherit;
+  }
 }
 
 .InputTextError {
