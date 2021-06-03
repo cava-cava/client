@@ -16,7 +16,7 @@
 
     @include media('exclude-low-tablet') {
         border-radius: $radius;
-        height: calc(100% - 150px);
-        padding: 75px  0;
+        height: calc(100% - 175px);
+        padding: 75px 0 100px;
     }
 }
