@@ -15,8 +15,12 @@ const SettingsModalCredits: FunctionComponent = () => {
                 </div>
                 <div>
                     <h3>Designers</h3>
-                    <a href="https://elisamasfrand.myportfolio.com/" target="_blank">Élise Masfrand</a>
+                    <a href="https://elisamasfrand.myportfolio.com/" target="_blank">Elisa Masfrand</a>
                     <a href="https://www.instagram.com/saana_malek/" target="_blank">Saana Malek</a>
+                </div>
+                <div>
+                    <h3>Sound Designer</h3>
+                    <a href="https://elisamasfrand.myportfolio.com/" target="_blank">James Ode</a>
                 </div>
             </div>
             <div>
