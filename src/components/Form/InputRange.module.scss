@@ -2,9 +2,13 @@
 
 .InputRange {
   position: relative;
+  max-width: 285px;
+  margin: auto;
 
   > input {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     width: 100%;
     height: 25px;
     background: url("../../assets/svg/inputRange.svg") center center no-repeat;
@@ -21,8 +25,9 @@
       opacity: 1;
     }
 
-    &::-webkit-slider-thumb, {
+    &::-webkit-slider-thumb {
       -webkit-appearance: none;
+      -moz-appearance: none;
       appearance: none;
       width: 25px;
       height: 25px;
