@@ -10,6 +10,15 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transform-origin: top left;
+
+  > div {
+    opacity: 0;
+  }
+
+  &Negative {
+    color: $white;
+  }
 
   @include media('exclude-low-tablet') {
     height: 413px;

@@ -36,9 +36,9 @@ const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug=false}
     }, [cards])
 
     const transitions = useTransition(cardsActions, {
-        from: {position: [2, -5, 1]},
-        enter: {position: [0, 0, 1]},
-        leave: {position: [5, 0, 1]},
+        from: {position: [2, -5, 0.5]},
+        enter: {position: [0, 0, 0.5]},
+        leave: {position: [5, 0, 0.5]},
     })
 
 
@@ -57,7 +57,7 @@ const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug=false}
                             map={card.Points > 0 ? textureOhCaVa : textureCheh}
                             transparent={true}
                         />
-                        <CardContent card={card} position={[-1.5, 2, -0.5]} rotation={-card.rotationZ} debug={debug} show={card.key === cards.length - 1}/>
+                        <CardContent isAlternative={true} card={card} position={[0,0, 0.5]} rotation={-card.rotationZ} debug={debug} show={card.key === cards.length - 1}/>
                     </Plane>
                 </a.mesh>)
             )}

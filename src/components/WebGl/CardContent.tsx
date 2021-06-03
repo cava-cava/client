@@ -7,6 +7,7 @@ import {useSpring} from "react-spring/three";
 import {a} from "react-spring";
 
 type CardContentProps = {
+    isAlternative: boolean,
     show: boolean,
     position: any
     rotation: number
@@ -15,6 +16,7 @@ type CardContentProps = {
 };
 
 const CardContent: FunctionComponent<CardContentProps> = ({
+                                                              isAlternative,
                                                               show,
                                                               position,
                                                               rotation,
@@ -23,11 +25,14 @@ const CardContent: FunctionComponent<CardContentProps> = ({
                                                           }) => {
     const [active, setActive] = useState(true)
 
-    const fade:any = useSpring({
-        from: { opacity: show ? 0 : 1 },
-        to: { opacity: show ? 1 : 0},
+    const fade: any = useSpring({
+        from: {opacity: 0},
+        to: {opacity: show ? 1 : 0},
+        onStart: () => {
+            if(show) setActive(true)
+        },
         onRest: () => {
-            setActive(show)
+            if(!show) setActive(false)
         }
     });
 
@@ -41,13 +46,13 @@ const CardContent: FunctionComponent<CardContentProps> = ({
             position={position}
             style={debug ? {
                 border: '1px solid red',
-                transform: `rotate(${rotation}rad)`
-            } : {transform: `rotate(${rotation}rad)`}}
+                transform: `rotate(${rotation}rad) translate(-50%, -50%)`
+            } : {transform: `rotate(${rotation}rad) translate(-50%, -50%)`}}
         >
             <a.div style={fade}>
                 {card.animation && (card.animation.url && card.animation.url.length !== 0) &&
                 <Player autoplay keepLastFrame src={card.animation.url}/>}
-                <p className={styles.description}>{card.Description}</p>
+                <p className={(card.Points < 0 && isAlternative) ? styles.CardContentNegative : undefined}>{card.Description}</p>
                 {(!card.animation || card.animation.url.length === 0) &&
                 <Player autoplay keepLastFrame src={card.Points > 0 ? '/Sohcava.json' : '/Scheh.json'}/>}
             </a.div>
