@@ -57,7 +57,7 @@ const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug=false}
                             map={card.Points > 0 ? textureOhCaVa : textureCheh}
                             transparent={true}
                         />
-                        { card.key === cards.length - 1 && <CardContent card={card} position={[-1.5, 2, -0.5]} rotation={-card.rotationZ} debug={debug}/>}
+                        <CardContent card={card} position={[-1.5, 2, -0.5]} rotation={-card.rotationZ} debug={debug} show={card.key === cards.length - 1}/>
                     </Plane>
                 </a.mesh>)
             )}

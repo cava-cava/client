@@ -4,6 +4,7 @@ import CardDeck from "./CardDeck";
 import {Card} from "../../server/types/card";
 
 type TheDeckProps = {
+    showContent: boolean,
     active: boolean,
     userKey: number,
     numberCards: number,
@@ -12,7 +13,7 @@ type TheDeckProps = {
     debug?:boolean
 };
 
-const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, numberCards, active, card, onClick, debug = false}) => {
+const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, numberCards, showContent, active, card, onClick, debug = false}) => {
         const group = useRef();
         const [hovered, setHover] = useState(false);
 
@@ -31,7 +32,7 @@ const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, numberCards, activ
                     index <= userKey ?
                         <CardDeckFlippable hovered={hovered} active={active}
                                            basicPosition={position(index-userKey)}
-                                           exit={index < userKey} key={index} card={card} debug={debug}/> : <CardDeck key={index} active={active} basicPosition={position(index-userKey)}/>
+                                           exit={index < userKey} key={index} card={card} debug={debug} showContent={showContent}/> : <CardDeck key={index} active={active} basicPosition={position(index-userKey)}/>
                 )}
             </group>
         );

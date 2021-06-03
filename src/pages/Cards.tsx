@@ -18,16 +18,16 @@ const Cards = () => {
     const [userKey, setUserKey] = useState<number>(0)
     const [showControls, setShowControls] = useState(false)
     const [cardsActions, setCardsActions] = useState<Card[]>([])
-    const [descriptionCardAction, setDescriptionCardAction] = useState("")
+    const [descriptionCardAction, setDescriptionCardAction] = useState("Lorem ipsum dolor mes couilles au bord de l'eau")
     const [pointsCardAction, setPointsCardAction] = useState<number>(10)
     const [card, setCard] = useState<Card>({
         id: 0,
-        Description: "",
+        Description: "Lorem ipsum dolor mes couilles au bord de l'eau",
         Points: 10,
         Alternative: [],
         audio: "",
     })
-    const [descriptionCard, setDescriptionCard] = useState("")
+    const [descriptionCard, setDescriptionCard] = useState("Lorem ipsum dolor mes couilles au bord de l'eau")
     const [pointsCard, setPointsCard] = useState<number>(10)
 
     const onClick = (event: Event) => {
@@ -63,6 +63,9 @@ const Cards = () => {
                     id:0,
                     Description: descriptionCard,
                     Points:  pointsCard,
+                    animation: {
+                        url: animationCard
+                    },
                     Alternative: [],
                     audio: "",
                 })
@@ -72,6 +75,9 @@ const Cards = () => {
                     id:0,
                     Description: descriptionCardAction,
                     Points:  pointsCardAction,
+                    animation: {
+                        url: animationAlternative
+                    },
                     Alternative: [],
                     audio: "",
                 }
@@ -122,13 +128,13 @@ const Cards = () => {
         return () => {
             gui.destroy()
         }
-    }, [pointsCard, descriptionCard, pointsCardAction, descriptionCardAction])
+    }, [pointsCard, descriptionCard, pointsCardAction, descriptionCardAction, animationCard, animationAlternative])
 
   return (
       <div className={styles.Cards}>
           <TheCanvas>
               <Suspense fallback={null}>
-                  <The3DDeck onClick={onClick} numberCards={numberUsers} userKey={userKey} active={active} card={card} debug={true}/>
+                  <The3DDeck onClick={onClick} numberCards={numberUsers} userKey={userKey} active={active} card={card} debug={true} showContent={!!(active && cardsActions.length === 0)}/>
                   <CardsActions cards={cardsActions} debug={true}/>
               </Suspense>
           </TheCanvas>

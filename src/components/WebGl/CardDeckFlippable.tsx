@@ -11,6 +11,7 @@ import {getRandom} from "../../mixins/getRandom";
 type CardDeckFlippableProps = {
     hovered: boolean;
     active: boolean;
+    showContent: boolean
     basicPosition: any;
     exit: boolean;
     card: Card;
@@ -20,6 +21,7 @@ type CardDeckFlippableProps = {
 const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
                                                                           hovered,
                                                                           active,
+                                                                          showContent,
                                                                           exit,
                                                                           basicPosition,
                                                                           card,
@@ -38,7 +40,7 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
     const activePosition = [0, 0, 0.5];
     const exitPosition = [4, 0, 0];
 
-    const randomRotation = card.Points > 0 ? Math.PI * 0.02 :  Math.PI * -0.02
+    const randomRotation = card.Points > 0 ? Math.PI * 0.02 : Math.PI * -0.02
 
     const {position, rotationY, rotationZ} = useSpring({
         position: exit ? exitPosition : active && hovered ? activePosition : active ? activePosition : hovered ? hoverPosition : basicPosition,
@@ -106,7 +108,8 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
                     transparent={true}
                 />
             </Box>
-            {active && <CardContent card={card} position={[1.27, 2.12, 0.5]} rotation={randomRotation} debug={debug}/>}
+            <CardContent card={card} position={[1.27, 2.12, 0.5]} rotation={randomRotation} debug={debug}
+                         show={showContent && active}/>
         </a.mesh>
     ) : null;
 };

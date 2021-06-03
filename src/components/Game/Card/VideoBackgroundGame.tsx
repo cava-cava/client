@@ -19,7 +19,6 @@ const VideoBackgroundGame: FunctionComponent<VideoBackgroundGameProps> = ({play,
     const [trigger, setTrigger] = useState(false)
 
     useEffect(() => {
-        console.log(card, lastCard)
         if (!card || !play) {
             if(reverse) videoReversePlay()
             return
