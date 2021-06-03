@@ -57,7 +57,7 @@ const CardContent: FunctionComponent<CardContentProps> = ({
                     </>
                     :
                     <>
-                        <Player autoplay keepLastFrame src={card.animation.url}/>
+                        <Player autoplay keepLastFrame className={styles.CardContentAnimation} src={card.animation.url}/>
                         <p className={(card.Points < 0 && isAlternative) ? styles.CardContentNegative : undefined}>{card.Description}</p>
                     </>}
             </a.div>

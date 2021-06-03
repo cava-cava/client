@@ -38,6 +38,11 @@
     transform: translate(-50%, -50%);
   }
 
+  &Animation {
+    width: 85%;
+    margin: auto auto 0.5rem;
+  }
+
   @include media('exclude-low-tablet') {
     height: 413px;
     width: 214px;
