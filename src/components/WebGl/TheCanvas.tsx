@@ -10,7 +10,7 @@ type TheCanvasProps = {
 const TheCanvas: FunctionComponent<TheCanvasProps> = ({showPerf = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'), ...props}) => {
     return (
         <div className={styles.TheCanvas}>
-            <Canvas dpr={[window.devicePixelRatio, 2]}>
+            <Canvas dpr={[window.devicePixelRatio, 2]} linear={true}>
                 {props.children}
                 <ambientLight intensity={1}/>
                 {showPerf && <Perf position={'bottom-right'}/>}

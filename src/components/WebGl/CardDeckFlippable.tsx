@@ -6,7 +6,8 @@ import textureSrcFrontWaouh from "../../assets/png/carte_waouh.png";
 import textureSrcFrontOutch from "../../assets/png/carte_outch.png";
 import {Card} from "../../server/types/card";
 import CardContent from "./CardContent";
-import {getRandom} from "../../mixins/getRandom";
+import {NearestFilter, RepeatWrapping} from "three";
+import {text} from "express";
 
 type CardDeckFlippableProps = {
     hovered: boolean;
