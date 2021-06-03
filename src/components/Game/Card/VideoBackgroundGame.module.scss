@@ -1,0 +1,14 @@
+.VideoBackgroundGame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+
+    > video {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

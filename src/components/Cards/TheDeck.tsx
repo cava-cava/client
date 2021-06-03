@@ -24,9 +24,11 @@ const TheDeck: FunctionComponent<TheDeckProps> = ({number, style, roomId, player
     }
 
     return number > 0 ?
-        (<div className={styles.TheDeck} onClick={deskClick} style={style}>
-            <img src={deck}/>
-        </div>) : null
+        (
+        <div className={styles.TheDeck} onClick={deskClick} style={style}>
+             <img src={deck}/>
+        </div>
+        ) : null
 }
 
 export default TheDeck;

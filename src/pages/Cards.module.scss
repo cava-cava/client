@@ -1,0 +1,14 @@
+@import "../scss/helpers";
+
+.Cards {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    @include media('exclude-low-tablet') {
+        border-radius: $radius;
+    }
+}

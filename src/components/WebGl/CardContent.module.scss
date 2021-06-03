@@ -1,0 +1,18 @@
+@import "../../scss/helpers";
+
+.CardContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 1rem;
+  width: 59vw;
+  height: 112vw;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @include media('exclude-low-tablet') {
+    height: 413px;
+    width: 214px;
+  }
+}
