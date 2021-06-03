@@ -21,6 +21,7 @@ export function createRoom(rooms: Rooms) {
             },
             cardGame: {
                 id: -1,
+                cardsActions: [],
                 showAlternative: false
             },
             guessEvent: {

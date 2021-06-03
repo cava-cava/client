@@ -14,7 +14,7 @@ type CardDeckFlippableProps = {
     showContent: boolean
     basicPosition: any;
     exit: boolean;
-    card: Card;
+    card?: Card;
     debug?: boolean
 };
 
@@ -34,13 +34,13 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
     const textureBack = useTexture(textureSrcBack);
     const textureFrontWaouh = useTexture(textureSrcFrontWaouh)
     const textureFrontOutch = useTexture(textureSrcFrontOutch)
-    const textureFront = (card.Points > 0) ? textureFrontWaouh : textureFrontOutch
+    const textureFront = card ? (card.Points > 0) ? textureFrontWaouh : textureFrontOutch : textureBack
 
     const hoverPosition = [basicPosition[0] - 0.1, basicPosition[1] + 0.1, 0.09];
-    const activePosition = [0, 0, 0.5];
-    const exitPosition = [4, 0, 0];
+    const activePosition = [0, -0.25, 0.5];
+    const exitPosition = [4, -0.25, 0];
 
-    const randomRotation = card.Points > 0 ? Math.PI * 0.02 : Math.PI * -0.02
+    const randomRotation = card ? card.Points > 0 ? Math.PI * 0.02 : Math.PI * -0.02 : 0
 
     const {position, rotationY, rotationZ} = useSpring({
         position: exit ? exitPosition : active && hovered ? activePosition : active ? activePosition : hovered ? hoverPosition : basicPosition,
@@ -110,7 +110,7 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
                     />
                 </Box>
             </a.mesh>
-            <CardContent card={card} position={[0,0,0.5]} rotation={randomRotation} debug={debug}
+            <CardContent card={card} position={[0, -0.25, 0.5]} rotation={randomRotation} debug={debug}
                          show={showContent && active} isAlternative={false}/>
         </>
     ) : null;

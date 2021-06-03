@@ -15,6 +15,7 @@ export function currentRound(room: Room, io:Server) {
     if(!room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         getPlayer(room, io)
         io.to(room.id).emit('pickedCard', room.game.cardGame.card)
+        io.to(room.id).emit('setAlternativeCard', room.game.cardGame.cardsActions)
     }else {
         getRoundEvent(room, io)
     }

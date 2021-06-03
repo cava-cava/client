@@ -11,7 +11,7 @@ type CardContentProps = {
     show: boolean,
     position: any
     rotation: number
-    card: Card
+    card?: Card
     debug?: boolean
 };
 
@@ -27,7 +27,7 @@ const CardContent: FunctionComponent<CardContentProps> = ({
 
     const fade: any = useSpring({
         from: {opacity: 0},
-        to: {opacity: show ? 1 : 0},
+        to: {opacity: show && card ? 1 : 0},
         onStart: () => {
             if(show) setActive(true)
         },
@@ -40,7 +40,7 @@ const CardContent: FunctionComponent<CardContentProps> = ({
         setActive(show)
     }, [])
 
-    return active ? (
+    return active && card ? (
         <Html
             className={styles.CardContent}
             position={position}

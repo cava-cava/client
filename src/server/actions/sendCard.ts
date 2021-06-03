@@ -15,6 +15,12 @@ import {Card} from "../types/card";
 export function sendCard(playerKey: number, card:Card ,room: Room, io:Server, isAlternative=false) {
     sendPointsUser(room.users[playerKey], card.Points)
     checkpoint(room, io)
-    io.to(room.id).emit('pickedCard', card, isAlternative, playerKey)
+    if(isAlternative) {
+        room.game.cardGame.cardsActions.push(card)
+        io.to(room.id).emit('addAlternativeCard', card)
+    } else {
+        room.game.cardGame.card = card
+        io.to(room.id).emit('pickedCard', card)
+    }
     startTimer(room, io, 10)
 }

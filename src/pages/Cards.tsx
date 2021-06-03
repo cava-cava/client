@@ -134,7 +134,7 @@ const Cards = () => {
       <div className={styles.Cards}>
           <TheCanvas>
               <Suspense fallback={null}>
-                  <The3DDeck onClick={onClick} numberCards={numberUsers} userKey={userKey} active={active} card={card} debug={true} showContent={!!(active && cardsActions.length === 0)}/>
+                  <The3DDeck userKey={userKey} onClick={onClick} numberCards={numberUsers} playerKey={userKey} active={active} card={card} debug={true} showContent={!!(active && cardsActions.length === 0)}/>
                   <CardsActions cards={cardsActions} debug={true}/>
               </Suspense>
           </TheCanvas>

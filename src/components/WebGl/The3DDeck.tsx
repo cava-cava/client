@@ -6,33 +6,35 @@ import {Card} from "../../server/types/card";
 type TheDeckProps = {
     showContent: boolean,
     active: boolean,
-    userKey: number,
+    userKey: number
+    playerKey: number,
     numberCards: number,
-    card: Card
+    card?: Card
     onClick: (event: Event) => void;
     debug?:boolean
 };
 
-const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, numberCards, showContent, active, card, onClick, debug = false}) => {
+const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, playerKey, numberCards, showContent, active, card, onClick, debug = false}) => {
         const group = useRef();
+        const canHover = userKey === playerKey
         const [hovered, setHover] = useState(false);
 
         const position = (ratio:number) => {
-            return [(ratio * 0.1), (ratio * 0.1), -(ratio * 0.015)]
+            return [(ratio * 0.1), (ratio * 0.1) - 0.25, -(ratio * 0.015)]
         }
 
         return (
             <group
                 ref={group}
-                onPointerOver={() => setHover(true)}
+                onPointerOver={() => canHover && setHover(true)}
                 onPointerOut={() => setHover(false)}
                 onClick={onClick}
             >
                 {[...Array(numberCards)].map((x, index) =>
-                    index <= userKey ?
+                    index <= playerKey ?
                         <CardDeckFlippable hovered={hovered} active={active}
-                                           basicPosition={position(index-userKey)}
-                                           exit={index < userKey} key={index} card={card} debug={debug} showContent={showContent}/> : <CardDeck key={index} active={active} basicPosition={position(index-userKey)}/>
+                                           basicPosition={position(index-playerKey)}
+                                           exit={index < playerKey} key={index} card={card} debug={debug} showContent={showContent}/> : <CardDeck key={index} active={active} basicPosition={position(index-playerKey)}/>
                 )}
             </group>
         );

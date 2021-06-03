@@ -15,7 +15,8 @@ export function endTimer(room: Room, io: Server) {
     room.timer.isRunning = false
     if (!room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         room.game.cardGame.card = undefined
-        io.to(room.id).emit('pickedCard', room.game.cardGame.card)
+        room.game.cardGame.cardsActions = []
+        io.to(room.id).emit('clearCards')
         nextRound(room, io)
     } else {
         nextStepRoundEvent(room, io)
