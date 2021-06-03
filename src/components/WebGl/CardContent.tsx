@@ -50,11 +50,16 @@ const CardContent: FunctionComponent<CardContentProps> = ({
             } : {transform: `rotate(${rotation}rad) translate(-50%, -50%)`}}
         >
             <a.div style={fade}>
-                {card.animation && (card.animation.url && card.animation.url.length !== 0) &&
-                <Player autoplay keepLastFrame src={card.animation.url}/>}
-                <p className={(card.Points < 0 && isAlternative) ? styles.CardContentNegative : undefined}>{card.Description}</p>
-                {(!card.animation || card.animation.url.length === 0) &&
-                <Player autoplay keepLastFrame src={card.Points > 0 ? '/Sohcava.json' : '/Scheh.json'}/>}
+                {(!card.animation || card.animation.url.length === 0) ?
+                    <>
+                        <p className={`${(card.Points < 0 && isAlternative) ? styles.CardContentNegative : undefined} ${styles.CardContentAbsoluteText}`}>{card.Description}</p>
+                        <Player autoplay keepLastFrame src={card.Points > 0 ? '/Sohcava.json' : '/Scheh.json'}/>
+                    </>
+                    :
+                    <>
+                        <Player autoplay keepLastFrame src={card.animation.url}/>
+                        <p className={(card.Points < 0 && isAlternative) ? styles.CardContentNegative : undefined}>{card.Description}</p>
+                    </>}
             </a.div>
         </Html>
     ) : null;

@@ -11,13 +11,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+
+  > *:first-child {
+    margin-top: auto;
+  }
 
   > div {
     opacity: 0;
+
+    > p {
+      width: 85%;
+      margin: auto auto 1rem;
+    }
   }
 
   &Negative {
     color: $white;
+  }
+
+  &AbsoluteText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   @include media('exclude-low-tablet') {
