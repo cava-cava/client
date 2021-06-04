@@ -32,9 +32,7 @@
 
   &:-webkit-autofill {
     &:hover,&:hover, &:active {
-      background: url("../../assets/svg/input-text.svg") center center no-repeat!important;
-      background-size: 100% 100%!important;
-      color: inherit!important;
+      box-shadow: none;
     }
   }
 }
