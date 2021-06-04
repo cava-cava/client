@@ -20,9 +20,9 @@
     height: 100vh;
     > div {
       &:first-child {
-        padding: 3rem 0;
+        padding: 0;
         margin: auto;
-        height: calc(100% - 6rem);
+        height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 100%;
