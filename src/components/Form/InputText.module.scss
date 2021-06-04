@@ -30,11 +30,12 @@
     }
   }
 
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus {
-    background: inherit;
-    border: inherit;
+  &:-webkit-autofill {
+    &:hover,&:hover, &:active {
+      background: url("../../assets/svg/input-text.svg") center center no-repeat!important;
+      background-size: 100% 100%!important;
+      color: inherit!important;
+    }
   }
 }
 
