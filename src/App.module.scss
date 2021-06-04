@@ -3,7 +3,10 @@
 .App {
   position: relative;
   text-align: center;
-  height: 100vh;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
+
 
   > div {
     &:first-child {
@@ -14,6 +17,7 @@
   }
 
   @include media('exclude-low-tablet') {
+    height: 100vh;
     > div {
       &:first-child {
         padding: 3rem 0;
