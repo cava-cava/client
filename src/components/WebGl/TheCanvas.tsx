@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import {Perf} from "r3f-perf";
-import {Canvas, useThree} from "@react-three/fiber";
+import {Canvas} from "@react-three/fiber";
 import styles from "./TheCanvas.module.scss"
 
 type TheCanvasProps = {
