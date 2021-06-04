@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "dependencies": {
+    "@juggle/resize-observer": "^3.3.1",
     "@lottiefiles/react-lottie-player": "^3.1.2",
     "@react-three/drei": "^4.0.3",
     "@react-three/fiber": "^6.0.8",

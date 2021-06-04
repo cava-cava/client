@@ -96,10 +96,12 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: calc(100vh - 30vh);
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
   background: url("../../assets/jpg/background.jpeg") center center no-repeat;
   background-size: 100% 100%;
-  padding: 15vh 0;
+  padding: 9vh 0;
 
   @include media('exclude-low-tablet') {
     border-radius: $radius;
