@@ -32,7 +32,8 @@
 
   &:-webkit-autofill {
     &:hover,&:hover, &:active {
-      box-shadow: none;
+      -webkit-box-shadow:0 0 0 50px white inset;
+      -webkit-text-fill-color: $black;
     }
   }
 }
@@ -40,4 +41,9 @@
 .InputTextError {
   color: $red;
   animation: buzz-out 0.75s linear 1;
+  &:-webkit-autofill {
+    &:hover,&:hover, &:active {
+      -webkit-text-fill-color: $red;
+    }
+  }
 }
