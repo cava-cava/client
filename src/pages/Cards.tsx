@@ -31,9 +31,12 @@ const Cards = () => {
     const [pointsCard, setPointsCard] = useState<number>(10)
 
     const onClick = (event: Event) => {
+        console.log("onClickBefore")
         event.stopPropagation()
+        console.log("onClickPropagation")
         if(cardsActions.length > 0) return;
         setActive(true)
+        console.log("onClickAfter")
     }
 
     useEffect(() => {
