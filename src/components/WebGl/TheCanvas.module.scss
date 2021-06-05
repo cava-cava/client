@@ -1,6 +1,9 @@
 @import "../../scss/helpers";
 
 .TheCanvas {
+  position: relative;
+  z-index: 1;
+  
   canvas {
     height: 100vh!important;
 
