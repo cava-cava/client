@@ -64,9 +64,9 @@ const VideoBackgroundGame: FunctionComponent<VideoBackgroundGameProps> = ({play,
     return (
         <div className={styles.VideoBackgroundGame}>
             {card && <video ref={refVideo}
-                   src={card.Points > 0 ? yellow : black} loop={false}
+                   src={card.Points > 0 ? yellow : black} loop={false} playsInline={true}
                    muted={true} controls={false} onEnded={onEndedVideo}/>}
-            {(reverse) && <video ref={refVideoReverse}
+            {(reverse) && <video ref={refVideoReverse} playsInline={true}
                                              src={lastCard && lastCard.Points > 0 ? reverseYellow : reverseBlack}
                                              loop={false}
                                              muted={true} controls={false}
