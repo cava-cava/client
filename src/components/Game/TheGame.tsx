@@ -10,6 +10,7 @@ import {Guess} from "../../server/types/guess";
 import {socket} from "../../socketClient";
 import {Omg} from "../../server/types/omg";
 import TheTutorial from "./TheTutorial";
+import DisconnectedUsers from "../Users/DisconnectedUsers";
 
 type TheGameProps = {
     roomId: string
@@ -24,6 +25,9 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
     const [omg, setOmg] = useState<Omg>();
     const [triggerGuesses, setTriggerGuesses] = useState(false);
     const [triggerOMG, setTriggerOMG] = useState(false);
+    const [isUsersDisconnected, setIsUsersDisconnected] = useState<boolean>(false);
+    const usersDisconnected = useListUsers(roomId, 'updateListUsersDisconnected', 'getListUsersDisconnectedInRoom')
+
 
     useEffect(() => {
         const getPlayer = (player: User) => {
@@ -47,6 +51,13 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
             dispatch({type: SET_USER, payload: user});
         }
 
+        const userDisconnected = (isDisconnected: boolean) => {
+            setIsUsersDisconnected(isDisconnected);
+        };
+
+        socket.emit("userDisconnected", roomId);
+        socket.on("userDisconnected", userDisconnected);
+
         socket.emit('getRoundEvent', roomId);
         socket.on('getPlayer', getPlayer);
         socket.on('sendGuess', sendGuess);
@@ -61,6 +72,8 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
             socket.off('startRoundEvent', eventRound);
             socket.off('endRoundEvent', eventRound);
             socket.off('checkpoint', checkpoint);
+            socket.off("userDisconnected", userDisconnected);
+            setIsUsersDisconnected(false);
             setPlayer(undefined)
             setGuess(undefined)
             setOmg(undefined)
@@ -69,6 +82,7 @@ const TheGame: FunctionComponent<TheGameProps> = ({roomId}) => {
 
     return(
         <>
+            {isUsersDisconnected && <DisconnectedUsers roomId={roomId} users={usersDisconnected}/>}
             { (!user.isReady) && <TheTutorial roomId={roomId} userKey={user.key}/>}
             { (user.isReady && !triggerGuesses && !triggerOMG) && <CardsGame users={users} player={player} user={user} roomId={roomId}/>}
             { (user.isReady && triggerGuesses && !triggerOMG) && <TheGuess roomId={roomId} question={guess?.question} users={users} userKey={user.key}/> }

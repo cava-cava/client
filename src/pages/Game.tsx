@@ -1,48 +1,21 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {RouteParams} from "../types/params";
 import {useParams} from "react-router";
-import {socket} from "../socketClient";
 import useRedirect from "../hooks/useRedirect";
 import TheGame from "../components/Game/TheGame";
 import SocketLog from "../components/SocketLog";
-import DisconnectedUsers from "../components/Users/DisconnectedUsers";
-import useListUsers from "../hooks/useListUsers";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../store";
 
 const Game = () => {
     const {id}: RouteParams = useParams();
-    const usersDisconnected = useListUsers(id, 'updateListUsersDisconnected', 'getListUsersDisconnectedInRoom')
-    const [isUsersDisconnected, setIsUsersDisconnected] = useState<boolean>(
-        false
-    );
     const userKey = useSelector((state: ApplicationState) => state.user.data.key);
 
     useRedirect();
 
-    useEffect(() => {
-        const userDisconnected = (isDisconnected: boolean) => {
-            setIsUsersDisconnected(isDisconnected);
-        };
-
-        socket.on("userDisconnected", userDisconnected);
-
-        socket.emit("userDisconnected", id);
-        return () => {
-            socket.off("userDisconnected", userDisconnected);
-            setIsUsersDisconnected(false);
-        };
-    }, []);
-
     return (
         <>
-            <>
-                {isUsersDisconnected ? (
-                    <DisconnectedUsers roomId={id} users={usersDisconnected}/>
-                ) : (
-                    <TheGame roomId={id}/>
-                )}
-            </>
+            <TheGame roomId={id}/>
             <SocketLog roomId={id} userKey={userKey}/>
         </>
     );
