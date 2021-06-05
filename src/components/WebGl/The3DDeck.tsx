@@ -26,7 +26,7 @@ const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, playerKey, numberC
         return (
             <group
                 ref={group}
-                onPointerDown={onClick}
+                onPointerDown={(event:Event) => onClick(event)}
                 onPointerOver={() => canHover && setHover(true)}
                 onPointerOut={() => setHover(false)}
             >

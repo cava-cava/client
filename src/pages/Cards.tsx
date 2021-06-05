@@ -45,7 +45,9 @@ const Cards = () => {
             pointsCard: pointsCard,
             descriptionCardAction: descriptionCardAction,
             pointsCardAction: pointsCardAction,
-            deckClick: onClick,
+            deckClick: () => {
+                setActive(true)
+            },
             nextCard: () => {
                 setActive(false)
             },
