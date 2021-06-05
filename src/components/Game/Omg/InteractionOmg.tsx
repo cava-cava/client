@@ -29,36 +29,38 @@ const InteractionOmg: FunctionComponent<InteractionOmgProps> = ({
                                                                     setActive
                                                                 }) => {
     const [clientYStart, setClientYStart] = useState<number>(0)
+    const [start, setStart] = useState<boolean>(false)
 
-    const handleStart = (startEvent:any) => {
+    const handleStart = (startEvent: any) => {
         startEvent.preventDefault();
-        if (type !== "swipe" || active || !canDoInteraction) return;
+        if (type !== "swipe" || active || !canDoInteraction || !start) return;
         setClientYStart(startEvent.clientY)
     }
 
-    const handleEnd = (endEvent:any) => {
+    const handleEnd = (endEvent: any) => {
         endEvent.preventDefault();
-        if (type !== "swipe" || active || !canDoInteraction) return;
-        if((clientYStart - endEvent.clientY) > 100) {
+        if (type !== "swipe" || active || !canDoInteraction || !start) return;
+        if ((clientYStart - endEvent.clientY) > 100) {
             setActive(true)
-            if(roomId !== undefined && userKey !== undefined) socket.emit('winOmg', roomId, userKey)
+            if (roomId !== undefined && userKey !== undefined) socket.emit('winOmg', roomId, userKey)
         }
     }
 
     const onClick = () => {
-        if (type !== "click" || active || !canDoInteraction) return;
+        if (type !== "click" || active || !canDoInteraction || !start) return;
         setActive(true)
-        if(roomId !== undefined && userKey !== undefined) socket.emit('winOmg', roomId, userKey)
+        if (roomId !== undefined && userKey !== undefined) socket.emit('winOmg', roomId, userKey)
     }
 
+
     return (
-        <div className={styles.InteractionOmg}  onClick={onClick}
-                                                onTouchStart={(touchStartEvent) => handleStart(touchStartEvent)}
-                                                onTouchEnd={(touchEndEvent) => handleEnd(touchEndEvent)}
-                                                // The following event handlers are for mouse compatibility:
-                                                onMouseDown={mouseDownEvent => handleStart(mouseDownEvent)}
-                                                onMouseUp={(mouseUpEvent) => handleEnd(mouseUpEvent)}
-                                                onMouseLeave={(mouseLeaveEvent) => handleEnd(mouseLeaveEvent)}>
+        <div className={styles.InteractionOmg} onClick={onClick}
+             onTouchStart={(touchStartEvent) => handleStart(touchStartEvent)}
+             onTouchEnd={(touchEndEvent) => handleEnd(touchEndEvent)}
+            // The following event handlers are for mouse compatibility:
+             onMouseDown={mouseDownEvent => handleStart(mouseDownEvent)}
+             onMouseUp={(mouseUpEvent) => handleEnd(mouseUpEvent)}
+             onMouseLeave={(mouseLeaveEvent) => handleEnd(mouseLeaveEvent)}>
             <>
                 <div>
                     <CSSTransition
@@ -66,18 +68,25 @@ const InteractionOmg: FunctionComponent<InteractionOmgProps> = ({
                         timeout={300}
                         classNames="fade"
                     >
-                        <Player autoplay keepLastFrame src={active ? animationAfter : animationBefore}>
+                        <Player autoplay keepLastFrame src={active ? animationAfter : animationBefore}
+                                onEvent={event => {
+                                    if (event === 'complete' && !start) setStart(true)
+                                }}>
                             <Controls visible={controls} buttons={['play', 'repeat', 'frame', 'debug']}/>
                         </Player>
                     </CSSTransition>
                 </div>
-                {
-                    (!active && canDoInteraction) &&
+                <CSSTransition
+                    in={(canDoInteraction && start && !active)}
+                    timeout={300}
+                    classNames="fade"
+                    unmountOnExit
+                >
                     <div>
                         <img src={type === "swipe" ? swipe : click}/>
                         <span>{type === "swipe" ? "Swiper" : "Appuyer"}</span>
                     </div>
-                }
+                </CSSTransition>
             </>
         </div>
     )

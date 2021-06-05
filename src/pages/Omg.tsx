@@ -54,8 +54,8 @@ const Omg = () => {
     return (
         <div className={styles.Omg}>
             <TheTitle title={omgWin ? "Win" : "Lose"}/>
-            <InteractionOmg controls={showControls} type={type} active={omgWin} setActive={setActive} animationBefore={animationBefore}
-                            animationAfter={animationAfter} canDoInteraction={true}/>
+            <InteractionOmg controls={showControls} type={type} active={omgWin} setActive={setActive} animationBefore={(animationBefore && animationBefore.length > 0) ? animationBefore : '/Sohcava.json'}
+                            animationAfter={(animationAfter && animationAfter.length > 0) ? animationAfter : '/Scheh.json'} canDoInteraction={true}/>
             <InputFile refs={myInputBefore} setValue={setAnimationBefore}/>
             <InputFile refs={myInputAfter} setValue={setAnimationAfter}/>
         </div>
