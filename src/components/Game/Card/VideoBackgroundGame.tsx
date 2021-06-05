@@ -1,8 +1,8 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
-import yellow from '../../../assets/mp4/fond_jaune.mp4'
-import black from '../../../assets/mp4/fond_noir.mp4'
-import reverseYellow from '../../../assets/mp4/reverse_jaune.mp4'
-import reverseBlack from '../../../assets/mp4/reverse_noir.mp4'
+import yellow from '../../../assets/mp4/yellow.mp4'
+import black from '../../../assets/mp4/black.mp4'
+import reverseYellow from '../../../assets/mp4/reverseYellow.mp4'
+import reverseBlack from '../../../assets/mp4/reverseBlack.mp4'
 import styles from './VideoBackgroundGame.module.scss'
 import {Card} from "../../../server/types/card";
 
@@ -65,12 +65,10 @@ const VideoBackgroundGame: FunctionComponent<VideoBackgroundGameProps> = ({play,
         <div className={styles.VideoBackgroundGame}>
             {card && <video ref={refVideo}
                    src={card.Points > 0 ? yellow : black} loop={false}
-                   playsInline
                    muted={true} controls={false} onEnded={onEndedVideo}/>}
             {(reverse) && <video ref={refVideoReverse}
                                              src={lastCard && lastCard.Points > 0 ? reverseYellow : reverseBlack}
                                              loop={false}
-                                             playsInline
                                              muted={true} controls={false}
                                              onEnded={onEndedVideoReverse}/>}
         </div>

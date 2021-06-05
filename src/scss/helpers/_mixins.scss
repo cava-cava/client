@@ -146,3 +146,23 @@
     transform: scale(0.8);
   }
 }
+
+@mixin theModal {
+  @include defaultBackground;
+  position: fixed;
+  z-index: 100;
+
+  > div {
+    padding: 0 2rem;
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  @include media('exclude-low-tablet') {
+    @include deviceContainer;
+    height: ($deviceHeight - 175px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
