@@ -31,12 +31,9 @@ const Cards = () => {
     const [pointsCard, setPointsCard] = useState<number>(10)
 
     const onClick = (event: Event) => {
-        console.log("onClickBefore")
         event.stopPropagation()
-        console.log("onClickPropagation")
         if(cardsActions.length > 0) return;
         setActive(true)
-        console.log("onClickAfter")
     }
 
     useEffect(() => {
@@ -48,6 +45,7 @@ const Cards = () => {
             pointsCard: pointsCard,
             descriptionCardAction: descriptionCardAction,
             pointsCardAction: pointsCardAction,
+            deckClick: onClick,
             nextCard: () => {
                 setActive(false)
             },
@@ -105,6 +103,7 @@ const Cards = () => {
             setUserKey(value)
             setActive(false)
         });
+        deckGui.add(parameters, 'deckClick').name('click Deck');
         deckGui.add(parameters, 'nextCard').name('Next Card');
         const cardGui = gui.addFolder("Card")
         cardGui.open()
