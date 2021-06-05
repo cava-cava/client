@@ -26,10 +26,9 @@ const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, playerKey, numberC
         return (
             <group
                 ref={group}
-                onPointerUp={() => {console.log("pointUp")}}
+                onPointerDown={onClick}
                 onPointerOver={() => canHover && setHover(true)}
                 onPointerOut={() => setHover(false)}
-                onClick={onClick}
             >
                 {[...Array(numberCards)].map((x, index) =>
                     index <= playerKey ?
