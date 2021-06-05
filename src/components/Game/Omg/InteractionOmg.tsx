@@ -32,15 +32,15 @@ const InteractionOmg: FunctionComponent<InteractionOmgProps> = ({
     const [start, setStart] = useState<boolean>(false)
 
     const handleStart = (startEvent: any) => {
-        startEvent.preventDefault();
         if (type !== "swipe" || active || !canDoInteraction || !start) return;
-        setClientYStart(startEvent.clientY)
+        const clientY =  startEvent?.touches?.length > 0 ? startEvent.touches[0].clientY : startEvent.clientY;
+        setClientYStart(clientY)
     }
 
     const handleEnd = (endEvent: any) => {
-        endEvent.preventDefault();
         if (type !== "swipe" || active || !canDoInteraction || !start) return;
-        if ((clientYStart - endEvent.clientY) > 100) {
+        const clientYEnd =  endEvent?.changedTouches?.length > 0 ? endEvent.changedTouches[0].clientY : endEvent.clientY;
+        if ((clientYStart - clientYEnd) > 100) {
             setActive(true)
             if (roomId !== undefined && userKey !== undefined) socket.emit('winOmg', roomId, userKey)
         }
