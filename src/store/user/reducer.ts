@@ -37,6 +37,7 @@ export const initialState: userState = {
       omgWon: 0
     },
     isReady: false,
+    progressBar: "",
     gameOver: []
   },
   errors: undefined,

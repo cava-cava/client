@@ -116,7 +116,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
                         </TheCanvas>
                         <VideoBackgroundGame play={cardsActions.length > 0 || active} card={cardsActions.length > 0 ? cardsActions[cardsActions.length - 1] : active ? currentCard : undefined}/>
                     </div>
-                    <div>
+                    <div className={styles.CardsGameBottom}>
                         <TheBottomDeck number={user.joker} assets={[cardPiocheCava, cardPiocheJaune]} deskClick={jokerClick} style={{opacity: (canUseJoker) ? '1' : '0.5', marginRight: 'auto'}}/>
                         <TheBottomDeck number={user.dirt} assets={[cardPiocheCheh, cardPiocheNoir]} deskClick={dirtClick} style={{opacity: (canUseDirt) ? '1' : '0.5', marginLeft: 'auto'}}/>
                     </div>

@@ -16,6 +16,7 @@ export interface User {
   answerEvent: AnswerEvent,
   statisticsGame: StatisticsGame
   isReady: boolean
+  progressBar: string
   gameOver: string[]
 }
 

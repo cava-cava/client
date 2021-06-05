@@ -2,11 +2,11 @@
 
 .TheProgressBar {
     position: relative;
-    margin: 10px 0;
+    margin: 1rem 0;
     width: 100%;
     cursor: pointer;
     transition: 0.1s transform ease;
-    z-index: 1;
+    z-index: 5;
 
     &:focus,&:active {
         transform: scale(0.98);

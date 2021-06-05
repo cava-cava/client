@@ -51,6 +51,7 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
             omgWon: 0
         },
         isReady: false,
+        progressBar: "",
         gameOver: []
     };
     room.users.push(user);

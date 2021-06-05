@@ -12,6 +12,7 @@ type TheProgressBarProps = {
 
 const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, playerKey}) => {
     const [activeKey, setActiveKey] = useState<number>(playerKey ? playerKey : -1)
+    const [usersPosition, setUsersPosition] = useState<User[]>([])
 
     const onClick = () => {
         let index = activeKey
@@ -23,6 +24,13 @@ const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, pl
         setActiveKey((playerKey || playerKey === 0) ? playerKey : -1)
     }, [playerKey])
 
+    useEffect(() => {
+        setUsersPosition([...users].sort((a, b) => (a.key > b.key) ? 1 : -1))
+        return () => {
+            setUsersPosition([])
+        }
+    }, [users])
+
     return (
         <div className={styles.TheProgressBar} onClick={onClick}>
             <div>
@@ -31,7 +39,7 @@ const TheProgressBar: FunctionComponent<TheProgressBarProps> = ({users, user, pl
                      style={{width: user.points > 50 ? `calc(${user.points}% - 10px)` : `${user.points}%`, backgroundColor: user.color}}/>
             </div>
             <div>
-                {users.map((user, index) => <UserProgressBar user={user} activeKey={activeKey} key={index}/>)}
+                {usersPosition.map((user, index) => <UserProgressBar user={user} activeKey={activeKey} position={index} key={index}/>)}
             </div>
         </div>
     )

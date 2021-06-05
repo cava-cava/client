@@ -29,6 +29,7 @@ import {winOmg} from "./actions/winOmg";
 import {getRoundEvent} from "./actions/getRoundEvent";
 import {checkpoint} from "./actions/checkpoint";
 import {getPlayer} from "./actions/getPlayer";
+import {progressBar} from "./actions/progressBar";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -109,12 +110,14 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].joker++;
+        progressBar(room.users[userKey], `+1 Oh ça va`)
     });
 
     socket.on('addDirt', (roomId:string, userKey:number) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].dirt++;
+        progressBar(room.users[userKey], `+1 Cheh`)
     });
 
     socket.on('sendPointsUser', (roomId:string, userKey:number, points:number) => {
