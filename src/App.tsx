@@ -7,19 +7,21 @@ import {socket} from "./socketClient";
 import {colors} from './mixins/color'
 import './mixins/browser-console-color'
 import TheRouter from "./components/TheRouter/TheRouter";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {SET_ID} from "./store/user/types";
 import useDidYouKnow from "./hooks/useDidYouKnow";
 import useGameOverMessages from "./hooks/useGameOverMessages";
 import QrCodeApp from "./components/App/QrCodeApp";
 import useTutorial from "./hooks/useTutorial";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
+import useMusics from "./hooks/useMusics";
 
 const App = () => {
     const dispatch = useDispatch();
     useDidYouKnow();
     useTutorial();
     useGameOverMessages();
+    useMusics();
 
     useEffect(() => {
         const connect = () => {

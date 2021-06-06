@@ -39,6 +39,7 @@ export async function startGame(room: Room, io:Server) {
 
     room.game.isLoading = false
     room.game.isStart = true
+    room.users.map(user => user.playingGame = true)
     io.to(room.id).emit('loading', room.game.isLoading);
     io.to(room.id).emit('redirect', `/game/${room.id}`);
     checkpoint(room, io)

@@ -10,7 +10,7 @@ import {
 
 export const initialState: settingsState = {
   data: {
-    music: 0.5,
+    music: 0.3,
     volume: 0.75,
     debug: false,
     homepage: false

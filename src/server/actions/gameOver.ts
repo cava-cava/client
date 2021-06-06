@@ -3,6 +3,7 @@ import {getMaxValue} from "./getMaxValue";
 
 export const gameOver = (room: Room) => {
     room.users.map(user => {
+        room.users.map(user => user.playingGame = false)
         user.gameOver = []
         // if winner
         if (user.ladder === 1) user.gameOver.push('winner')

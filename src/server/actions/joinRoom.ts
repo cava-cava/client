@@ -50,6 +50,7 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
             guessLost: 0,
             omgWon: 0
         },
+        playingGame: false,
         isReady: false,
         progressBar: "",
         gameOver: []
