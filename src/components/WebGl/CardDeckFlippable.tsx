@@ -78,38 +78,37 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
                 rotation-z={rotationZ}
                 position={position}
             >
-                <Box args={[2.25, 4, 0]}>
-                    <meshBasicMaterial
-                        attachArray="material"
-                        map={textureBack}
-                        transparent={true}
-                    />
-                    <meshBasicMaterial
-                        attachArray="material"
-                        map={textureFront}
-                        transparent={true}
-                    />
-                    <meshBasicMaterial
-                        attachArray="material"
-                        map={textureBack}
-                        transparent={true}
-                    />
-                    <meshBasicMaterial
-                        attachArray="material"
-                        map={textureFront}
-                        transparent={true}
-                    />
-                    <meshBasicMaterial
-                        attachArray="material"
-                        map={textureBack}
-                        transparent={true}
-                    />
-                    <meshBasicMaterial
-                        attachArray="material"
-                        map={textureFront}
-                        transparent={true}
-                    />
-                </Box>
+                <boxBufferGeometry args={[2.25, 4, 0]}/>
+                <meshBasicMaterial
+                    attachArray="material"
+                    map={textureBack}
+                    transparent={true}
+                />
+                <meshBasicMaterial
+                    attachArray="material"
+                    map={textureFront}
+                    transparent={true}
+                />
+                <meshBasicMaterial
+                    attachArray="material"
+                    map={textureBack}
+                    transparent={true}
+                />
+                <meshBasicMaterial
+                    attachArray="material"
+                    map={textureFront}
+                    transparent={true}
+                />
+                <meshBasicMaterial
+                    attachArray="material"
+                    map={textureBack}
+                    transparent={true}
+                />
+                <meshBasicMaterial
+                    attachArray="material"
+                    map={textureFront}
+                    transparent={true}
+                />
             </a.mesh>
             <CardContent card={card} position={[0, -0.25, 0.5]} rotation={randomRotation} debug={debug}
                          show={showContent && active} isAlternative={false}/>

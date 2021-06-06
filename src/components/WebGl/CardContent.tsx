@@ -28,6 +28,8 @@ const CardContent: FunctionComponent<CardContentProps> = ({
     const fade: any = useSpring({
         from: {opacity: 0},
         to: {opacity: show && card ? 1 : 0},
+        delay: show ? 500 : 0,
+        config: { duration: 200 },
         onStart: () => {
             if(show) setActive(true)
         },

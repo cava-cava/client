@@ -4,7 +4,7 @@ import textureSrc from '../../assets/png/deck.png'
 import {a, useSpring} from "react-spring/three";
 
 type CardDeckProps = {
-    active:boolean
+    active: boolean
     basicPosition: any
 }
 
@@ -12,21 +12,19 @@ const CardDeck: FunctionComponent<CardDeckProps> = ({active, basicPosition}) => 
     const texture = useTexture(textureSrc)
     const mesh = useRef();
 
-    const { position } = useSpring({
+    const {position} = useSpring({
         position: active ? [basicPosition[0], basicPosition[1], basicPosition[2] - 0.75] : basicPosition
     });
 
     return (
         <a.mesh ref={mesh} position={position}>
-            <Plane args={[2.25, 4]}>
-                <meshBasicMaterial
-                    attach="material"
-                    map={texture}
-                    transparent={true}
-                />
-            </Plane>
+            <planeBufferGeometry args={[2.25, 4]}/>
+            <meshBasicMaterial
+                attach="material"
+                map={texture}
+                transparent={true}
+            />
         </a.mesh>
-
     );
 }
 

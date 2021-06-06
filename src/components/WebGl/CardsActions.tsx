@@ -13,16 +13,16 @@ type CardsActionsProps = {
     debug?: boolean
 };
 
-const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug=false}) => {
+const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug = false}) => {
     const mesh = useRef();
     const textureOhCaVa = useTexture(textureSrcOhCaVa)
     const textureCheh = useTexture(textureSrcCheh)
     const [cardsActions, setCardsActions] = useState<any[]>([])
 
     useEffect(() => {
-        let tmpCardsActions:any[] = []
+        let tmpCardsActions: any[] = []
         cards.map((card, index) => {
-            if(cardsActions[index]) {
+            if (cardsActions[index]) {
                 tmpCardsActions.push(cardsActions[index])
             } else {
                 tmpCardsActions.push({
@@ -44,21 +44,21 @@ const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug=false}
 
     return (
         <>
-            {transitions(({position, key}:any, card) => (
+            {transitions(({position, key}: any, card) => (
                 <a.mesh
                     ref={mesh}
                     position={position}
                     rotation-z={card.rotationZ}
                     key={key}
                 >
-                    <Plane args={[2.25, 4]}>
-                        <meshBasicMaterial
-                            attach="material"
-                            map={card.Points > 0 ? textureOhCaVa : textureCheh}
-                            transparent={true}
-                        />
-                        <CardContent isAlternative={true} card={card} position={[0,0,0]} rotation={-card.rotationZ} debug={debug} show={card.key === cards.length - 1}/>
-                    </Plane>
+                    <planeBufferGeometry args={[2.25, 4]}/>
+                    <meshBasicMaterial
+                        attach="material"
+                        map={card.Points > 0 ? textureOhCaVa : textureCheh}
+                        transparent={true}
+                    />
+                    <CardContent isAlternative={true} card={card} position={[0, 0, 0]} rotation={-card.rotationZ}
+                                 debug={debug} show={card.key === cards.length - 1}/>
                 </a.mesh>)
             )}
         </>
