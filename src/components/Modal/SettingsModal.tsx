@@ -7,6 +7,7 @@ import {ApplicationState} from "../../store";
 import {SET_MUSIC_SETTINGS, SET_VOLUME_SETTINGS} from "../../store/settings/types";
 import styles from './SettingsModal.module.scss'
 import volumeSound from "../../assets/mp3/tick.mp3"
+import useSoundEffect from "../../hooks/useSoundEffect";
 
 type SettingsModalProps = {
     isShowing: boolean
@@ -17,17 +18,14 @@ const SettingsModal: FunctionComponent<SettingsModalProps> = ({isShowing, hide})
     const dispatch = useDispatch()
     const music: number = useSelector((state: ApplicationState) => state.settings.data.music);
     const volume: number = useSelector((state: ApplicationState) => state.settings.data.volume);
-    const audioVolume = new Audio(volumeSound)
+    const soundEffectVolume = useSoundEffect(volumeSound)
 
     const setMusic = (music: number) => {
         dispatch({type: SET_MUSIC_SETTINGS, payload: music})
     }
 
     const setVolume = (volume: number) => {
-        audioVolume.volume = volume
-        if (audioVolume.paused) {
-            audioVolume.play()
-        }
+        soundEffectVolume?.play()
         dispatch({type: SET_VOLUME_SETTINGS, payload: volume})
     }
 
