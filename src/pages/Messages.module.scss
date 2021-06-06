@@ -16,6 +16,7 @@
         position: absolute;
         bottom: 75px;
         width: 100%;
+        z-index: 1;
 
         > a {
             @include theButton;
