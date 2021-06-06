@@ -7,9 +7,10 @@ import useTutorial from "../../../hooks/useTutorial";
 import {Tutorial} from "../../../store/tutorial/types";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../../../store";
+import ReactPlayer from "react-player";
 
 const SliderTutorial: FunctionComponent = () => {
-    const tutorial:Tutorial = useSelector((state: ApplicationState) => state.tutorial.data)
+    const tutorial: Tutorial = useSelector((state: ApplicationState) => state.tutorial.data)
 
     useTutorial();
 
@@ -23,12 +24,13 @@ const SliderTutorial: FunctionComponent = () => {
         prevArrow: <LeftArrow classname={styles.SliderTutorialArrowLeft}/>
     };
 
-    return(
+    return (
         <Slider {...settings} className={styles.SliderTutorial}>
             {
                 tutorial.videos.map((video, index) =>
                     <div key={index}>
-                        <video src={video.url} autoPlay={true} loop={false} muted={true} controls={false} playsInline={true}/>
+                        <ReactPlayer url={video.url} playing={true} loop={false} muted={true} controls={false}
+                                     playsInline={true} width={'95%'} height='auto'/>
                     </div>
                 )
             }

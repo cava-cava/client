@@ -1,10 +1,7 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
-import yellow from '../../../assets/mp4/yellow.mp4'
-import black from '../../../assets/mp4/black.mp4'
-import reverseYellow from '../../../assets/mp4/reverseYellow.mp4'
-import reverseBlack from '../../../assets/mp4/reverseBlack.mp4'
 import styles from './VideoBackgroundGame.module.scss'
 import {Card} from "../../../server/types/card";
+import ReactPlayer from "react-player";
 
 type VideoBackgroundGameProps = {
     play: boolean
@@ -12,65 +9,56 @@ type VideoBackgroundGameProps = {
 }
 
 const VideoBackgroundGame: FunctionComponent<VideoBackgroundGameProps> = ({play, card}) => {
-    const refVideo = useRef<any>()
-    const refVideoReverse = useRef<any>()
-    const [reverse, setReverse] = useState(false)
+    const [playingVideo, setPlayingVideo] = useState<boolean>(false)
+    const [playingVideoReverse, setPlayingVideoReverse] = useState<boolean>(false)
+    const [canReverse, setCanReverse] = useState(false)
     const [lastCard, setLastCard] = useState<Card>()
-    const [trigger, setTrigger] = useState(false)
+    const [triggerVideo, setTriggerVideo] = useState<boolean>(false)
 
     useEffect(() => {
         if (!card || !play) {
-            if(reverse) videoReversePlay()
+            if (canReverse) setPlayingVideoReverse(true)
             return
-        }
-        else if (card !== lastCard) {
-            setTrigger(true)
-            if (reverse) videoReversePlay()
-            else videoPlay()
+        } else if (card !== lastCard) {
+            setTriggerVideo(true)
+            if (canReverse) setPlayingVideoReverse(true)
+            else setPlayingVideo(true)
         }
     }, [play, card])
 
-    const videoPlay = () => {
-        if(null === refVideo.current) return
-        refVideo.current.pause()
-        refVideo.current.currentTime = 0;
-        refVideo.current.play()
+    const onPlayVideo = () => {
         if (card !== lastCard) setLastCard(card)
     }
 
-    const videoReversePlay = () => {
-        if(null === refVideoReverse.current) return
-        refVideoReverse.current.pause()
-        refVideoReverse.current.currentTime = 0;
-        refVideoReverse.current.play()
-        if(null === refVideo.current) return
-        refVideo.current.pause()
-        refVideo.current.currentTime = 0;
-    }
-
     const onEndedVideo = () => {
-        if (trigger && !reverse) {
-            setReverse(true)
-            setTrigger(false)
+        console.log(lastCard?.Points)
+        if (playingVideo) setPlayingVideo(false)
+        if (!canReverse && triggerVideo) {
+            setCanReverse(true)
+            setTriggerVideo(false)
         }
     }
 
     const onEndedVideoReverse = () => {
-        if (reverse) setReverse(false)
-        if(card && play) videoPlay()
-        else if(lastCard) setLastCard(undefined)
+        if(playingVideoReverse) setPlayingVideoReverse(false)
+        if (canReverse) setCanReverse(false)
+        if (card && play) setPlayingVideo(true)
+        else if (lastCard) setLastCard(undefined)
     }
 
     return (
         <div className={styles.VideoBackgroundGame}>
-            {card && <video ref={refVideo}
-                   src={card.Points > 0 ? yellow : black} loop={false} playsInline={true}
-                   muted={true} controls={false} onEnded={onEndedVideo}/>}
-            {(reverse) && <video ref={refVideoReverse} playsInline={true}
-                                             src={lastCard && lastCard.Points > 0 ? reverseYellow : reverseBlack}
-                                             loop={false}
-                                             muted={true} controls={false}
-                                             onEnded={onEndedVideoReverse}/>}
+            {card &&
+            <ReactPlayer url={card.Points > 0 ? "/mp4/yellow.mp4" : "/mp4/black.mp4"} playing={playingVideo} loop={false}
+                         muted={true} controls={false}
+                         playsInline={true} width={'100%'} height='auto' onEnded={onEndedVideo} onPlay={onPlayVideo}/>
+            }
+            {(canReverse) &&
+            <ReactPlayer url={lastCard && lastCard.Points > 0 ? "/mp4/reverseYellow.mp4" : "/mp4/reverseBlack.mp4"}
+                         playing={playingVideoReverse} loop={false}
+                         muted={true} controls={false}
+                         playsInline={true} width={'100%'} height='auto' onEnded={onEndedVideoReverse}/>
+            }
         </div>
     )
 }
