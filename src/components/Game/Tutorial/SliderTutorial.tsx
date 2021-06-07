@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import styles from "./SliderTutorial.module.scss"
 import Slider from "react-slick";
 import LeftArrow from "../../Arrow/LeftArrow";
@@ -13,6 +13,8 @@ import SliderTutorialVideo from '../Tutorial/SliderTutorialVideo'
 const SliderTutorial: FunctionComponent = () => {
     const tutorial: Tutorial = useSelector((state: ApplicationState) => state.tutorial.data)
 
+    const [activeSlide, setActiveSlide] = useState(0)
+
     useTutorial();
 
     const settings = {
@@ -22,14 +24,19 @@ const SliderTutorial: FunctionComponent = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <RightArrow classname={styles.SliderTutorialArrowRight}/>,
-        prevArrow: <LeftArrow classname={styles.SliderTutorialArrowLeft}/>
+        prevArrow: <LeftArrow classname={styles.SliderTutorialArrowLeft}/>,
+        afterChange: (current:any) => {setActiveSlide(current)}
+
     };
+
+    
+
 
     return (
         <Slider {...settings} className={styles.SliderTutorial}>
             {
                 tutorial.videos.map((video, index) =>
-                    <SliderTutorialVideo key={index} videoProps={video}  />
+                    <SliderTutorialVideo key={index} playing={activeSlide === index} videoProps={video}  />
                 )
             }
         </Slider>

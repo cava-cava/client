@@ -12,28 +12,14 @@ import { FileStrapi } from "../../../server/types/fileStrapi";
 
 type SliderTutorialVideoProps = {
   videoProps: FileStrapi;
+  playing: boolean
 };
 
 const SliderTutorialVideo: FunctionComponent<SliderTutorialVideoProps> = ({
   videoProps,
+  playing
 }) => {
-  const tutorial: Tutorial = useSelector(
-    (state: ApplicationState) => state.tutorial.data
-  );    
-
   const [isLoading, setIsLoading] = useState(true)
-
-  useTutorial();
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <RightArrow classname={styles.SliderTutorialArrowRight} />,
-    prevArrow: <LeftArrow classname={styles.SliderTutorialArrowLeft} />,
-  };
 
   const toggleLoading = () => {
     setIsLoading(false)
@@ -45,7 +31,7 @@ const SliderTutorialVideo: FunctionComponent<SliderTutorialVideoProps> = ({
       <ReactPlayer
         onStart={() => toggleLoading()}
         url={videoProps.url}
-        playing={true}
+        playing={playing}
         loop={false}
         muted={true}
         controls={false}
