@@ -6,7 +6,6 @@ const useAudio = (src: string, autoplay: boolean, loop: boolean) => {
     const [source, setSource] = useState<string>(src)
 
     useEffect(() => {
-        Howler.autoUnlock = false;
         setAudio(new Howl({
             src: [source],
             autoplay: autoplay,
