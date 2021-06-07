@@ -30,7 +30,7 @@ const SliderTutorial: FunctionComponent = () => {
                 tutorial.videos.map((video, index) =>
                     <div key={index}>
                         <ReactPlayer url={video.url} playing={true} loop={false} muted={true} controls={false}
-                                     playsInline={true} width={'95%'} height='auto'/>
+                                     playsinline={true} width={'95%'} height='auto'/>
                     </div>
                 )
             }

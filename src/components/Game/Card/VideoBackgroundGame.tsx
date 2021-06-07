@@ -50,13 +50,13 @@ const VideoBackgroundGame: FunctionComponent<VideoBackgroundGameProps> = ({play,
             {card &&
             <ReactPlayer url={card.Points > 0 ? "/mp4/yellow.mp4" : "/mp4/black.mp4"} playing={playingVideo} loop={false}
                          muted={true} controls={false}
-                         playsInline={true} width={'100%'} height='auto' onEnded={onEndedVideo} onPlay={onPlayVideo}/>
+                         playsinline={true} width={'100%'} height='auto' onEnded={onEndedVideo} onPlay={onPlayVideo}/>
             }
             {(canReverse) &&
             <ReactPlayer url={lastCard && lastCard.Points > 0 ? "/mp4/reverseYellow.mp4" : "/mp4/reverseBlack.mp4"}
                          playing={playingVideoReverse} loop={false}
                          muted={true} controls={false}
-                         playsInline={true} width={'100%'} height='auto' onEnded={onEndedVideoReverse}/>
+                         playsinline={true} width={'100%'} height='auto' onEnded={onEndedVideoReverse}/>
             }
         </div>
     )
