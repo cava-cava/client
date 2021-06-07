@@ -20,7 +20,7 @@ const The3DDeck: FunctionComponent<TheDeckProps> = ({userKey, playerKey, numberC
         const [hovered, setHover] = useState(false);
 
         const position = (ratio:number) => {
-            return [(ratio * 0.1), (ratio * 0.1) - 0.25, -(ratio * 0.015)]
+            return [(ratio * 0.1), -(ratio * 0.1) - 0.25, -(ratio * 0.015)]
         }
 
         return (
