@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import styles from "./SliderTutorial.module.scss";
+import styles from "./SliderTutorialVideo.module.scss";
 import Slider from "react-slick";
 import LeftArrow from "../../Arrow/LeftArrow";
 import RightArrow from "../../Arrow/RightArrow";
@@ -21,7 +21,7 @@ const SliderTutorialVideo: FunctionComponent<SliderTutorialVideoProps> = ({
     (state: ApplicationState) => state.tutorial.data
   );    
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useTutorial();
 
@@ -40,8 +40,8 @@ const SliderTutorialVideo: FunctionComponent<SliderTutorialVideoProps> = ({
   };
 
   return (
-    <div>
-    {isLoading && 'Chargement'}
+    <div className={styles.SliderTutorialVideo}>
+    {isLoading && <p>Chargement</p>}
       <ReactPlayer
         onStart={() => toggleLoading()}
         url={videoProps.url}
