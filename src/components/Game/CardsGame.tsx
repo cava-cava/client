@@ -18,6 +18,7 @@ import TheCanvas from "../WebGl/TheCanvas";
 import The3DDeck from "../WebGl/The3DDeck";
 import CardsActions from "../WebGl/CardsActions";
 import VideoBackgroundGame from "./Card/VideoBackgroundGame";
+import useSoundEffect from "../../hooks/useSoundEffect";
 
 
 type CardsGameProps = {
@@ -31,6 +32,7 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
     const [currentCard, setCurrentCard] = useState<Card>()
     const [cardsActions, setCardsActions] = useState<Card[]>([])
     const [active, setActive] = useState(false)
+    const {sound, setSource} = useSoundEffect("", true)
 
     const canUseJoker = (player && ((currentCard && currentCard.Points < 0 && cardsActions.length === 0) || (cardsActions.length > 0 && cardsActions[cardsActions.length - 1].Points < 0 )))
     const canUseDirt = (player && user.id !== player.id && ((currentCard && currentCard.Points > 0 && cardsActions.length === 0) || (cardsActions.length > 0 && cardsActions[cardsActions.length - 1].Points > 0 )))
@@ -64,18 +66,28 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
         }
     }
 
+    const playSoundCard = (card:Card) => {
+        if(card && card.audio && card.audio.url.length > 0) {
+            console.log(card.audio.url)
+            setSource(card.audio.url)
+        }
+    }
+
     useEffect(() => {
         const pickedCard = (card:Card) => {
             setCurrentCard(card);
             setActive(true)
+            playSoundCard(card)
         }
 
         const addAlternativeCard = (card:Card) => {
             setCardsActions(oldCardsActions => [...oldCardsActions, card]);
+            playSoundCard(card)
         }
 
         const setAlternativeCard = (cards:Card[]) => {
             setCardsActions(cards)
+            playSoundCard(cards[cards.length-1])
         }
 
         const clearCards = () => {

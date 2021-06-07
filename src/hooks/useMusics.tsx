@@ -8,8 +8,8 @@ import useAudio from "./useAudio";
 const useMusics = () => {
     const user = useSelector((state: ApplicationState) => state.user.data);
     const volume: number = useSelector((state: ApplicationState) => state.settings.data.music);
-    const musicInterface = useAudio(interfaceSrc, true, true)
-    const musicGame = useAudio(gameSrc, false, true)
+    const {audio:musicInterface} = useAudio(interfaceSrc, true, true)
+    const {audio:musicGame} = useAudio(gameSrc, false, true)
 
     useEffect(()=> {
         musicInterface?.volume(volume)

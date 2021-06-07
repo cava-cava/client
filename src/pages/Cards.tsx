@@ -25,7 +25,6 @@ const Cards = () => {
         Description: "Lorem ipsum dolor mes couilles au bord de l'eau",
         Points: 10,
         Alternative: [],
-        audio: "",
     })
     const [descriptionCard, setDescriptionCard] = useState("Lorem ipsum dolor mes couilles au bord de l'eau")
     const [pointsCard, setPointsCard] = useState<number>(10)
@@ -70,7 +69,6 @@ const Cards = () => {
                         url: animationCard
                     },
                     Alternative: [],
-                    audio: "",
                 })
             },
             pushCardAction: () => {
@@ -82,7 +80,6 @@ const Cards = () => {
                         url: animationAlternative
                     },
                     Alternative: [],
-                    audio: "",
                 }
                 const cards:Card[] = [...cardsActions]
                 cardsActions.push(cardAction)

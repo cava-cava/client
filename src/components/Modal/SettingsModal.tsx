@@ -18,7 +18,7 @@ const SettingsModal: FunctionComponent<SettingsModalProps> = ({isShowing, hide})
     const dispatch = useDispatch()
     const music: number = useSelector((state: ApplicationState) => state.settings.data.music);
     const volume: number = useSelector((state: ApplicationState) => state.settings.data.volume);
-    const soundEffectVolume = useSoundEffect(volumeSound)
+    const {sound:soundEffectVolume} = useSoundEffect(volumeSound, false)
 
     const setMusic = (music: number) => {
         dispatch({type: SET_MUSIC_SETTINGS, payload: music})
