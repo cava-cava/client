@@ -31,7 +31,6 @@ const VideoBackgroundGame: FunctionComponent<VideoBackgroundGameProps> = ({play,
     }
 
     const onEndedVideo = () => {
-        console.log(lastCard?.Points)
         if (playingVideo) setPlayingVideo(false)
         if (!canReverse && triggerVideo) {
             setCanReverse(true)

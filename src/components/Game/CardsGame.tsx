@@ -68,7 +68,6 @@ const CardsGame: FunctionComponent<CardsGameProps> = ({users, player, user, room
 
     const playSoundCard = (card:Card) => {
         if(card && card.audio && card.audio.url.length > 0) {
-            console.log(card.audio.url)
             setSource(card.audio.url)
         }
     }
