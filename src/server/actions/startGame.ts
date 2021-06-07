@@ -34,6 +34,14 @@ export async function startGame(room: Room, io:Server) {
     if(room.game.omgs && room.game.omgs.length > 0) room.game.omgEvent.id = 0
     room.game.omgEvent.idTrigger = initIdOMG(room)
 
+
+    //Initialize Sounds Alternative
+    await axios.get('https://happiness-strapi.herokuapp.com/sounds').then(({data}) => {
+        room.game.cardGame.sounds = data
+    })
+    if(room.game.cardGame.sounds.cava && room.game.cardGame.sounds.cava.length > 0) room.game.cardGame.sounds.idCava = 0
+    if(room.game.cardGame.sounds.cheh && room.game.cardGame.sounds.cheh.length > 0) room.game.cardGame.sounds.idCheh = 0
+
     //Init Key of users
     room.users.map((user,index) => room.users[index].key = index)
 

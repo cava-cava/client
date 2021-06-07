@@ -18,6 +18,10 @@ export function sendJoker(userKey:number, playerKey:number, room: Room, io:Serve
     const alternativeCard = getCardAlternative("Tu fais genre que tout va bien... Tu affiches ton meilleur sourire !", room)
     if(!alternativeCard) return;
     alternativeCard.Points = Math.abs(room.game.cardGame.card.Points)
+    //play sound
+    if(room.game.cardGame.sounds.idCava >= room.game.cardGame.sounds.cava.length) room.game.cardGame.sounds.idCava = 0
+    alternativeCard.audio = room.game.cardGame.sounds.cava[room.game.cardGame.sounds.idCava]
+    room.game.cardGame.sounds.idCava++
     // use Joker
     if(--room.users[userKey].joker < 0) room.users[userKey].joker = 0
     io.to(room.id).emit('message', `${room.users[userKey].name} à posé une carte Oh Ça Va !`);
