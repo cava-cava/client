@@ -8,6 +8,7 @@ import {Tutorial} from "../../../store/tutorial/types";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../../../store";
 import ReactPlayer from "react-player";
+import SliderTutorialVideo from '../Tutorial/SliderTutorialVideo'
 
 const SliderTutorial: FunctionComponent = () => {
     const tutorial: Tutorial = useSelector((state: ApplicationState) => state.tutorial.data)
@@ -28,10 +29,7 @@ const SliderTutorial: FunctionComponent = () => {
         <Slider {...settings} className={styles.SliderTutorial}>
             {
                 tutorial.videos.map((video, index) =>
-                    <div key={index}>
-                        <ReactPlayer url={video.url} playing={true} loop={false} muted={true} controls={false}
-                                     playsinline={true} width={'95%'} height='auto'/>
-                    </div>
+                    <SliderTutorialVideo key={index} videoProps={video}  />
                 )
             }
         </Slider>
