@@ -7,7 +7,6 @@ import useTutorial from "../../../hooks/useTutorial";
 import {Tutorial} from "../../../store/tutorial/types";
 import {useSelector} from "react-redux";
 import {ApplicationState} from "../../../store";
-import ReactPlayer from "react-player";
 import SliderTutorialVideo from '../Tutorial/SliderTutorialVideo'
 
 const SliderTutorial: FunctionComponent = () => {
@@ -25,18 +24,16 @@ const SliderTutorial: FunctionComponent = () => {
         slidesToScroll: 1,
         nextArrow: <RightArrow classname={styles.SliderTutorialArrowRight}/>,
         prevArrow: <LeftArrow classname={styles.SliderTutorialArrowLeft}/>,
-        afterChange: (current:any) => {setActiveSlide(current)}
-
+        afterChange: (current: any) => {
+            setActiveSlide(current)
+        }
     };
-
-    
-
 
     return (
         <Slider {...settings} className={styles.SliderTutorial}>
             {
                 tutorial.videos.map((video, index) =>
-                    <SliderTutorialVideo key={index} playing={activeSlide === index} videoProps={video}  />
+                    <SliderTutorialVideo key={index} playing={activeSlide === index} videoProps={video}/>
                 )
             }
         </Slider>
