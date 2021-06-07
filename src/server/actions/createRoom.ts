@@ -22,7 +22,13 @@ export function createRoom(rooms: Rooms) {
             cardGame: {
                 id: -1,
                 cardsActions: [],
-                showAlternative: false
+                showAlternative: false,
+                sounds: {
+                    cava: [],
+                    cheh: [],
+                    idCava: -1,
+                    idCheh: -1
+                }
             },
             guessEvent: {
                 id: -1,
