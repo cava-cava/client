@@ -18,7 +18,7 @@ const CardDeck: FunctionComponent<CardDeckProps> = ({active, basicPosition}) => 
 
     return (
         <a.mesh ref={mesh} position={position}>
-            <planeBufferGeometry args={[2.25, 4]}/>
+            <planeBufferGeometry args={[2, 3.75]}/>
             <meshBasicMaterial
                 attach="material"
                 map={texture}

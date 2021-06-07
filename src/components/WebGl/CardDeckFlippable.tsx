@@ -78,7 +78,7 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
                 rotation-z={rotationZ}
                 position={position}
             >
-                <boxBufferGeometry args={[2.25, 4, 0]}/>
+                <boxBufferGeometry args={[2, 3.75, 0]}/>
                 <meshBasicMaterial
                     attachArray="material"
                     map={textureBack}

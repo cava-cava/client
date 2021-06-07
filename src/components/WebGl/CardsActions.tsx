@@ -51,7 +51,7 @@ const CardsActions: FunctionComponent<CardsActionsProps> = ({cards, debug = fals
                     rotation-z={card.rotationZ}
                     key={key}
                 >
-                    <planeBufferGeometry args={[2.25, 4]}/>
+                    <planeBufferGeometry args={[2, 3.75]}/>
                     <meshBasicMaterial
                         attach="material"
                         map={card.Points > 0 ? textureOhCaVa : textureCheh}
