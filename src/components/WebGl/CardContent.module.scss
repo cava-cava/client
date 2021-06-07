@@ -11,13 +11,8 @@
   transform-origin: top left;
   display: flex;
   flex-direction: column;
-  height: 54vh;
-  width: 30vh;
-
-  @include media('exclude-low-tablet') {
-    width: 59vw;
-    height: 112vw;
-  }
+  height: 53vh;
+  width: 28vh;
 
   > *:first-child {
     margin-top: auto;
@@ -49,7 +44,7 @@
   }
 
   @include media('exclude-low-tablet') {
-    height: 413px;
-    width: 214px;
+    height: 390px;
+    width: 200px;
   }
 }
