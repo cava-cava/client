@@ -14,8 +14,8 @@ export function currentRound(room: Room, io:Server) {
     checkpoint(room, io)
     if(!room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         getPlayer(room, io)
-        io.to(room.id).emit('pickedCard', room.game.cardGame.card)
-        io.to(room.id).emit('setAlternativeCard', room.game.cardGame.cardsActions)
+        if(room.game.cardGame.card) io.to(room.id).emit('pickedCard', room.game.cardGame.card)
+        if(room.game.cardGame.cardsActions.length > 0) io.to(room.id).emit('setAlternativeCard', room.game.cardGame.cardsActions)
     }else {
         getRoundEvent(room, io)
     }
