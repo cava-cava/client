@@ -38,7 +38,7 @@ const CardDeckFlippable: FunctionComponent<CardDeckFlippableProps> = ({
     const textureFront = card ? (card.Points > 0) ? textureFrontWaouh : textureFrontOutch : textureBack
 
     const hoverPosition = [basicPosition[0] - 0.1, basicPosition[1] + 0.1, 0.09];
-    const activePosition = [0, -0.25, 0.5];
+    const activePosition = [0, -0.75, 0.5];
     const exitPosition = [4, -0.25, 0];
 
     const randomRotation = card ? card.Points > 0 ? Math.PI * 0.02 : Math.PI * -0.02 : 0
