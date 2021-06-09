@@ -34,7 +34,7 @@ const End = () => {
     return (
         <div className={styles.End}>
             <div>
-                <TheTitle title={user.ladder === 1 ? "Gagner" : "Perdu"}/>
+                <TheTitle title={user.ladder === 1 ? "Gagné" : "Perdu"}/>
                 {winners.length > 0 &&
                 <>
                     <div className={styles.EndWinner}>
