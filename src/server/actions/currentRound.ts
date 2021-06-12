@@ -3,6 +3,7 @@ import {getPlayer} from "./getPlayer";
 import {checkpoint} from "./checkpoint";
 import {Server} from "socket.io";
 import {startTimer} from "./startTimer";
+import {getRoundEvent} from "./getRoundEvent";
 
 /**
  * Get fired for get player in game room
@@ -13,15 +14,10 @@ export function currentRound(room: Room, io:Server) {
     checkpoint(room, io)
     if(!room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         getPlayer(room, io)
-        io.to(room.id).emit('pickedCard', room.game.cardGame.card)
+        if(room.game.cardGame.card) io.to(room.id).emit('pickedCard', room.game.cardGame.card)
+        if(room.game.cardGame.cardsActions.length > 0) io.to(room.id).emit('setAlternativeCard', room.game.cardGame.cardsActions)
     }else {
-        io.to(room.id).emit('startRoundEvent', room.game.guessEvent.trigger, room.game.omgEvent.trigger);
-        if (room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
-            io.to(room.id).emit('sendGuess', room.game.guessEvent.guess)
-            if(room.game.guessEvent.idStep !== -1 && room.game.guessEvent.idStep < room.users.length) {
-                io.to(room.id).emit('startAnswersEvent')
-            }
-        }
+        getRoundEvent(room, io)
     }
-    if(room.game.cardGame.card || room.game.guessEvent.guess) startTimer(room, io)
+    startTimer(room, io)
 }

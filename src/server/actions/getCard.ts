@@ -10,10 +10,10 @@ import {sendCard} from "./sendCard";
  */
 export function getCard(playerKey:number, room: Room, io:Server) {
     if (room.timer.isRunning || !room.game.cards) return;
-    room.game.cardGame.card = room.game.cards[room.game.cardGame.id];
+    const card = room.game.cards[room.game.cardGame.id];
 
     // add statistics bonus / malus
-    room.game.cardGame.card.Points > 0 ? ++room.users[playerKey].statisticsGame.bonus : ++room.users[playerKey].statisticsGame.malus
+    card.Points > 0 ? ++room.users[playerKey].statisticsGame.bonus : ++room.users[playerKey].statisticsGame.malus
 
-    sendCard(playerKey, room.game.cardGame.card, room, io)
+    sendCard(playerKey, card, room, io)
 }

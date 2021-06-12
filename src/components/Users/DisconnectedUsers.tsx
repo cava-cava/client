@@ -4,6 +4,7 @@ import CodeHeader from "../Code/CodeHeader";
 import WaitingUsers from "./WaitingUsers";
 import {User} from "../../store/user/types";
 import TheTitle from "../TheTitle";
+import { Link } from 'react-router-dom';
 
 type DisconnectedUsersProps = {
     roomId: string
@@ -14,9 +15,12 @@ const DisconnectedUsers: FunctionComponent<DisconnectedUsersProps> = ({roomId, u
     return (
         <div className={styles.DisconnectedUsers}>
             <div>
-                <TheTitle title={"Deconnexion"}/>
-                <CodeHeader roomId={roomId}/>
-                <WaitingUsers text="Une ou plusieurs personnes sont déconnectées, Veuillez patienter..." users={users}/>
+                <div>
+                    <TheTitle title={"Deconnexion"}/>
+                    <CodeHeader roomId={roomId}/>
+                    <WaitingUsers text="Une ou plusieurs personnes sont déconnectées, Veuillez patienter..." users={users}/>
+                    <Link to="/rooms" className={styles.DisconnectedUsersButton}>Quitter</Link>
+                </div>
             </div>
         </div>
     )

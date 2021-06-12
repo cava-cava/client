@@ -12,8 +12,12 @@ export interface User {
   joker: number
   dirt: number
   winEvent: boolean
+  winOmg: boolean
   answerEvent: AnswerEvent,
   statisticsGame: StatisticsGame
+  isReady: boolean
+  playingGame: boolean
+  progressBar: string
   gameOver: string[]
 }
 

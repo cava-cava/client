@@ -14,7 +14,7 @@ export function checkGameOver(room: Room, io: Server) {
             room.game.isGameOver = true
             gameOver(room)
             checkpoint(room,io)
-            io.to(room.id).emit('redirect', `/end`);
+            io.to(room.id).emit('redirect', `/end/${room.id}`);
         }
     })
 }

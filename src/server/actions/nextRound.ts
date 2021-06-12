@@ -12,9 +12,11 @@ import {startTimer} from "./startTimer";
 export function nextRound(room: Room, io:Server) {
     checkpoint(room, io)
     room.game.round++
-    if(room.game.round === room.game.omgEvent.id) {
+    if(room.game.round === room.game.omgEvent.idTrigger) {
         room.game.guessEvent.trigger = false
         room.game.omgEvent.trigger = true
+        room.game.omgEvent.omg = (room.game.omgs && room.game.omgs.length > 0) ? room.game.omgs[room.game.omgEvent.id] : undefined
+        io.to(room.id).emit('sendOmg', room.game.omgEvent.omg)
     }else {
         if(++room.game.playerGame.id >= room.users.length) {
             room.game.guessEvent.trigger = true

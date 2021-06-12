@@ -24,6 +24,12 @@ import {startTimer} from "./actions/startTimer";
 import {stopTimer} from "./actions/stopTimer";
 import {pushAnswersGuess} from "./actions/pushAnswersGuess";
 import React from "react";
+import {nextStepRoundEvent} from "./actions/nextStepRoundEvent";
+import {winOmg} from "./actions/winOmg";
+import {getRoundEvent} from "./actions/getRoundEvent";
+import {checkpoint} from "./actions/checkpoint";
+import {getPlayer} from "./actions/getPlayer";
+import {progressBar} from "./actions/progressBar";
 
 const app = express();
 const server = require('http').createServer(app);
@@ -74,6 +80,18 @@ io.on("connect", (socket: ExtendedSocket) => {
         }
     })
 
+    socket.on('isReady', (roomId:string, userKey:number) => {
+        const room:Room = rooms[roomId];
+
+        if(room) {
+            room.users[userKey].isReady = true
+            checkpoint(room, io)
+            if(room.users.filter(user => user.isReady).length === room.users.length) {
+                getPlayer(room,io)
+            }
+        }
+    });
+
     socket.on('getListUsersInRoom', (roomId:string) => {
         const room:Room = rooms[roomId];
         if(room) {
@@ -92,12 +110,14 @@ io.on("connect", (socket: ExtendedSocket) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].joker++;
+        progressBar(room.users[userKey], `+1 Oh ça va`)
     });
 
     socket.on('addDirt', (roomId:string, userKey:number) => {
         const room:Room = rooms[roomId];
 
         room.users[userKey].dirt++;
+        progressBar(room.users[userKey], `+1 Cheh`)
     });
 
     socket.on('sendPointsUser', (roomId:string, userKey:number, points:number) => {
@@ -138,23 +158,31 @@ io.on("connect", (socket: ExtendedSocket) => {
         nextRound(room, io)
     })
 
-    socket.on('winRoundEvent', (roomId: string, userKey: number) => {
+    socket.on('winOmg', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
-
-        if(room.users.filter(user => user.winEvent).length > 0) return
-        room.users[userKey].winEvent = true
+        const user = room.users[userKey]
+        if(room.users.filter(user => user.winOmg).length > 0 || room.game.omgEvent.win) return
+        user.winOmg = true
+        room.game.omgEvent.win = true
         //add statistics winOmg
-        ++room.users[userKey].statisticsGame.omgWon
-        socket.emit('winRoundEvent')
-        socket.to(room.id).emit('loseRoundEvent')
-        io.to(room.id).emit('updateListUsers', room.users);
+        ++user.statisticsGame.omgWon
+        winOmg(room.id, user.id, socket, io)
+        nextStepRoundEvent(room, io)
     });
 
-    socket.on('checkRoundEvent', (roomId: string, userKey: number) => {
+    socket.on('checkWinOmg', (roomId: string, userKey: number) => {
+        const room:Room = rooms[roomId];
+        const user = room.users[userKey]
+        if(user && user.winOmg && room.game.omgEvent.win) {
+            winOmg(room.id, user.id, socket, io)
+        }
+    });
+
+    socket.on('checkWinRoundEvent', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
         const user:User = room.users[userKey]
 
-        if(room.users.filter(user => user.winEvent).length === 0) return
+        if(!user || room.users.filter(user => user.winEvent).length === 0) return
         if(user.winEvent) {
             io.to(user.id).emit('winRoundEvent')
          }else io.to(user.id).emit('loseRoundEvent')
@@ -163,7 +191,13 @@ io.on("connect", (socket: ExtendedSocket) => {
     socket.on('endRoundEvent', (roomId: string, userKey: number) => {
         const room:Room = rooms[roomId];
         room.users[userKey].winEvent = false
+        if(room.game.omgEvent.win) room.users[userKey].winOmg = false
         endRoundEvent(room, io)
+    });
+
+    socket.on('getRoundEvent', (roomId: string) => {
+        const room:Room = rooms[roomId];
+        getRoundEvent(room, io)
     });
 
     socket.on('getAnswers', (roomId: string, userKey: number) => {

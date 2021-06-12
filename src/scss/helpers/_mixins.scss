@@ -86,7 +86,7 @@
 
 @mixin deviceContainer() {
   min-width: 355px;
-  min-height: $deviceHeight;
+  height: 100%;
   max-width: 340px;
   max-height: $deviceHeight;
 }
@@ -96,15 +96,15 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: calc(100vh - 30vh);
+  height: calc(100vh - 23vh);
   background: url("../../assets/jpg/background.jpeg") center center no-repeat;
   background-size: 100% 100%;
-  padding: 15vh 0;
+  padding: 10vh 0 13vh;
 
   @include media('exclude-low-tablet') {
     border-radius: $radius;
-    height: calc(100% - 150px);
-    padding: 75px  0;
+    height: calc(100% - 175px);
+    padding: 75px 0 100px;
   }
 }
 
@@ -113,15 +113,15 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: calc(100vh - 30vh);
+  height: calc(100vh - 18vh);
   background: url("../../assets/jpg/gameOver.jpeg") center center no-repeat;
   background-size: 100% 100%;
-  padding: 15vh 0;
+  padding: 9vh 0;
 
   @include media('exclude-low-tablet') {
     border-radius: $radius;
-    height: calc(100% - 150px);
-    padding: 75px  0;
+    height: calc(100% - 140px);
+    padding: 70px 0;
   }
 }
 
@@ -144,5 +144,25 @@
 
   &:focus,&:active {
     transform: scale(0.8);
+  }
+}
+
+@mixin theModal {
+  @include defaultBackground;
+  position: fixed;
+  z-index: 100;
+
+  > div {
+    padding: 0 2rem;
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  @include media('exclude-low-tablet') {
+    @include deviceContainer;
+    height: ($deviceHeight - 175px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

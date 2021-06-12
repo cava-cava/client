@@ -1,12 +1,12 @@
 .TheCards {
   position: absolute;
   width: 14rem;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 375px;
+  height: 425px;
   transform: rotate(10deg);
 
 
@@ -17,7 +17,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 85%;
+      width: 77%;
       transform: translate(-50%, -50%);
     }
   }
@@ -30,7 +30,7 @@
       text-align: left;
       width: 75%;
       left: 50%;
-      bottom: 12%;
+      bottom: 5%;
       transform: translateX(-50%);
     }
   }

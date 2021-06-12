@@ -1,29 +1,21 @@
 @import "../../scss/helpers";
 
 .DisconnectedUsers {
-  @include defaultBackground;
+  @include theModal;
 
-  h1 {
-    font-size: 3.5rem;
+  &Button {
+    @include theButton;
   }
 
   > div {
-    padding: 0 2rem;
-
-    &:first-child {
-      position: relative;
-      height: 100%;
-      padding: 0 2rem;
-    }
-
     p {
       margin-top: 0;
       font-weight: bold;
       font-size: 18px;
     }
 
-    > img {
-      margin: 2rem 0 1rem;
+    h1 {
+      font-size: 3.5rem;
     }
   }
 }

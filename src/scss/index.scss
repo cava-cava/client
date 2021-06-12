@@ -1,6 +1,11 @@
 @import "helpers";
 @import "fonts";
 @import "transitions";
+@import "slick";
+
+html {
+  animation: fadeIn 300ms ease-in;
+}
 
 html, html body {
   margin: 0;
@@ -66,4 +71,8 @@ img {
     top: 100%;
     left: 0;
   }
+}
+
+body .dg.ac {
+  z-index: 10;
 }

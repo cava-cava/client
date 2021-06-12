@@ -25,9 +25,7 @@ export const AndroidPrompt:FunctionComponent<AndroidPrompt> = ({body,addHomeButt
 
     return isVisible ? (
         <div className={styles.AndroidPrompt} onClick={hide}>
-            <div>
-                <p>{body}</p>
-            </div>
+            <p>{body}</p>
             <div>
                 <button onClick={hide}>{closePrompt}</button>
                 <button onClick={promptToInstall}>{addHomeButtonLabel}</button>

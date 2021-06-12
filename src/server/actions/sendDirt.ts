@@ -17,8 +17,13 @@ export function sendDirt(userKey:number, playerKey:number, room: Room, io:Server
     const alternativeCard = getCardAlternative("Tout le monde se moque de toi... C’est pas cool !", room)
     if(!alternativeCard) return;
     alternativeCard.Points = -Math.abs(room.game.cardGame.card.Points)
+    //play sound
+    if(room.game.cardGame.sounds.idCheh >= room.game.cardGame.sounds.cheh.length) room.game.cardGame.sounds.idCheh = 0
+    alternativeCard.audio = room.game.cardGame.sounds.cheh[room.game.cardGame.sounds.idCheh]
+    room.game.cardGame.sounds.idCheh++
     // use Dirt
     if(--room.users[userKey].dirt < 0) room.users[userKey].dirt = 0
+    io.to(room.id).emit('message', `${room.users[userKey].name} à posé une carte Cheh !`);
     // add statistics use dirt
     ++room.users[userKey].statisticsGame.useDirt;
     sendCard(playerKey, alternativeCard, room, io, true)

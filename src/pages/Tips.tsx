@@ -51,7 +51,7 @@ const Tips = () => {
                 <FormTips />
             </div>
             <div>
-                <Link to="/end"><IconClose/></Link>
+                <Link to="/messages"><IconClose/></Link>
             </div>
         </div>
     );

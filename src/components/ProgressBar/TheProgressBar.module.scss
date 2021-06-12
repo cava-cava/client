@@ -2,10 +2,12 @@
 
 .TheProgressBar {
     position: relative;
-    margin: 10px 0;
+    margin: 1rem auto;
     width: 100%;
+    max-width: 350px;
     cursor: pointer;
     transition: 0.1s transform ease;
+    z-index: 5;
 
     &:focus,&:active {
         transform: scale(0.98);
@@ -13,13 +15,20 @@
 
     > div {
         &:first-child {
+            max-width: 350px;
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
+            margin: auto;
             overflow: hidden;
             z-index: 0;
             width: 100%;
             border-radius: 0 100px 100px 0;
+
+            img {
+                max-height: 30px;
+            }
         }
         &:last-child {
             width: calc(100% - 25px);

@@ -2,6 +2,7 @@ import {Room} from "../types/rooms";
 import {nextRound} from "./nextRound";
 import {Server} from "socket.io";
 import {nextStepRoundEvent} from "./nextStepRoundEvent";
+import {clearProgressBar} from "./clearProgressBar";
 
 /**
  * Get fired to end Timer in game room
@@ -15,7 +16,9 @@ export function endTimer(room: Room, io: Server) {
     room.timer.isRunning = false
     if (!room.game.guessEvent.trigger && !room.game.omgEvent.trigger) {
         room.game.cardGame.card = undefined
-        io.to(room.id).emit('pickedCard', room.game.cardGame.card)
+        room.game.cardGame.cardsActions = []
+        io.to(room.id).emit('clearCards')
+        clearProgressBar(room.users)
         nextRound(room, io)
     } else {
         nextStepRoundEvent(room, io)

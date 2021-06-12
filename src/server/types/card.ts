@@ -6,6 +6,6 @@ export interface Card {
     Points: number,
     Alternative: Card[]
     animation?: FileStrapi,
-    audio: string,
+    audio?: FileStrapi,
 }
 

@@ -1,0 +1,50 @@
+@import "../../scss/helpers";
+
+.CardContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  height: 53vh;
+  width: 28vh;
+
+  > *:first-child {
+    margin-top: auto;
+  }
+
+  > div {
+    opacity: 0;
+
+    > p {
+      width: 85%;
+      margin: auto auto 1rem;
+    }
+  }
+
+  &Negative {
+    color: $white;
+  }
+
+  &AbsoluteText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &Animation {
+    width: 85%;
+    margin: auto auto 0.5rem;
+  }
+
+  @include media('exclude-low-tablet') {
+    height: 390px;
+    width: 200px;
+  }
+}

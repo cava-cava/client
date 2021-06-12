@@ -1,8 +1,16 @@
 @import "../../scss/helpers";
 
 .TheCanvas {
+  position: relative;
+  z-index: 3;
+
+  > div {
+    z-index: 3;
+  }
+
   canvas {
     height: 100vh!important;
+    z-index: 3;
 
     @include media('exclude-low-tablet') {
       height: $deviceHeight!important;

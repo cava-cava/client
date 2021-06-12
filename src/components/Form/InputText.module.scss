@@ -6,6 +6,7 @@
   border: none;
   outline: none;
   width: 55%;
+  max-width: 245px;
   padding: 10px 25px;
   height: 45px;
   font-weight: 700;
@@ -28,9 +29,26 @@
       color: $black;
     }
   }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:active {
+    border: 1px solid;
+    border-image: url("../../assets/svg/button-transparent.svg") 24/34px;
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: $black;
+  }
 }
 
 .InputTextError {
   color: $red;
   animation: buzz-out 0.75s linear 1;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:active {
+      -webkit-text-fill-color: $red;
+  }
 }

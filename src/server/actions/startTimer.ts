@@ -19,5 +19,5 @@ export function startTimer(room: Room, io:Server, seconds: number|null = null) {
         }, 1000);
     }
     io.to(room.id).emit('timer', room.timer.seconds)
-    if(room.timer.interval) room.timer.isRunning = true
+    if(room.timer.interval && room.timer.seconds > 0) room.timer.isRunning = true
 }

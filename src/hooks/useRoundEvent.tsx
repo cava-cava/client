@@ -20,7 +20,7 @@ const useRoundEvent = (roomId:string, userKey: number) => {
         socket.on('winRoundEvent', winRoundEvent)
         socket.on('loseRoundEvent', loseRoundEvent)
 
-        socket.emit('checkRoundEvent', roomId, userKey)
+        socket.emit('checkWinRoundEvent', roomId, userKey)
         return () => {
             socket.off('winRoundEvent', winRoundEvent)
             socket.off('loseRoundEvent', loseRoundEvent)

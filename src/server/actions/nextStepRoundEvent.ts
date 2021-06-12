@@ -6,6 +6,7 @@ import {sendAnswerGuess} from "./sendAnswerGuess";
 import {Answer} from "../types/answer";
 import {pushAnswersGuess} from "./pushAnswersGuess";
 import {shuffle} from "../../mixins/shuffle";
+import {getUserAnswersEvent} from "./getUserAnswersEvent";
 
 /**
  * Get fired next step round event for game room
@@ -46,11 +47,7 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
         if(room.game.guessEvent.idStep === 0) {
             io.to(room.id).emit('startAnswersEvent')
             startTimer(room, io, 40)
-            room.users.map((user) => {
-                if(user.answerEvent.allAnswersUserKey.length > 0) {
-                    io.to(user.id).emit('message', `Qu'est-ce qu'à répondu ${room.users[user.answerEvent.allAnswersUserKey[0]].name} ?`)
-                } else io.to(user.id).emit('message', '')
-            })
+            getUserAnswersEvent(room, io)
         } else if(room.game.guessEvent.idStep === 1) {
             io.to(room.id).emit('showResultsAnswersEvent')
             startTimer(room, io, 8)
@@ -92,6 +89,21 @@ export function nextStepRoundEvent(room: Room,  io:Server) {
         else {
             endRoundEvent(room, io)
         }
+    } else if (!room.game.guessEvent.trigger && room.game.omgEvent.trigger) {
+        if (room.game.omgEvent.idStep === 0) {
+            startTimer(room, io, 3)
+        } else if (room.game.omgEvent.idStep === 1 && room.users.filter(user => user.winOmg).length > 0) {
+            room.users.map(user => {
+                if(!user.winOmg) io.to(user.id).emit('loseRoundEvent')
+                else {
+                    user.winEvent = true
+                    io.to(user.id).emit('winRoundEvent')
+                }
+            })
+        } else {
+            endRoundEvent(room, io)
+        }
+        ++room.game.omgEvent.idStep
     }
     //update list users
     io.to(room.id).emit('updateListUsers', room.users);

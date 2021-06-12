@@ -28,6 +28,7 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
         joker: 2,
         dirt: 2,
         winEvent: false,
+        winOmg: false,
         answerEvent: {
             myAnswer: {
                 userKey: -1,
@@ -49,6 +50,9 @@ export const joinRoom = (username:string, avatar:string, io:Server, socket:Exten
             guessLost: 0,
             omgWon: 0
         },
+        playingGame: false,
+        isReady: false,
+        progressBar: "",
         gameOver: []
     };
     room.users.push(user);

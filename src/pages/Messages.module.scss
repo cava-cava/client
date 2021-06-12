@@ -1,0 +1,33 @@
+@import "../scss/helpers";
+.Messages {
+    @include gameOverBackground;
+
+    > div {
+        &:first-child {
+            position: relative;
+            height: 85%;
+            overflow-y: scroll;
+            padding: 0 2rem;
+        }
+    }
+
+    &Buttons {
+        display: flex;
+        position: absolute;
+        bottom: 75px;
+        width: 100%;
+        z-index: 1;
+
+        > a {
+            @include theButton;
+
+            &:first-child {
+                margin-right: 0.5rem;
+            }
+
+            &:last-child {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}

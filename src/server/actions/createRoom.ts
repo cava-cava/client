@@ -21,7 +21,14 @@ export function createRoom(rooms: Rooms) {
             },
             cardGame: {
                 id: -1,
-                showAlternative: false
+                cardsActions: [],
+                showAlternative: false,
+                sounds: {
+                    cava: [],
+                    cheh: [],
+                    idCava: -1,
+                    idCheh: -1
+                }
             },
             guessEvent: {
                 id: -1,
@@ -31,7 +38,10 @@ export function createRoom(rooms: Rooms) {
             },
             omgEvent: {
                 id: -1,
-                trigger: false
+                trigger: false,
+                idTrigger: 0,
+                idStep: 0,
+                win: false
             },
             isStart: false,
             isGameOver: false,

@@ -15,9 +15,23 @@
     transform: scale(1.3);
   }
 
+  &Bottom {
+    bottom: -1.2rem;
+  }
 
-  img {
+  &Top {
+    top: -1.1rem;
+  }
+
+  > img {
     width: 100%;
     object-fit: contain;
+  }
+
+  > div {
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+    width: 4rem;
   }
 }

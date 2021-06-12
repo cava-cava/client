@@ -1,32 +1,90 @@
 @import "../scss/helpers";
+
 .End {
-    @include gameOverBackground;
+  @include gameOverBackground;
+  overflow: hidden;
+
+  > div {
+    &:first-child {
+      position: relative;
+      padding: 0 2rem;
+      height: 100%;
+      overflow-y: scroll;
+
+      > h1 {
+        font-size: 5.5rem;
+      }
+
+      > a {
+        @include theButton;
+        margin-top: 4rem;
+        width: 100%;
+      }
+    }
+  }
+
+  &Winner {
+    margin-top: 3rem;
+
+    > p {
+      font-weight: bold;
+      margin: 0;
+
+      &:first-child {
+        font-size: 1.5rem;
+      }
+
+      &:last-child {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &Progress {
+    position: relative;
+    left: -2rem;
+    width: 100%;
+    height: 10rem ;
 
     > div {
-        &:first-child {
-            position: relative;
-            height: 85%;
-            overflow-y: scroll;
-            padding: 0 2rem;
-        }
-    }
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: 4rem;
+      width: calc(100% + 1rem);
+      border: 2px solid;
+      border-left: 0;
+      border-image: url('../assets/svg/progressWinner.svg') 24/24px;
+      padding: 0.75rem 0.5rem 0.75rem 0;
 
-    &Buttons {
-        display: flex;
-        position: absolute;
-        bottom: 75px;
+      > div {
+        background: $yellow;
+        height: 100%;
         width: 100%;
+        position: relative;
+        transition: 1.5s width ease-out;
 
-        > a {
-            @include theButton;
+        > div {
+          position: absolute;
+          top: calc(-50% - 0.5rem);
+          right: -1.5rem;
+          width: 8rem;
+          height: 8rem;
+          padding: 0.75rem;
+          margin: auto;
+          background: url("../assets/svg/cercleWhite.svg") center center no-repeat;
+          background-size: 100% 100%;
 
-            &:first-child {
-                margin-right: 0.5rem;
-            }
-
-            &:last-child {
-                margin-left: 0.5rem;
-            }
+          > img {
+            position: relative;
+            top: 7px;
+            left: -2px;
+            width: 100%;
+          }
         }
+      }
     }
+  }
 }

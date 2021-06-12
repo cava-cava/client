@@ -1,6 +1,6 @@
 .SliderAvatar {
   display: flex;
-  margin-bottom: 10%;
+  margin-bottom: 8%;
 
   > * {
     &:first-child {
@@ -9,24 +9,6 @@
 
     &:last-child {
       margin-right: auto;
-    }
-  }
-
-  > button {
-    background: none;
-    border: none;
-    padding: 0;
-    height: 3rem;
-    width: 3rem;
-    margin-top: auto;
-    margin-bottom: auto;
-
-    &:first-child {
-      background: url("../../assets/svg/arrowL.svg") center center no-repeat;
-    }
-
-    &:last-child {
-      background: url("../../assets/svg/arrowR.svg") center center no-repeat;
     }
   }
 

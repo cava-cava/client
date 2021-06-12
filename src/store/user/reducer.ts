@@ -14,6 +14,7 @@ export const initialState: userState = {
     joker: 2,
     dirt: 2,
     winEvent: false,
+    winOmg: false,
     answerEvent: {
       myAnswer: {
         userKey: -1,
@@ -35,6 +36,9 @@ export const initialState: userState = {
       guessLost: 0,
       omgWon: 0
     },
+    playingGame: false,
+    isReady: false,
+    progressBar: "",
     gameOver: []
   },
   errors: undefined,

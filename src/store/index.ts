@@ -15,12 +15,15 @@ import {rulesState} from "./rules/types";
 import {rulesReducer} from "./rules/reducer";
 import {settingsState} from "./settings/types";
 import {settingsReducer} from "./settings/reducer";
+import {tutorialState} from "./tutorial/types";
+import {tutorialReducer} from "./tutorial/reducer";
 
 export interface ApplicationState {
     settings: settingsState
     user: userState;
     knows: knowsState;
-    messages: messagesState
+    tutorial: tutorialState;
+    messages: messagesState;
     tips: tipsState;
     rules: rulesState;
     router: RouterState;
@@ -31,6 +34,7 @@ export const createRootReducer = (history: History) =>
         settings: settingsReducer,
         user: userReducer,
         knows: knowsReducer,
+        tutorial: tutorialReducer,
         messages: messagesReducer,
         tips: tipsReducer,
         rules: rulesReducer,

@@ -26,7 +26,7 @@ const TheCards: FunctionComponent<TheCardsProps> = ({
                 src={!isAlternative ? (points > 0 ? cardWaouh : cardOutch) : (points > 0 ? cardOhCaVa : cardCheh)}
                 alt='carte'
             />
-            <Player autoplay src={animation ? animation.url : (points > 0) ? '/Sohcava.json' : '/Scheh.json'}/>
+            <Player autoplay keepLastFrame src={animation ? animation.url : (points > 0) ? '/Sohcava.json' : '/Scheh.json'}/>
             <div
                 className={`${styles.description} ${(isAlternative && points < 0) && styles.TheCardsIsCheh}`}>{Description}</div>
         </div>

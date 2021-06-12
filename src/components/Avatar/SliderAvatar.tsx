@@ -3,6 +3,8 @@ import styles from './SliderAvatar.module.scss'
 import {useDispatch} from "react-redux";
 import {SET_AVATAR} from "../../store/user/types";
 import AvatarHeader from "./AvatarHeader";
+import LeftArrow from "../Arrow/LeftArrow";
+import RightArrow from "../Arrow/RightArrow";
 
 type SliderAvatarProps = {
     color: string
@@ -21,9 +23,9 @@ const SliderAvatar: FunctionComponent<SliderAvatarProps> = ({color, avatarNumber
 
     return (
         <div className={styles.SliderAvatar}>
-            <button onClick={() => setAvatar(-1)}/>
+            <LeftArrow onClick={() => setAvatar(-1)}/>
             <AvatarHeader color={color} avatarNumber={avatarNumber} />
-            <button onClick={() => setAvatar(+1)}/>
+            <RightArrow onClick={() => setAvatar(+1)}/>
         </div>
     )
 }
